@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/03/22 14:44:32 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/03/22 15:48:09 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,11 @@ ARRAY_LIST		:= ./src/array_lst/init_array_list.c\
 				./src/array_lst/remove_node_back.c\
 				./src/array_lst/remove_specific_node.c\
 				./src/array_lst/remove_specific_content.c\
-				./src/array_lst/delete_list.c
+				./src/array_lst/delete_list.c\
+				./src/array_lst/add_node_back.c\
+				./src/array_lst/add_node_front.c\
+				./src/array_lst/create_matrix_array_lst.c
+				
 
 INCLUDE			:= -I ./include -I ./lib/lib_get_print/includes
 CMD_CLEAN		:= rm -Rf

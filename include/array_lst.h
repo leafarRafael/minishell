@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 14:44:56 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/22 15:49:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ typedef struct s_array_list
 	int         size;
 }           t_array_lst;
 
+typedef struct s_matrix_list
+{
+	t_array_lst			*head_line;
+	t_array_lst			*last_line;
+	struct s_matrix_list *next_line;
+	struct s_matrix_list *prev_line;
+	int         size;
+}           t_matrix_lst;
+
 typedef struct s_var_array_list
 {
 	t_node_alst	*current_node;
@@ -43,14 +52,17 @@ typedef struct s_var_array_list
 	int			i;
 }			t_var;
 
-t_array_lst	*init_array_lst(void);
-int			ft_create_addnode_back_alst(t_array_lst *lst, char content);
-int			ft_create_addnode_front_alst(t_array_lst *lst, char content);
-int			ft_remove_node_front(t_array_lst *lst);
-int			ft_remove_node_back(t_array_lst *lst);
-int			ft_remove_specific_node(t_array_lst *lst, t_node_alst *node);
-int			ft_remove_specific_content(t_array_lst *lst, char c);
-int			ft_delete_list(t_array_lst *lst);
+t_array_lst		*init_array_lst(void);
+t_matrix_lst	*ft_init_matrix_lst(void);
+int				ft_create_addnode_back_alst(t_array_lst *lst, char content);
+int				ft_addnode_back(t_array_lst *lst, t_node_alst *node);
+int				ft_create_addnode_front_alst(t_array_lst *lst, char content);
+int				ft_addnode_front(t_array_lst *lst, t_node_alst *node);;
+int				ft_remove_node_front(t_array_lst *lst);
+int				ft_remove_node_back(t_array_lst *lst);
+int				ft_remove_specific_node(t_array_lst *lst, t_node_alst *node);
+int				ft_remove_specific_content(t_array_lst *lst, char c);
+int				ft_delete_list(t_array_lst *lst);
 
 
 #endif
