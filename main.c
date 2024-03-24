@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 17:29:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/24 15:58:07 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int main()
 		}
 		var.i++;
 	}
-	ft_print_array_lst(lst_array, 1);
+	printf("head = %c\n", lst_array->head->c);
+	printf("last = %c\n", lst_array->last->c);
+	ft_scanner_input(lst_array);
+	ft_print_array_lst_content_type(lst_array);
 	ft_delete_list(lst_array);
 	free(var.infile);
 	printf_ttype();

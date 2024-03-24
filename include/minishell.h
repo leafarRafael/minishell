@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 14:31:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/24 11:37:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISEHLL_H
+# define MINISHELL_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,7 +30,13 @@ typedef struct s_variables_minishell
 	int		i;
 }			t_var_minishell;
 
+/*
+			Function parse
+*/
+void		ft_scanner_input(t_array_lst *lst);
 
 void	ft_print_array_lst(t_array_lst *lst, int front_back);
+void	ft_print_array_lst_content_type(t_array_lst *lst);
+
 
 #endif
