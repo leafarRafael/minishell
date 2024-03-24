@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:30:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/24 17:21:59 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/24 18:10:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void	ft_scanner_input(t_array_lst *lst)
 		while (var.i <= lst->size )
 		{
 			type = -1;
+			var.temp_node->type = is_simple_type(var.temp_node->c);
 			type = ft_is_composite_type(var.temp_node->c, var.temp_node->next->c);
-			if (type != -1 && var.temp_node->next != lst->head)
+			if (type != -1 && var.temp_node != lst->last)
 			{
 				var.temp_node->type = type;
 				var.temp_node->next->type = type;
@@ -44,7 +45,6 @@ void	ft_scanner_input(t_array_lst *lst)
 			}
 			var.temp_node = var.temp_node->next;
 			var.i++;
-			var.temp_node->type = is_simple_type(var.temp_node->c);
 		}
 	}
 }

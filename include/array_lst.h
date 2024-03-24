@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 15:49:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/24 18:08:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ typedef struct s_array_list
 
 typedef struct s_matrix_list
 {
+	t_node_alst			*head;
+	t_node_alst			*last;
 	t_array_lst			*head_line;
+	t_array_lst			*next_line;
+	t_array_lst			*prev_line;
 	t_array_lst			*last_line;
-	struct s_matrix_list *next_line;
-	struct s_matrix_list *prev_line;
 	int         size;
 }           t_matrix_lst;
 
