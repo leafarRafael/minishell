@@ -6,13 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/24 11:56:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/27 09:54:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	printf_ttypee(int type);
+void	show_str_type(int type);
+void	print_all_type();
 
 void	ft_print_array_lst(t_array_lst *lst, int front_back)
 {
@@ -52,14 +53,32 @@ void	ft_print_array_lst_content_type(t_array_lst *lst)
 	temp = lst->head;
 	while (i != lst->size)
 	{
-		printf_ttypee(temp->type);
+		show_str_type(temp->type);
 		printf("->[%c]->[%d]\n", temp->c, temp->type);
 		temp = temp->next;
 		i++;
 	}
 }
 
-void	printf_ttypee(int type)
+void	print_all_type()
+{
+	printf("\n%d NO_OPERATOR_TYPE \n", NO_OPERATOR_TYPE);
+	printf("%d SINGLE_QUOTES\n", SINGLE_QUOTES);
+	printf("%d DOUBLE_QUOTES\n", DOUBLE_QUOTES);
+	printf("%d WHITE_SPACE\n", WHITE_SPACE);
+	printf("%d DOLLAR_SING\n", DOLLAR_SIGN);
+	printf("%d REDI_INFILE\n", REDI_INFILE);
+	printf("%d REDIRECT\n", REDIRECT);
+	printf("%d HERE_DOC\n", HERE_DOC);
+	printf("%d APPEND\n", APPEND);
+	printf("%d PIPE\n", PIPE);
+	printf("%d AND\n", AND);
+	printf("%d OR\n", OR);
+	printf("%d LEFT_PAREN\n", LEFT_PAREN);
+	printf("%d RIGHT_PAREN\n", RIGHT_PAREN);
+}
+
+void	show_str_type(int type)
 {
 	if (type == NO_OPERATOR_TYPE)
 		printf("NO_OPERATOR_TYPE");
@@ -69,7 +88,7 @@ void	printf_ttypee(int type)
 		printf("DOUBLE_QUOTES");
 	if (type == WHITE_SPACE)
 		printf("WHITE_SPACE");
-	if (type == DOLLAR_SING)
+	if (type == DOLLAR_SIGN)
 		printf("DOLLAR_SING");
 	if (type == REDI_INFILE)
 		printf("REDI_INFILE");

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:30:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/24 18:10:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/27 09:54:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	is_simple_type(char current_c)
 	if (current_c == _DOUBLE_QUOTES_)
 		return (DOUBLE_QUOTES);
 	if (current_c == _DOLLAR_SING_)
-		return (DOLLAR_SING);
+		return (DOLLAR_SIGN);
 	if (current_c == _REDI_INFILE_)
 		return (REDI_INFILE);
 	if (current_c == _REDIRECT_)

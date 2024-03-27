@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/03/24 13:13:52 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/03/27 17:30:54 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,12 @@ ARRAY_LIST		:= ./src/array_lst/init_array_list.c\
 				./src/array_lst/delete_list.c\
 				./src/array_lst/add_node_back.c\
 				./src/array_lst/add_node_front.c\
-				./src/array_lst/create_matrix_array_lst.c
+				./src/array_lst/create_string_list.c\
+				./src/array_lst/init_matriz.c
 
 PARSE			:= ./src/parse/scanner_array_list.c
 
-KEY_WORDS		:= ./src/key_words/key_words.c
+KEY_WORDS		:= ./src/key_words/key_words.c ./src/key_words/is_operator.c
 
 INCLUDE			:= -I ./include -I ./lib/lib_get_print/includes
 CMD_CLEAN		:= rm -Rf
@@ -39,7 +40,7 @@ CMD_FCLEAN		:= rm -rf
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(FILES)
+$(NAME): $(FILES) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(LIBFT)
 
 $(NAME):
 	@$(CC) $(FILES) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(LIBFT) $(INCLUDE) -o $(NAME) -g3 -lreadline

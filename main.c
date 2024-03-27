@@ -6,57 +6,109 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/24 15:58:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/27 18:49:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <unistd.h>
+#include <fcntl.h>
 
-void	printf_ttype();
+
+void	print_operator(t_array_lst *lst);
+int		ft_chage_pointer(t_node_alst **current_node, t_node_alst *ref_node, int *is_aspa);
+void	ft_add_list_to_matrix(t_matrix *matrix, t_array_lst *lst);
+void	print_matrix(t_matrix *matrix);
 
 int main()
 {
 	t_array_lst		*lst_array;
-	t_matrix_lst	*matrix_lst;
 	t_var_minishell var;
+	t_matrix		*matrix;
 
+	matrix = ft_init_matrix();
 	lst_array = init_array_lst();
-	matrix_lst = ft_init_matrix_lst();
 	var.infile = readline("minishell ~:");
-	var.i = 0;
-	while (var.infile[var.i])
-	{
-		if (ft_create_addnode_back_alst(lst_array, var.infile[var.i]))
-		{
-			printf("error creation array_list");
-			exit(-1);
-		}
-		var.i++;
-	}
-	printf("head = %c\n", lst_array->head->c);
-	printf("last = %c\n", lst_array->last->c);
+	ft_add_string_in_list(lst_array, var.infile);
+	ft_add_list_to_matrix(matrix, lst_array);
 	ft_scanner_input(lst_array);
-	ft_print_array_lst_content_type(lst_array);
+	print_matrix(matrix);
+	print_operator(lst_array);
 	ft_delete_list(lst_array);
 	free(var.infile);
-	printf_ttype();
+	free(matrix);
 }
 
-
-void	printf_ttype()
+void	print_operator(t_array_lst *lst)
 {
-	printf("\n%d NO_OPERATOR_TYPE \n", NO_OPERATOR_TYPE);
-	printf("%d SINGLE_QUOTES\n", SINGLE_QUOTES);
-	printf("%d DOUBLE_QUOTES\n", DOUBLE_QUOTES);
-	printf("%d WHITE_SPACE\n", WHITE_SPACE);
-	printf("%d DOLLAR_SING\n", DOLLAR_SING);
-	printf("%d REDI_INFILE\n", REDI_INFILE);
-	printf("%d REDIRECT\n", REDIRECT);
-	printf("%d HERE_DOC\n", HERE_DOC);
-	printf("%d APPEND\n", APPEND);
-	printf("%d PIPE\n", PIPE);
-	printf("%d AND\n", AND);
-	printf("%d OR\n", OR);
-	printf("%d LEFT_PAREN\n", LEFT_PAREN);
-	printf("%d RIGHT_PAREN\n", RIGHT_PAREN);
+	t_var	var;
+	int		is_aspa;
+
+	is_aspa = 0;
+	var.current_node = lst->head;
+	while (1)
+	{
+		if (var.current_node->type == WHITE_SPACE && is_aspa == 0)
+			if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
+				break ;
+		if (is_operator(var.current_node->type))
+		{
+			printf("\n");
+			if (var.current_node->type == var.current_node->next->type && var.current_node->next != lst->head)
+			{
+				printf("%c", var.current_node->c);
+				if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
+					break ;
+			}
+			printf("%c\n", var.current_node->c);
+		}
+		else
+			printf("%c", var.current_node->c);
+		if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
+			break ;
+	}
+}
+
+int	ft_chage_pointer(t_node_alst **current_node, t_node_alst *ref_node, int *is_aspa)
+{
+	*current_node = (*current_node)->next;
+	if ((*current_node)->type & (DOUBLE_QUOTES | SINGLE_QUOTES))
+	{
+		if ((*is_aspa) == 0)
+			(*is_aspa)++;
+		else
+			(*is_aspa)--;
+	}
+	if ((*current_node) == ref_node)
+		return (-1) ;
+	return (0);
+}
+
+// void ft_add_list_to_matrix(t_matrix *matrix, t_node_alst *node)
+// {
+// 	t_array_lst	*list;
+
+// 	list = malloc(sizeof(t_array_lst));
+// 	if (!list)
+// 		return ;
+// 	if (!matrix)
+// 		return ;
+// 	ft_addnode_back(list, node);
+// 	matrix->list = list;
+// 	matrix->next = NULL;
+// 	matrix->prev = NULL;
+// 	matrix->size = 0;
+// }
+
+void ft_add_list_to_matrix(t_matrix *matrix, t_array_lst *lst)
+{
+	matrix->list = lst;
+	matrix->next = NULL;
+	matrix->prev = NULL;
+	matrix->size = 0;
+}
+
+void	print_matrix(t_matrix *matrix)
+{
+	ft_print_array_lst_content_type(matrix->list);
 }
