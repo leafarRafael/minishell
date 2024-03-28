@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   init_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 09:31:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2023/11/03 15:06:36 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/03/22 09:06:17 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/03/28 08:52:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "array_lst.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+t_lst	*ft_init_lst(void)
 {
-	if (!lst || !f)
-		return ;
-	while (lst->next != NULL)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
-	f(lst->content);
+	t_lst	*lst;
+
+	lst = malloc(sizeof(t_lst));
+	if (!lst)
+		return (NULL);
+	lst->head = NULL;
+	lst->last = NULL;
+	lst->size = 0;
+	return (lst);
 }

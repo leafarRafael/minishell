@@ -6,18 +6,18 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:32:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 12:34:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-static int	ft_one_node(t_array_lst *lst, t_node_alst *node);
-static int	ft_two_node(t_array_lst *lst, t_node_alst *node);
-static int	ft_three_more_node(t_array_lst *lst, t_node_alst *node);
-static int	ft_case_head_last(t_array_lst *lst, t_node_alst *node);
+static int	ft_one_node(t_lst *lst, t_node *node);
+static int	ft_two_node(t_lst *lst, t_node *node);
+static int	ft_three_more_node(t_lst *lst, t_node *node);
+static int	ft_case_head_last(t_lst *lst, t_node *node);
 
-int	ft_remove_specific_node(t_array_lst *lst, t_node_alst *node)
+int	ft_remove_specific_node(t_lst *lst, t_node *node)
 {
 	if (!lst)
 		return (-1);
@@ -36,7 +36,7 @@ int	ft_remove_specific_node(t_array_lst *lst, t_node_alst *node)
 	return (-1);
 }
 
-static int	ft_one_node(t_array_lst *lst, t_node_alst *node)
+static int	ft_one_node(t_lst *lst, t_node *node)
 {
 	lst->last = NULL;
 	lst->head = NULL;
@@ -45,7 +45,7 @@ static int	ft_one_node(t_array_lst *lst, t_node_alst *node)
 	return (0);
 }
 
-static int	ft_two_node(t_array_lst *lst, t_node_alst *node)
+static int	ft_two_node(t_lst *lst, t_node *node)
 {
 	t_var var;
 
@@ -72,7 +72,7 @@ static int	ft_two_node(t_array_lst *lst, t_node_alst *node)
 	return (-1);
 }
 
-static int	ft_three_more_node(t_array_lst *lst, t_node_alst *node)
+static int	ft_three_more_node(t_lst *lst, t_node *node)
 {
 	t_var var;
 
@@ -97,7 +97,7 @@ static int	ft_three_more_node(t_array_lst *lst, t_node_alst *node)
 	return (0);
 }
 
-static int	ft_case_head_last(t_array_lst *lst, t_node_alst *node)
+static int	ft_case_head_last(t_lst *lst, t_node *node)
 {
 	t_var var;
 

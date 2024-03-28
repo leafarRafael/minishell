@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_array_list.c                                  :+:      :+:    :+:   */
+/*   init_line_lst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 09:06:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 09:27:45 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/03/28 09:17:58 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/03/28 10:22:25 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "matrix_lst.h"
 
-t_array_lst	*init_array_lst(void)
+t_lst_line	*ft_init_line_lst(void)
 {
-	t_array_lst	*array_lst;
+	t_lst_line	*line_lst;
 
-	array_lst = malloc(sizeof(t_array_lst));
-	if (!array_lst)
+	line_lst = malloc(sizeof(t_lst_line));
+	if (!line_lst)
 		return (NULL);
-	array_lst->head = NULL;
-	array_lst->last = NULL;
-	array_lst->size = 0;
-	return (array_lst);
+	line_lst->lst = NULL;
+	line_lst->next = NULL;
+	line_lst->prev = NULL;
+	return (line_lst);
 }

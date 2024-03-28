@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/27 09:54:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	show_str_type(int type);
 void	print_all_type();
 
-void	ft_print_array_lst(t_array_lst *lst, int front_back)
+void	ft_print_array_lst(t_lst *lst, int front_back)
 {
 	int i;
-	t_node_alst *temp;
+	t_node *temp;
 
 	if (!lst)
 		return ;
@@ -40,10 +40,10 @@ void	ft_print_array_lst(t_array_lst *lst, int front_back)
 	}
 }
 
-void	ft_print_array_lst_content_type(t_array_lst *lst)
+void	ft_print_array_lst_content_type(t_lst *lst)
 {
 	int i;
-	t_node_alst *temp;
+	t_node *temp;
 
 	if (!lst)
 		return ;

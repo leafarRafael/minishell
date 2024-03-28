@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   delete_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 14:54:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2023/11/03 15:06:46 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/03/22 14:39:28 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "array_lst.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_delete_list(t_lst *lst)
 {
-	t_list	*element;
+	t_var	var;
 
-	element = (t_list *) malloc(sizeof(t_list));
-	if (!element)
-		return (0);
-	element->content = content;
-	element->next = (NULL);
-	return (element);
+	if (!lst)
+		return (-1);
+	if (!lst->head && !lst->last)
+		return (-1);
+	while (lst->size != 0)
+		ft_remove_node_front(lst);
+	free(lst);
+	return (0);	
 }

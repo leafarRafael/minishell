@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   creat_addnode_front_array_list.c                   :+:      :+:    :+:   */
+/*   create_node_add_front_lst.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:43:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 14:35:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/28 08:31:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-static void	ft_first_node(t_array_lst *lst, t_node_alst *new_node);
-static void	ft_second_node(t_array_lst *lst, t_node_alst *new_node);
-static void	ft_third_onwards_node(t_array_lst *lst, t_node_alst *new_node);
+static void	ft_first_node(t_lst *lst, t_node *new_node);
+static void	ft_second_node(t_lst *lst, t_node *new_node);
+static void	ft_third_onwards_node(t_lst *lst, t_node *new_node);
 
-int	ft_create_addnode_front_alst(t_array_lst *lst, char content)
+int	ft_create_add_node_front(t_lst *lst, char content)
 {
-	t_node_alst	*new_node;
+	t_node	*new_node;
 
 	if (!lst)
 		return (-1);
-	new_node = malloc(sizeof(t_node_alst));
+	new_node = malloc(sizeof(t_node));
 	if (!new_node)
 		return (-1);
 	new_node->c = content;
@@ -43,7 +43,7 @@ int	ft_create_addnode_front_alst(t_array_lst *lst, char content)
 	}
 }
 
-static void	ft_first_node(t_array_lst *lst, t_node_alst *new_node)
+static void	ft_first_node(t_lst *lst, t_node *new_node)
 {
 	new_node->next = new_node;
 	new_node->prev = new_node;
@@ -52,7 +52,7 @@ static void	ft_first_node(t_array_lst *lst, t_node_alst *new_node)
 	lst->size = 1;
 }
 
-static void	ft_second_node(t_array_lst *lst, t_node_alst *new_node)
+static void	ft_second_node(t_lst *lst, t_node *new_node)
 {
 	new_node->next = lst->last;
 	new_node->prev = lst->last;
@@ -62,7 +62,7 @@ static void	ft_second_node(t_array_lst *lst, t_node_alst *new_node)
 	lst->size++;
 }
 
-static void	ft_third_onwards_node(t_array_lst *lst, t_node_alst *new_node)
+static void	ft_third_onwards_node(t_lst *lst, t_node *new_node)
 {
 	t_var	var;
 

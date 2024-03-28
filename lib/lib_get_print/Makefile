@@ -7,9 +7,7 @@ FILES = libft/src_ctype/ft_isalnum.c libft/src_ctype/ft_isascii.c libft/src_ctyp
 		libft/src_string/src_str/ft_strncmp.c libft/src_string/src_str/ft_strnstr.c libft/src_string/src_str/ft_strdup.c\
 		libft/src_string/src_str/ft_strlen.c libft/src_string/src_str/ft_strlcat.c libft/src_string/src_str/ft_bzero.c\
 		libft/src_string/src_str/ft_strlcpy.c libft/src_string/src_str/ft_strchr.c libft/src_string/src_str/ft_strrchr.c\
-		libft/src_stdlib/ft_calloc.c libft/src_stdlib/ft_atoi.c libft/src_lst/ft_lstclear.c\
-		libft/src_lst/ft_lstdelone.c libft/src_lst/ft_lstadd_front.c libft/src_lst/ft_lstnew.c libft/src_lst/ft_lstmap.c\
-		libft/src_lst/ft_lstlast.c libft/src_lst/ft_lstsize.c libft/src_lst/ft_lstiter.c libft/src_lst/ft_lstadd_back.c\
+		libft/src_stdlib/ft_calloc.c libft/src_stdlib/ft_atoi.c\
 		libft/src_/ft_striteri.c libft/src_/ft_strjoin.c libft/src_/ft_itoa.c libft/src_/ft_strtrim.c\
 		libft/src_/ft_split.c libft/src_/ft_substr.c libft/src_/ft_strmapi.c libft/src_put/ft_putendl_fd.c\
 		libft/src_put/ft_putnbr_fd.c libft/src_put/ft_putstr_fd.c libft/src_put/ft_putchar_fd.c\

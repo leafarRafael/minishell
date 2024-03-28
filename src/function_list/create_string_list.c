@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   create_string_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 17:55:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2023/11/03 15:32:20 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/03/27 08:49:47 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/03/28 08:28:26 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "array_lst.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_add_string_in_list(t_lst *lst, char *array)
 {
-	t_list	*h;
+	int	i;
 
-	if (del == NULL && lst == NULL)
-		return ;
-	while (*lst)
+	if (!lst || !array)
+	 	return (-1);
+	i = 0;
+	while (array[i])
 	{
-		del((*lst)->content);
-		h = *lst;
-		*lst = h->next;
-		free(h);
+		if (ft_create_node_add_back(lst, array[i]))
+		{
+			ft_putstr_fd("error creation array_list", STDERR_FILENO);
+			return (-1);
+		}
+		i++;
 	}
-	*lst = NULL;
+	return (0);
 }

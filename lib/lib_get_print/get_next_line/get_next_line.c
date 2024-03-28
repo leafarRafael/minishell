@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 08:36:57 by rbutzke           #+#    #+#             */
-/*   Updated: 2023/12/16 11:00:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/28 08:10:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	remode_buffer(char *buffer, int index)
 	}
 }
 
-void	cpy_buff_to_lst(char *buffer, t_lst **lst, int *is_space)
+void	cpy_buff_to_lst(char *buffer, t_get_lst **lst, int *is_space)
 {
 	int	index;
 
@@ -53,10 +53,10 @@ void	cpy_buff_to_lst(char *buffer, t_lst **lst, int *is_space)
 	}
 }
 
-t_lst	*ft_read_files(int fd)
+t_get_lst	*ft_read_files(int fd)
 {
 	static char	buffer[BUFFER_SIZE +1];
-	t_lst		*lst;
+	t_get_lst	*lst;
 	int			bytes_read;
 	int			is_space;
 
@@ -80,8 +80,8 @@ t_lst	*ft_read_files(int fd)
 
 char	*get_next_line(int fd)
 {
-	char	*next_line;
-	t_lst	*lst;
+	char		*next_line;
+	t_get_lst	*lst;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

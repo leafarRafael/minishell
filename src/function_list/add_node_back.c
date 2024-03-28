@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_node_front.c                                   :+:      :+:    :+:   */
+/*   add_node_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 15:17:10 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 15:18:27 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/03/22 15:13:20 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-static void	ft_first_node(t_array_lst *lst, t_node_alst *node);
-static void	ft_second_node(t_array_lst *lst, t_node_alst *node);
-static void	ft_third_onwards_node(t_array_lst *lst, t_node_alst *node);
+static void	ft_first_node(t_lst *lst, t_node *node);
+static void	ft_second_node(t_lst *lst, t_node *node);
+static void	ft_third_onwards_node(t_lst *lst, t_node *node);
 
-int	ft_addnode_front(t_array_lst *lst, t_node_alst *node)
+int	ft_addnode_back(t_lst *lst, t_node *node)
 {
 	if (!lst)
 		return (-1);
@@ -37,7 +37,7 @@ int	ft_addnode_front(t_array_lst *lst, t_node_alst *node)
 	}
 }
 
-static void	ft_first_node(t_array_lst *lst, t_node_alst *node)
+static void	ft_first_node(t_lst *lst, t_node *node)
 {
 	node->next = node;
 	node->prev = node;
@@ -46,26 +46,25 @@ static void	ft_first_node(t_array_lst *lst, t_node_alst *node)
 	lst->size = 1;
 }
 
-static void	ft_second_node(t_array_lst *lst, t_node_alst *node)
+static void	ft_second_node(t_lst *lst, t_node *node)
 {
-	node->next = lst->last;
-	node->prev = lst->last;
-	lst->last->prev = node;
-	lst->last->next = node;
-	lst->head = node;
+	node->next = lst->head;
+	node->prev = lst->head;
+	lst->head->next = node;
+	lst->head->prev = node;
+	lst->last = node;
 	lst->size++;
 }
 
-static void	ft_third_onwards_node(t_array_lst *lst, t_node_alst *node)
+static void	ft_third_onwards_node(t_lst *lst, t_node *node)
 {
 	t_var	var;
 
-	var.head = lst->head;
-	var.head = lst->head;
-	node->next = var.head;
-	node->prev = lst->last;
-	lst->last->next = node;
-	var.head->prev = node;
-	lst->head = node;
+	var.last = lst->last;
+	node->prev = var.last;
+	node->next = lst->head;
+	lst->head->prev = node;
+	var.last->next = node;
+	lst->last = node;
 	lst->size++;
 }

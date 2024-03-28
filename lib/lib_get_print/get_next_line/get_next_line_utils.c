@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 08:38:03 by rbutzke           #+#    #+#             */
-/*   Updated: 2023/12/10 13:31:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/28 08:09:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_lst_add_creat(t_lst **lst, char content)
+void	ft_lst_add_creat(t_get_lst **lst, char content)
 {
-	t_lst	*new_node;
-	t_lst	*temp;
+	t_get_lst	*new_node;
+	t_get_lst	*temp;
 
-	new_node = malloc (sizeof(t_lst));
+	new_node = malloc (sizeof(t_get_lst));
 	if (!lst || !new_node)
 		return ;
 	new_node->c = content;
@@ -33,12 +33,12 @@ void	ft_lst_add_creat(t_lst **lst, char content)
 	temp->next = new_node;
 }
 
-char	*cpy_lst_array(t_lst *lst)
+char	*cpy_lst_array(t_get_lst *lst)
 {
-	char	*next_line;
-	t_lst	*temp;
-	int		size;
-	int		i;
+	char		*next_line;
+	t_get_lst	*temp;
+	int			size;
+	int			i;
 
 	size = ft_lstlen(lst);
 	next_line = malloc (sizeof(char) *(size +1));
@@ -60,9 +60,9 @@ char	*cpy_lst_array(t_lst *lst)
 	return (next_line);
 }
 
-void	clear(t_lst *lst)
+void	clear(t_get_lst *lst)
 {
-	t_lst	*temp;
+	t_get_lst	*temp;
 
 	while (lst)
 	{
@@ -72,7 +72,7 @@ void	clear(t_lst *lst)
 	}
 }
 
-int	ft_lstlen(t_lst *lst)
+int	ft_lstlen(t_get_lst *lst)
 {
 	int	i;
 

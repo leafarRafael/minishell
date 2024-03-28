@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_array_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:30:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/27 09:54:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	ft_is_composite_type(char current_c, char next_c);
 static int	is_simple_type(char current_c);
-static int	ft_size_two_less(t_array_lst *lst);
+static int	ft_size_two_less(t_lst *lst);
 
-void	ft_scanner_input(t_array_lst *lst)
+void	ft_scanner_input(t_lst *lst)
 {
 	t_var	var;
 	int		type;
@@ -85,7 +85,7 @@ static int	ft_is_composite_type(char current_c, char next_c)
 	return (-1);
 }
 
-static int	ft_size_two_less(t_array_lst *lst)
+static int	ft_size_two_less(t_lst *lst)
 {
 	int type;
 
