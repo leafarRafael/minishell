@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 10:33:27 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,20 @@ void	show_str_type(int type)
 		printf("LEFT_PAREN");
 	if (type == RIGHT_PAREN)
 		printf("RIGHT_PAREN");
+}
+
+void	ft_print_matrix_line(t_matrix_lst *m_line)
+{
+	t_lst_line *temp;
+	int i;
+
+	i = 1;
+	temp = m_line->head;
+	while (i <= m_line->size)
+	{
+		printf("\n\n\n NOVA LISTA:\n");
+		ft_print_array_lst_content_type(temp->lst);
+		i++;
+		temp = temp->next;
+	}
 }

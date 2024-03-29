@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/03/28 10:19:04 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/03/29 10:45:59 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,11 @@ ARRAY_LIST		:= ./src/function_list/init_list.c\
 
 MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
 				./src/matrix_lst/init_line_lst.c\
-				./src/matrix_lst/create_list_add_front.c
-				
+				./src/matrix_lst/add_line_front.c\
+				./src/matrix_lst/add_line_back.c
 
-PARSE			:= ./src/parse/scanner_array_list.c
+PARSE			:= ./src/parse/scanner_array_list.c\
+				./src/parse/ask_to_operador.c
 
 KEY_WORDS		:= ./src/key_words/key_words.c ./src/key_words/is_operator.c
 

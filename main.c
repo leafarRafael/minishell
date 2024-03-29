@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 12:52:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 10:49:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,23 @@ int		ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa);
 
 int main()
 {
-	t_lst			*lst_array;
 	t_var_minishell var;
+	t_lst			*lst_array;
+	t_matrix_lst	*matrix_lst;
 
+	matrix_lst = ft_init_matrix();
 	lst_array = ft_init_lst();
+	var.infile = readline("minishell ~:"); // n 0
+	ft_add_string_in_list(lst_array, var.infile); // n 1
+	ft_scanner_input(lst_array); // n 2
 	
-// etapa 0 = receber string do utilizador;
-	var.infile = readline("minishell ~:");
-	
-// etapa 1 = copiar string para uma lista de caracters, 
-	ft_add_string_in_list(lst_array, var.infile);
-	
-// etapa 2 = scanear a lista e indentificar caracteres "normais" operadores e delimitadores (definido por type)
-	ft_scanner_input(lst_array);
-	
-// etapa 3 = verificar se existe algum operador
-	if (ft_have_operator(lst_array))
-	{
-// caso possua operador, sera criado uma matrix de listas, onde cada lista representara o conteudo 
-// anteriores ao operador, uma lista para o conteudo do operador, e uma lista para os dados apos o operador
-// caso existam mais de 1 operadores seram criadas listas seguindo esta logica
+
+	if (ft_have_operator(lst_array))// n 3
+	{// n 3.1
 		printf("\npossui operador\n");
 	}
 	else
-	{
-// caso nao possua operador passar a lista envia a primeira lista para tokenização e verificaçã de expansao
+	{ // n 3.2
 		printf("\nnão possui operador\n");
 	}
 	print_operator(lst_array);
@@ -97,18 +89,16 @@ int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa)
 	return (0);
 }
 
-int	ft_have_operator(t_lst *lst)
-{
-	t_var	var;
+// n 0 = receber string do utilizador;
+// n 1 = etapa 1 = copiar string para uma lista de caracters
+// n 2 = etapa 2 = scanear a lista e indentificar caracteres "normais" operadores e delimitadores (definido por type)
 
-	var.current_node = lst->head;
-	var.i = 1;
-	while (var.i <= lst->size)
-	{
-		if (is_operator(var.current_node->type))
-			return (-1);
-		var.i++;
-		var.current_node = var.current_node->next;
-	}
-	return (0);
-}
+/*
+	n 3 = etapa 3 = verificar se existe algum operador
+
+	n 3.1 = { caso possua operador, sera criado uma matrix de listas, onde cada lista representara o conteudo 
+	anteriores ao operador, uma lista para o conteudo do operador, e uma lista para os dados apos o operador
+	caso existam mais de 1 operadores seram criadas listas seguindo esta logica }
+
+	// n 3.2 = caso nao possua operador passar a lista envia a primeira lista para tokenização e verificaçã de expansao
+*/
