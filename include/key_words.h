@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/27 11:27:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 14:52:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ int	ft_is_append(char current, char next);
 int	ft_is_or(char current, char next);
 int	ft_is_and(char current, char next);
 int	is_white_space(char c);
-
-int		is_operator(int i);
-int		is_operator_composite(int c_type, int n_type);
+int	is_operator(int i);
+int	is_operator_composite(int c_type, int n_type);
 
 
 #endif

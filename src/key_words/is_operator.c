@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/27 12:59:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 17:18:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int		is_operator(int type)
 
 int		is_operator_composite(int c_type, int n_type)
 {
-	return ((c_type && n_type) & (REDI_INFILE | REDIRECT | HERE_DOC | APPEND | PIPE | AND | OR));
+	return ((c_type && n_type) & (HERE_DOC | APPEND | PIPE | AND | OR));
 }

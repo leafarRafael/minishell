@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/29 10:33:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 17:11:27 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	show_str_type(int type);
 void	print_all_type();
+static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa);
 
 void	ft_print_array_lst(t_lst *lst, int front_back)
 {
@@ -119,9 +120,51 @@ void	ft_print_matrix_line(t_matrix_lst *m_line)
 	temp = m_line->head;
 	while (i <= m_line->size)
 	{
-		printf("\n\n\n NOVA LISTA:\n");
-		ft_print_array_lst_content_type(temp->lst);
+		ft_print_array_lst(temp->lst, 0);
+		printf("\n");
 		i++;
 		temp = temp->next;
 	}
+}
+
+void	print_operator(t_lst *lst)
+{
+	t_var	var;
+	int		is_aspa;
+
+	is_aspa = 0;
+	var.current_node = lst->head;
+	while (lst->size >= 0)
+	{
+		if (is_operator(var.current_node->type))
+		{
+			printf("\n");
+			if (var.current_node->type == var.current_node->next->type && var.current_node->next != lst->head)
+			{
+				printf("%c", var.current_node->c);
+				if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
+					break ;
+			}
+			printf("%c\n", var.current_node->c);
+		}
+		else
+			printf("%c", var.current_node->c);
+		if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
+			break ;
+	}
+}
+
+static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa)
+{
+	*current_node = (*current_node)->next;
+	if ((*current_node)->type & (DOUBLE_QUOTES | SINGLE_QUOTES))
+	{
+		if ((*is_aspa) == 0)
+			(*is_aspa)++;
+		else
+			(*is_aspa)--;
+	}
+	if ((*current_node) == ref_node)
+		return (-1) ;
+	return (0);
 }

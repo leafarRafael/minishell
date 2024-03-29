@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/29 10:49:23 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 18:04:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,18 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-void	print_operator(t_lst *lst);
-int		ft_have_operator(t_lst *lst);
-int		ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa);
-
 int main()
 {
 	t_var_minishell var;
-	t_lst			*lst_array;
+	t_lst			*input_user;
 	t_matrix_lst	*matrix_lst;
 
 	matrix_lst = ft_init_matrix();
-	lst_array = ft_init_lst();
+	input_user = ft_init_lst();
 	var.infile = readline("minishell ~:"); // n 0
-	ft_add_string_in_list(lst_array, var.infile); // n 1
-	ft_scanner_input(lst_array); // n 2
-	
-
-	if (ft_have_operator(lst_array))// n 3
+	ft_add_string_in_list(input_user, var.infile); // n 1
+	ft_scanner_input(input_user); // n 2
+	if (ft_have_operator(input_user))// n 3
 	{// n 3.1
 		printf("\npossui operador\n");
 	}
@@ -39,55 +33,44 @@ int main()
 	{ // n 3.2
 		printf("\nnão possui operador\n");
 	}
-	print_operator(lst_array);
-	ft_delete_list(lst_array);
-	free(var.infile);
+	ft_separate_operators(matrix_lst, input_user);
+	ft_print_matrix_line(matrix_lst);
+	// print_operator(input_user);
+	// ft_delete_list(input_user);
+	// free(var.infile);
 }
 
-void	print_operator(t_lst *lst)
-{
-	t_var	var;
-	int		is_aspa;
 
-	is_aspa = 0;
-	var.current_node = lst->head;
-	while (lst->size >= 0)
-	{
-		//if (var.current_node->type == WHITE_SPACE && is_aspa == 0)
-			//if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
-				//break ;
-		if (is_operator(var.current_node->type))
-		{
-			printf("\n");
-			if (var.current_node->type == var.current_node->next->type && var.current_node->next != lst->head)
-			{
-				printf("%c", var.current_node->c);
-				if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
-					break ;
-			}
-			printf("%c\n", var.current_node->c);
-		}
-		else
-			printf("%c", var.current_node->c);
-		if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
-			break ;
-	}
-}
 
-int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa)
-{
-	*current_node = (*current_node)->next;
-	if ((*current_node)->type & (DOUBLE_QUOTES | SINGLE_QUOTES))
-	{
-		if ((*is_aspa) == 0)
-			(*is_aspa)++;
-		else
-			(*is_aspa)--;
-	}
-	if ((*current_node) == ref_node)
-		return (-1) ;
-	return (0);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // n 0 = receber string do utilizador;
 // n 1 = etapa 1 = copiar string para uma lista de caracters

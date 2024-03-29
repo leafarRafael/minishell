@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_array_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:30:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 14:00:51 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	ft_scanner_input(t_lst *lst)
 {
 	t_var	var;
 	int		type;
+	int		quotes;
 
+	quotes = 0;
 	if (!lst)
 		return ;
 	if (!lst->head || !lst->last)
@@ -34,10 +36,21 @@ void	ft_scanner_input(t_lst *lst)
 		while (var.i <= lst->size )
 		{
 			type = -1;
+			if (var.temp_node->c == _SINGLE_QUOTES_ || var.temp_node->c == _DOUBLE_QUOTES_)
+			{
+				if (quotes == 1)
+					quotes--;
+				else
+					quotes++;
+			}
 			var.temp_node->type = is_simple_type(var.temp_node->c);
+			if (quotes == 1)
+				var.temp_node->type = NO_OPERATOR_TYPE;
 			type = ft_is_composite_type(var.temp_node->c, var.temp_node->next->c);
 			if (type != -1 && var.temp_node != lst->last)
 			{
+				if (quotes != 0)
+					type = NO_OPERATOR_TYPE;
 				var.temp_node->type = type;
 				var.temp_node->next->type = type;
 				var.temp_node = var.temp_node->next;

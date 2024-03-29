@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 10:19:42 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 17:07:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ typedef struct s_node
 	int				type;
 	struct s_node	*next;
 	struct s_node	*prev;
-}           t_node;
+}			t_node;
 
 typedef struct s_lst
 {
 	t_node		*head;
 	t_node		*last;
-	int         size;
+	int			size;
 }			t_lst;
 
 typedef struct s_var_array_list
@@ -36,10 +36,10 @@ typedef struct s_var_array_list
 	t_node	*current_node;
 	t_node	*next_node;
 	t_node	*prev_node;
-	t_node *temp_node;
-	t_node *head;
-	t_node *last;
-	t_node *second;
+	t_node	*temp_node;
+	t_node	*head;
+	t_node	*last;
+	t_node	*second;
 	t_node	*second_last;
 	int			i;
 }			t_var;

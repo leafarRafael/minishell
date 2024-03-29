@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/29 10:45:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/03/29 14:03:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_variables_minishell
 {
 	char	*infile;
 	int		i;
+	int		is_d_quotes;
+	int		is_s_quotes;
 }			t_var_minishell;
 
 /*
@@ -42,8 +44,8 @@ void	ft_print_array_lst(t_lst *lst, int front_back);
 void	ft_print_array_lst_content_type(t_lst *lst);
 void	show_str_type(int type);
 void	print_all_type();
-
+void	print_operator(t_lst *lst);
 void	ft_print_matrix_line(t_matrix_lst *m_line);
-
+int		ft_separate_operators(t_matrix_lst	*matrix_lst, t_lst *input_user);
 
 #endif
