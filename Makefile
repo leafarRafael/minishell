@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/03/29 14:06:27 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/01 11:26:36 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,20 @@ ARRAY_LIST		:= ./src/function_list/init_list.c\
 				./src/function_list/add_node_back.c\
 				./src/function_list/add_node_front.c\
 				./src/function_list/create_string_list.c\
-				./src/function_list/remove_and_return_node.c
+				./src/function_list/remove_and_return_node.c\
+				./src/function_list/insert_nodes_between.c\
+				./src/function_list/cpy_lst_to_array.c
 
 MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
 				./src/matrix_lst/init_line_lst.c\
 				./src/matrix_lst/add_line_front.c\
-				./src/matrix_lst/add_line_back.c
+				./src/matrix_lst/add_line_back.c\
+				./src/matrix_lst/remove_lst_front.c
 
 PARSE			:= ./src/parse/scanner_array_list.c\
 				./src/parse/ask_to_operador.c\
-				./src/parse/popule_matrix_list.c
+				./src/parse/popule_matrix_list.c\
+				./src/parse/expander.c
 
 KEY_WORDS		:= ./src/key_words/key_words.c ./src/key_words/is_operator.c
 

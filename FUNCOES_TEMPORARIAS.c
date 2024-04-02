@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/29 17:11:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/01 16:04:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 void	show_str_type(int type);
 void	print_all_type();
 static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa);
+
+
+void	ft_printf_matrix()
+{
+	int	i;
+
+	i = 0;
+	while (__environ[i])
+	{
+		printf("%s\n", __environ[i]);
+		i++;
+	}
+}
 
 void	ft_print_array_lst(t_lst *lst, int front_back)
 {
@@ -25,12 +38,12 @@ void	ft_print_array_lst(t_lst *lst, int front_back)
 		return ;
 	if (!lst->head && !lst->last)
 		return ;
-	i = 0;
+	i = 1;
 	if (front_back == 0)
 		temp = lst->head;
 	else
 		temp = lst->last;
-	while (i != lst->size)
+	while (i <= lst->size)
 	{
 		printf("%c", temp->c);
 		if (front_back == 0)

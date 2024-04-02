@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_lst.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:34:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/29 16:55:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/01 09:32:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_matrix_lst	*ft_init_matrix(void);
 t_lst_line		*ft_init_line_lst(void);
 int				ft_add_list_front(t_matrix_lst *matrix_lst, t_lst *lst);
 int				ft_add_list_back(t_matrix_lst *matrix_lst, t_lst *lst);
+int				ft_remove_lst_front(t_matrix_lst *m_lst);
 
 #endif

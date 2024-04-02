@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/29 17:07:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/02 15:10:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_var_array_list
 t_lst			*ft_init_lst(void);
 int				ft_create_node_add_back(t_lst *lst, char content);
 int				ft_addnode_back(t_lst *lst, t_node *node);
-int				ft_create_node_add_front(t_lst *lst, char content);
+int				ft_create_add_node_front(t_lst *lst, char content);
 int				ft_add_node_front(t_lst *lst, t_node *node);;
 int				ft_remove_node_front(t_lst *lst);
 int				ft_remove_node_back(t_lst *lst);
@@ -56,6 +56,8 @@ int				ft_remove_specific_content(t_lst *lst, char c);
 int				ft_delete_list(t_lst *lst);
 int				ft_add_string_in_list(t_lst *lst, char *array);
 t_node			*ft_remove_return_node(t_lst *lst, t_node *node);
+int				ft_insert_lst_between_lst(t_lst *lst_dest, t_node *between_a, t_node *between_b, t_lst *lst_new);
+char			*ft_cpy_lst_to_array(t_lst *lst);
 
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/29 14:03:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/02 13:20:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@
 # include "binary_tree.h"
 # include "get_next_line.h"
 # include "matrix_lst.h"
+# include "parser.h"
 
 typedef struct s_variables_minishell
 {
-	char	*infile;
-	int		i;
-	int		is_d_quotes;
-	int		is_s_quotes;
+	char			*infile;
+	t_lst			*input_user;
+	t_matrix_lst	*matrix_lst;
+	int				i;
+	int				is_d_quotes;
+	int				is_s_quotes;
 }			t_var_minishell;
 
 /*
@@ -39,7 +42,11 @@ typedef struct s_variables_minishell
 */
 void		ft_scanner_input(t_lst *lst);
 int			ft_have_operator(t_lst *lst);
+void		ft_scanner_input_2(t_lst *lst);
 
+
+
+void	ft_printf_matrix();
 void	ft_print_array_lst(t_lst *lst, int front_back);
 void	ft_print_array_lst_content_type(t_lst *lst);
 void	show_str_type(int type);
