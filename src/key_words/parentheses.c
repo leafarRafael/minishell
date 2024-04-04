@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_operator.c                                      :+:      :+:    :+:   */
+/*   parentheses.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 08:40:47 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/04 13:03:42 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/04 13:05:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "key_words.h"
 
-int		is_operator(int type)
+int	is_open_parenthesis(char c)
 {
-	return (type & (REDI_INFILE | REDIRECT | HERE_DOC | APPEND | PIPE | AND | OR));
+	return (c == '(');
 }
 
-int		is_operator_composite(int c_type, int n_type)
+int	is_close_parenthesis(char c)
 {
-	return ((c_type && n_type) & (HERE_DOC | APPEND | PIPE | AND | OR));
+	return (c == ')');
 }

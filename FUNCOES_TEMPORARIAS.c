@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/01 16:04:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/04 13:08:22 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	print_all_type()
 	printf("%d PIPE\n", PIPE);
 	printf("%d AND\n", AND);
 	printf("%d OR\n", OR);
-	printf("%d LEFT_PAREN\n", LEFT_PAREN);
-	printf("%d RIGHT_PAREN\n", RIGHT_PAREN);
+	printf("%d OPEN_PAREN\n", OPEN_PAREN);
+	printf("%d CLOSE_PAREN\n", CLOSE_PAREN);
 }
 
 void	show_str_type(int type)
@@ -118,10 +118,10 @@ void	show_str_type(int type)
 		printf("AND");
 	if (type == OR)
 		printf("OR");
-	if (type == LEFT_PAREN)
-		printf("LEFT_PAREN");
-	if (type == RIGHT_PAREN)
-		printf("RIGHT_PAREN");
+	if (type == OPEN_PAREN)
+		printf("OPEN_PAREN");
+	if (type == CLOSE_PAREN)
+		printf("CLOSE_PAREN");
 }
 
 void	ft_print_matrix_line(t_matrix_lst *m_line)

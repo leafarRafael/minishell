@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_operator.c                                      :+:      :+:    :+:   */
+/*   redirection_control_operators.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 08:40:47 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/04 12:30:29 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/04 12:53:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "key_words.h"
 
-int		is_operator(int type)
+int	ft_is_here_doc(char current, char next)
 {
-	return (type & (REDI_INFILE | REDIRECT | HERE_DOC | APPEND | PIPE | AND | OR));
+	return (current == '<' && next == '<');
 }
 
-int		is_operator_composite(int c_type, int n_type)
+int	ft_is_append(char current, char next)
 {
-	return ((c_type && n_type) & (HERE_DOC | APPEND | PIPE | AND | OR));
+	return (current == '>' && next == '>');
+}
+
+int	ft_is_infile(char current)
+{
+	return (current == '<');
+}
+
+int	ft_is_outfile(char current)
+{
+	return (current == '>');
 }

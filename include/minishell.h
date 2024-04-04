@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/02 13:20:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/04 16:17:15 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_variables_minishell
 */
 void		ft_scanner_input(t_lst *lst);
 int			ft_have_operator(t_lst *lst);
-void		ft_scanner_input_2(t_lst *lst);
+void		ft_scanner_input(t_lst *lst);
 
 
 

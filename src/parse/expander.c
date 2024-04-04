@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 15:31:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/02 15:42:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/04 17:13:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_expander_variable(t_matrix_lst *m_lst)
 		var.temp_lst.size = 0;
 		var.temp_lst.head = NULL;
 		var.temp_lst.last = NULL;
-		ft_scanner_input_2(var.lst_current);
+		ft_scanner_input(var.lst_current);
 		have_many_dollar = ft_find_dollar(var.lst_current);
 		ft_find_and_expand(var.lst_current, &var.temp_lst);
 		if (have_many_dollar > 0)
@@ -87,6 +87,8 @@ static void ft_find_and_expand(t_lst *lst, t_lst *dest)
 			(*dest).size++;
 			while (var.index_lst <= lst->size && var.current_node->type == NO_OPERATOR_TYPE)
 			{
+				if (is_simple_quotes(var.current_node->c))
+					break ;
 				(*dest).last = var.current_node;
 				var.current_node = var.current_node->next;
 				var.index_lst++;

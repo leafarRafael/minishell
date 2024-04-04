@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/01 11:26:36 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/04 16:56:49 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,15 @@ MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
 PARSE			:= ./src/parse/scanner_array_list.c\
 				./src/parse/ask_to_operador.c\
 				./src/parse/popule_matrix_list.c\
-				./src/parse/expander.c
+				./src/parse/expander.c\
 
-KEY_WORDS		:= ./src/key_words/key_words.c ./src/key_words/is_operator.c
+KEY_WORDS		:= ./src/key_words/is_operator.c\
+				./src/key_words/flow_control_operators.c\
+				./src/key_words/redirection_control_operators.c\
+				./src/key_words/string_delimiters.c\
+				./src/key_words/words_delimiters.c\
+				./src/key_words/dollar_sign.c\
+				./src/key_words/parentheses.c
 
 SRC				:= $(FILES) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(MATRIX_LIST)
 
