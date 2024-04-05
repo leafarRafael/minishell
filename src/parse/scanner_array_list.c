@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:30:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 17:46:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/05 09:31:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_scanner_input(t_lst *lst)
 	int		s_quotes;
 	int		d_quotes;
 
-	d_quotes = 0;
-	s_quotes = 0;
 	if (!lst)
 		return ;
 	if (!lst->head || !lst->last)
@@ -33,6 +31,8 @@ void	ft_scanner_input(t_lst *lst)
 	if (!ft_size_two_less(lst))
 		return ;
 	var.i = 0;
+	d_quotes = 0;
+	s_quotes = 0;
 	if (lst->size > 2)
 	{
 		var.temp_node = lst->head;
@@ -48,11 +48,19 @@ void	ft_scanner_input(t_lst *lst)
 			if (s_quotes == 1 && !is_simple_quotes(var.temp_node->c))
 				var.temp_node->type = NO_OPERATOR_TYPE;
 			if (d_quotes == 1 && !is_double_quotes(var.temp_node->c) && !is_dollar(var.temp_node->c))
-				var.temp_node->type = NO_OPERATOR_TYPE;
+			{
+				if (var.temp_node->type != NO_OPERATOR_TYPE)
+					var.temp_node->type = META_LITERAL;
+			}
 			if (type != -1 && var.temp_node != lst->last)
 			{
-				if (s_quotes != 0 || d_quotes != 0)
+				if (s_quotes != 0)
 					type = NO_OPERATOR_TYPE;
+				if (d_quotes != 0)
+				{
+					if (type != NO_OPERATOR_TYPE)
+						type = META_LITERAL;
+				}
 				var.temp_node->type = type;
 				var.temp_node->next->type = type;
 				var.temp_node = var.temp_node->next;

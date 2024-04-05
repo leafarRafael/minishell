@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 15:31:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 17:13:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/05 09:36:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ static void ft_find_and_expand(t_lst *lst, t_lst *dest)
 			(*dest).size++;
 			while (var.index_lst <= lst->size && var.current_node->type == NO_OPERATOR_TYPE)
 			{
-				if (is_simple_quotes(var.current_node->c))
-					break ;
 				(*dest).last = var.current_node;
 				var.current_node = var.current_node->next;
 				var.index_lst++;

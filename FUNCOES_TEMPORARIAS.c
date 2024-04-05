@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 13:08:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/05 09:16:02 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	print_all_type()
 
 void	show_str_type(int type)
 {
+	if (type == META_LITERAL)
+		printf("META_LITERAL");
 	if (type == NO_OPERATOR_TYPE)
 		printf("NO_OPERATOR_TYPE");
 	if (type == SINGLE_QUOTES)
