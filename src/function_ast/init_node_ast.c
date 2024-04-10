@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scanner.c                                          :+:      :+:    :+:   */
+/*   init_node_ast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 09:03:42 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/05 09:08:13 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/10 13:35:25 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/10 15:17:51 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "abstract_syntax_tree.h"
 
-int	scanner_input(t_lst *lst)
+t_ast_node	*ft_init_new_ast_node()
 {
-	t_var_parse	var;
+	t_ast_node	*new_node;
 
-	if (!lst)
-		return (-1);
-	if (lst->size == 0)
-		return (-1);
-	var.node = lst->head;
-	var.d_quotes = 0;
-	var.s_quotes = 0;
-	var.i = 1;
-	while (var.i <= lst->size)
-	{
-		if (is_double_quotes(var.node->c))
-		{
-			if (var.d_quotes == 1)
-				var.d_quotes--;
-			else
-				var.d_quotes++;
-		}
-
-		var.node = var.node->next;
-		var.i++;
-	}
+	new_node = malloc(sizeof(t_ast_node));
+	new_node->left = NULL;
+	new_node->right = NULL;
+	new_node->m_lst = NULL;
+	new_node->type = -42;
+	return (new_node);
 }

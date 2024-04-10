@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 16:17:15 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/10 15:26:13 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,22 @@
 # include "string.h"
 # include "key_words.h"
 # include "array_lst.h"
-# include "binary_tree.h"
 # include "get_next_line.h"
 # include "matrix_lst.h"
+# include "expanding.h"
 # include "parser.h"
+# include "scanner.h"
+# include "token.h"
+# include "matrix_matrix_lst.h"
+# include "abstract_syntax_tree.h"
 
 typedef struct s_variables_minishell
 {
 	char			*infile;
 	t_lst			*input_user;
-	t_matrix_lst	*matrix_lst;
-	int				i;
-	int				is_d_quotes;
-	int				is_s_quotes;
+	t_mtrx_lst		*matrix_lst;
+	t_mtrx_mtrx		*list_matrix;
+	t_ast			*ast;
 }			t_var_minishell;
 
 /*
@@ -52,7 +55,9 @@ void	ft_print_array_lst_content_type(t_lst *lst);
 void	show_str_type(int type);
 void	print_all_type();
 void	print_operator(t_lst *lst);
-void	ft_print_matrix_line(t_matrix_lst *m_line);
-int		ft_separate_operators(t_matrix_lst	*matrix_lst, t_lst *input_user);
+void	ft_print_matrix_line(t_mtrx_lst *m_line);
+int		ft_separate_operators(t_mtrx_lst	*matrix_lst, t_lst *input_user);
+void	ft_print_lst_matrix(t_mtrx_mtrx *m_l);
+
 
 #endif

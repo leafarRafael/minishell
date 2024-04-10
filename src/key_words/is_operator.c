@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 08:40:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/10 09:41:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int		is_operator(int type)
 {
-	return (type & (REDI_INFILE | REDIRECT | HERE_DOC | APPEND | PIPE | AND | OR));
+	return (type & (REDI_IN | REDIRECT 
+		| HERE_DOC | APPEND | PIPE | AND_OP 
+		| OR_OP | OPEN_PAREN | CLOSE_PAREN));
 }
 
 int		is_operator_composite(int c_type, int n_type)
 {
-	return ((c_type && n_type) & (HERE_DOC | APPEND | PIPE | AND | OR));
+	return ((c_type && n_type) & (HERE_DOC | APPEND | PIPE | AND_OP | OR_OP));
 }

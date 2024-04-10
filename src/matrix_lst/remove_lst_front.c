@@ -6,17 +6,17 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:44:00 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/01 09:58:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/10 17:17:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-static int	lst_size_one(t_matrix_lst *m_lst);
-static int	lst_size_two(t_matrix_lst *m_lst);
-static int	lst_size_third_onward(t_matrix_lst *m_lst);
+static int	lst_size_one(t_mtrx_lst *m_lst);
+static int	lst_size_two(t_mtrx_lst *m_lst);
+static int	lst_size_third_onward(t_mtrx_lst *m_lst);
 
-int	ft_remove_lst_front(t_matrix_lst *m_lst)
+int	ft_remove_lst_front(t_mtrx_lst *m_lst)
 {
 	t_var_matrix	var;
 	
@@ -46,17 +46,19 @@ int	ft_remove_lst_front(t_matrix_lst *m_lst)
 }
 
 
-static int	lst_size_one(t_matrix_lst *m_lst)
+static int	lst_size_one(t_mtrx_lst *m_lst)
 {
 	if (ft_delete_list(m_lst->head->lst))
 		return (-1);
+	free(m_lst->head);
 	m_lst->head = NULL;
 	m_lst->last = NULL;
 	m_lst->size--;
+
 	return (0);
 }
 
-static int	lst_size_two(t_matrix_lst *m_lst)
+static int	lst_size_two(t_mtrx_lst *m_lst)
 {
 	t_var_matrix	var;
 
@@ -73,7 +75,7 @@ static int	lst_size_two(t_matrix_lst *m_lst)
 }
 
 
-static int	lst_size_third_onward(t_matrix_lst *m_lst)
+static int	lst_size_third_onward(t_mtrx_lst *m_lst)
 {
 	t_var_matrix	var;
 

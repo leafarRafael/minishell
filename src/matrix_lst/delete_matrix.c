@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_control_operators.c                    :+:      :+:    :+:   */
+/*   delete_matrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 12:30:29 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/04 12:53:38 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/10 16:09:29 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/10 16:23:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_words.h"
+#include "matrix_lst.h"
 
-int	ft_is_here_doc(char current, char next)
+int	ft_delete_matrix(t_mtrx_lst *matrix)
 {
-	return (current == '<' && next == '<');
-}
-
-int	ft_is_append(char current, char next)
-{
-	return (current == '>' && next == '>');
-}
-
-int	ft_is_infile(char current)
-{
-	return (current == '<');
-}
-
-int	ft_is_outfile(char current)
-{
-	return (current == '>');
+	if (!matrix)
+		return (-1);
+	if (matrix->size == 0)
+	{
+		free(matrix);
+		return (0);
+	}
+	else if (matrix->size == 1)
+	{
+		ft_remove_lst_front(matrix);
+		free(matrix);
+		return (0);
+	}
+	else if (matrix->size > 1)
+	{
+		while (matrix->size > 0)
+			ft_remove_lst_front(matrix);
+		free(matrix);
+		return (0);
+	}
+	return (0);	
 }

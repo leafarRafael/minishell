@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_sign.c                                      :+:      :+:    :+:   */
+/*   init_matrix_matrix_lst.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 12:57:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/08 15:48:07 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/10 13:50:36 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/10 14:43:27 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_words.h"
+#include "matrix_matrix_lst.h"
 
-int	ft_dollar(char current)
+t_mtrx_mtrx	*ft_mtrx_mtrx_lst(void)
 {
-	return (current == '$');
+	t_mtrx_mtrx	*mtrx_lst;
+
+	mtrx_lst = malloc(sizeof(t_mtrx_mtrx));
+	mtrx_lst->head = NULL;
+	mtrx_lst->last = NULL;
+	mtrx_lst->size = 0;
+	return (mtrx_lst);
 }

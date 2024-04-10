@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/02 15:10:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/10 09:38:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ typedef struct s_node
 {
 	char			c;
 	int				type;
+	int				paren;
+	int				priority;
 	struct s_node	*next;
 	struct s_node	*prev;
 }			t_node;
@@ -46,7 +48,7 @@ typedef struct s_var_array_list
 
 t_lst			*ft_init_lst(void);
 int				ft_create_node_add_back(t_lst *lst, char content);
-int				ft_addnode_back(t_lst *lst, t_node *node);
+int				ft_add_node_back(t_lst *lst, t_node *node);
 int				ft_create_add_node_front(t_lst *lst, char content);
 int				ft_add_node_front(t_lst *lst, t_node *node);;
 int				ft_remove_node_front(t_lst *lst);

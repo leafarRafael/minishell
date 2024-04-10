@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   binary_tree.h                                      :+:      :+:    :+:   */
+/*   init_node_m_mtrx_lst.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 08:46:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/22 08:51:56 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/10 13:53:40 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/10 15:51:33 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BINARY_TREE_H
-# define BINARY_TREE_H
+#include "matrix_matrix_lst.h"
 
+t_mnode	*init_matrix_node(void)
+{
+	t_mnode	*new_matrix_node;
 
-#endif
+	new_matrix_node = malloc(sizeof(t_mnode));
+	new_matrix_node->matrix = NULL;
+	new_matrix_node->type = -42;
+	new_matrix_node->next = NULL;
+	new_matrix_node->prev = NULL;
+	return (new_matrix_node);
+}

@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/04 16:56:49 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/10 16:21:49 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,22 +37,43 @@ MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
 				./src/matrix_lst/init_line_lst.c\
 				./src/matrix_lst/add_line_front.c\
 				./src/matrix_lst/add_line_back.c\
-				./src/matrix_lst/remove_lst_front.c
+				./src/matrix_lst/remove_lst_front.c\
+				./src/matrix_lst/delete_matrix.c
 
-PARSE			:= ./src/parse/scanner_array_list.c\
+AS_TREE			:=./src/function_ast/create_add_ast_node.c\
+				./src/function_ast/init_ast.c\
+				./src/function_ast/init_node_ast.c
+
+
+MATRIX_M_L		:=./src/matrix_matrix_lst/ft_add_node_m_back.c\
+				./src/matrix_matrix_lst/ft_add_node_m_front.c\
+				./src/matrix_matrix_lst/init_matrix_matrix_lst.c\
+				./src/matrix_matrix_lst/init_node_m_mtrx_lst.c\
+				./src/matrix_matrix_lst/ft_remove_first_mlst.c
+				
+
+PARSE			:= ./src/parse/scanner/scanner_composite_op.c\
+				./src/parse/scanner/scanner_input.c\
+				./src/parse/scanner/scanner_parenthes.c\
+				./src/parse/scanner/scanner_quotes.c\
+				./src/parse/scanner/scanner_simple_op.c\
+				./src/parse/scanner/scanner_for_priotity.c\
 				./src/parse/ask_to_operador.c\
 				./src/parse/popule_matrix_list.c\
-				./src/parse/expander.c\
+				./src/parse/expanding/expanding.c\
+				./src/parse/token/token.c
 
-KEY_WORDS		:= ./src/key_words/is_operator.c\
-				./src/key_words/flow_control_operators.c\
-				./src/key_words/redirection_control_operators.c\
-				./src/key_words/string_delimiters.c\
-				./src/key_words/words_delimiters.c\
+KEY_WORDS		:= ./src/key_words/add_type_content.c\
+				./src/key_words/control_operators.c\
 				./src/key_words/dollar_sign.c\
-				./src/key_words/parentheses.c
+				./src/key_words/is_operator.c\
+				./src/key_words/parentheses.c\
+				./src/key_words/redirection_ctrl_op.c\
+				./src/key_words/string_delimiters.c\
+				./src/key_words/words_delimiters.c
 
-SRC				:= $(FILES) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(MATRIX_LIST)
+
+SRC				:= $(FILES) $(MATRIX_M_L) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(MATRIX_LIST)
 
 INCLUDE			:= -I ./include -I ./lib/lib_get_print/includes
 CMD_CLEAN		:= rm -Rf

@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_sign.c                                      :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 12:57:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/08 15:48:07 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/09 12:58:15 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/10 14:43:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef TOKEN_H
+# define TOKEN_H
+
+#include "array_lst.h"
+#include "matrix_lst.h"
 #include "key_words.h"
 
-int	ft_dollar(char current)
+typedef struct s_token
 {
-	return (current == '$');
-}
+	t_lst	*new_lst;
+	t_node	*node;
+	t_node	*next;
+	char	*new_str;
+	t_lst	temp_lst;
+	int		i;
+	int		type;
+}		t_token;
+
+t_mtrx_lst	*ft_simple_comand(t_lst	*lst);
+
+#endif

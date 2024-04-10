@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 17:16:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/02 15:41:02 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/09 09:30:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	ft_insert_lst_between_lst(t_lst *lst_dest, t_node *between_a, t_node *betwee
 			return (-1);
 		list_dest_size_two_more(lst_dest, between_a, between_b, lst_new);
 		lst_dest->size += lst_new->size;	
-		/* lst_new->head = NULL; */
-		/* lst_new->last = NULL; */
 		lst_new->size = 0;
 	}
 	return (-1);
@@ -57,8 +55,6 @@ static void	empyt_list_dest(t_lst *lst_dest, t_node *between_a, t_node *between_
 	lst_dest->head = between_a;
 	lst_dest->last = between_b;
 	lst_dest->size = lst_new->size;
-	/* lst_new->head = NULL; */
-	/* lst_new->last = NULL; */
 	lst_new->size = 0;
 }
 
@@ -70,8 +66,6 @@ static void	list_dest_size_one(t_lst *lst_dest, t_node *between_a, t_node *betwe
 	lst_dest->head->prev = lst_new->last;
 	lst_dest->last = lst_new->last;
 	lst_dest->size += lst_new->size;	
-	/* lst_new->head = NULL; */
-	/* lst_new->last = NULL; */
 	lst_new->size = 0;
 }
 

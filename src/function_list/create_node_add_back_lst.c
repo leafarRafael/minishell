@@ -6,15 +6,15 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:12:36 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 08:30:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/10 14:34:13 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-static void	ft_first_node(t_lst *lst, t_node *new_node);
-static void	ft_second_node(t_lst *lst, t_node *new_node);
-static void	ft_third_onwards_node(t_lst *lst, t_node *new_node);
+static void	ft_first_matrix_node(t_lst *lst, t_node *new_node);
+static void	ft_second_matrix_node(t_lst *lst, t_node *new_node);
+static void	ft_third_onwards_matrix_node(t_lst *lst, t_node *new_node);
 
 int	ft_create_node_add_back(t_lst *lst, char content)
 {
@@ -28,22 +28,22 @@ int	ft_create_node_add_back(t_lst *lst, char content)
 	new_node->c = content;
 	if (lst->size == 0)
 	{
-		ft_first_node(lst, new_node);
+		ft_first_matrix_node(lst, new_node);
 		return (0);
 	}
 	else if (lst->size == 1)
 	{
-		ft_second_node(lst, new_node);
+		ft_second_matrix_node(lst, new_node);
 		return (0);
 	}
 	else
 	{
-		ft_third_onwards_node(lst, new_node);
+		ft_third_onwards_matrix_node(lst, new_node);
 		return (0);
 	}
 }
 
-static void	ft_first_node(t_lst *lst, t_node *new_node)
+static void	ft_first_matrix_node(t_lst *lst, t_node *new_node)
 {
 	new_node->next = new_node;
 	new_node->prev = new_node;
@@ -52,7 +52,7 @@ static void	ft_first_node(t_lst *lst, t_node *new_node)
 	lst->size = 1;
 }
 
-static void	ft_second_node(t_lst *lst, t_node *new_node)
+static void	ft_second_matrix_node(t_lst *lst, t_node *new_node)
 {
 	new_node->next = lst->head;
 	new_node->prev = lst->head;
@@ -62,7 +62,7 @@ static void	ft_second_node(t_lst *lst, t_node *new_node)
 	lst->size++;
 }
 
-static void	ft_third_onwards_node(t_lst *lst, t_node *new_node)
+static void	ft_third_onwards_matrix_node(t_lst *lst, t_node *new_node)
 {
 	t_var	var;
 

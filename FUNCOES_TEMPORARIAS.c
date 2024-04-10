@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/05 09:16:02 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/10 17:05:21 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_print_array_lst_content_type(t_lst *lst)
 	while (i != lst->size)
 	{
 		show_str_type(temp->type);
-		printf("->[%c]->[%d]\n", temp->c, temp->type);
+		printf(" [%c] [%d] [%d] [priority = %d] \n", temp->c, temp->type, temp->paren, temp->priority);
 		temp = temp->next;
 		i++;
 	}
@@ -76,18 +76,18 @@ void	ft_print_array_lst_content_type(t_lst *lst)
 
 void	print_all_type()
 {
-	printf("\n%d NO_OPERATOR_TYPE \n", NO_OPERATOR_TYPE);
-	printf("%d SINGLE_QUOTES\n", SINGLE_QUOTES);
-	printf("%d DOUBLE_QUOTES\n", DOUBLE_QUOTES);
-	printf("%d WHITE_SPACE\n", WHITE_SPACE);
-	printf("%d DOLLAR_SING\n", DOLLAR_SIGN);
-	printf("%d REDI_INFILE\n", REDI_INFILE);
+	printf("\n%d NO_OP_TYPE \n", NO_OP_TYPE);
+	printf("%d S_QUOTES\n", S_QUOTES);
+	printf("%d D_QUOTES\n", D_QUOTES);
+	printf("%d WH_SPACE\n", WH_SPACE);
+	printf("%d DOLLAR_SING\n", DOLLAR);
+	printf("%d REDI_IN\n", REDI_IN);
 	printf("%d REDIRECT\n", REDIRECT);
 	printf("%d HERE_DOC\n", HERE_DOC);
 	printf("%d APPEND\n", APPEND);
 	printf("%d PIPE\n", PIPE);
-	printf("%d AND\n", AND);
-	printf("%d OR\n", OR);
+	printf("%d AND_OP\n", AND_OP);
+	printf("%d OR_OP\n", OR_OP);
 	printf("%d OPEN_PAREN\n", OPEN_PAREN);
 	printf("%d CLOSE_PAREN\n", CLOSE_PAREN);
 }
@@ -96,18 +96,18 @@ void	show_str_type(int type)
 {
 	if (type == META_LITERAL)
 		printf("META_LITERAL");
-	if (type == NO_OPERATOR_TYPE)
-		printf("NO_OPERATOR_TYPE");
-	if (type == SINGLE_QUOTES)
-		printf("SINGLE_QUOTES");
-	if (type == DOUBLE_QUOTES)
-		printf("DOUBLE_QUOTES");
-	if (type == WHITE_SPACE)
-		printf("WHITE_SPACE");
-	if (type == DOLLAR_SIGN)
+	if (type == NO_OP_TYPE)
+		printf("NO_OP_TYPE");
+	if (type == S_QUOTES)
+		printf("S_QUOTES");
+	if (type == D_QUOTES)
+		printf("D_QUOTES");
+	if (type == WH_SPACE)
+		printf("WH_SPACE");
+	if (type == DOLLAR)
 		printf("DOLLAR_SING");
-	if (type == REDI_INFILE)
-		printf("REDI_INFILE");
+	if (type == REDI_IN)
+		printf("REDI_IN");
 	if (type == REDIRECT)
 		printf("REDIRECT");
 	if (type == HERE_DOC)
@@ -116,17 +116,17 @@ void	show_str_type(int type)
 		printf("APPEND");
 	if (type == PIPE)
 		printf("PIPE");
-	if (type == AND)
-		printf("AND");
-	if (type == OR)
-		printf("OR");
+	if (type == AND_OP)
+		printf("AND_OP");
+	if (type == OR_OP)
+		printf("OR_OP");
 	if (type == OPEN_PAREN)
 		printf("OPEN_PAREN");
 	if (type == CLOSE_PAREN)
 		printf("CLOSE_PAREN");
 }
 
-void	ft_print_matrix_line(t_matrix_lst *m_line)
+void	ft_print_matrix_line(t_mtrx_lst *m_line)
 {
 	t_lst_line *temp;
 	int i;
@@ -172,7 +172,7 @@ void	print_operator(t_lst *lst)
 static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa)
 {
 	*current_node = (*current_node)->next;
-	if ((*current_node)->type & (DOUBLE_QUOTES | SINGLE_QUOTES))
+	if ((*current_node)->type & (D_QUOTES | S_QUOTES))
 	{
 		if ((*is_aspa) == 0)
 			(*is_aspa)++;
@@ -182,4 +182,23 @@ static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_asp
 	if ((*current_node) == ref_node)
 		return (-1) ;
 	return (0);
+}
+
+void ft_print_lst_matrix(t_mtrx_mtrx *m_l)
+{
+	t_mnode	*temp;
+	int 	i;
+
+	if (!m_l)
+		return ;
+	if (m_l->size == 0)
+		return ;
+	i = 1;
+	temp = m_l->head;
+	while (i <= m_l->size)
+	{
+		ft_print_matrix_line(temp->matrix);
+		temp = temp->next;
+		i++;
+	}
 }
