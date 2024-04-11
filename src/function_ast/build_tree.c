@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_add_ast_node.c                              :+:      :+:    :+:   */
+/*   build_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:29:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 12:34:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 18:34:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "abstract_syntax_tree.h"
 
-int	ft_create_ast_node(t_ast *ast, t_mtrx_lst *matrix)
+void	ft_build_tree(t_ast *tree, t_mtrx_lst *matrix, int value)
 {
 	t_ast_var	v;
 
-	if (!ast)
-		return (-1);
+	if (!tree)
+		return ;
 	if (!matrix)
-		return (-1);
-	if (ast->size == 0)
+		return ;
+	v.ast_node = ft_init_new_ast_node();
+	v.ast_node->m_lst = matrix;
+	if (tree->root == NULL)
+		tree->root = v.ast_node;
+	if (value < tree->root->type && tree->root->right == NULL)
 	{
-		v.ast_node = ft_init_new_ast_node();
-		v.ast_node->m_lst = matrix;
-		ast->root = v.ast_node;
+		v.temp = tree->root->left;
+		tree->root->left = v.ast_node;
 	}
 }

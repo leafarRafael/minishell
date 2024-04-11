@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 14:31:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 18:35:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ int main()
 	matrix = ft_cpy_mtrllst_to_cmtrx(v.list_matrix->head->matrix);
 	ft_printf_matrix(matrix);
 	//ft_print_lst_matrix(v.list_matrix);
+
+	v.ast = ft_init_ast();
+	ft_build_tree(v.ast, v.list_matrix->head->matrix, 10);
+
 	ft_delete_mtrx_mtrx_lst(v.list_matrix);
 	ft_delete_cmatrix(matrix);
 	free(v.input_user);
 	free(v.infile);
 }
-

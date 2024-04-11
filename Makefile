@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/11 14:30:45 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/11 16:44:26 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
 				./src/matrix_lst/delete_matrix.c\
 				./src/matrix_lst/cpy_mtrllst_to_cmtrx.c
 
-AS_TREE			:=./src/function_ast/create_add_ast_node.c\
+AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\
 				./src/function_ast/init_node_ast.c
 
@@ -76,7 +76,7 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/words_delimiters.c
 
 
-SRC				:= $(FILES) $(MATRIX_M_L) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(MATRIX_LIST)
+SRC				:= $(FILES) $(MATRIX_M_L) $(AS_TREE) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(MATRIX_LIST)
 
 INCLUDE			:= -I ./include -I ./lib/lib_get_print/includes
 CMD_CLEAN		:= rm -Rf

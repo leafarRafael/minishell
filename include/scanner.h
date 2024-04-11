@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:35:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/09 15:03:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 16:27:56 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ typedef enum s_priority
     LOWEST = 0,
     LOW = 1 << 0,
     MEDIUM = 1 << 1,
-    HIGH = 1 << 2
+    HIGH = 1 << 2,
+	HERE = HERE_DOC
 }		t_priority;
 
 typedef struct s_scanner
