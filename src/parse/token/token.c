@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 14:43:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 12:53:27 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_mtrx_lst	*ft_simple_comand(t_lst	*lst)
 		return (NULL);
 	while (lst->last->type == WH_SPACE)
 		ft_remove_node_back(lst);
+	while (lst->head->type == WH_SPACE)
+		ft_remove_node_front(lst);
 	new_matrix = ft_init_matrix();
 	if (is_operator(lst->head->type))
 	{

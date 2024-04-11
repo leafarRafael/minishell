@@ -6,14 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 13:12:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:53:33 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_WORDS_H
 # define KEY_WORDS_H
 
-typedef enum s_type
+typedef enum s_type_character
 {
 	NO_OP_TYPE  = 0,
 	S_QUOTES = 1 << 0,
@@ -29,9 +29,10 @@ typedef enum s_type
 	OR_OP = 1 << 10,
 	OPEN_PAREN = 1 << 11,
 	CLOSE_PAREN = 1 << 12,
-	META_LITERAL = 1 << 13
-}       t_type;
-
+	META_LITERAL = 1 << 13,
+	COMMAND = 1 << 14,
+	END_OF = 1 << 15
+}       t_type_character;
 
 int	ft_or_op(char current, char next);
 int	ft_and_op(char current, char next);

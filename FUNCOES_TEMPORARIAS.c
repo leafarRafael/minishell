@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 17:05:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 14:14:25 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	print_all_type();
 static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa);
 
 
-void	ft_printf_matrix()
+void	ft_printf_matrix(char **matrix)
 {
 	int	i;
 
 	i = 0;
-	while (__environ[i])
+	while (matrix[i])
 	{
-		printf("%s\n", __environ[i]);
+		printf("%s\n", matrix[i]);
 		i++;
 	}
 }
@@ -189,7 +189,7 @@ void ft_print_lst_matrix(t_mtrx_mtrx *m_l)
 	t_mnode	*temp;
 	int 	i;
 
-	if (!m_l)
+	if (m_l == NULL)
 		return ;
 	if (m_l->size == 0)
 		return ;
@@ -197,6 +197,7 @@ void ft_print_lst_matrix(t_mtrx_mtrx *m_l)
 	temp = m_l->head;
 	while (i <= m_l->size)
 	{
+		printf("\npriority = %d\n", temp->type);
 		ft_print_matrix_line(temp->matrix);
 		temp = temp->next;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:25:42 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/09 15:00:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 12:59:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ static int value_priority(int type)
 		return (LOWEST);
 	if (type & (AND_OP | OR_OP))
 		return (LOWEST);
-	return (-1);
+	return (-42);
 }

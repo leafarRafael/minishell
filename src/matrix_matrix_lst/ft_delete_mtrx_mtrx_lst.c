@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_list.c                                      :+:      :+:    :+:   */
+/*   ft_delete_mtrx_mtrx_lst.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 14:39:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 09:28:06 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/11 08:27:28 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/11 09:08:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "matrix_matrix_lst.h"
 
-int	ft_delete_list(t_lst *lst)
+int	ft_delete_mtrx_mtrx_lst(t_mtrx_mtrx *m_matrix)
 {
-	t_var	var;
-
-	if (!lst)
+	if (!m_matrix)
 		return (-1);
-	if (!lst->head && !lst->last)
-		return (-1);
-	while (lst->size != 0)
-		ft_remove_node_front(lst);
-	free(lst);
-	lst = NULL;
-	return (0);	
+	while (m_matrix->size > 0)
+		ft_remove_first_matrix(m_matrix);
+	free(m_matrix);
+	m_matrix = NULL;
+	return (0);
 }

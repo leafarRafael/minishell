@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:29:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 15:17:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 12:34:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ int	ft_create_ast_node(t_ast *ast, t_mtrx_lst *matrix)
 		v.ast_node->m_lst = matrix;
 		ast->root = v.ast_node;
 	}
-	
 }

@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_list.c                                      :+:      :+:    :+:   */
+/*   ft_define_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 14:39:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 09:28:06 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/11 12:56:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "minishell.h"
 
-int	ft_delete_list(t_lst *lst)
+int	ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst)
 {
-	t_var	var;
+	int		i;
+	t_mnode	*temp;
 
-	if (!lst)
+	if (!m_m_lst)
 		return (-1);
-	if (!lst->head && !lst->last)
+	if (m_m_lst->size == 0)
 		return (-1);
-	while (lst->size != 0)
-		ft_remove_node_front(lst);
-	free(lst);
-	lst = NULL;
-	return (0);	
+	temp = m_m_lst->head;
+	i = 1;
+	while (i <= m_m_lst->size)
+	{
+		temp->type = temp->matrix->head->lst->head->priority;
+		temp = temp->next;
+		i++;
+	}
+	return (0);
 }

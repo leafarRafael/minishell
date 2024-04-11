@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:34:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 16:22:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 14:23:13 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ typedef struct s_variables_matrix_list
 	t_lst_line	*prev_lst;
 	t_lst_line	*head_lst;
 	t_lst_line	*last_lst;
+	char		**matrix;
 	int			i;
+	int			index;
+
 }				t_var_matrix;
 
 t_mtrx_lst		*ft_init_matrix(void);
@@ -46,5 +49,6 @@ int				ft_add_list_front(t_mtrx_lst *matrix_lst, t_lst *lst);
 int				ft_add_list_back(t_mtrx_lst *matrix_lst, t_lst *lst);
 int				ft_remove_lst_front(t_mtrx_lst *m_lst);
 int				ft_delete_matrix(t_mtrx_lst *matrix);
+char			**ft_cpy_mtrllst_to_cmtrx(t_mtrx_lst *lst_matrix);
 
 #endif

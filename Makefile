@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/10 16:21:49 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/11 14:30:45 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC				:= cc
 LIBFT			:= ./lib/lib_get_print/libft.a
 PATH_MAKE_LIB	:= ./lib/lib_get_print
 
-FILES			:= ./main.c FUNCOES_TEMPORARIAS.c
+FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c
 
 ARRAY_LIST		:= ./src/function_list/init_list.c\
 				./src/function_list/create_node_add_back_lst.c\
@@ -38,7 +38,8 @@ MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
 				./src/matrix_lst/add_line_front.c\
 				./src/matrix_lst/add_line_back.c\
 				./src/matrix_lst/remove_lst_front.c\
-				./src/matrix_lst/delete_matrix.c
+				./src/matrix_lst/delete_matrix.c\
+				./src/matrix_lst/cpy_mtrllst_to_cmtrx.c
 
 AS_TREE			:=./src/function_ast/create_add_ast_node.c\
 				./src/function_ast/init_ast.c\
@@ -49,7 +50,8 @@ MATRIX_M_L		:=./src/matrix_matrix_lst/ft_add_node_m_back.c\
 				./src/matrix_matrix_lst/ft_add_node_m_front.c\
 				./src/matrix_matrix_lst/init_matrix_matrix_lst.c\
 				./src/matrix_matrix_lst/init_node_m_mtrx_lst.c\
-				./src/matrix_matrix_lst/ft_remove_first_mlst.c
+				./src/matrix_matrix_lst/ft_remove_first_mlst.c\
+				./src/matrix_matrix_lst/ft_delete_mtrx_mtrx_lst.c
 				
 
 PARSE			:= ./src/parse/scanner/scanner_composite_op.c\
@@ -61,7 +63,8 @@ PARSE			:= ./src/parse/scanner/scanner_composite_op.c\
 				./src/parse/ask_to_operador.c\
 				./src/parse/popule_matrix_list.c\
 				./src/parse/expanding/expanding.c\
-				./src/parse/token/token.c
+				./src/parse/token/token.c\
+				./src/parse/ft_define_command_operator.c
 
 KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/control_operators.c\

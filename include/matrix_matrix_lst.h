@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:46:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 16:20:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:48:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_mnode		*init_matrix_node(void);
 int			ft_create_node_matrix_add_front(t_mtrx_mtrx *lst_m , t_mtrx_lst *matrix);
 int			ft_create_node_matrix_add_back(t_mtrx_mtrx *lst_m , t_mtrx_lst *matrix);
 int			ft_remove_first_matrix(t_mtrx_mtrx *ma_lst);
+int			ft_delete_mtrx_mtrx_lst(t_mtrx_mtrx *m_matrix);
 
 
 #endif

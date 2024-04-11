@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_list.c                                      :+:      :+:    :+:   */
+/*   delete_cmatrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 14:39:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 09:28:06 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/11 14:27:28 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/11 14:29:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "minishell.h"
 
-int	ft_delete_list(t_lst *lst)
+int	ft_delete_cmatrix(char **matrix)
 {
-	t_var	var;
+	int	i;
 
-	if (!lst)
+	if (!matrix)
 		return (-1);
-	if (!lst->head && !lst->last)
-		return (-1);
-	while (lst->size != 0)
-		ft_remove_node_front(lst);
-	free(lst);
-	lst = NULL;
-	return (0);	
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+	matrix = NULL;
+	return (0);
 }

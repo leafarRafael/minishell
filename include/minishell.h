@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 15:26:13 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/11 14:29:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ typedef struct s_variables_minishell
 void		ft_scanner_input(t_lst *lst);
 int			ft_have_operator(t_lst *lst);
 void		ft_scanner_input(t_lst *lst);
+int			ft_delete_cmatrix(char **matrix);
+int			ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst);
 
 
 
-void	ft_printf_matrix();
+void	ft_printf_matrix(char **matrix);
 void	ft_print_array_lst(t_lst *lst, int front_back);
 void	ft_print_array_lst_content_type(t_lst *lst);
 void	show_str_type(int type);
