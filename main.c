@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 17:55:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 17:59:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_exit(char	*input);
 int main()
 {
 	t_var_minishell v;
-
 
 	v.looping_shell = 1;
 	while (v.looping_shell)
@@ -44,9 +43,7 @@ int main()
 			ft_delete_cmatrix(v.env);
 			__environ = v.temp__environ;
 		}
-		
 	}
-	
 }
 
 int	ft_is_valid(char *array)
@@ -60,10 +57,13 @@ int	ft_is_valid(char *array)
 		return (-1);
 	size = ft_strlen(array);
 	if (size == 0)
+	{
+		free(array);
 		return (-1);
+	}
 	if (size == 1)
 	{
-		if (array[0] == ' ' || array[0] == '	')
+		if (ft_words_delemiter(array[0]))
 		{
 			free(array);
 			return (-1);
