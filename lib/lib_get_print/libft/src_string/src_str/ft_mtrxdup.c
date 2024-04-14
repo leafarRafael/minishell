@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_matrix.c                                    :+:      :+:    :+:   */
+/*   ft_mtrxdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 16:09:29 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 14:37:22 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/14 12:01:22 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/14 12:51:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix_lst.h"
+#include "libft.h"
 
-int	ft_delete_matrix(t_mtrx_lst *matrix)
+char	**ft_mtrxdup(char **origin_matrix)
 {
-	if (!matrix)
-		return (-1);
-	if (matrix->size == 0)
+	char	**dest_matrix;
+	int		size;
+	int		i;
+
+	dest_matrix = NULL;
+	if (!origin_matrix)
+		return (dest_matrix);
+	size = 0;
+	while (origin_matrix[size])
+		size++;
+	dest_matrix = ft_calloc(sizeof (char *), size +1);
+	i = 0;
+	while (origin_matrix[i])
 	{
-		free(matrix);
-		matrix = NULL;
-		return (-1);
+		dest_matrix[i] = ft_strdup(origin_matrix[i]);
+		i++;
 	}
-	if (matrix->size > 0)
-	{
-		while (matrix->size > 0)
-			ft_remove_list_back(matrix);
-		free(matrix);
-		matrix = NULL;
-		return (0);
-	}
-	return (-1);	
+	return (dest_matrix);
 }

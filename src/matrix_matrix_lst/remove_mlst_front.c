@@ -1,46 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_remove_first_mlst.c                             :+:      :+:    :+:   */
+/*   remove_mlst_front.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:02:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 09:08:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/13 14:31:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_matrix_lst.h"
 
-static void	ft_size_one(t_mtrx_mtrx *ma_lst);
-static void	ft_size_two(t_mtrx_mtrx *ma_lst);
-static void ft_three_more(t_mtrx_mtrx *ma_lst);
+static int	ft_size_one(t_mtrx_mtrx *ma_lst);
+static int	ft_size_two(t_mtrx_mtrx *ma_lst);
+static int	ft_three_more(t_mtrx_mtrx *ma_lst);
 
-int	ft_remove_first_matrix(t_mtrx_mtrx *ma_lst)
+int	ft_remove_matrix_front(t_mtrx_mtrx *ma_lst)
 {
 	if (!ma_lst)
 		return (-1);
 	if (ma_lst->size == 0)
 		return (-1);
 	if (ma_lst->size == 1)
-	{
-		ft_size_one(ma_lst);
-		return (0);
-	}
-	else if (ma_lst->size == 2)
-	{
-		ft_size_two(ma_lst);
-		return (0);
-	}
-	else if (ma_lst->size > 2)
-	{
-		ft_three_more(ma_lst);
-		return (0);
-	}
+		return (ft_size_one(ma_lst));
+	if (ma_lst->size == 2)
+		return (ft_size_two(ma_lst));
+	if (ma_lst->size > 2)
+		return (ft_three_more(ma_lst));
 	return (-1);
 }
 
-static void	ft_size_one(t_mtrx_mtrx *ma_lst)
+static int	ft_size_one(t_mtrx_mtrx *ma_lst)
 {
 	t_var_m_mlst	v;
 
@@ -50,9 +41,11 @@ static void	ft_size_one(t_mtrx_mtrx *ma_lst)
 	ma_lst->size--;
 	ft_delete_matrix(v.head->matrix);
 	free(v.head);
+	v.head = NULL;
+	return (0);
 }
 
-static void	ft_size_two(t_mtrx_mtrx *ma_lst)
+static int	ft_size_two(t_mtrx_mtrx *ma_lst)
 {
 	t_var_m_mlst	v;
 
@@ -61,11 +54,14 @@ static void	ft_size_two(t_mtrx_mtrx *ma_lst)
 	ma_lst->last->prev = ma_lst->last;
 	ma_lst->head = ma_lst->last;
 	ma_lst->size--;
-	ft_delete_matrix(v.head->matrix);
+	if (ft_delete_matrix(v.head->matrix))
+		return (-1);
 	free(v.head);
+	v.head = NULL;
+	return (0);
 }
 
-static void ft_three_more(t_mtrx_mtrx *ma_lst)
+static int ft_three_more(t_mtrx_mtrx *ma_lst)
 {
 	t_var_m_mlst	v;
 
@@ -75,6 +71,9 @@ static void ft_three_more(t_mtrx_mtrx *ma_lst)
 	ma_lst->last->prev = v.second;
 	ma_lst->head = v.second;
 	ma_lst->size--;
-	ft_delete_matrix(v.head->matrix);
+	if (ft_delete_matrix(v.head->matrix))
+		return (-1);
 	free(v.head);
+	v.head = NULL;
+	return (0);
 }

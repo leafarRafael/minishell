@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 09:51:10 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 08:25:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/13 12:16:16 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static int	ft_one_node(t_lst *lst);
 static int	ft_two_node(t_lst *lst);
-static int	ft_three_more_node(t_lst *lst);
+static int	ft_three_more(t_lst *lst);
 
 int	ft_remove_node_front(t_lst *lst)
 {
 	if (!lst)
 		return (-1);
-	if (!lst->head && !lst->last)
+	if (lst->size == 0)
 		return (-1);
 	if (lst->size == 1)
 		return (ft_one_node(lst));
-	else if (lst->size == 2)
+	if (lst->size == 2)
 		return (ft_two_node(lst));
-	else
-		return (ft_three_more_node(lst));
+	if (lst->size > 2)
+		return (ft_three_more(lst));
 	return (-1);	
 }
 
@@ -40,6 +40,7 @@ static int	ft_one_node(t_lst *lst)
 	lst->last = NULL;
 	lst->size = 0;
 	free(var.head);
+	var.head = NULL;
 	return (0);
 }
 
@@ -48,16 +49,16 @@ static int	ft_two_node(t_lst *lst)
 	t_var	var;
 
 	var.head = lst->head;
-	var.last = lst->last;
-	var.last->next = var.last;
-	var.last->prev = var.last;
-	lst->head = var.last;
+	lst->last->next = lst->last;
+	lst->last->prev = lst->last;
+	lst->head = lst->last;
 	lst->size--;
 	free(var.head);
+	var.head = NULL;
 	return (0);
 }
 
-static int	ft_three_more_node(t_lst *lst)
+static int	ft_three_more(t_lst *lst)
 {
 	t_var	var;
 
@@ -68,5 +69,6 @@ static int	ft_three_more_node(t_lst *lst)
 	lst->head = var.second;
 	lst->size--;
 	free(var.head);
+	var.head = NULL;
 	return (0);
 }

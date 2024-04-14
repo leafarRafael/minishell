@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:35:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 16:27:56 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 12:20:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void	ft_scanner_simple_operator(t_lst *lst);
 void	ft_scanner_composite(t_lst *lst);
 void	ft_scanner_input(t_lst *lst);
 void	ft_scanner_priority_type(t_lst *lst);
+int		ft_scanner_add_literal(t_lst *lst);
 
 #endif

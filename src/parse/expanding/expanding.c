@@ -6,12 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/09 15:49:09 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 12:21:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expanding.h"
 #include "scanner.h"
+#include <stdio.h>
 
 static int		find_variable(t_lst *lst, t_lst *lst_temp);
 static void		ft_remove_node_var(t_lst *lst, t_lst *temp);
@@ -85,6 +86,8 @@ static void	ft_remove_node_var(t_lst *lst, t_lst *temp)
 	{
 		ft_remove_specific_node(lst, v.node);
 		temp->size--;
+		if (temp->size == 0)
+			break ;
 		v.node = v.next_node;
 		v.next_node = v.node->next;
 	}
@@ -107,7 +110,7 @@ static void	ft_replace_lst(t_lst *lst, t_lst *temp, char *env)
 	ft_remove_node_var(lst, temp);
 	v.poin_lst = ft_init_lst();
 	ft_add_string_in_list(v.poin_lst, env);
-	ft_scanner_input(v.poin_lst);
+	ft_scanner_add_literal(v.poin_lst);
 	ft_insert_lst_between_lst(lst, v.prev_head, v.next_last, v.poin_lst);
 	if (v.is_head > 0)
 		lst->head = v.poin_lst->head;

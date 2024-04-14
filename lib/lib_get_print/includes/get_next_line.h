@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 08:38:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 08:09:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 12:05:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_get_lst
 {
-	char			c;
+	char				c;
 	struct s_get_lst	*next;
 }	t_get_lst;
 

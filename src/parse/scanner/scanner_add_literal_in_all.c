@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_matrix.c                                    :+:      :+:    :+:   */
+/*   scanner_add_literal_in_all.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 16:09:29 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 14:37:22 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/14 12:14:30 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/14 12:20:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix_lst.h"
+#include "scanner.h"
 
-int	ft_delete_matrix(t_mtrx_lst *matrix)
+int	ft_scanner_add_literal(t_lst *lst)
 {
-	if (!matrix)
+	t_scan	v;
+
+	if (!lst)
 		return (-1);
-	if (matrix->size == 0)
-	{
-		free(matrix);
-		matrix = NULL;
+	if (lst->size == 0)
 		return (-1);
-	}
-	if (matrix->size > 0)
+	v.i = 1;
+	v.node = lst->head;
+	while (v.i <= lst->size)
 	{
-		while (matrix->size > 0)
-			ft_remove_list_back(matrix);
-		free(matrix);
-		matrix = NULL;
-		return (0);
+		v.node->type = NO_OP_TYPE;
+		v.node = v.node->next;
+		v.i++;
 	}
-	return (-1);	
+	return (0);
 }

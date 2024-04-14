@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/11 16:44:26 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/14 12:18:10 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
 				./src/matrix_lst/init_line_lst.c\
 				./src/matrix_lst/add_line_front.c\
 				./src/matrix_lst/add_line_back.c\
+				./src/matrix_lst/remove_especific_list_in_matrix.c\
 				./src/matrix_lst/remove_lst_front.c\
+				./src/matrix_lst/remove_lst_back.c\
 				./src/matrix_lst/delete_matrix.c\
 				./src/matrix_lst/cpy_mtrllst_to_cmtrx.c
 
@@ -50,11 +52,14 @@ MATRIX_M_L		:=./src/matrix_matrix_lst/ft_add_node_m_back.c\
 				./src/matrix_matrix_lst/ft_add_node_m_front.c\
 				./src/matrix_matrix_lst/init_matrix_matrix_lst.c\
 				./src/matrix_matrix_lst/init_node_m_mtrx_lst.c\
-				./src/matrix_matrix_lst/ft_remove_first_mlst.c\
+				./src/matrix_matrix_lst/remove_mlst_front.c\
+				./src/matrix_matrix_lst/remove_mlst_back.c\
+				./src/matrix_matrix_lst/remove_especific_matrix.c\
 				./src/matrix_matrix_lst/ft_delete_mtrx_mtrx_lst.c
 				
 
-PARSE			:= ./src/parse/scanner/scanner_composite_op.c\
+PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
+				./src/parse/scanner/scanner_composite_op.c\
 				./src/parse/scanner/scanner_input.c\
 				./src/parse/scanner/scanner_parenthes.c\
 				./src/parse/scanner/scanner_quotes.c\
