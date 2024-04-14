@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/11 12:53:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 16:46:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	muve_node_token_operator(t_lst *lst, t_mtrx_lst *matrix);
 t_mtrx_lst	*ft_simple_comand(t_lst	*lst)
 {
 	t_token			v;
-	t_mtrx_lst	*new_matrix;
+	t_mtrx_lst		*new_matrix;
 
 	if(!lst)
 		return (NULL);

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   words_delimiters.c                                 :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 12:40:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 17:03:23 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/14 16:23:20 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/14 16:26:15 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_words.h"
+#include "minishell.h"
 
-int	ft_space(char current)
+char	*ft_getenv(char	*variable)
 {
-	return (current == ' ');
-}
 
-int	ft_tab(char current)
-{
-	return (current == '	');
-}
-
-int	ft_words_delemiter(char current)
-{
-	return (ft_space(current) || ft_tab(current));
 }
