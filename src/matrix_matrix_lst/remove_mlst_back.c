@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:40:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 13:33:30 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 15:45:30 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static int ft_three_more(t_mtrx_mtrx *ma_lst)
 	v.last = ma_lst->last;
 	v.second = ma_lst->last->prev;
 	v.second->next = ma_lst->head;
-	ma_lst->head->next = v.last;
-	ma_lst->last = v.last;
+	ma_lst->head->prev = v.last;
+	ma_lst->last = v.second;
 	ma_lst->size--;
 	if (ft_delete_matrix(v.last->matrix))
 		return (-1);

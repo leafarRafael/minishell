@@ -6,17 +6,17 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 12:50:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 15:25:56 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
 int main()
 {
 	t_var_minishell v;
 
-	ft_printf_matrix(ft_mtrxdup(__environ));
 	v.input_user = ft_init_lst();
 	v.list_matrix = ft_mtrx_mtrx_lst();
 	v.infile = readline("minishell ~:");

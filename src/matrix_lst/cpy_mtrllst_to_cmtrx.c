@@ -6,12 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:18:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 14:55:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/14 15:35:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 #include "expanding.h"
+#include "minishell.h"
 
 static int	ft_expande_before_copie(t_mtrx_lst *lst_matrix);
 
@@ -19,7 +20,6 @@ char	**ft_cpy_mtrllst_to_cmtrx(t_mtrx_lst *lst_matrix)
 {
 	t_var_matrix	v;
 
-	v.matrix = NULL;
 	if (!lst_matrix)
 		return (v.matrix);
 	v.matrix = ft_calloc(sizeof(char*), lst_matrix->size +1);
@@ -36,7 +36,6 @@ char	**ft_cpy_mtrllst_to_cmtrx(t_mtrx_lst *lst_matrix)
 		}
 		v.current_lst = v.current_lst->next;
 		v.i++;
-		
 	}
 	return (v.matrix);
 }
