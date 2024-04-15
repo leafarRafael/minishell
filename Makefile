@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/15 14:23:10 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/15 16:04:39 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,45 +27,9 @@ MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
 FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c
 
-ARRAY_LIST		:= ./src/function_list/init_list.c\
-				./src/function_list/create_node_add_back_lst.c\
-				./src/function_list/create_node_add_front_lst.c\
-				./src/function_list/remove_node_front.c\
-				./src/function_list/remove_node_back.c\
-				./src/function_list/remove_specific_node.c\
-				./src/function_list/remove_specific_content.c\
-				./src/function_list/delete_list.c\
-				./src/function_list/add_node_back.c\
-				./src/function_list/add_node_front.c\
-				./src/function_list/create_string_list.c\
-				./src/function_list/remove_and_return_node.c\
-				./src/function_list/insert_nodes_between.c\
-				./src/function_list/cpy_lst_to_array.c
-
-MATRIX_LIST		:= ./src/matrix_lst/init_matriz.c\
-				./src/matrix_lst/init_line_lst.c\
-				./src/matrix_lst/add_line_front.c\
-				./src/matrix_lst/add_line_back.c\
-				./src/matrix_lst/remove_especific_list_in_matrix.c\
-				./src/matrix_lst/remove_lst_front.c\
-				./src/matrix_lst/remove_lst_back.c\
-				./src/matrix_lst/delete_matrix.c\
-				./src/matrix_lst/cpy_mtrllst_to_cmtrx.c
-
 AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\
 				./src/function_ast/init_node_ast.c
-
-
-MATRIX_M_L		:=./src/matrix_matrix_lst/ft_add_node_m_back.c\
-				./src/matrix_matrix_lst/ft_add_node_m_front.c\
-				./src/matrix_matrix_lst/init_matrix_matrix_lst.c\
-				./src/matrix_matrix_lst/init_node_m_mtrx_lst.c\
-				./src/matrix_matrix_lst/remove_mlst_front.c\
-				./src/matrix_matrix_lst/remove_mlst_back.c\
-				./src/matrix_matrix_lst/remove_especific_matrix.c\
-				./src/matrix_matrix_lst/ft_delete_mtrx_mtrx_lst.c
-				
 
 PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_composite_op.c\
