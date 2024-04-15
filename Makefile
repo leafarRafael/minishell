@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/15 16:04:39 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/15 17:28:46 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,25 +84,43 @@ linked_list:
 	@$(MAKE) -C $(MAKE_LINKED_L) --no-print-directory
 
 linked_list_clean:
+	@$(MAKE) -C $(MAKE_LINKED_L) clean --no-print-directory
+
+linked_list_fclean:
 	@$(MAKE) -C $(MAKE_LINKED_L) fclean --no-print-directory
+
+linked_list_re:
+	@$(MAKE) -C $(MAKE_LINKED_L) re --no-print-directory
 
 matrix_list:
 	@$(MAKE) -C $(MAKE_MATRIX_L) --no-print-directory
 
 matrix_list_clean:
+	@$(MAKE) -C $(MAKE_MATRIX_L) clean --no-print-directory
+
+matrix_list_fclean:
 	@$(MAKE) -C $(MAKE_MATRIX_L) fclean --no-print-directory
+
+matrix_list_re:
+	@$(MAKE) -C $(MAKE_MATRIX_L) re --no-print-directory
 
 matrix_matrix_list:
 	@$(MAKE) -C $(MAKE_MTRX_MTRX) --no-print-directory
 
 matrix_matrix_list_clean:
+	@$(MAKE) -C $(MAKE_MTRX_MTRX) clean --no-print-directory
+
+matrix_matrix_list_fclean:
 	@$(MAKE) -C $(MAKE_MTRX_MTRX) fclean --no-print-directory
+
+matrix_matrix_list_re:
+	@$(MAKE) -C $(MAKE_MTRX_MTRX) re --no-print-directory
 
 libft:
 	@$(MAKE) -C $(PATH_MAKE_LIB) --no-print-directory
 
 libft_clean:
-	@$(MAKE) -C $(PATH_MAKE_LIB) fclean --no-print-directory
+	@$(MAKE) -C $(PATH_MAKE_LIB) clean --no-print-directory
 
 libft_re:
 	@$(MAKE) -C $(PATH_MAKE_LIB) re --no-print-directory
@@ -110,7 +128,7 @@ libft_re:
 clean:
 	@$(CMD_CLEAN) $(NAME)
 
-fclean: clean libft_clean linked_list_clean matrix_list_clean matrix_matrix_list_clean
+fclean: clean libft_clean linked_list_fclean matrix_list_fclean matrix_matrix_list_fclean
 	@$(CMD_CLEAN) $(NAME)
 
-re: clean, fclean, libft_re, pipex_re, $(LIBFT), $(LINKED_LIST), $(MATRIX_LIST)
+re: libft_clean linked_list_clean matrix_list_clean matrix_matrix_list_clean clean all 

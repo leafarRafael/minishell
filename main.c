@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 17:59:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:30:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int main()
 			while (v.input_user->size > 0)
 				ft_create_node_matrix_add_back(v.list_matrix, ft_simple_comand(v.input_user));
 			ft_define_cmd_operator(v.list_matrix);
-			ft_print_todos_os_tokens_expandidos(v.list_matrix);
+			ft_print_lst_matrix(v.list_matrix);
+			//ft_print_todos_os_tokens_expandidos(v.list_matrix);
 			ft_delete_mtrx_mtrx_lst(v.list_matrix);
 			free(v.input_user);
 			v.looping_shell = ft_exit(v.infile);

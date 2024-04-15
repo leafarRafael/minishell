@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:35:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 12:20:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:35:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef enum s_priority
     LOW = 1 << 0,
     MEDIUM = 1 << 1,
     HIGH = 1 << 2,
-	HERE = HERE_DOC
+	HERE = 1 << 3
 }		t_priority;
 
 typedef struct s_scanner
