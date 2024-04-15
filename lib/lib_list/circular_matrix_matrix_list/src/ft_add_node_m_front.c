@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_node_m_front.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:56:33 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 15:58:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 11:39:01 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	ft_third_onwards(t_mtrx_mtrx *lst_m, t_mnode *new_mnode);
 
 int	ft_create_node_matrix_add_front(t_mtrx_mtrx *lst_m , t_mtrx_lst *matrix)
 {
-	t_var_m_mlst	v;
 	t_mnode			*new_mnode;
 
 	if (!lst_m || !matrix)
@@ -54,7 +53,6 @@ static void	ft_first(t_mtrx_mtrx *lst_m, t_mnode *new_mnode)
 
 static void	ft_second(t_mtrx_mtrx *lst_m, t_mnode *new_mnode)
 {
-	
 	new_mnode->prev = lst_m->last;
 	new_mnode->next = lst_m->last;
 	lst_m->last->prev = new_mnode;
@@ -65,12 +63,10 @@ static void	ft_second(t_mtrx_mtrx *lst_m, t_mnode *new_mnode)
 
 static void	ft_third_onwards(t_mtrx_mtrx *lst_m, t_mnode *new_mnode)
 {
-	t_var_m_mlst	v;
-	
 	new_mnode->prev = lst_m->last;
 	new_mnode->next = lst_m->head;
 	lst_m->last->next = new_mnode;
 	lst_m->head->prev = new_mnode;
 	lst_m->head = new_mnode;
-	lst_m->size++;	
+	lst_m->size++;
 }

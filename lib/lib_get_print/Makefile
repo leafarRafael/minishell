@@ -23,12 +23,13 @@ OBJS		:= ./objs
 INCLUDES = ./includes
 O_FILE = $(FILES:%.c=$(OBJS)/%.o)
 CC = cc
-CFLAGS = #-Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 O_FLAGS = -c
 
 all : $(NAME)
 
 $(NAME): $(O_FILE)
+	@echo ""
 
 bonus: $(O_BONUS)
 
@@ -39,13 +40,14 @@ $(OBJS)/%.o: %.c
 	@$(CC) -I$(INCLUDES) $(O_FLAGS) $(CFLAGS) $< -o $@
 	@ar -rc $(NAME) $@
 	@$(eval COUNT := $(shell echo $$(($(COUNT)+1))))
-	@echo "[$(shell echo 	$$(($(COUNT) * 100 / $(NUM_FILES))))%] libft Progress"
+	@printf "libft Progress       [%s]\r" $(shell echo 	"$$(($(COUNT) * 100 / $(NUM_FILES)))%")
+	@sleep 0.1
 
 clean:
-	rm -Rf $(OBJS)
+	@rm -Rf $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 

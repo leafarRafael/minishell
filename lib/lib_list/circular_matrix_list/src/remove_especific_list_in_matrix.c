@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_especific_list_in_matrix.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 08:58:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 12:29:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 12:27:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	ft_check_in_matrix(t_mtrx_lst *matrix, t_lst_line *line_lst)
 	while (v.i <= matrix->size)
 	{
 		if (v.current_lst == line_lst)
-			return (0);		
+			return (0);
 		v.current_lst = v.current_lst->next;
 		v.i++;
 	}

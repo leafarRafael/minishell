@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_lst_front.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:44:00 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 12:29:26 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 11:03:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static int	remove_size_three_more(t_mtrx_lst *matrix);
 
 int	ft_remove_lst_front(t_mtrx_lst *m_lst)
 {
-	t_var_matrix	var;
-	
 	if (!m_lst)
 		return (-1);
 	if (m_lst->size == 0)

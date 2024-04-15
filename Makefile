@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/14 12:18:10 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/15 14:23:10 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,15 @@ CFLAGS			:= -Wextra -Wall -Werror
 CC				:= cc
 LIBFT			:= ./lib/lib_get_print/libft.a
 PATH_MAKE_LIB	:= ./lib/lib_get_print
+
+LINKED_LIST		:= ./lib/lib_list/lib_list.a
+MAKE_LINKED_L	:= ./lib/lib_list/circular_linked_list
+
+MATRIX_LIST		:= ./lib/lib_list/lib_list.a
+MAKE_MATRIX_L	:= ./lib/lib_list/circular_matrix_list
+
+MTRX_MTRX_L		:= ./lib/lib_list/lib_list.a
+MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
 FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c
 
@@ -68,6 +77,7 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/ask_to_operador.c\
 				./src/parse/popule_matrix_list.c\
 				./src/parse/expanding/expanding.c\
+				./src/parse/expanding/expand_m_lst_to_cmtrx.c\
 				./src/parse/token/token.c\
 				./src/parse/ft_define_command_operator.c
 
@@ -80,21 +90,49 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/string_delimiters.c\
 				./src/key_words/words_delimiters.c
 
+SRC				:= $(FILES) $(AS_TREE) $(PARSE) $(KEY_WORDS)
 
-SRC				:= $(FILES) $(MATRIX_M_L) $(AS_TREE) $(ARRAY_LIST) $(PARSE) $(KEY_WORDS) $(MATRIX_LIST)
+INCLUDE			:= -I ./include\
+				-I lib/lib_get_print/includes\
+				-I lib/lib_list/circular_linked_list/include\
+				-I lib/lib_list/circular_matrix_list/include\
+				-I lib/lib_list/circular_matrix_matrix_list/include
 
-INCLUDE			:= -I ./include -I ./lib/lib_get_print/includes
 CMD_CLEAN		:= rm -Rf
 CMD_FCLEAN		:= rm -rf
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(LIBFT)
+$(NAME): $(SRC) $(LIBFT) $(LINKED_LIST) $(MATRIX_LIST) $(MTRX_MTRX_L)
 
 $(NAME):
-	@$(CC) $(SRC) $(LIBFT) $(INCLUDE) -o $(NAME) -g3 -lreadline
+	@$(CC) $(SRC) $(LIBFT) $(LINKED_LIST) $(INCLUDE) -o $(NAME) -g3 -lreadline
 
 $(LIBFT): libft
+
+$(LINKED_LIST): linked_list
+
+$(MATRIX_LIST): matrix_list
+
+$(MTRX_MTRX_L): matrix_matrix_list
+
+linked_list:
+	@$(MAKE) -C $(MAKE_LINKED_L) --no-print-directory
+
+linked_list_clean:
+	@$(MAKE) -C $(MAKE_LINKED_L) fclean --no-print-directory
+
+matrix_list:
+	@$(MAKE) -C $(MAKE_MATRIX_L) --no-print-directory
+
+matrix_list_clean:
+	@$(MAKE) -C $(MAKE_MATRIX_L) fclean --no-print-directory
+
+matrix_matrix_list:
+	@$(MAKE) -C $(MAKE_MTRX_MTRX) --no-print-directory
+
+matrix_matrix_list_clean:
+	@$(MAKE) -C $(MAKE_MTRX_MTRX) fclean --no-print-directory
 
 libft:
 	@$(MAKE) -C $(PATH_MAKE_LIB) --no-print-directory
@@ -108,7 +146,7 @@ libft_re:
 clean:
 	@$(CMD_CLEAN) $(NAME)
 
-fclean: clean libft_clean
+fclean: clean libft_clean linked_list_clean matrix_list_clean matrix_matrix_list_clean
 	@$(CMD_CLEAN) $(NAME)
 
-re: clean, fclean, libft_re, pipex_re, $(LIBFT)
+re: clean, fclean, libft_re, pipex_re, $(LIBFT), $(LINKED_LIST), $(MATRIX_LIST)

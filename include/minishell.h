@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 17:05:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:33:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 # include "string.h"
 # include "key_words.h"
 # include "array_lst.h"
-# include "get_next_line.h"
 # include "matrix_lst.h"
+# include "matrix_matrix_lst.h"
+# include "get_next_line.h"
 # include "expanding.h"
 # include "parser.h"
 # include "scanner.h"
 # include "token.h"
-# include "matrix_matrix_lst.h"
 # include "abstract_syntax_tree.h"
 
 typedef struct s_variables_minishell
@@ -65,5 +65,6 @@ void	ft_print_matrix_line(t_mtrx_lst *m_line);
 int		ft_separate_operators(t_mtrx_lst	*matrix_lst, t_lst *input_user);
 void	ft_print_lst_matrix(t_mtrx_mtrx *m_l);
 void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx);
+
 
 #endif

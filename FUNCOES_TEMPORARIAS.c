@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 10:37:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 11:30:33 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx)
 	matrix = NULL;
 	while (i <= mtrx_mtrx->size)
 	{
-		matrix = ft_cpy_mtrllst_to_cmtrx(temp->matrix);
+		matrix = ft_expand_m_lst_to_cmtrx(temp->matrix);
 		if (matrix == NULL)
 			ft_remove_specific_matrix(mtrx_mtrx, temp);
 		ft_printf_matrix(matrix);

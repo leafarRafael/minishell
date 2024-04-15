@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cpy_mtrllst_to_cmtrx.c                             :+:      :+:    :+:   */
+/*   expand_m_lst_to_cmtrx.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:18:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 15:35:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:32:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix_lst.h"
+
 #include "expanding.h"
 #include "minishell.h"
 
 static int	ft_expande_before_copie(t_mtrx_lst *lst_matrix);
 
-char	**ft_cpy_mtrllst_to_cmtrx(t_mtrx_lst *lst_matrix)
+char	**ft_expand_m_lst_to_cmtrx(t_mtrx_lst *lst_matrix)
 {
 	t_var_matrix	v;
 

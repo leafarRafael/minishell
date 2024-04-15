@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 15:50:01 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 09:22:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	ft_delete_list(t_lst *lst)
 {
-	t_var	var;
-
 	if (!lst)
 		return (-1);
 	while (lst->size > 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:48:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/09 09:54:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/15 11:18:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "key_words.h"
 #include "array_lst.h"
+#include "matrix_lst.h"
 
 typedef struct s_expandig
 {
@@ -33,6 +34,7 @@ typedef struct s_expandig
 }		t_expand;
 
 
-int	ft_expander_lst_token(t_lst *lst);
+int			ft_expander_lst_token(t_lst *lst);
+char		**ft_expand_m_lst_to_cmtrx(t_mtrx_lst *lst_matrix);
 
 #endif
