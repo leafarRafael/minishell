@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/15 17:28:46 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/16 10:50:08 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c
 
 AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\
-				./src/function_ast/init_node_ast.c
+				./src/function_ast/init_node_ast.c\
+				./src/function_ast/delete_tree.c
 
 PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_composite_op.c\

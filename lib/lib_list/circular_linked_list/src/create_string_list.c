@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_string_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 08:49:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 09:24:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/16 08:50:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_add_string_in_list(t_lst *lst, char *array)
 	{
 		if (ft_create_node_add_back(lst, array[i]))
 		{
-			write(STDERR_FILENO, "error creation array_list\n", 29);
+			write(STDERR_FILENO, "error creation array_list\n", 27);
 			return (-1);
 		}
 		i++;
