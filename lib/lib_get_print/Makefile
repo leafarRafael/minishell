@@ -5,7 +5,7 @@ FILES = libft/src_ctype/ft_isalnum.c libft/src_ctype/ft_isascii.c libft/src_ctyp
 		libft/src_ctype/ft_tolower.c libft/src_string/src_mem/ft_memcmp.c libft/src_string/src_mem/ft_memcpy.c\
 		libft/src_string/src_mem/ft_memset.c libft/src_string/src_mem/ft_memchr.c libft/src_string/src_mem/ft_memmove.c\
 		libft/src_string/src_str/ft_strncmp.c libft/src_string/src_str/ft_strnstr.c libft/src_string/src_str/ft_strdup.c\
-		libft/src_string/src_str/ft_strlen.c libft/src_string/src_str/ft_strlcat.c libft/src_string/src_str/ft_bzero.c\
+		libft/src_string/src_str/ft_strlen.c libft/src_string/src_str/ft_mtrxlen.c libft/src_string/src_str/ft_strlcat.c libft/src_string/src_str/ft_bzero.c\
 		libft/src_string/src_str/ft_strlcpy.c libft/src_string/src_str/ft_strchr.c libft/src_string/src_str/ft_strrchr.c\
 		libft/src_stdlib/ft_calloc.c libft/src_stdlib/ft_atoi.c\
 		libft/src_/ft_striteri.c libft/src_/ft_strjoin.c libft/src_/ft_itoa.c libft/src_/ft_strtrim.c\

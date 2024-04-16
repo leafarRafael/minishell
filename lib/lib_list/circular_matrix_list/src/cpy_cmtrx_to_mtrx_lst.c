@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_cmatrix.c                                   :+:      :+:    :+:   */
+/*   cpy_cmtrx_to_mtrx_lst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 14:27:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/16 16:02:55 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/16 15:54:19 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/16 15:54:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "matrix_lst.h"
 
-int	ft_delete_cmatrix(char **matrix)
+t_mtrx_lst	*ft_cmtrix_to_mtrx_lst(char **matrix)
 {
-	int	i;
+	t_mtrx_lst	*new_mtrx_lst;
+	t_lst		*new_lst;
+	int			i;
 
-	i = 0;
 	if (!matrix)
-		return (-1);
+		return (NULL);
+	new_mtrx_lst = ft_init_matrix();
+	i = 0;
 	while (matrix[i])
 	{
-		free(matrix[i]);
+		new_lst = ft_init_lst();
+		ft_add_string_in_list(new_lst, matrix[i]);
+		ft_add_list_back(new_mtrx_lst, new_lst);
 		i++;
 	}
-	free(matrix);
-	matrix = NULL;
-	return (0);
+	return (new_mtrx_lst);
 }

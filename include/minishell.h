@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 13:33:09 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/16 15:56:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_variables_minishell
 	int				looping_shell;
 	t_lst			*input_user;
 	t_mtrx_lst		*matrix_lst;
+	t_mtrx_lst		*mrtx_lst_env;
 	t_mtrx_mtrx		*list_matrix;
 	t_ast			*ast;
 }			t_var_minishell;

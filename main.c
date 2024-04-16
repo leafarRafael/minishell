@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/16 14:57:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/16 16:01:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,16 @@ void	ft_printtree(t_ast_node *root);
 int main()
 {
 	t_var_minishell v;
+	char			**env;
 
 	v.looping_shell = 1;
+	env = NULL;
+	v.mrtx_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
+	//ft_print_matrix_line(v.mrtx_lst_env);
+	env = ft_cpy_mtrllst_to_cmtrx(v.mrtx_lst_env);
+	ft_printf_matrix(env);
+	ft_delete_cmatrix(env);
+	ft_delete_matrix(v.mrtx_lst_env);
 	while (v.looping_shell)
 	{
 		v.infile = readline("minishell ~:");
@@ -39,7 +47,7 @@ int main()
 			ft_define_cmd_operator(v.list_matrix);
 			v.ast = ft_init_ast();
 			ft_populetree(v.ast, v.list_matrix);
-			//ft_print_todos_os_tokens_expandidos(v.list_matrix);
+			ft_delete_tree(v.ast);
 			ft_delete_mtrx_mtrx_lst(v.list_matrix);
 			free(v.input_user);
 			v.looping_shell = ft_exit(v.infile);
@@ -68,7 +76,6 @@ void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx)
 		i++;
 	}
 	ft_printtree(tree->root);
-	ft_delete_tree(tree);
 }
 
 void ft_printtree(t_ast_node *root)
@@ -81,9 +88,6 @@ void ft_printtree(t_ast_node *root)
 		printf("direita do op: ");
 		ft_print_matrix_line(root->m_lst->next->matrix);
 		printf("\nnovo op\n");
-
-
-
 		ft_printtree(root->left);
 		ft_printtree(root->right);
 	}

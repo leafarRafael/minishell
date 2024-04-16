@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:34:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 09:30:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/16 15:55:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int				ft_remove_lst_front(t_mtrx_lst *m_lst);
 int				ft_remove_list_back(t_mtrx_lst *m_lst);
 int				ft_delete_matrix(t_mtrx_lst *matrix);
 char			**ft_cpy_mtrllst_to_cmtrx(t_mtrx_lst *lst_matrix);
+t_mtrx_lst		*ft_cmtrix_to_mtrx_lst(char **matrix);
 
 #endif
