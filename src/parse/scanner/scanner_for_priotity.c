@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:25:42 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 16:41:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/17 14:51:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int value_priority(int type)
 	if (type & (REDI_IN | REDIRECT | APPEND))
 		return (MEDIUM);
 	if (type == PIPE)
-		return (LOW);
-	if (type & (AND_OP | OR_OP))
 		return (LOWEST);
+	if (type & (AND_OP | OR_OP))
+		return (LOW);
 	if (type == HERE_DOC)
 		return(HERE);
 	return (-42);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_matrix_lst.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:46:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 12:59:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/17 13:04:56 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_m_node
 {
 	t_mtrx_lst		*matrix;
 	int				type;
+	int				in_parent;
 	struct s_m_node	*next;
 	struct s_m_node	*prev;
 }				t_mnode;

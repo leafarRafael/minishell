@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/16 10:50:08 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/17 15:19:25 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,14 @@ MAKE_MATRIX_L	:= ./lib/lib_list/circular_matrix_list
 MTRX_MTRX_L		:= ./lib/lib_list/lib_list.a
 MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
-FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c
+FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c define_ast.c
 
 AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\
 				./src/function_ast/init_node_ast.c\
-				./src/function_ast/delete_tree.c
+				./src/function_ast/delete_tree.c\
+				./src/function_ast/add_node_right.c\
+				./src/function_ast/add_node_left.c
 
 PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_composite_op.c\

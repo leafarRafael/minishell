@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/16 16:02:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/17 18:28:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,9 +220,25 @@ void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx)
 		matrix = ft_expand_m_lst_to_cmtrx(temp->matrix);
 		if (matrix == NULL)
 			ft_remove_specific_matrix(mtrx_mtrx, temp);
+		if (is_operator(temp->type))
+			printf("\n\n\n");
+		if (is_operator(temp->next->type))
+			printf("\n\n\n");
 		ft_printf_matrix(matrix);
 		ft_delete_cmatrix(matrix);
 		temp = temp->next;
 		i++;
+	}
+}
+
+void ft_printtree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx)
+{
+	if (root != NULL)
+	{
+		ft_print_matrix_line(root->m_lst->matrix);
+		if (root->m_lst->next != mtrx_mtrx->head)
+			ft_print_matrix_line(root->m_lst->next->matrix);
+		ft_printtree(root->left, mtrx_mtrx);
+		ft_printtree(root->right, mtrx_mtrx);
 	}
 }

@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_define_command_operator.c                       :+:      :+:    :+:   */
+/*   execulte.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/17 11:43:46 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/17 16:54:54 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/17 17:24:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# ifndef EXECUTE_H
+# define EXECUTE_H
 
-int	ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst)
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <errno.h>
+# include "minishell.h"
+
+typedef struct s_execute
 {
-	int		i;
-	t_mnode	*temp;
+	char	**path;
+	char	**matrix_cmd;
+	char	*path_exe;
+	char	*comand;
+	pid_t	*pid;
+	int		pipe[2];
+	t_lst_line *temp;
 
-	if (!m_m_lst)
-		return (-1);
-	if (m_m_lst->size == 0)
-		return (-1);
-	temp = m_m_lst->head;
-	i = 1;
-	while (i <= m_m_lst->size)
-	{
-		temp->type = temp->matrix->head->lst->head->type;
-		temp = temp->next;
-		i++;
-	}
-	return (0);
-}
+}	t_execute;
+
+
+#endif
