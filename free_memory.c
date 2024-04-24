@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_ast.c                                       :+:      :+:    :+:   */
+/*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 11:37:53 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/24 14:31:25 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/24 14:33:24 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx)
+void	ft_free_memory_revert_environ(t_var_minishell *v)
 {
-	t_mnode		*temp;
-	int			i;
-	int			type;
-
-	i = 1;
-	temp = mtrx_mtrx->last;
-	type = temp->type;
-	while (i <= mtrx_mtrx->size)
-	{
-		if (is_operator(type))
-			ft_tree_add_left(tree, temp);
-		temp = temp->prev;
-		type = temp->type;
-		i++;
-	}
+	ft_delete_tree(v->ast);
+	ft_delete_mtrx_mtrx_lst(v->list_matrix);
+	free(v->input_user);
+	v->looping_shell = ft_exit(v->infile);
+	free(v->infile);
+	__environ = v->temp__environ;
 }

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_ast.c                                       :+:      :+:    :+:   */
+/*   find_str_in_matrixlst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 11:37:53 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/24 14:45:10 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/24 15:16:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "matrix_lst.h"
 
-void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx)
+t_lst	*find_str_in_matrixlst(t_mtrx_lst *m_lst, char *str, int size)
 {
-	t_mnode		*temp;
-	int			i;
-	int			type;
+	t_var_matrix	v;
 
-	i = 1;
-	temp = mtrx_mtrx->last;
-	type = temp->type;
-	while (i <= mtrx_mtrx->size)
+	v.current_lst = m_lst->head;
+	v.i = 1;
+	while (v.i <= m_lst->size)
 	{
-		if (is_operator(type))
-			ft_tree_add_left(tree, temp);
-		temp = temp->prev;
-		type = temp->type;
-		i++;
+		if (ft_find_str_inlist(v.current_lst->lst, str, size) == size)
+			return (v.current_lst->lst);
+		v.i++;
+		v.current_lst = v.current_lst->next;
 	}
+	return (NULL);
 }

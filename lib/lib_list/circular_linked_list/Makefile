@@ -13,7 +13,8 @@ SRC				:= ./src/init_list.c\
 				./src/create_string_list.c\
 				./src/remove_and_return_node.c\
 				./src/insert_nodes_between.c\
-				./src/cpy_lst_to_array.c
+				./src/cpy_lst_to_array.c\
+				./src/find_istring_in_list.c
 
 NUM_FILES		:= $(words $(SRC))
 OBJS			:= ./objs_circular_linked_list

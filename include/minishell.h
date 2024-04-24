@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/17 12:50:40 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/24 17:32:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # include "scanner.h"
 # include "token.h"
 # include "abstract_syntax_tree.h"
+
+#define PATH "PATH=/"
+#define SIZE_PATH 6
+
 
 typedef struct s_variables_minishell
 {
@@ -55,8 +59,6 @@ int			ft_delete_cmatrix(char **matrix);
 int			ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst);
 void		ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx);
 
-
-
 void	ft_printf_matrix(char **matrix);
 void	ft_print_array_lst(t_lst *lst, int front_back);
 void	ft_print_array_lst_content_type(t_lst *lst);
@@ -69,5 +71,9 @@ void	ft_print_lst_matrix(t_mtrx_mtrx *m_l);
 void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx);
 void	ft_printtree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx);
 
+int		ft_input_is_valid(char *array);
+int		ft_exit(char	*input);
+void	ft_free_memory_revert_environ(t_var_minishell *v);
+char	**ft_path_env(t_mtrx_lst *m_lst);
 
 #endif

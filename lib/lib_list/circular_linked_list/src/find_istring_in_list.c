@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_ast.c                                       :+:      :+:    :+:   */
+/*   find_istring_in_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 11:37:53 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/24 14:46:09 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/24 15:03:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "array_lst.h"
 
-void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx)
+int	ft_find_str_inlist(t_lst *lst, char *str, int size)
 {
-	t_mnode		*temp;
-	int			i;
-	int			type;
+	t_var	v;
+	int		index;
 
-	i = 1;
-	temp = mtrx_mtrx->last;
-	type = temp->type;
-	while (i <= mtrx_mtrx->size)
+	v.i = 1;
+	index = 0;
+	v.temp_node = lst->head;
+	while (v.i <= lst->size)
 	{
-		if (is_operator(type))
-			ft_tree_add_left(tree, temp);
-		temp = temp->prev;
-		type = temp->type;
-		i++;
+		if (str[index] == v.temp_node->c)
+			index++;
+		else
+			index = 0;
+		if (index == size)
+			break;
+		v.temp_node = v.temp_node->next;
+		v.i++;
 	}
+	if (index == size)
+		return (index);
+	return (-1);
 }

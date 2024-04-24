@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/17 15:19:25 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/24 17:19:44 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ MAKE_MATRIX_L	:= ./lib/lib_list/circular_matrix_list
 MTRX_MTRX_L		:= ./lib/lib_list/lib_list.a
 MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
-FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c define_ast.c
+FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c define_ast.c\
+				valid_input.c exit.c free_memory.c path_comand.c
 
 AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\
@@ -46,7 +47,8 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/expanding/expanding.c\
 				./src/parse/expanding/expand_m_lst_to_cmtrx.c\
 				./src/parse/token/token.c\
-				./src/parse/ft_define_command_operator.c
+				./src/parse/ft_define_command_operator.c\
+				./src/parse/define_priority_operator.c
 
 KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/control_operators.c\

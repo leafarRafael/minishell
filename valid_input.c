@@ -1,33 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_define_command_operator.c                       :+:      :+:    :+:   */
+/*   valid_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 10:44:49 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/24 14:27:18 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/24 14:29:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst)
+int	ft_input_is_valid(char *array)
 {
-	int		i;
-	t_mnode	*temp;
+	int	i;
+	int size;
 
-	if (!m_m_lst)
+	i = 0;
+	size = 0;
+	if (!array)
 		return (-1);
-	if (m_m_lst->size == 0)
-		return (-1);
-	temp = m_m_lst->head;
-	i = 1;
-	while (i <= m_m_lst->size)
+	size = ft_strlen(array);
+	if (size == 0)
 	{
-		temp->type = temp->matrix->head->lst->head->type;
-		temp = temp->next;
+		free(array);
+		return (-1);
+	}
+	if (size == 1)
+	{
+		if (ft_words_delemiter(array[0]))
+		{
+			free(array);
+			return (-1);
+		}
+		write(2, array, size);
+		write(2,": command not found\n", 21);
+		free(array);
+		return (-1);
+	}
+	while (array[i])
+	{
+		if (!ft_words_delemiter(array[i]))
+			return (0);
 		i++;
 	}
-	return (0);
+	free(array);
+	return (-1);
 }

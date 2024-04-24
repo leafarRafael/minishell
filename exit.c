@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_ast.c                                       :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 11:37:53 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/24 14:29:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx)
+int	ft_exit(char	*input)
 {
-	t_mnode		*temp;
-	int			i;
-	int			type;
+	int	i;
 
-	i = 1;
-	temp = mtrx_mtrx->last;
-	type = temp->type;
-	while (i <= mtrx_mtrx->size)
-	{
-		if (is_operator(type))
-			ft_tree_add_left(tree, temp);
-		temp = temp->prev;
-		type = temp->type;
+	if (!input)
+		return (-1);
+	i = 0;
+	while (ft_words_delemiter(input[i]))
 		i++;
-	}
+	if (ft_strncmp("exit", &input[i], 4) == 0)
+		return (0);
+	return (-1);
 }

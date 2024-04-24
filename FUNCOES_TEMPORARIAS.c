@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/17 18:28:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/24 14:36:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,10 +235,7 @@ void ft_printtree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx)
 {
 	if (root != NULL)
 	{
-		ft_print_matrix_line(root->m_lst->matrix);
-		if (root->m_lst->next != mtrx_mtrx->head)
-			ft_print_matrix_line(root->m_lst->next->matrix);
 		ft_printtree(root->left, mtrx_mtrx);
-		ft_printtree(root->right, mtrx_mtrx);
+		ft_print_matrix_line(root->m_lst->matrix);
 	}
 }

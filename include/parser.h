@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 14:41:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 14:43:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/24 10:45:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ char		*ft_expand(t_node *node, t_node *l_node);
 
 int			ft_scanner_for_quotes(t_lst *lst);
 
+void	ft_valid_op_in_subshell(t_mtrx_mtrx *m_m_lst);
 
 #endif
