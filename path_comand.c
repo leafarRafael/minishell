@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:18:53 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 17:31:15 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/25 08:42:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	**ft_path_env(t_mtrx_lst *m_lst)
 {
 	t_lst	*temp;
 	t_lst	to_array;
+	char	**env;
 
 	temp = find_str_in_matrixlst(m_lst, PATH, SIZE_PATH);
 	to_array.head = find_head(m_lst, temp);

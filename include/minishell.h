@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 17:32:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/25 08:19:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,25 @@ typedef struct s_variables_minishell
 	t_ast			*ast;
 }			t_var_minishell;
 
+typedef struct s_var_executable
+{
+	char	*path_exe;
+	char	**env;
+	char	**command_m;
+	pid_t	pid;
+	int		pipe[2];
+	int	fd;
+}		t_var_exe;
+
 /*
 			Function parse
 */
-void		ft_scanner_input(t_lst *lst);
-int			ft_have_operator(t_lst *lst);
-void		ft_scanner_input(t_lst *lst);
-int			ft_delete_cmatrix(char **matrix);
-int			ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst);
-void		ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx);
+void	ft_scanner_input(t_lst *lst);
+int		ft_have_operator(t_lst *lst);
+void	ft_scanner_input(t_lst *lst);
+int		ft_delete_cmatrix(char **matrix);
+int		ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst);
+void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx);
 
 void	ft_printf_matrix(char **matrix);
 void	ft_print_array_lst(t_lst *lst, int front_back);
