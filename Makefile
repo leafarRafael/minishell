@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/24 17:19:44 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/25 09:20:35 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
 FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c define_ast.c\
 				valid_input.c exit.c free_memory.c path_comand.c
+
+SIMPLE			:=./src/simple_command/execute_simple_command.c
 
 AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\
@@ -59,7 +61,7 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/string_delimiters.c\
 				./src/key_words/words_delimiters.c
 
-SRC				:= $(FILES) $(AS_TREE) $(PARSE) $(KEY_WORDS)
+SRC				:= $(FILES) $(AS_TREE) $(PARSE) $(KEY_WORDS) $(SIMPLE)
 
 INCLUDE			:= -I ./include\
 				-I lib/lib_get_print/includes\

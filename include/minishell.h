@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/25 08:19:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/25 09:22:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int		ft_input_is_valid(char *array);
 int		ft_exit(char	*input);
 void	ft_free_memory_revert_environ(t_var_minishell *v);
 char	**ft_path_env(t_mtrx_lst *m_lst);
+void	ft_execute_simple_cmd(t_var_minishell *mini);
+char	*ft_get_executable(char *command, char **path);
 
 #endif
