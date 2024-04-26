@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_istring_in_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:46:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 15:03:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/26 09:14:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_find_str_inlist(t_lst *lst, char *str, int size)
 	v.i = 1;
 	index = 0;
 	v.temp_node = lst->head;
-	while (v.i <= lst->size)
+	while (v.i <= lst->size && v.i <= size)
 	{
 		if (str[index] == v.temp_node->c)
 			index++;

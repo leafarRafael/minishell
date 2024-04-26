@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/25 09:20:35 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/26 11:39:22 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MTRX_MTRX_L		:= ./lib/lib_list/lib_list.a
 MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
 FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c define_ast.c\
-				valid_input.c exit.c free_memory.c path_comand.c
+				valid_input.c exit.c free_memory.c path_comand.c open_infile.c pipe.c
 
 SIMPLE			:=./src/simple_command/execute_simple_command.c
 

@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_ast.c                                       :+:      :+:    :+:   */
+/*   open_infile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/26 17:27:41 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/26 10:26:44 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/26 14:17:30 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx)
+void	ft_open_infile(char *file)
 {
-	t_mnode		*temp;
-	int			i;
-	int			type;
+	int	fd;
 
-	i = 1;
-	temp = mtrx_mtrx->last;
-	type = temp->type;
-/* 	if (mtrx_mtrx->size == 1)
-	{
-		ft_tree_add_left(tree, temp);
-		return ;
-	} */
-	while (i <= mtrx_mtrx->size)
-	{
-		if (!is_operator(type))
-			ft_tree_add_left(tree, temp);
-		temp = temp->prev;
-		type = temp->type;
-		i++;
-	}
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		exit(1);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+}
+
+void	ft_open_outfile(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0000644);
+	if (fd == -1)
+		exit(1);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }

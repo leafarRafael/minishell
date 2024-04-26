@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/25 09:22:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/26 15:17:54 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_variables_minishell
 typedef struct s_var_executable
 {
 	char	*path_exe;
+	char	*infile;
+	char	*outfile;
 	char	**env;
 	char	**command_m;
 	pid_t	pid;
@@ -87,5 +89,8 @@ void	ft_free_memory_revert_environ(t_var_minishell *v);
 char	**ft_path_env(t_mtrx_lst *m_lst);
 void	ft_execute_simple_cmd(t_var_minishell *mini);
 char	*ft_get_executable(char *command, char **path);
+void	ft_open_infile(char *file);
+void	ft_open_outfile(char *file);
+void	ft_pipe(int pipe[2]);
 
 #endif

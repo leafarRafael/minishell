@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_simple_command.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/25 09:22:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/26 09:51:53 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	ft_execute_simple_cmd(t_var_minishell *mini)
 		var.command_m = ft_cpy_mtrllst_to_cmtrx(mini->list_matrix->head->matrix);
 		var.env = ft_path_env(mini->mrtx_lst_env);
 		var.path_exe = ft_get_executable(var.command_m[0], var.env);
-		execve(var.path_exe, var.command_m, var.env);
+		if (var.path_exe)
+			execve(var.path_exe, var.command_m, var.env);
 	}
 }
 
