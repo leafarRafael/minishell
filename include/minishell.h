@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/27 10:09:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/27 16:18:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_print_matrix_line(t_mtrx_lst *m_line);
 int		ft_separate_operators(t_mtrx_lst	*matrix_lst, t_lst *input_user);
 void	ft_print_lst_matrix(t_mtrx_mtrx *m_l);
 void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx);
-void	ft_printtree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx);
+void	ft_printtree(t_ast_node *root);
 
 int		ft_input_is_valid(char *array);
 int		ft_exit(char	*input);

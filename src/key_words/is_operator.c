@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/27 11:06:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/27 16:10:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 /* 
 int		is_operator(int type)
 {
-	return (type & (REDI_IN | REDIRECT 
+	return (type & (REDI_IN | REDI_OUT 
 		| HERE_DOC | APPEND | PIPE | AND_OP 
 		| OR_OP | OPEN_PAREN | CLOSE_PAREN));
 } */

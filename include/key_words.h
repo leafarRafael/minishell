@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_words.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 17:03:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/27 16:10:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef enum s_type_character
 	WH_SPACE  = 1 << 2,
 	DOLLAR = 1 << 3,
 	REDI_IN = 1 << 4,
-	REDIRECT = 1 << 5,
+	REDI_OUT = 1 << 5,
 	HERE_DOC = 1 << 6,
 	APPEND = 1 << 7,
 	PIPE = 1 << 8,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_type_content.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:03:16 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/08 17:09:13 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/27 16:10:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_simple_type(char current_c)
 	if (ft_infile(current_c))
 		return (REDI_IN);
 	if (ft_outfile(current_c))
-		return (REDIRECT);
+		return (REDI_OUT);
 	if (ft_open_parent(current_c))
 		return (OPEN_PAREN);
 	if (ft_close_parent(current_c))

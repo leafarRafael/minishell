@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 14:36:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/27 16:19:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_all_type()
 	printf("%d WH_SPACE\n", WH_SPACE);
 	printf("%d DOLLAR_SING\n", DOLLAR);
 	printf("%d REDI_IN\n", REDI_IN);
-	printf("%d REDIRECT\n", REDIRECT);
+	printf("%d REDI_OUT\n", REDI_OUT);
 	printf("%d HERE_DOC\n", HERE_DOC);
 	printf("%d APPEND\n", APPEND);
 	printf("%d PIPE\n", PIPE);
@@ -110,8 +110,8 @@ void	show_str_type(int type)
 		printf("DOLLAR_SING");
 	if (type == REDI_IN)
 		printf("REDI_IN");
-	if (type == REDIRECT)
-		printf("REDIRECT");
+	if (type == REDI_OUT)
+		printf("REDI_OUT");
 	if (type == HERE_DOC)
 		printf("HERE_DOC");
 	if (type == APPEND)
@@ -231,11 +231,12 @@ void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx)
 	}
 }
 
-void ft_printtree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx)
+void ft_printtree(t_ast_node *root)
 {
 	if (root != NULL)
 	{
-		ft_printtree(root->left, mtrx_mtrx);
+		ft_printtree(root->left);
 		ft_print_matrix_line(root->m_lst->matrix);
+		printf("=======================================\n");
 	}
 }

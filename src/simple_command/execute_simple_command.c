@@ -6,10 +6,11 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/27 15:20:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/27 19:43:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/wait.h>
 #include "minishell.h"
 
 void	ft_execute_simple_cmd4(t_ast_node *cmd, t_mtrx_lst *env_list);
@@ -21,6 +22,7 @@ void ft_execute_tree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx, t_mtrx_lst *env)
 	if (root != NULL)
 	{
 		ft_execute_tree(root->left, mtrx_mtrx, env);
+		printf("START RECUR\n");
 		ft_execute_simple_cmd4(root, env);
 	}
 }
@@ -54,13 +56,6 @@ void	ft_execute_simple_cmd3(t_ast_node *cmd, t_mtrx_lst *env_list)
 			ft_open_infile(var.infile);
 			ft_remove_lst_front(cmd->m_lst->matrix);
 		}
-		if (cmd->m_lst->matrix->last->prev->lst->head->type == REDIRECT)
-		{
-			var.outfile = ft_cpy_lst_to_array(cmd->m_lst->matrix->last->lst);
-			ft_open_outfile(var.outfile);
-			ft_remove_list_back(cmd->m_lst->matrix);
-			ft_remove_list_back(cmd->m_lst->matrix);
-		}
 		var.command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 		var.env = ft_path_env(env_list);
 		var.path_exe = ft_get_executable(var.command_m[0], var.env);
@@ -85,8 +80,6 @@ void	ft_execute_simple_cmd2(t_ast_node *cmd, t_mtrx_lst *env_list)
 			ft_open_infile(var.command_m[i]);
 			i++;
 		}
-		if (cmd->m_lst->next->type == REDIRECT)
-			ft_open_outfile(var.command_m[i]);
 		if (i > 0 )
 			ft_remove_lst_front(cmd->m_lst->matrix);
 		var.env = ft_path_env(env_list);
@@ -126,19 +119,15 @@ void	ft_execute_simple_cmd4(t_ast_node *cmd, t_mtrx_lst *env_list)
 	t_var_exe	var;
 	int			tube[2];
 
-	pipe(tube);
+	if (cmd->m_lst->next->type == PIPE)
+		pipe(tube);
 	var.pid = fork();
 	if (var.pid == 0)
 	{
+		ft_putstr_fd("== IF ==\n", 2);
 		if (cmd->m_lst->next->type == PIPE)
 		{
 			dup2(tube[1], STDOUT_FILENO);
-			close(tube[0]);
-			close(tube[1]);
-		}
-		if (cmd->m_lst->prev->type == PIPE)
-		{
-			dup2(tube[0], STDIN_FILENO);
 			close(tube[0]);
 			close(tube[1]);
 		}
@@ -149,4 +138,26 @@ void	ft_execute_simple_cmd4(t_ast_node *cmd, t_mtrx_lst *env_list)
 			execve(var.path_exe, &var.command_m[0], var.env);
 		exit(1);
 	}
+	else
+	{
+		ft_putstr_fd("== ESLE ==\n", 2);
+		if (cmd->m_lst->next->type == PIPE)
+		{
+			dup2(tube[0], STDIN_FILENO);
+			close(tube[0]);
+			close(tube[1]);
+		}
+		else
+		{
+			printf("%d tube[0] valor = %d\n", close(tube[0]), tube[0]);
+			printf("%d tube[1] valor = %d\n", close(tube[1]), tube[1]);
+			dup(STDIN_FILENO);
+			dup(STDOUT_FILENO);
+		}
+		sleep(3);
+	}
+	ft_putstr_fd("== END ==\n", 2);
+
+
+
 }

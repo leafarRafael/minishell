@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 14:25:42 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/17 14:51:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/27 16:10:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int value_priority(int type)
 {
 	if (type & (OPEN_PAREN | CLOSE_PAREN))
 		return (HIGH);
-	if (type & (REDI_IN | REDIRECT | APPEND))
+	if (type & (REDI_IN | REDI_OUT | APPEND))
 		return (MEDIUM);
 	if (type == PIPE)
 		return (LOWEST);
