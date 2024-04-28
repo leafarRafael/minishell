@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/27 18:44:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/28 18:35:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,19 @@ int main()
 {
 	t_var_minishell v;
 	char			**env;
+	int				tty[2];
+
 
 	v.looping_shell = 1;
 	env = NULL;
 	v.temp__environ = __environ;
 	v.mrtx_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	v.env = ft_cpy_mtrllst_to_cmtrx(v.mrtx_lst_env);
-	// while (v.looping_shell)
-	while (1)
+	while (v.looping_shell)
 	{
-		
-		printf("== WHILE ==\n");
-		v.infile = "";
-		printf("[[%s]]\n", v.infile);
 		v.infile = readline("minishell ~:");
-		printf("[[%s]]\n", v.infile);
-		sleep(1);
 		if (!ft_input_is_valid(v.infile))
 		{
-			printf("==>>>> MAIN_IF ==\n");
 			__environ = v.env;
 			v.input_user = ft_init_lst();
 			v.list_matrix = ft_mtrx_mtrx_lst();
@@ -42,20 +36,30 @@ int main()
 			ft_scanner_input(v.input_user);
 			while (v.input_user->size > 0)
 				ft_create_node_matrix_add_back(v.list_matrix, ft_simple_comand(v.input_user));
-			ft_define_cmd_operator(v.list_matrix);
+			ft_define_cmd_status(v.list_matrix);
+			// TODO MORE CHECKs OPERATORS
+			ft_remove_cmd_status(v.list_matrix);
 			ft_valid_op_in_subshell(v.list_matrix);
 			v.ast = ft_init_ast();
 			ft_populetree(v.ast, v.list_matrix);
-			// ft_printtree(v.ast->root);
-			ft_execute_tree(v.ast->root, v.list_matrix, v.mrtx_lst_env);
-			printf("OUT OF CMD\n");
-			sleep(3);
+			tty[0] = dup(STDIN_FILENO);
+			tty[1] = dup(STDOUT_FILENO);
+			v.pid = fork();
+			if (v.pid == 0)
+			{
+				ft_execute_tree(tty, v.ast->root, v.list_matrix, v.mrtx_lst_env);
+				ft_free_memory_revert_environ(&v);
+				ft_delete_cmatrix(v.env);
+				ft_delete_matrix(v.mrtx_lst_env);
+				exit(1);
+			}
+			close (tty[0]);
+			close (tty[1]);
 			ft_free_memory_revert_environ(&v);
 		}
 	}
 	ft_delete_cmatrix(v.env);
 	ft_delete_matrix(v.mrtx_lst_env);
 }
-
 
 // cat Makefile | grep NAME | wc -l

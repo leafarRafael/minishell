@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/27 16:19:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/28 15:21:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ void	ft_print_array_lst(t_lst *lst, int front_back)
 		temp = lst->last;
 	while (i <= lst->size)
 	{
-		printf("%c", temp->c);
+		ft_putchar_fd(temp->c, STDERR_FILENO);
 		if (front_back == 0)
 			temp = temp->next;
 		else
 			temp = temp->prev;
 		i++;
 	}
+	ft_putchar_fd('\n', STDERR_FILENO);
 }
 
 void	ft_print_array_lst_content_type(t_lst *lst)

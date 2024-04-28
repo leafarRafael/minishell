@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/27 16:18:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/28 18:27:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@
 #define PATH "PATH=/"
 #define SIZE_PATH 6
 
-
 typedef struct s_variables_minishell
 {
 	char			*infile;
@@ -47,6 +46,7 @@ typedef struct s_variables_minishell
 	t_mtrx_lst		*mrtx_lst_env;
 	t_mtrx_mtrx		*list_matrix;
 	t_ast			*ast;
+	pid_t	pid;
 }			t_var_minishell;
 
 typedef struct s_var_executable
@@ -58,7 +58,6 @@ typedef struct s_var_executable
 	char	**command_m;
 	pid_t	pid;
 	int		pipe[2];
-	int	fd;
 }		t_var_exe;
 
 /*
@@ -68,7 +67,8 @@ void	ft_scanner_input(t_lst *lst);
 int		ft_have_operator(t_lst *lst);
 void	ft_scanner_input(t_lst *lst);
 int		ft_delete_cmatrix(char **matrix);
-int		ft_define_cmd_operator(t_mtrx_mtrx *m_m_lst);
+int		ft_define_cmd_status(t_mtrx_mtrx *m_m_lst);
+int		ft_remove_cmd_status(t_mtrx_mtrx *m_m_lst);
 void	ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx);
 
 void	ft_printf_matrix(char **matrix);
@@ -94,6 +94,6 @@ void	ft_open_outfile(char *file);
 void	ft_pipe(int pipe[2]);
 void	ft_pipe_parent(int pipe[2]);
 
-void 	ft_execute_tree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx, t_mtrx_lst *env);
+void 	ft_execute_tree(int tty[2], t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx, t_mtrx_lst *env);
 
 #endif

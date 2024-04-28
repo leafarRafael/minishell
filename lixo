@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/28 16:49:25 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/26 11:39:22 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/expanding/expand_m_lst_to_cmtrx.c\
 				./src/parse/token/token.c\
 				./src/parse/ft_define_command_operator.c\
-				./src/parse/ft_remove_command_operator.c\
 				./src/parse/define_priority_operator.c
 
 KEY_WORDS		:= ./src/key_words/add_type_content.c\

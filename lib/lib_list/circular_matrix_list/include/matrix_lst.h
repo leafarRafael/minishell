@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_lst.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:34:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 15:14:26 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/28 16:21:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_lst_line
 	t_lst				*lst;
 	struct s_lst_line	*next;
 	struct s_lst_line	*prev;
+	int					rdrct;
 }				t_lst_line;
 
 typedef struct s_matrix_list
