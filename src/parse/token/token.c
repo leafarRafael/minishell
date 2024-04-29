@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 10:09:09 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 18:50:33 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "token.h"
 #include "minishell.h"
@@ -22,7 +21,7 @@ t_mtrx_lst	*ft_simple_comand(t_lst	*lst)
 	t_token			v;
 	t_mtrx_lst		*new_matrix;
 
-	if(!lst)
+	if (!lst)
 		return (NULL);
 	if (lst->size == 0)
 		return (NULL);

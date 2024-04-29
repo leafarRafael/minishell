@@ -6,11 +6,11 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 09:21:26 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 09:21:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 17:07:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 char	*ft_get_executable(char *command, char **path)
 {

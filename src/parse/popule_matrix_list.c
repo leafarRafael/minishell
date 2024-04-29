@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   popule_matrix_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:02:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 14:43:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:29:24 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_separate_operators(t_mtrx_lst	*matrix_lst, t_lst *input_user)
+static void	ft_matrix_op(t_lst *n_lst, t_mtrx_lst *m_lst, t_lst *input, int i);
+
+int	ft_separate_operators(t_mtrx_lst *matrix_lst, t_lst *input_user)
 {
 	t_lst	*new_list;
 	t_node	*node;
@@ -23,27 +25,7 @@ int		ft_separate_operators(t_mtrx_lst	*matrix_lst, t_lst *input_user)
 	while (input_user->size > 0)
 	{
 		if (is_operator(input_user->head->type))
-		{
-			if (new_list->size != 0)
-				ft_add_list_back(matrix_lst, new_list);
-			if (i != 0)
-				new_list = ft_init_lst();
-			if (input_user->head->type == input_user->head->next->type && input_user->head->next != input_user->head)
-			{
-				node = ft_remove_return_node(input_user, input_user->head);
-				ft_add_node_back(new_list, node);
-				node = ft_remove_return_node(input_user, input_user->head);
-				ft_add_node_back(new_list, node);
-			}
-			else
-			{
-				node = ft_remove_return_node(input_user, input_user->head);
-				ft_add_node_back(new_list, node);
-			}
-			ft_add_list_back(matrix_lst, new_list);
-			if (input_user->size != 0)
-				new_list = ft_init_lst();
-		}
+			ft_matrix_op(new_list, matrix_lst, input_user, i);
 		else
 		{
 			node = ft_remove_return_node(input_user, input_user->head);
@@ -54,4 +36,30 @@ int		ft_separate_operators(t_mtrx_lst	*matrix_lst, t_lst *input_user)
 	if (new_list != matrix_lst->last->lst)
 		ft_add_list_back(matrix_lst, new_list);
 	return (0);
+}
+
+static void	ft_matrix_op(t_lst *n_lst, t_mtrx_lst *m_lst, t_lst *input, int i)
+{
+	t_node	*node;
+
+	if (n_lst->size != 0)
+		ft_add_list_back(m_lst, n_lst);
+	if (i != 0)
+		n_lst = ft_init_lst();
+	if (input->head->type == input->head->next->type
+		&& input->head->next != input->head)
+	{
+		node = ft_remove_return_node(input, input->head);
+		ft_add_node_back(n_lst, node);
+		node = ft_remove_return_node(input, input->head);
+		ft_add_node_back(n_lst, node);
+	}
+	else
+	{
+		node = ft_remove_return_node(input, input->head);
+		ft_add_node_back(n_lst, node);
+	}
+	ft_add_list_back(m_lst, n_lst);
+	if (input->size != 0)
+		n_lst = ft_init_lst();
 }

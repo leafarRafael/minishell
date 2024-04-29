@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:56:33 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 11:39:01 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:34:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_first(t_mtrx_mtrx *lst_m, t_mnode *new_mnode);
 static void	ft_second(t_mtrx_mtrx *lst_m, t_mnode *new_mnode);
 static void	ft_third_onwards(t_mtrx_mtrx *lst_m, t_mnode *new_mnode);
 
-int	ft_create_node_matrix_add_front(t_mtrx_mtrx *lst_m , t_mtrx_lst *matrix)
+int	ft_matrix_add_front(t_mtrx_mtrx *lst_m, t_mtrx_lst *matrix)
 {
 	t_mnode			*new_mnode;
 

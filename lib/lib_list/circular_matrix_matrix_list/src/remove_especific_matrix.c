@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_especific_matrix.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:49:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 14:16:40 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:29:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	ft_check_in_m_matrix(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx)
 	while (v.i <= m_matrix->size)
 	{
 		if (v.current == node_mtrx)
-			return (0);		
+			return (0);
 		v.current = v.current->next;
 		v.i++;
 	}

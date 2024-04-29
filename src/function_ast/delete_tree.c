@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:40:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/17 08:56:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:45:34 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_delete(t_ast *tree, t_ast_node *node);
 
 void	ft_delete_tree(t_ast *tree)
 {
-	t_ast_node *node;
+	t_ast_node	*node;
 
 	if (!tree)
 		return ;
@@ -25,7 +25,7 @@ void	ft_delete_tree(t_ast *tree)
 	free(tree);
 }
 
-static void ft_delete(t_ast *tree, t_ast_node *node)
+static void	ft_delete(t_ast *tree, t_ast_node *node)
 {
 	if (node)
 	{

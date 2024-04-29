@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_matrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:09:29 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 15:38:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:23:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ int	ft_delete_matrix(t_mtrx_lst *matrix)
 		matrix = NULL;
 		return (0);
 	}
-	return (-1);	
+	return (-1);
 }

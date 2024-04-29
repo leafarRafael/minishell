@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:21:02 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/09 10:39:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:45:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ void	ft_scanner_quotes(t_lst *lst)
 	v.d_quotes = 0;
 	v.s_quotes = 0;
 	v.node = lst->head;
-	while (v.i <= lst->size )
+	while (v.i <= lst->size)
 	{
 		if (v.node->type == D_QUOTES && v.s_quotes == 0)
 			ft_is_quotes(&v.d_quotes);
-		if (v.node->type == S_QUOTES  && v.d_quotes == 0)
+		if (v.node->type == S_QUOTES && v.d_quotes == 0)
 			ft_is_quotes(&v.s_quotes);
 		if (v.s_quotes == 1 && v.node->type != S_QUOTES)
 			v.node->type = NO_OP_TYPE;
-		if (v.d_quotes == 1 && v.node->type != D_QUOTES && v.node->type != DOLLAR)
+		if (v.d_quotes == 1
+			&& v.node->type != D_QUOTES && v.node->type != DOLLAR)
 		{
 			if (v.node->type != NO_OP_TYPE)
-				v.node->type  = META_LITERAL;
+				v.node->type = META_LITERAL;
 		}
 		v.node = v.node->next;
 		v.i++;

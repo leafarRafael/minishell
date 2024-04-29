@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cpy_mtrllst_to_cmtrx.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:18:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/16 16:15:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:20:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_cpy_mtrllst_to_cmtrx(t_mtrx_lst *lst_matrix)
 	v.matrix = NULL;
 	if (!lst_matrix)
 		return (v.matrix);
-	v.matrix = malloc(sizeof(char*) * (lst_matrix->size +1));
+	v.matrix = malloc(sizeof(char *) * (lst_matrix->size +1));
 	if (!v.matrix)
 		return (v.matrix);
 	v.current_lst = lst_matrix->head;
@@ -35,6 +35,6 @@ char	**ft_cpy_mtrllst_to_cmtrx(t_mtrx_lst *lst_matrix)
 		v.current_lst = v.current_lst->next;
 		v.i++;
 	}
-	v.matrix[v.i-1] = NULL;
+	v.matrix[v.i -1] = NULL;
 	return (v.matrix);
 }

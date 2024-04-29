@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_matrix_matrix_lst.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:50:36 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 14:43:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:30:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

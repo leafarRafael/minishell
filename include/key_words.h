@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/28 15:18:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 17:01:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 typedef enum s_type_character
 {
-	NO_OP_TYPE  = 0,
+	NO_OP_TYPE = 0,
 	S_QUOTES = 1 << 0,
 	D_QUOTES = 1 << 1,
-	WH_SPACE  = 1 << 2,
+	WH_SPACE = 1 << 2,
 	DOLLAR = 1 << 3,
 	REDI_IN = 1 << 4,
 	REDI_OUT = 1 << 5,
@@ -32,7 +32,7 @@ typedef enum s_type_character
 	META_LITERAL = 1 << 13,
 	COMMAND = 1 << 14,
 	END_OF = 1 << 15
-}       t_type_character;
+}	t_type_character;
 
 int	ft_or_op(char current, char next);
 int	ft_and_op(char current, char next);

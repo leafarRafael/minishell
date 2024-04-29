@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_priority_operator.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 13:01:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/24 10:45:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 14:59:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

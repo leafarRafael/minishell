@@ -6,16 +6,16 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:48:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 11:18:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 17:01:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANDING_H
 # define EXPANDING_H
 
-#include "key_words.h"
-#include "array_lst.h"
-#include "matrix_lst.h"
+# include "array_lst.h"
+# include "key_words.h"
+# include "matrix_lst.h"
 
 typedef struct s_expandig
 {
@@ -31,8 +31,7 @@ typedef struct s_expandig
 	int		is_head;
 	int		is_last;
 	int		i;
-}		t_expand;
-
+}			t_expand;
 
 int			ft_expander_lst_token(t_lst *lst);
 char		**ft_expand_m_lst_to_cmtrx(t_mtrx_lst *lst_matrix);

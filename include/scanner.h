@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:35:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 16:35:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:57:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 typedef enum s_priority
 {
-    LOWEST = 0,
-    LOW = 1 << 0,
-    MEDIUM = 1 << 1,
-    HIGH = 1 << 2,
+	LOWEST = 0,
+	LOW = 1 << 0,
+	MEDIUM = 1 << 1,
+	HIGH = 1 << 2,
 	HERE = 1 << 3
-}		t_priority;
+}			t_priority;
 
 typedef struct s_scanner
 {
@@ -33,15 +33,15 @@ typedef struct s_scanner
 	int		type;
 	int		s_quotes;
 	int		d_quotes;
-	
-}		t_scan;
 
-void	ft_scanner_parenthes(t_lst *lst);
-void	ft_scanner_quotes(t_lst *lst);
-void	ft_scanner_simple_operator(t_lst *lst);
-void	ft_scanner_composite(t_lst *lst);
-void	ft_scanner_input(t_lst *lst);
-void	ft_scanner_priority_type(t_lst *lst);
-int		ft_scanner_add_literal(t_lst *lst);
+}			t_scan;
+
+void		ft_scanner_parenthes(t_lst *lst);
+void		ft_scanner_quotes(t_lst *lst);
+void		ft_scanner_simple_operator(t_lst *lst);
+void		ft_scanner_composite(t_lst *lst);
+void		ft_scanner_input(t_lst *lst);
+void		ft_scanner_priority_type(t_lst *lst);
+int			ft_scanner_add_literal(t_lst *lst);
 
 #endif

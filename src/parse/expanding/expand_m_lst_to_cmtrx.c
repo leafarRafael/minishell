@@ -6,10 +6,9 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:18:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 13:32:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:47:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "expanding.h"
 #include "minishell.h"
@@ -22,7 +21,7 @@ char	**ft_expand_m_lst_to_cmtrx(t_mtrx_lst *lst_matrix)
 
 	if (!lst_matrix)
 		return (v.matrix);
-	v.matrix = ft_calloc(sizeof(char*), lst_matrix->size +1);
+	v.matrix = ft_calloc(sizeof(char *), lst_matrix->size +1);
 	v.current_lst = lst_matrix->head;
 	v.index = 0;
 	v.i = 1;
@@ -53,7 +52,7 @@ static int	ft_expande_before_copie(t_mtrx_lst *lst_matrix)
 		ft_expander_lst_token(v.current_lst->lst);
 		if (v.current_lst->lst->size == 0)
 		{
-			ft_remove_especific_lst_mtrx(lst_matrix, v.current_lst);
+			ft_rmv_spcfc_lst_mtrx(lst_matrix, v.current_lst);
 			if (lst_matrix->size == 0)
 				return (-1);
 			v.current_lst = lst_matrix->head;

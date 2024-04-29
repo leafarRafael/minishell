@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 08:58:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 12:27:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:26:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 static int	ft_check_in_matrix(t_mtrx_lst *matrix, t_lst_line *line_lst);
 static int	ft_other_cases(t_mtrx_lst *matrix, t_lst_line *line_list);
 
-int	ft_remove_especific_lst_mtrx(t_mtrx_lst *matrix, t_lst_line *line_lst)
+int	ft_rmv_spcfc_lst_mtrx(t_mtrx_lst *matrix, t_lst_line *line_lst)
 {
 	if (!matrix)
-		return(-1);
+		return (-1);
 	if (!line_lst)
 		return (-1);
 	if (ft_check_in_matrix(matrix, line_lst))
@@ -48,7 +48,7 @@ static int	ft_check_in_matrix(t_mtrx_lst *matrix, t_lst_line *line_lst)
 	return (-1);
 }
 
-static int ft_other_cases(t_mtrx_lst *matrix, t_lst_line *line_list)
+static int	ft_other_cases(t_mtrx_lst *matrix, t_lst_line *line_list)
 {
 	t_var_matrix	v;
 

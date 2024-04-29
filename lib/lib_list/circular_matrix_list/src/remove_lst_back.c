@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_lst_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 08:21:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 14:23:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:21:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ static int	remove_two_size(t_mtrx_lst *matrix)
 	return (0);
 }
 
-
-
 static int	remove_size_three_more(t_mtrx_lst *matrix)
 {
 	t_var_matrix	v;
@@ -77,6 +75,6 @@ static int	remove_size_three_more(t_mtrx_lst *matrix)
 	if (ft_delete_list(v.last_lst->lst))
 		return (-1);
 	free(v.last_lst);
-	v.last_lst = NULL;		
+	v.last_lst = NULL;
 	return (0);
 }

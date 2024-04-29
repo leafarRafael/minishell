@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:17:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/17 15:18:34 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:43:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "abstract_syntax_tree.h"
 
-static void ft_add_left(t_ast_node	*node, t_ast_node *new_node);
+static void	ft_add_left(t_ast_node	*node, t_ast_node *new_node);
 
 void	ft_tree_add_left(t_ast *tree, t_mnode *matrix)
 {
@@ -29,7 +29,7 @@ void	ft_tree_add_left(t_ast *tree, t_mnode *matrix)
 		ft_add_left(tree->root, v.ast_node);
 }
 
-static void ft_add_left(t_ast_node	*node, t_ast_node *new_node)
+static void	ft_add_left(t_ast_node	*node, t_ast_node *new_node)
 {
 	if (node->left == NULL)
 		node->left = new_node;

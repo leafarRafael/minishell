@@ -6,15 +6,15 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:21:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 19:00:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main()
+int	main(void)
 {
-	t_var_minishell v;
+	t_var_minishell	v;
 	char			**env;
 
 	v.looping_shell = 1;
@@ -35,23 +35,17 @@ int main()
 			ft_add_string_in_list(v.input_user, v.infile);
 			ft_scanner_input(v.input_user);
 			while (v.input_user->size > 0)
-				ft_create_node_matrix_add_back(v.list_matrix, ft_simple_comand(v.input_user));
+				ft_matrix_add_back(v.list_matrix,
+					ft_simple_comand(v.input_user));
 			ft_define_cmd_status(v.list_matrix);
 			// TODO MORE CHECKs OPERATORS
 			ft_remove_cmd_status(v.list_matrix);
+			ft_remove_cmd_status(v.list_matrix);
 			ft_valid_op_in_subshell(v.list_matrix);
+			//ft_print_todos_os_tokens_expandidos(v.list_matrix);
 			v.ast = ft_init_ast();
 			ft_populetree(v.ast, v.list_matrix);
 			ft_execute(v.ast->root, v.mrtx_lst_env);
-			/* v.pid = fork();
-			if (v.pid == 0)
-			{
-				ft_execute_tree(v.ast->root, v.list_matrix, v.mrtx_lst_env);
-				ft_free_memory_revert_environ(&v);
-				ft_delete_cmatrix(v.env);
-				ft_delete_matrix(v.mrtx_lst_env);
-				exit(1);
-			} */
 			ft_free_memory_revert_environ(&v);
 		}
 	}

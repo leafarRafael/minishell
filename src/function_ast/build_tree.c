@@ -6,14 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:29:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/17 15:23:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:45:15 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "abstract_syntax_tree.h"
 
-static void ft_insert_left(t_ast_node *current_node, t_ast_node *new, int value);
-static void ft_insert_right(t_ast_node *current_node, t_ast_node *new, int value);
+static void	ft_left(t_ast_node *current_node, t_ast_node *new, int value);
+static void	ft_right(t_ast_node *current_node, t_ast_node *new, int value);
 
 void	ft_build_tree(t_ast *tree, t_mnode *matrix, int value)
 {
@@ -31,34 +31,34 @@ void	ft_build_tree(t_ast *tree, t_mnode *matrix, int value)
 	else
 	{
 		if (value <= tree->root->type)
-			ft_insert_left(tree->root, v.ast_node, value);
+			ft_left(tree->root, v.ast_node, value);
 		else
-			ft_insert_right(tree->root, v.ast_node, value);
+			ft_right(tree->root, v.ast_node, value);
 	}
 }
 
-static void ft_insert_left(t_ast_node *current_node, t_ast_node *new, int value)
+static void	ft_left(t_ast_node *current_node, t_ast_node *new, int value)
 {
 	if (current_node->left == NULL)
 		current_node->left = new;
 	else
 	{
 		if (current_node->left->type <= value)
-			ft_insert_left(current_node->left, new, value);
+			ft_left(current_node->left, new, value);
 		else
-			ft_insert_right (current_node->left, new, value);
+			ft_right (current_node->left, new, value);
 	}
 }
 
-static void ft_insert_right(t_ast_node *current_node, t_ast_node *new, int value)
+static void	ft_right(t_ast_node *current_node, t_ast_node *new, int value)
 {
 	if (current_node->right == NULL)
 		current_node->right = new;
 	else
 	{
 		if (current_node->right->type > value)
-			ft_insert_right (current_node->right, new, value);
+			ft_right (current_node->right, new, value);
 		else
-			ft_insert_left(current_node->right, new, value);
+			ft_left(current_node->right, new, value);
 	}
 }

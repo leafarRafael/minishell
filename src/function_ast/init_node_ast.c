@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_node_ast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:35:25 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/10 15:17:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:44:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "abstract_syntax_tree.h"
 
-t_ast_node	*ft_init_new_ast_node()
+t_ast_node	*ft_init_new_ast_node(void)
 {
 	t_ast_node	*new_node;
 

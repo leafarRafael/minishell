@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_mlst_front.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:02:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 14:31:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:32:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	ft_size_two(t_mtrx_mtrx *ma_lst)
 	return (0);
 }
 
-static int ft_three_more(t_mtrx_mtrx *ma_lst)
+static int	ft_three_more(t_mtrx_mtrx *ma_lst)
 {
 	t_var_m_mlst	v;
 

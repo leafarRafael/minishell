@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:11:12 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 17:08:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit(char	*input)
+int	ft_exit(char *input)
 {
 	int	i;
 

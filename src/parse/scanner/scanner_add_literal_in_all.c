@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_add_literal_in_all.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:14:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 12:20:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:42:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

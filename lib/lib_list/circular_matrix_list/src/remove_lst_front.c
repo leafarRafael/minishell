@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:44:00 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 11:03:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:19:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	ft_remove_lst_front(t_mtrx_lst *m_lst)
 	return (-1);
 }
 
-
 static int	remove_one_size(t_mtrx_lst *matrix)
 {
 	t_var_matrix	v;
@@ -74,7 +73,6 @@ static int	remove_two_size(t_mtrx_lst *matrix)
 	v.head_lst = NULL;
 	return (0);
 }
-
 
 static int	remove_size_three_more(t_mtrx_lst *matrix)
 {
