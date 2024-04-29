@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:26:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 11:02:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:07:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	ft_add_list_back(t_mtrx_lst *matrix_lst, t_lst *lst)
 {
 	t_lst_line 		*new_line;
 
+	if (!matrix_lst || !lst)
+		return (-1);
 	new_line = ft_init_line_lst();
 	if (!new_line)
-		return (-1);
-	if (!matrix_lst || !lst)
 		return (-1);
 	new_line->lst = lst;
 	if (matrix_lst->size == 0)

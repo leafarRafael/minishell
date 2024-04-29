@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/28 18:27:40 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 09:24:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ int		ft_input_is_valid(char *array);
 int		ft_exit(char	*input);
 void	ft_free_memory_revert_environ(t_var_minishell *v);
 char	**ft_path_env(t_mtrx_lst *m_lst);
-void	ft_execute_simple_cmd(t_var_minishell *mini);
+void	ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list);
 char	*ft_get_executable(char *command, char **path);
 void	ft_open_infile(char *file);
 void	ft_open_outfile(char *file);
 void	ft_pipe(int pipe[2]);
 void	ft_pipe_parent(int pipe[2]);
 
-void 	ft_execute_tree(int tty[2], t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx, t_mtrx_lst *env);
+void 	ft_execute_tree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx, t_mtrx_lst *env);
 
 #endif

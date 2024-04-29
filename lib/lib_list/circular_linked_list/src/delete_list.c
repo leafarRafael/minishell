@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 09:22:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:55:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int	ft_delete_list(t_lst *lst)
 		ft_remove_node_front(lst);
 	free(lst);
 	lst = NULL;
-	return (0);	
+	return (0);
 }

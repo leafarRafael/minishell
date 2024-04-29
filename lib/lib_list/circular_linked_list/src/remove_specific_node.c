@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_specific_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:32:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 12:05:06 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:08:54 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_remove_specific_node(t_lst *lst, t_node *node)
 static int	ft_other_cases(t_lst *lst, t_node *node)
 {
 	t_var	v;
+
 	if (!lst)
 		return (-1);
 	if (!node)

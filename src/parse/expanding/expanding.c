@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/14 15:33:25 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:11:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static void	ft_replace_lst(t_lst *lst, t_lst *temp, char *env)
 	v.poin_lst = ft_init_lst();
 	ft_add_string_in_list(v.poin_lst, env);
 	ft_scanner_add_literal(v.poin_lst);
-	ft_insert_lst_between_lst(lst, v.prev_head, v.next_last, v.poin_lst);
+	ft_lst_btwn_lst(lst, v.prev_head, v.next_last, v.poin_lst);
 	if (v.is_head > 0)
 		lst->head = v.poin_lst->head;
 	if (v.is_last > 0)

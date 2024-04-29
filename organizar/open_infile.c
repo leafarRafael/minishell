@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_string_list.c                               :+:      :+:    :+:   */
+/*   open_infile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 08:49:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:56:28 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/26 10:26:44 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/28 17:41:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "minishell.h"
 
-int	ft_add_string_in_list(t_lst *lst, char *array)
+void	ft_open_infile(char *file)
 {
-	int	i;
+	int	fd;
 
-	if (!lst || !array)
-		return (-1);
-	i = 0;
-	while (array[i])
-	{
-		if (ft_create_node_add_back(lst, array[i]))
-		{
-			write(STDERR_FILENO, "error creation array_list\n", 27);
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		exit(1);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+}
+
+void	ft_open_outfile(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0000644);
+	if (fd == -1)
+		exit(1);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
 }

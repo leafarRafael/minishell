@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_string_list.c                               :+:      :+:    :+:   */
+/*   delete_cmatrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 08:49:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:56:28 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/11 14:27:28 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/16 16:02:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "minishell.h"
 
-int	ft_add_string_in_list(t_lst *lst, char *array)
+int	ft_delete_cmatrix(char **matrix)
 {
 	int	i;
 
-	if (!lst || !array)
-		return (-1);
 	i = 0;
-	while (array[i])
+	if (!matrix)
+		return (-1);
+	while (matrix[i])
 	{
-		if (ft_create_node_add_back(lst, array[i]))
-		{
-			write(STDERR_FILENO, "error creation array_list\n", 27);
-			return (-1);
-		}
+		free(matrix[i]);
 		i++;
 	}
+	free(matrix);
+	matrix = NULL;
 	return (0);
 }

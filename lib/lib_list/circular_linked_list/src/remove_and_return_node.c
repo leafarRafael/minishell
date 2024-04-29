@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   remove_and_return_node.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:05:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/03/28 10:41:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:07:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
+
+static t_node	*ft_size_one(t_lst *lst, t_node *node);
 
 t_node	*ft_remove_return_node(t_lst *lst, t_node *node)
 {
@@ -21,14 +23,7 @@ t_node	*ft_remove_return_node(t_lst *lst, t_node *node)
 	if (!lst->head || !lst->last || lst->size == 0)
 		return (NULL);
 	if (node->next == node)
-	{
-		lst->head = NULL;
-		lst->last = NULL;
-		node->next = NULL;
-		node->prev = NULL;
-		lst->size--;
-		return (node);
-	}
+		return (ft_size_one(lst, node));
 	var.next_node = node->next;
 	var.prev_node = node->prev;
 	var.prev_node->next = var.next_node;
@@ -37,6 +32,16 @@ t_node	*ft_remove_return_node(t_lst *lst, t_node *node)
 		lst->head = var.next_node;
 	if (node == lst->last)
 		lst->last = var.prev_node;
+	node->next = NULL;
+	node->prev = NULL;
+	lst->size--;
+	return (node);
+}
+
+static t_node	*ft_size_one(t_lst *lst, t_node *node)
+{
+	lst->head = NULL;
+	lst->last = NULL;
 	node->next = NULL;
 	node->prev = NULL;
 	lst->size--;

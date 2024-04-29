@@ -6,84 +6,82 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 17:16:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/15 09:29:30 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 11:11:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-static void	empyt_list_dest(t_lst *lst_dest, t_node *between_a, t_node *between_b, t_lst *lst_new);
-static void	list_dest_size_one(t_lst *lst_dest, t_lst *lst_new);
-static void	list_dest_size_two_more(t_node *between_a, t_node *between_b, t_lst *lst_new);
-static int	node_in_list(t_lst *lst_dest, t_node *node);
+static void	empyt_lst_dst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n);
+static int	list_dest_size_one(t_lst *lst_d, t_lst *lst_n);
+static void	list_dest_size_two_more(t_node *n_a, t_node *n_b, t_lst *lst_n);
+static int	node_in_list(t_lst *lst_d, t_node *node);
 
-int	ft_insert_lst_between_lst(t_lst *lst_dest, t_node *between_a, t_node *between_b, t_lst *lst_new)
+int	ft_lst_btwn_lst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n)
 {
-	if (!lst_dest || !lst_new || !between_a || !between_b)
+	if (!lst_d || !lst_n || !n_a || !n_b)
 		return (-1);
-	if (lst_dest == lst_new)
+	if (lst_d == lst_n)
 		return (-1);
-	if (lst_dest->size == 0)
+	if (lst_d->size == 0)
 	{
-		empyt_list_dest(lst_dest, between_a, between_b, lst_new);
+		empyt_lst_dst(lst_d, n_a, n_b, lst_n);
 		return (0);
 	}
-	if (node_in_list(lst_dest, between_a) || node_in_list(lst_dest, between_a))
+	if (node_in_list(lst_d, n_a) || node_in_list(lst_d, n_a))
 		return (-1);
-	if (between_a->next != between_b && between_b->prev != between_a)
-			return (-1);
-	if (lst_dest->size == 1)
+	if (n_a->next != n_b && n_b->prev != n_a)
+		return (-1);
+	if (lst_d->size == 1)
+		return (list_dest_size_one(lst_d, lst_n));
+	if (lst_d->size >= 2)
 	{
-		list_dest_size_one(lst_dest, lst_new);
-		return (0);
-	}
-	if (lst_dest->size >= 2)
-	{
-		if (between_a == between_b)
+		if (n_a == n_b)
 			return (-1);
-		list_dest_size_two_more(between_a, between_b, lst_new);
-		lst_dest->size += lst_new->size;
-		lst_new->size = 0;
+		list_dest_size_two_more(n_a, n_b, lst_n);
+		lst_d->size += lst_n->size;
+		lst_n->size = 0;
 	}
 	return (-1);
 }
 
-static void	empyt_list_dest(t_lst *lst_dest, t_node *between_a, t_node *between_b, t_lst *lst_new)
+static void	empyt_lst_dst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n)
 {
-	between_a = lst_new->head;
-	between_b = lst_new->last;
-	lst_dest->head = between_a;
-	lst_dest->last = between_b;
-	lst_dest->size = lst_new->size;
-	lst_new->size = 0;
+	n_a = lst_n->head;
+	n_b = lst_n->last;
+	lst_d->head = n_a;
+	lst_d->last = n_b;
+	lst_d->size = lst_n->size;
+	lst_n->size = 0;
 }
 
-static void	list_dest_size_one(t_lst *lst_dest, t_lst *lst_new)
+static int	list_dest_size_one(t_lst *lst_d, t_lst *lst_n)
 {
-	lst_dest->head->next = lst_new->head;
-	lst_new->head->prev = lst_dest->head;
-	lst_new->last->next = lst_dest->head;
-	lst_dest->head->prev = lst_new->last;
-	lst_dest->last = lst_new->last;
-	lst_dest->size += lst_new->size;
-	lst_new->size = 0;
+	lst_d->head->next = lst_n->head;
+	lst_n->head->prev = lst_d->head;
+	lst_n->last->next = lst_d->head;
+	lst_d->head->prev = lst_n->last;
+	lst_d->last = lst_n->last;
+	lst_d->size += lst_n->size;
+	lst_n->size = 0;
+	return (0);
 }
 
-static void	list_dest_size_two_more(t_node *between_a, t_node *between_b, t_lst *lst_new)
+static void	list_dest_size_two_more(t_node *n_a, t_node *n_b, t_lst *lst_n)
 {
-	between_a->next = lst_new->head;
-	lst_new->head->prev = between_a;
-	between_b->prev = lst_new->last;
-	lst_new->last->next = between_b;
+	n_a->next = lst_n->head;
+	lst_n->head->prev = n_a;
+	n_b->prev = lst_n->last;
+	lst_n->last->next = n_b;
 }
 
-static int	node_in_list(t_lst *lst_dest, t_node *node)
+static int	node_in_list(t_lst *lst_d, t_node *node)
 {
 	t_var	var;
 
-	var.current_node = lst_dest->head;
+	var.current_node = lst_d->head;
 	var.i = 1;
-	while (var.i <= lst_dest->size)
+	while (var.i <= lst_d->size)
 	{
 		if (var.current_node == node)
 			return (0);

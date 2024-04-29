@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_string_list.c                               :+:      :+:    :+:   */
+/*   init_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 08:49:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:56:28 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/03/27 17:18:07 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/29 10:09:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "matrix_lst.h"
 
-int	ft_add_string_in_list(t_lst *lst, char *array)
+t_mtrx_lst	*ft_init_matrix(void)
 {
-	int	i;
+	t_mtrx_lst	*matrix;
 
-	if (!lst || !array)
-		return (-1);
-	i = 0;
-	while (array[i])
-	{
-		if (ft_create_node_add_back(lst, array[i]))
-		{
-			write(STDERR_FILENO, "error creation array_list\n", 27);
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
+	matrix = malloc(sizeof(t_mtrx_lst));
+	if (!matrix)
+		return (NULL);
+	matrix->head = NULL;
+	matrix->last = NULL;
+	matrix->size = 0;
+	return (matrix);
 }

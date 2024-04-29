@@ -1,6 +1,6 @@
 NAME			:= ../lib_list.a
 
-SRC				:= ./src/init_matriz.c\
+SRC				:= ./src/init_matrix.c\
 				./src/init_line_lst.c\
 				./src/add_line_front.c\
 				./src/add_line_back.c\

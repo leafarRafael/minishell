@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_string_list.c                               :+:      :+:    :+:   */
+/*   init_node.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 08:49:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:56:28 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/29 09:54:28 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/29 11:08:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-int	ft_add_string_in_list(t_lst *lst, char *array)
+t_node	*ft_init_node(char c)
 {
-	int	i;
+	t_node	*new_node;
 
-	if (!lst || !array)
-		return (-1);
-	i = 0;
-	while (array[i])
-	{
-		if (ft_create_node_add_back(lst, array[i]))
-		{
-			write(STDERR_FILENO, "error creation array_list\n", 27);
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
+	if (c == '\0')
+		return (NULL);
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->c = c;
+	new_node->type = -42;
+	new_node->paren = -42;
+	new_node->priority = -42;
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	return (new_node);
 }

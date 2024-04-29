@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/04/28 16:49:25 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/04/29 09:48:01 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,12 @@ MAKE_MATRIX_L	:= ./lib/lib_list/circular_matrix_list
 MTRX_MTRX_L		:= ./lib/lib_list/lib_list.a
 MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
-FILES			:= ./main.c FUNCOES_TEMPORARIAS.c delete_cmatrix.c define_ast.c\
-				valid_input.c exit.c free_memory.c path_comand.c open_infile.c pipe.c
+FILES			:= ./organizar/main.c ./organizar/FUNCOES_TEMPORARIAS.c\
+				./organizar/delete_cmatrix.c ./organizar/define_ast.c\
+				./organizar/valid_input.c ./organizar/exit.c ./organizar/free_memory.c\
+				./organizar/path_comand.c ./organizar/open_infile.c ./organizar/pipe.c
 
-SIMPLE			:=./src/simple_command/execute_simple_command.c
+SIMPLE			:=./src/execute_command/execute.c ./src/execute_command/get_executable.c
 
 AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\

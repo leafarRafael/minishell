@@ -1,6 +1,7 @@
 NAME			:= ../lib_list.a
 
 SRC				:= ./src/init_list.c\
+				./src/init_node.c\
 				./src/create_node_add_back_lst.c\
 				./src/create_node_add_front_lst.c\
 				./src/remove_node_front.c\
@@ -14,7 +15,7 @@ SRC				:= ./src/init_list.c\
 				./src/remove_and_return_node.c\
 				./src/insert_nodes_between.c\
 				./src/cpy_lst_to_array.c\
-				./src/find_istring_in_list.c
+				./src/find_str_in_list.c
 
 NUM_FILES		:= $(words $(SRC))
 OBJS			:= ./objs_circular_linked_list

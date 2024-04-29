@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_node_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:16:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/13 12:16:30 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/29 10:57:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_remove_node_back(t_lst *lst)
 		return (ft_two_node(lst));
 	if (lst->size > 2)
 		return (ft_three_more(lst));
-	return (-1);	
+	return (-1);
 }
 
 static int	ft_one_node(t_lst *lst)
@@ -39,7 +39,7 @@ static int	ft_one_node(t_lst *lst)
 	lst->last = NULL;
 	lst->head = NULL;
 	lst->size = 0;
-	free(var.last);	
+	free(var.last);
 	var.last = NULL;
 	return (0);
 }

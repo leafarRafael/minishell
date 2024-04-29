@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_string_list.c                               :+:      :+:    :+:   */
+/*   find_str_in_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 08:49:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:56:28 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/24 14:46:09 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/04/29 11:02:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-int	ft_add_string_in_list(t_lst *lst, char *array)
+int	ft_find_str_inlist(t_lst *lst, char *str, int size)
 {
-	int	i;
+	t_var	v;
+	int		index;
 
-	if (!lst || !array)
-		return (-1);
-	i = 0;
-	while (array[i])
+	v.i = 1;
+	index = 0;
+	v.temp_node = lst->head;
+	while (v.i <= lst->size && v.i <= size)
 	{
-		if (ft_create_node_add_back(lst, array[i]))
-		{
-			write(STDERR_FILENO, "error creation array_list\n", 27);
-			return (-1);
-		}
-		i++;
+		if (str[index] == v.temp_node->c)
+			index++;
+		else
+			index = 0;
+		if (index == size)
+			break ;
+		v.temp_node = v.temp_node->next;
+		v.i++;
 	}
-	return (0);
+	if (index == size)
+		return (index);
+	return (-1);
 }
