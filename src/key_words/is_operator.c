@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:41:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/30 12:05:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,6 @@ int		is_operator(int type)
 		| HERE_DOC | APPEND | PIPE | AND_OP 
 		| OR_OP | OPEN_PAREN | CLOSE_PAREN));
 } */
+
+
+

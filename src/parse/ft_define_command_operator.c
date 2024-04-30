@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_define_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 18:58:30 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/30 10:18:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	ft_define_outfile(t_mtrx_mtrx *m_m_lst)
 		count[1] = 1;
 		while (count[1] <= mnoode_temp->matrix->size)
 		{
-			ft_print_array_lst_content_type(lst_temp->lst);
 			if (lst_temp->prev->lst->head->type == REDI_OUT)
 				lst_temp->rdrct = REDI_OUT;
 			else if (lst_temp->prev->lst->head->type == APPEND)

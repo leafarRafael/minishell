@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 19:00:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/30 11:29:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	main(void)
 			ft_define_cmd_status(v.list_matrix);
 			// TODO MORE CHECKs OPERATORS
 			ft_remove_cmd_status(v.list_matrix);
-			ft_remove_cmd_status(v.list_matrix);
 			ft_valid_op_in_subshell(v.list_matrix);
-			//ft_print_todos_os_tokens_expandidos(v.list_matrix);
 			v.ast = ft_init_ast();
 			ft_populetree(v.ast, v.list_matrix);
 			ft_execute(v.ast->root, v.mrtx_lst_env);

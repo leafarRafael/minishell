@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_words.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 17:01:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/30 11:32:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_or_op(char current, char next);
 int	ft_and_op(char current, char next);
 int	is_pipe(char c);
 int	is_operator(int type);
+int	is_operator2(int type);
+int	is_operator_redirect(int type);
 int	is_operator_composite(int c_type, int n_type);
 int	ft_heredoc(char current, char next);
 int	ft_append(char current, char next);

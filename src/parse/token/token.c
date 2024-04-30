@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 18:50:33 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/04/30 12:01:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_mtrx_lst	*ft_simple_comand(t_lst	*lst)
 static void	muve_node_token_command(t_lst *lst, t_mtrx_lst *matrix)
 {
 	t_token	v;
+	int		type;
 
 	if (lst->size == 0)
 		return ;
@@ -51,7 +52,8 @@ static void	muve_node_token_command(t_lst *lst, t_mtrx_lst *matrix)
 	if (is_operator(lst->head->type))
 		return ;
 	v.new_lst = ft_init_lst();
-	while (!is_operator(lst->head->type) && lst->head->type != WH_SPACE)
+	type = lst->head->type;
+	while (!is_operator(lst->head->type) && lst->head->type == type)
 	{
 		v.node = ft_remove_return_node(lst, lst->head);
 		ft_add_node_back(v.new_lst, v.node);

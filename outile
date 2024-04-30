@@ -1,7 +1,0 @@
-NAME			:= minishell
-all: $(NAME)
-$(NAME): $(SRC) $(LIBFT) $(LINKED_LIST) $(MATRIX_LIST) $(MTRX_MTRX_L)
-$(NAME):
-	@$(CC) $(SRC) $(LIBFT) $(LINKED_LIST) $(INCLUDE) -o $(NAME) -g3 -lreadline
-	@$(CMD_CLEAN) $(NAME)
-	@$(CMD_CLEAN) $(NAME)
