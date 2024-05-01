@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/30 12:05:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/01 11:59:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ int		is_operator(int type)
 		| OR_OP | OPEN_PAREN | CLOSE_PAREN));
 } */
 
-
+int	is_operator_redirect(int type)
+{
+	return (type & (REDI_IN | REDI_OUT | HERE_DOC | APPEND));
+}
 

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 10:26:44 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 17:09:00 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/01 14:03:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ void	ft_open_outfile(char *file)
 	int	fd;
 
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0000644);
+	if (fd == -1)
+		exit(1);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+}
+
+
+void	ft_open_outfile_append(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0000644);
 	if (fd == -1)
 		exit(1);
 	dup2(fd, STDOUT_FILENO);

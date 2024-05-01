@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/30 11:29:42 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/01 13:28:48 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,16 @@ static void	ft_remove_rdrct(t_mtrx_mtrx *m_m_lst)
 
 	mnoode_temp = m_m_lst->head;
 	count[0] = 1;
-	size = mnoode_temp->matrix->size;
 	while (count[0] <= m_m_lst->size)
 	{
 		lst_temp = mnoode_temp->matrix->head;
 		lst_next = lst_temp->next;
 		count[1] = 1;
+		size = mnoode_temp->matrix->size;
 		while (count[1] <= size)
 		{
-			if (lst_temp->lst->head->type
-				& (REDI_IN | HERE_DOC | REDI_OUT | APPEND))
-			{
-				ft_print_array_lst(lst_temp->lst, 0);
+			if (lst_temp->lst->head->type & (REDI_IN | HERE_DOC | REDI_OUT | APPEND))
 				ft_rmv_spcfc_lst_mtrx(mnoode_temp->matrix, lst_temp);
-
-			}
 			lst_temp = lst_next;
 			lst_next = lst_next->next;
 			count[1]++;

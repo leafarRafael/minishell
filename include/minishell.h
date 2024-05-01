@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/30 10:54:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/01 13:01:16 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int				ft_input_is_valid(char *array);
 int				ft_exit(char *input);
 void			ft_free_memory_revert_environ(t_var_minishell *v);
 char			**ft_path_env(t_mtrx_lst *m_lst);
-void			ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list);
+void			ft_execute(t_var_minishell *v, t_ast_node *cmd, t_mtrx_lst *env_list);
 char			*ft_get_executable(char *command, char **path);
 void			ft_open_infile(char *file);
 void			ft_open_outfile(char *file);

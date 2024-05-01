@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/30 11:29:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/01 15:50:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ int	main(void)
 			while (v.input_user->size > 0)
 				ft_matrix_add_back(v.list_matrix,
 					ft_simple_comand(v.input_user));
+			ft_print_lst_matrix(v.list_matrix);
 			ft_define_cmd_status(v.list_matrix);
 			// TODO MORE CHECKs OPERATORS
 			ft_remove_cmd_status(v.list_matrix);
 			ft_valid_op_in_subshell(v.list_matrix);
+			
 			v.ast = ft_init_ast();
 			ft_populetree(v.ast, v.list_matrix);
-			ft_execute(v.ast->root, v.mrtx_lst_env);
+			ft_execute(&v, v.ast->root, v.mrtx_lst_env);
 			ft_free_memory_revert_environ(&v);
 		}
 	}

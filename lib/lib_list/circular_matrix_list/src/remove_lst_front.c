@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:44:00 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:19:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/01 13:24:02 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	remove_size_three_more(t_mtrx_lst *matrix)
 	v.second_lst = matrix->head->next;
 	v.head_lst = matrix->head;
 	v.second_lst->prev = matrix->last;
-	matrix->last->next = matrix->head;
+	matrix->last->next = v.second_lst;
 	matrix->head = v.second_lst;
 	matrix->size--;
 	if (ft_delete_list(v.head_lst->lst))
