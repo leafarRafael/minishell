@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 10:20:30 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 13:40:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void ft_open_infile_02(t_mtrx_lst *mtrix);
 static void ft_open_outfile_02(t_mtrx_lst *mtrix);
 
-void	ft_execute(t_var_minishell *v, t_ast_node *cmd, t_mtrx_lst *env_list)
+void	ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list)
 {
 	t_var_exe	var;
 	int			tube[2];
@@ -28,7 +28,12 @@ void	ft_execute(t_var_minishell *v, t_ast_node *cmd, t_mtrx_lst *env_list)
 	var.pid = fork();
 	if (var.pid == 0)
 	{
-		ft_execute(v, cmd->left, env_list);
+		ft_execute(cmd->left, env_list);
+		if (cmd->m_lst->matrix->head->lst->head->c == '(')
+		{
+			ft_parse_and_execute(cmd->m_lst->matrix->head->lst, env_list);
+			exit(0);
+		}
 		ft_remove_quote_m_lst(cmd->m_lst->matrix);
 		ft_expand_m_lst(cmd->m_lst->matrix);
 		if (cmd->m_lst->next->type == PIPE)

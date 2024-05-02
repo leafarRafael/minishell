@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 08:23:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 09:20:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 11:25:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_ast_node
 {
 	t_mnode				*m_lst;
 	int					type;
+	int					how_to_exe;
 	struct s_ast_node	*left;
 	struct s_ast_node	*right;
 }						t_ast_node;

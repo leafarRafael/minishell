@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 10:20:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 12:11:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,12 @@
 
 typedef struct s_variables_minishell
 {
-	char		*infile;
-	char		**temp__environ;
+	t_mtrx_lst	*m_lst_env;
+	t_lst		*input_lst;
+	char		*input;
 	char		**env;
-	int			i;
-	int			looping_shell;
-	t_lst		*input_user;
-	t_mtrx_lst	*matrix_lst;
-	t_mtrx_lst	*mrtx_lst_env;
-	t_mtrx_mtrx	*list_matrix;
-	t_ast		*ast;
-	pid_t		pid;
-}				t_var_minishell;
+	char		**temp_environ;
+}				t_mini;
 
 typedef struct s_var_executable
 {
@@ -88,18 +82,15 @@ void			ft_printtree(t_ast_node *root);
 
 int				ft_input_is_valid(char *array);
 int				ft_exit(char *input);
-void			ft_free_memory_revert_environ(t_var_minishell *v);
+void			ft_free_memory_revert_environ(t_mini *v);
 char			**ft_path_env(t_mtrx_lst *m_lst);
-void			ft_execute(t_var_minishell *v, t_ast_node *cmd, t_mtrx_lst *env_list);
+void			ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list);
 char			*ft_get_executable(char *command, char **path);
 void			ft_open_infile(char *file);
 void			ft_open_outfile(char *file);
 void			ft_pipe(int pipe[2]);
 void			ft_pipe_parent(int pipe[2]);
 
-void			ft_execute_tree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx,
-					t_mtrx_lst *env);
-
-void			ft_parse_and_execute(t_var_minishell *v, t_lst *input);
+void			ft_parse_and_execute(t_lst *input, t_mtrx_lst *mrtx_lst_env);
 
 #endif

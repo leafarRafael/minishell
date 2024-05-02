@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:35:25 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:44:06 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 11:25:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ t_ast_node	*ft_init_new_ast_node(void)
 	new_node->right = NULL;
 	new_node->m_lst = NULL;
 	new_node->type = -42;
+	new_node->how_to_exe = -42;
 	return (new_node);
 }
