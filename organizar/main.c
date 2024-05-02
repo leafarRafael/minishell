@@ -6,11 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 15:50:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 10:20:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_define_node_tree(t_ast *ast);
 
 int	main(void)
 {
@@ -37,12 +39,9 @@ int	main(void)
 			while (v.input_user->size > 0)
 				ft_matrix_add_back(v.list_matrix,
 					ft_simple_comand(v.input_user));
-			ft_print_lst_matrix(v.list_matrix);
 			ft_define_cmd_status(v.list_matrix);
-			// TODO MORE CHECKs OPERATORS
 			ft_remove_cmd_status(v.list_matrix);
 			ft_valid_op_in_subshell(v.list_matrix);
-			
 			v.ast = ft_init_ast();
 			ft_populetree(v.ast, v.list_matrix);
 			ft_execute(&v, v.ast->root, v.mrtx_lst_env);
@@ -52,3 +51,45 @@ int	main(void)
 	ft_delete_cmatrix(v.env);
 	ft_delete_matrix(v.mrtx_lst_env);
 }
+/* 
+void	ft_parse_and_execute(t_var_minishell *v, t_lst *input)
+{
+	t_var_minishell	mini;
+
+	if (input->size == 0)
+		return ;
+	if (!v)
+		return ;
+	if (input->head->type == OPEN_PAREN)
+	{
+		ft_remove_node_front(input);
+		ft_remove_node_back(input);
+	}
+	mini.list_matrix = ft_mtrx_mtrx_lst();
+	while (input->size > 0)
+		ft_matrix_add_back(mini.list_matrix,
+			ft_simple_comand(input));
+	ft_define_cmd_status(mini.list_matrix);
+	ft_remove_cmd_status(mini.list_matrix);
+	ft_valid_op_in_subshell(mini.list_matrix);
+	mini.ast = ft_init_ast();
+	ft_populetree(mini.ast, mini.list_matrix);
+	ft_define_node_tree(mini.ast);
+	ft_execute(v, mini.ast->root, v->mrtx_lst_env);
+	ft_free_memory_revert_environ(&mini);
+	ft_free_memory_revert_environ(v);
+	ft_delete_cmatrix(v->env);
+	ft_delete_matrix(v->mrtx_lst_env);
+}
+
+void	ft_define_node_tree(t_ast *ast)
+{
+	t_ast_node	*temp;
+
+	temp = ast->root;
+	while (temp != NULL)
+	{
+		temp->type = temp->m_lst->matrix->head->lst->head->type;
+		temp = temp->left;
+	}
+} */

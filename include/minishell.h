@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 13:01:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 10:20:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ void			ft_pipe_parent(int pipe[2]);
 
 void			ft_execute_tree(t_ast_node *root, t_mtrx_mtrx *mtrx_mtrx,
 					t_mtrx_lst *env);
+
+void			ft_parse_and_execute(t_var_minishell *v, t_lst *input);
 
 #endif
