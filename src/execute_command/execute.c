@@ -6,15 +6,12 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 13:40:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 16:20:26 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/wait.h>
-
-static void ft_open_infile_02(t_mtrx_lst *mtrix);
-static void ft_open_outfile_02(t_mtrx_lst *mtrix);
 
 void	ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list)
 {
@@ -32,7 +29,7 @@ void	ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list)
 		if (cmd->m_lst->matrix->head->lst->head->c == '(')
 		{
 			ft_parse_and_execute(cmd->m_lst->matrix->head->lst, env_list);
-			exit(0);
+			exit(1);
 		}
 		ft_remove_quote_m_lst(cmd->m_lst->matrix);
 		ft_expand_m_lst(cmd->m_lst->matrix);
@@ -42,17 +39,22 @@ void	ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list)
 			close(tube[0]);
 			close(tube[1]);
 		}
-		ft_open_infile_02(cmd->m_lst->matrix);
-		ft_open_outfile_02(cmd->m_lst->matrix);
+		ft_opens_all_input_files(cmd->m_lst->matrix);
+		ft_opens_all_output_files_truncate(cmd->m_lst->matrix);
+		ft_opens_all_output_files_append(cmd->m_lst->matrix);
 		var.command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 		var.env = ft_path_env(env_list);
 		var.path_exe = ft_get_executable(var.command_m[0], var.env);
 		if (var.path_exe)
 			execve(var.path_exe, &var.command_m[0], var.env);
+/* 		if (cmd->m_lst->next->type == PIPE)
+			ft_print_matrix_line(cmd->m_lst->next->matrix);
+		ft_print_matrix_line(cmd->m_lst->matrix); */
 		exit(1);
 	}
 	else
 	{
+		sleep(1);
 		if (cmd->m_lst->next->type == PIPE)
 		{
 			dup2(tube[0], STDIN_FILENO);
@@ -61,84 +63,3 @@ void	ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list)
 		}
 	}
 }
-
-static void ft_open_infile_02(t_mtrx_lst *mtrix)
-{
-	t_lst_line	*current;
-	t_lst_line	*next;
-	char		*infile;
-	int			i;
-	int			size;
-
-	i = 1;
-	current = mtrix->head;
-	next = current->next;
-	size = mtrix->size;
-	while (i <= size)
-	{
-		if (current->rdrct == REDI_IN)
-		{
-			infile = ft_cpy_lst_to_array(current->lst);
-			ft_open_infile(infile);
-			ft_rmv_spcfc_lst_mtrx(mtrix, current);
-			free(infile);
-		}
-		i++;
-		current = next;
-		next = next->next;
-	}
-}
-
-static void ft_open_outfile_02(t_mtrx_lst *mtrix)
-{
-	t_lst_line	*current;
-	t_lst_line	*next;
-	char		*outfile;
-	int			i;
-	int			size;
-
-	i = 1;
-	current = mtrix->head;
-	next = current->next;
-	size = mtrix->size;
-	while (i <= size)
-	{
-		if (current->rdrct == REDI_OUT)
-		{
-			outfile = ft_cpy_lst_to_array(current->lst);
-			ft_open_outfile(outfile);
-			ft_rmv_spcfc_lst_mtrx(mtrix, current);
-			free(outfile);
-		}
-		i++;
-		current = next;
-		next = next->next;
-	}
-}
-
-/* static void ft_open_outfile_02(t_mtrx_lst *mtrix)
-{
-	t_lst_line	*current;
-	t_lst_line	*next;
-	char		*outfile;
-	int			i;
-	int			size;
-
-	i = 1;
-	current = mtrix->head;
-	next = current->next;
-	size = mtrix->size;
-	while (i <= size)
-	{
-		if (current->rdrct == REDI_OUT)
-		{
-			outfile = ft_cpy_lst_to_array(current->lst);
-			ft_open_outfile(outfile);
-			ft_rmv_spcfc_lst_mtrx(mtrix, current);
-			free(outfile);
-		}
-		i++;
-		current = next;
-		next = next->next;
-	}
-} */

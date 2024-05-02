@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 13:35:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/02 15:54:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_parse_and_execute(t_lst *input, t_mtrx_lst *mrtx_lst_env)
 	new_ast = ft_init_ast();
 	ft_populetree(new_ast, new_matrix);
 	ft_define_node_tree(new_ast);
-	ft_print_lst_matrix(new_matrix);
 	ft_execute(new_ast->root, mrtx_lst_env);
 	ft_delete_tree(new_ast);
 	ft_delete_mtrx_mtrx_lst(new_matrix);

@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/01 10:56:45 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/02 14:21:48 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 FILES			:= ./organizar/main.c ./organizar/FUNCOES_TEMPORARIAS.c\
 				./organizar/delete_cmatrix.c ./organizar/define_ast.c\
 				./organizar/valid_input.c ./organizar/exit.c ./organizar/free_memory.c\
-				./organizar/path_comand.c ./organizar/open_infile.c ./organizar/pipe.c
+				./organizar/path_comand.c ./organizar/open_all_outfiles_append.c ./organizar/pipe.c\
+				./organizar/open_all_infiles.c ./organizar/open_all_outfiles_trucate.c
 
 SIMPLE			:=./src/execute_command/execute.c ./src/execute_command/get_executable.c
 
