@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:11:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/03 09:41:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ t_node	*ft_remove_return_node(t_lst *lst, t_node *node);
 int		ft_lst_btwn_lst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n);
 char	*ft_cpy_lst_to_array(t_lst *lst);
 int		ft_find_str_inlist(t_lst *lst, char *str, int size);
+t_lst	*ft_create_lst_add_str(char *array);
+void	ft_putlst_fd(t_lst *lst, int fd);
 
 #endif

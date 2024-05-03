@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 14:22:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/03 09:41:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void			ft_pipe_parent(int pipe[2]);
 void			ft_parse_and_execute(t_lst *input, t_mtrx_lst *mrtx_lst_env);
 
 
+void			here_doc(t_mtrx_lst *mtrix);
 void			ft_opens_all_input_files(t_mtrx_lst *mtrix);
 void			ft_opens_all_output_files_append(t_mtrx_lst *mtrix);
 void 			ft_opens_all_output_files_truncate(t_mtrx_lst *mtrix);

@@ -15,7 +15,9 @@ SRC				:= ./src/init_list.c\
 				./src/remove_and_return_node.c\
 				./src/insert_nodes_between.c\
 				./src/cpy_lst_to_array.c\
-				./src/find_str_in_list.c
+				./src/find_str_in_list.c\
+				./src/create_lst_add_str.c\
+				./src/put_lst_fd.c
 
 NUM_FILES		:= $(words $(SRC))
 OBJS			:= ./objs_circular_linked_list
