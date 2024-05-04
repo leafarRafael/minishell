@@ -1,47 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_all_outfiles_append.c                         :+:      :+:    :+:   */
+/*   outfile_append.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 10:26:44 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 14:21:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/04 16:55:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "redirect.h"
 
-static void	ft_open_outfile_append(char *file);
+static void	ft_open(char *file);
 
-void	ft_opens_all_output_files_append(t_mtrx_lst *mtrix)
+void	ft_open_append(t_mtrx_lst *mtrix, t_lst_line *lst)
 {
-	t_lst_line	*current;
-	t_lst_line	*next;
-	char		*outfile;
-	int			i;
-	int			size;
+	char	*infile;
 
-	i = 1;
-	current = mtrix->head;
-	next = current->next;
-	size = mtrix->size;
-	while (i <= size)
-	{
-		if (current->rdrct == APPEND)
-		{
-			outfile = ft_cpy_lst_to_array(current->lst);
-			ft_open_outfile_append(outfile);
-			ft_rmv_spcfc_lst_mtrx(mtrix, current);
-			free(outfile);
-		}
-		i++;
-		current = next;
-		next = next->next;
-	}
+	infile = ft_cpy_lst_to_array(lst->lst);
+	ft_open(infile);
+	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
+	free(infile);
 }
 
-static void	ft_open_outfile_append(char *file)
+static void	ft_open(char *file)
 {
 	int	fd;
 

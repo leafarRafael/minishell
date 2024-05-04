@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/03 09:41:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/04 18:22:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include "redirect.h"
+
 
 # define PATH "PATH=/"
 # define SIZE_PATH 6
@@ -43,6 +45,7 @@ typedef struct s_variables_minishell
 	char		*input;
 	char		**env;
 	char		**temp_environ;
+	int			fd_std[2];
 }				t_mini;
 
 typedef struct s_var_executable
@@ -87,18 +90,10 @@ char			**ft_path_env(t_mtrx_lst *m_lst);
 void			ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list);
 char			*ft_get_executable(char *command, char **path);
 
-void			ft_open_outfile(char *file);
 void			ft_pipe(int pipe[2]);
 void			ft_pipe_parent(int pipe[2]);
 
 void			ft_parse_and_execute(t_lst *input, t_mtrx_lst *mrtx_lst_env);
-
-
-void			here_doc(t_mtrx_lst *mtrix);
-void			ft_opens_all_input_files(t_mtrx_lst *mtrix);
-void			ft_opens_all_output_files_append(t_mtrx_lst *mtrix);
-void 			ft_opens_all_output_files_truncate(t_mtrx_lst *mtrix);
-
-
+void			ft_parse_and_execute2(t_lst *input, t_mtrx_lst *mrtx_lst_env, int op);
 
 #endif

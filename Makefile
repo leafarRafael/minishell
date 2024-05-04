@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/03 09:40:09 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/04 16:44:21 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,13 @@ MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 FILES			:= ./organizar/main.c ./organizar/FUNCOES_TEMPORARIAS.c\
 				./organizar/delete_cmatrix.c ./organizar/define_ast.c\
 				./organizar/valid_input.c ./organizar/exit.c ./organizar/free_memory.c\
-				./organizar/path_comand.c ./organizar/open_all_outfiles_append.c ./organizar/pipe.c\
-				./organizar/open_all_infiles.c ./organizar/open_all_outfiles_trucate.c\
-				./organizar/here_doc.c
+				./organizar/path_comand.c ./organizar/pipe.c
+
+REDIRECT		:= ./src/redirect/redirect.c\
+				./src/redirect/here_doc.c\
+				./src/redirect/infile.c\
+				./src/redirect/outfile_append.c\
+				./src/redirect/outfile_trucate.c
 
 SIMPLE			:=./src/execute_command/execute.c ./src/execute_command/get_executable.c
 
@@ -67,7 +71,7 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/string_delimiters.c\
 				./src/key_words/words_delimiters.c
 
-SRC				:= $(FILES) $(AS_TREE) $(PARSE) $(KEY_WORDS) $(SIMPLE)
+SRC				:= $(FILES) $(AS_TREE) $(PARSE) $(KEY_WORDS) $(SIMPLE) $(REDIRECT)
 
 INCLUDE			:= -I ./include\
 				-I lib/lib_get_print/includes\

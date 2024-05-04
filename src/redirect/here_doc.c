@@ -6,39 +6,23 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:05:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/03 11:30:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/04 16:59:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "redirect.h"
 #include "expanding.h"
 
+static void	ft_open(t_lst *lst);
 static t_mtrx_lst	*ft_read_std(t_lst *lst);
-static void			open_here_doc(t_lst *lst);
 
-void here_doc(t_mtrx_lst *mtrix)
+void	ft_open_here_doc(t_mtrx_lst *mtrix, t_lst_line *lst)
 {
-	int			i;
-	t_lst_line	*temp_current;
-	t_lst_line	*temp_next;
-
-	i = 1;
-	temp_current = mtrix->head;
-	temp_next = temp_current->next;
-	while (i <= mtrix->size)
-	{
-		if (temp_current->rdrct == HERE_DOC)
-		{
-			open_here_doc(temp_current->lst);
-			ft_rmv_spcfc_lst_mtrx(mtrix, temp_current);
-		}
-		temp_current = temp_next;
-		temp_next = temp_next->next;
-		i++;
-	}
+	ft_open(lst->lst);
+	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
 }
 
-static void	open_here_doc(t_lst *lst)
+static void	ft_open(t_lst *lst)
 {
 	t_mtrx_lst	*new_mtrx;
 	t_lst_line	*temp;

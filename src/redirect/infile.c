@@ -1,47 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_all_infiles.c                                 :+:      :+:    :+:   */
+/*   infile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:08:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 14:11:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/04 16:55:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "redirect.h"
 
-static void	ft_open_infile(char *file);
+static void	ft_open(char *file);
 
-void ft_opens_all_input_files(t_mtrx_lst *mtrix)
+void	ft_open_infile(t_mtrx_lst *mtrix, t_lst_line *lst)
 {
-	t_lst_line	*current;
-	t_lst_line	*next;
-	char		*infile;
-	int			i;
-	int			size;
+	char	*infile;
 
-	i = 1;
-	current = mtrix->head;
-	next = current->next;
-	size = mtrix->size;
-	while (i <= size)
-	{
-		if (current->rdrct == REDI_IN)
-		{
-			infile = ft_cpy_lst_to_array(current->lst);
-			ft_open_infile(infile);
-			ft_rmv_spcfc_lst_mtrx(mtrix, current);
-			free(infile);
-		}
-		i++;
-		current = next;
-		next = next->next;
-	}
+	infile = ft_cpy_lst_to_array(lst->lst);
+	ft_open(infile);
+	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
+	free(infile);
 }
 
-static void	ft_open_infile(char *file)
+static void	ft_open(char *file)
 {
 	int	fd;
 
