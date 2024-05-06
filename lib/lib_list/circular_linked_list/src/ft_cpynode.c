@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_lst_fd.c                                       :+:      :+:    :+:   */
+/*   ft_cpynode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 09:35:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/06 09:58:05 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/06 09:38:33 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/06 09:38:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-void	ft_putlst_fd(t_lst *lst, int new_line, int fd)
+t_node	*ft_cpynode(t_node *node_origin)
 {
-	int		i;
-	t_node *current;
+	t_node	*new_node;
 
-	if (fd < 0)
-		return ;
-	if (!lst)
-		return ;
-	if (lst->size == 0)
-		return ;
-	i = 1;
-	current = lst->head;
-	while (i <= lst->size)
-	{
-		write(fd, &current->c, 1);
-		current = current->next;
-		i++;
-	}
-	if(new_line)
-		write(fd, "\n", 1);
+	if (!node_origin)
+		return (NULL);
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->c = node_origin->c;
+	new_node->type = node_origin->type;
+	new_node->paren = node_origin->paren;
+	new_node->priority = node_origin->priority;
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	return (new_node);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:05:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/04 16:59:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/06 09:58:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_open(t_lst *lst)
 	temp = new_mtrx->head;
 	while (i <= new_mtrx->size)
 	{
-		ft_putlst_fd(temp->lst, here_doc[1]);
+		ft_putlst_fd(temp->lst, 0 ,here_doc[1]);
 		write(here_doc[1], "\n", 1);
 		temp = temp->next;
 		i++;

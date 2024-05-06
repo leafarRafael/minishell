@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_lst_fd.c                                       :+:      :+:    :+:   */
+/*   ft_duplst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 09:35:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/06 09:58:05 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/06 09:12:43 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/06 09:54:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-void	ft_putlst_fd(t_lst *lst, int new_line, int fd)
+t_lst	*ft_duplst(t_lst *ori_lst, t_node (*ft_cpy(t_node *)), int (*add_n)(t_lst *, t_node *))
 {
+	t_lst	*new_lst;
+	t_node	*node;
+	t_node	*new_node;
 	int		i;
-	t_node *current;
 
-	if (fd < 0)
-		return ;
-	if (!lst)
-		return ;
-	if (lst->size == 0)
-		return ;
+	if (!ori_lst)
+		return (NULL);
+	if (ori_lst->size == 0)
+		return (NULL);
+	new_lst = ft_init_lst();
+	if (!new_lst)
+		return (NULL);
 	i = 1;
-	current = lst->head;
-	while (i <= lst->size)
+	node = ori_lst->head;
+	while (i <= ori_lst->size)
 	{
-		write(fd, &current->c, 1);
-		current = current->next;
+		new_node = ft_cpy(node);
+		if (!new_node)
+			return (NULL);
+		add_n(new_lst, new_node);
+		node = node->next;
 		i++;
 	}
-	if(new_line)
-		write(fd, "\n", 1);
+	return (new_lst);
 }

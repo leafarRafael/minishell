@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/04 18:22:59 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/06 08:58:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list)
 
 	if (cmd == NULL)
 		return ;
+	ft_execute(cmd->left, env_list);
 	if (cmd->m_lst->next->type == PIPE)
 		pipe(tube);
-	ft_execute(cmd->left, env_list);
 	ft_redirect(cmd->m_lst->matrix);
 	var.pid = fork();
 	if (var.pid == 0)

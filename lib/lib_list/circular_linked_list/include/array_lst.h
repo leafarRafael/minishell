@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/03 09:41:12 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/06 09:57:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ typedef struct s_var_array_list
 }			t_var;
 
 t_lst	*ft_init_lst(void);
+t_lst	*ft_duplst(t_lst *ori_lst, t_node (*ft_cpy(t_node *)), int (*add_n)(t_lst *, t_node *));
+t_lst	*ft_create_lst_add_str(char *array);
 t_node	*ft_init_node(char c);
+t_node	*ft_cpynode(t_node *node_origin);
+t_node	*ft_remove_return_node(t_lst *lst, t_node *node);
 int		ft_create_node_add_back(t_lst *lst, char content);
 int		ft_add_node_back(t_lst *lst, t_node *node);
 int		ft_create_add_node_front(t_lst *lst, char content);
@@ -58,11 +62,9 @@ int		ft_remove_specific_node(t_lst *lst, t_node *node);
 int		ft_remove_specific_content(t_lst *lst, char c);
 int		ft_delete_list(t_lst *lst);
 int		ft_add_string_in_list(t_lst *lst, char *array);
-t_node	*ft_remove_return_node(t_lst *lst, t_node *node);
 int		ft_lst_btwn_lst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n);
-char	*ft_cpy_lst_to_array(t_lst *lst);
 int		ft_find_str_inlist(t_lst *lst, char *str, int size);
-t_lst	*ft_create_lst_add_str(char *array);
-void	ft_putlst_fd(t_lst *lst, int fd);
+char	*ft_cpy_lst_to_array(t_lst *lst);
+void	ft_putlst_fd(t_lst *lst, int new_line, int fd);
 
 #endif
