@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 16:06:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 18:46:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 		temp = cmd->m_lst->matrix->head->lst;
 		new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
 		ft_remove_specific_matrix(mmlst, cmd->m_lst);
-		//cmd->m_lst = NULL;
 		ft_remove_node_back(new_lst);
 		ft_remove_node_front(new_lst);
 		ft_parse_exe(new_lst, env_list, mmlst);
 	}
-	else
-		ft_print_matrix_line(cmd->m_lst->matrix);
+/* 	else
+		ft_print_matrix_line(cmd->m_lst->matrix); */
 }
 
 static void ft_execve(t_ast_n *cmd, t_mlst *env_list, int tube[2])
