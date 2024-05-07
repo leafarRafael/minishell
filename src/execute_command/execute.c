@@ -6,14 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 18:46:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 18:54:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/wait.h>
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list, int tube[2]);
+static void ft_execve(t_ast_n *cmd, t_mlst *env_list);
 
 void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 {
@@ -34,13 +34,16 @@ void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 		ft_remove_node_front(new_lst);
 		ft_parse_exe(new_lst, env_list, mmlst);
 	}
-/* 	else
-		ft_print_matrix_line(cmd->m_lst->matrix); */
+	else
+		ft_execve(cmd, env_list);
+		//ft_print_matrix_line(cmd->m_lst->matrix);
 }
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list, int tube[2])
+static void ft_execve(t_ast_n *cmd, t_mlst *env_list)
 {
 	t_var_exe	var;
+	int			tube[2];
+	
 	if (cmd->m_lst->next->type == PIPE)
 		pipe(tube);
 	ft_redirect(cmd->m_lst->matrix);
@@ -64,6 +67,7 @@ static void ft_execve(t_ast_n *cmd, t_mlst *env_list, int tube[2])
 	}
 	else
 	{
+		wait(&var.pid);
 		if (cmd->m_lst->next->type == PIPE)
 		{
 			dup2(tube[0], STDIN_FILENO);
