@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   add_line_front.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 09:24:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:24:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-static void	ft_first_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line);
-static void	ft_second_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line);
-static void	ft_third_onwards_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line);
+static void	ft_first_line(t_mlst *matrix_lst, t_lst_line *new_line);
+static void	ft_second_line(t_mlst *matrix_lst, t_lst_line *new_line);
+static void	ft_third_onwards_line(t_mlst *matrix_lst, t_lst_line *new_line);
 
-int	ft_add_list_front(t_mtrx_lst *matrix_lst, t_lst *lst)
+int	ft_add_list_front(t_mlst *matrix_lst, t_lst *lst)
 {
 	t_lst_line	*new_line;
 
@@ -44,7 +44,7 @@ int	ft_add_list_front(t_mtrx_lst *matrix_lst, t_lst *lst)
 	return (-1);
 }
 
-static void	ft_first_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line)
+static void	ft_first_line(t_mlst *matrix_lst, t_lst_line *new_line)
 {
 	new_line->next = new_line;
 	new_line->prev = new_line;
@@ -53,7 +53,7 @@ static void	ft_first_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line)
 	matrix_lst->size++;
 }
 
-static void	ft_second_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line)
+static void	ft_second_line(t_mlst *matrix_lst, t_lst_line *new_line)
 {
 	new_line->next = matrix_lst->last;
 	new_line->prev = matrix_lst->last;
@@ -63,7 +63,7 @@ static void	ft_second_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line)
 	matrix_lst->size++;
 }
 
-static void	ft_third_onwards_line(t_mtrx_lst *matrix_lst, t_lst_line *new_line)
+static void	ft_third_onwards_line(t_mlst *matrix_lst, t_lst_line *new_line)
 {
 	t_var_matrix	var;
 

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   remove_lst_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 08:21:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:21:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-static int	remove_one_size(t_mtrx_lst *matrix);
-static int	remove_two_size(t_mtrx_lst *matrix);
-static int	remove_size_three_more(t_mtrx_lst *matrix);
+static int	remove_one_size(t_mlst *matrix);
+static int	remove_two_size(t_mlst *matrix);
+static int	remove_size_three_more(t_mlst *matrix);
 
-int	ft_remove_list_back(t_mtrx_lst *m_lst)
+int	ft_remove_list_back(t_mlst *m_lst)
 {
 	if (!m_lst)
 		return (-1);
@@ -31,7 +31,7 @@ int	ft_remove_list_back(t_mtrx_lst *m_lst)
 	return (-1);
 }
 
-static int	remove_one_size(t_mtrx_lst *matrix)
+static int	remove_one_size(t_mlst *matrix)
 {
 	t_var_matrix	v;
 
@@ -46,7 +46,7 @@ static int	remove_one_size(t_mtrx_lst *matrix)
 	return (0);
 }
 
-static int	remove_two_size(t_mtrx_lst *matrix)
+static int	remove_two_size(t_mlst *matrix)
 {
 	t_var_matrix	v;
 
@@ -62,7 +62,7 @@ static int	remove_two_size(t_mtrx_lst *matrix)
 	return (0);
 }
 
-static int	remove_size_three_more(t_mtrx_lst *matrix)
+static int	remove_size_three_more(t_mlst *matrix)
 {
 	t_var_matrix	v;
 

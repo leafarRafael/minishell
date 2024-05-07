@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   remove_mlst_front.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:02:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:32:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_matrix_lst.h"
 
-static int	ft_size_one(t_mtrx_mtrx *ma_lst);
-static int	ft_size_two(t_mtrx_mtrx *ma_lst);
-static int	ft_three_more(t_mtrx_mtrx *ma_lst);
+static int	ft_size_one(t_mmlst *ma_lst);
+static int	ft_size_two(t_mmlst *ma_lst);
+static int	ft_three_more(t_mmlst *ma_lst);
 
-int	ft_remove_matrix_front(t_mtrx_mtrx *ma_lst)
+int	ft_remove_matrix_front(t_mmlst *ma_lst)
 {
 	if (!ma_lst)
 		return (-1);
@@ -31,7 +31,7 @@ int	ft_remove_matrix_front(t_mtrx_mtrx *ma_lst)
 	return (-1);
 }
 
-static int	ft_size_one(t_mtrx_mtrx *ma_lst)
+static int	ft_size_one(t_mmlst *ma_lst)
 {
 	t_var_m_mlst	v;
 
@@ -45,7 +45,7 @@ static int	ft_size_one(t_mtrx_mtrx *ma_lst)
 	return (0);
 }
 
-static int	ft_size_two(t_mtrx_mtrx *ma_lst)
+static int	ft_size_two(t_mmlst *ma_lst)
 {
 	t_var_m_mlst	v;
 
@@ -61,7 +61,7 @@ static int	ft_size_two(t_mtrx_mtrx *ma_lst)
 	return (0);
 }
 
-static int	ft_three_more(t_mtrx_mtrx *ma_lst)
+static int	ft_three_more(t_mmlst *ma_lst)
 {
 	t_var_m_mlst	v;
 

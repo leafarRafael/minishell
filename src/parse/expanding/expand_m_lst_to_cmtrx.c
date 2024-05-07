@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   expand_m_lst_to_cmtrx.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:18:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 10:41:48 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expanding.h"
 #include "minishell.h"
 
-static int	ft_expande_before_copie(t_mtrx_lst *lst_matrix);
+static int	ft_expande_before_copie(t_mlst *lst_matrix);
 
-char	**ft_expand_m_lst_to_cmtrx(t_mtrx_lst *lst_matrix)
+char	**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix)
 {
 	t_var_matrix	v;
 
@@ -39,7 +39,7 @@ char	**ft_expand_m_lst_to_cmtrx(t_mtrx_lst *lst_matrix)
 	return (v.matrix);
 }
 
-static int	ft_expande_before_copie(t_mtrx_lst *lst_matrix)
+static int	ft_expande_before_copie(t_mlst *lst_matrix)
 {
 	t_var_matrix	v;
 	int				size;

@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/02 08:41:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 #include "minishell.h"
 
-static void	muve_node_token_command(t_lst *lst, t_mtrx_lst *matrix);
-static void	muve_node_token_operator(t_lst *lst, t_mtrx_lst *matrix);
-static void	muve_token_parent(t_lst *lst, t_mtrx_lst *matrix);
+static void	muve_node_token_command(t_lst *lst, t_mlst *matrix);
+static void	muve_node_token_operator(t_lst *lst, t_mlst *matrix);
+static void	muve_token_parent(t_lst *lst, t_mlst *matrix);
 
-t_mtrx_lst	*ft_simple_comand(t_lst	*lst)
+t_mlst	*ft_token_cmd(t_lst	*lst)
 {
 	t_token			v;
-	t_mtrx_lst		*new_matrix;
+	t_mlst		*new_matrix;
 
 	if (!lst)
 		return (NULL);
@@ -46,7 +46,7 @@ t_mtrx_lst	*ft_simple_comand(t_lst	*lst)
 	return (new_matrix);
 }
 
-static void	muve_node_token_command(t_lst *lst, t_mtrx_lst *matrix)
+static void	muve_node_token_command(t_lst *lst, t_mlst *matrix)
 {
 	t_token	v;
 
@@ -79,7 +79,7 @@ static void	muve_node_token_command(t_lst *lst, t_mtrx_lst *matrix)
 	muve_node_token_command(lst, matrix);
 }
 
-static void	muve_node_token_operator(t_lst *lst, t_mtrx_lst *matrix)
+static void	muve_node_token_operator(t_lst *lst, t_mlst *matrix)
 {
 	t_token	v;
 
@@ -101,7 +101,7 @@ static void	muve_node_token_operator(t_lst *lst, t_mtrx_lst *matrix)
 	ft_add_list_back(matrix, v.new_lst);
 }
 
-static void	muve_token_parent(t_lst *lst, t_mtrx_lst *matrix)
+static void	muve_token_parent(t_lst *lst, t_mlst *matrix)
 {
 	t_token	v;
 	int		parent;

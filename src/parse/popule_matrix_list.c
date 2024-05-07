@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   popule_matrix_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:02:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 16:29:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_matrix_op(t_lst *n_lst, t_mtrx_lst *m_lst, t_lst *input, int i);
+static void	ft_matrix_op(t_lst *n_lst, t_mlst *m_lst, t_lst *input, int i);
 
-int	ft_separate_operators(t_mtrx_lst *matrix_lst, t_lst *input_user)
+int	ft_separate_operators(t_mlst *matrix_lst, t_lst *input_user)
 {
 	t_lst	*new_list;
 	t_node	*node;
@@ -38,7 +38,7 @@ int	ft_separate_operators(t_mtrx_lst *matrix_lst, t_lst *input_user)
 	return (0);
 }
 
-static void	ft_matrix_op(t_lst *n_lst, t_mtrx_lst *m_lst, t_lst *input, int i)
+static void	ft_matrix_op(t_lst *n_lst, t_mlst *m_lst, t_lst *input, int i)
 {
 	t_node	*node;
 

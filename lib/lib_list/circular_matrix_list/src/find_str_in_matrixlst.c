@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   find_str_in_matrixlst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:45:10 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:19:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-t_lst	*find_str_in_matrixlst(t_mtrx_lst *m_lst, char *str, int size)
+t_lst	*find_str_in_matrixlst(t_mlst *m_lst, char *str, int size)
 {
 	t_var_matrix	v;
 

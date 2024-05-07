@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cpy_cmtrx_to_mtrx_lst.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:54:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:23:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-t_mtrx_lst	*ft_cmtrix_to_mtrx_lst(char **matrix)
+t_mlst	*ft_cmtrix_to_mtrx_lst(char **matrix)
 {
-	t_mtrx_lst	*new_mtrx_lst;
+	t_mlst	*new_mtrx_lst;
 	t_lst		*new_lst;
 	int			i;
 

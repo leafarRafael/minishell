@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/04 18:22:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 14:35:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@
 
 typedef struct s_variables_minishell
 {
-	t_mtrx_lst	*m_lst_env;
+	t_mmlst		*mmlst;
+	t_ast		*ast;
+	t_mlst		*m_lst_env;
 	t_lst		*input_lst;
 	char		*input;
 	char		**env;
@@ -66,9 +68,10 @@ void			ft_scanner_input(t_lst *lst);
 int				ft_have_operator(t_lst *lst);
 void			ft_scanner_input(t_lst *lst);
 int				ft_delete_cmatrix(char **matrix);
-int				ft_define_cmd_status(t_mtrx_mtrx *m_m_lst);
-int				ft_remove_cmd_status(t_mtrx_mtrx *m_m_lst);
-void			ft_populetree(t_ast *tree, t_mtrx_mtrx *mtrx_mtrx);
+int				ft_define_cmd_status(t_mmlst *m_m_lst);
+int				ft_remove_cmd_status(t_mmlst *m_m_lst);
+void			ft_populetree_left(t_ast *tree, t_mmlst *mmlst);
+void			ft_populetree_right(t_ast *tree, t_mmlst *mmlst);
 
 void			ft_printf_matrix(char **matrix);
 void			ft_print_array_lst(t_lst *lst, int front_back);
@@ -76,24 +79,23 @@ void			ft_print_array_lst_content_type(t_lst *lst);
 void			show_str_type(int type);
 void			print_all_type(void);
 void			print_operator(t_lst *lst);
-void			ft_print_matrix_line(t_mtrx_lst *m_line);
-int				ft_separate_operators(t_mtrx_lst *matrix_lst,
+void			ft_print_matrix_line(t_mlst *m_line);
+int				ft_separate_operators(t_mlst *matrix_lst,
 					t_lst *input_user);
-void			ft_print_lst_matrix(t_mtrx_mtrx *m_l);
-void			ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx);
-void			ft_printtree(t_ast_node *root);
+void			ft_print_lst_matrix(t_mmlst *m_l);
+void			ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx);
+void			ft_printtree(t_ast_n *root);
 
 int				ft_input_is_valid(char *array);
 int				ft_exit(char *input);
 void			ft_free_memory_revert_environ(t_mini *v);
-char			**ft_path_env(t_mtrx_lst *m_lst);
-void			ft_execute(t_ast_node *cmd, t_mtrx_lst *env_list);
+char			**ft_path_env(t_mlst *m_lst);
 char			*ft_get_executable(char *command, char **path);
 
 void			ft_pipe(int pipe[2]);
 void			ft_pipe_parent(int pipe[2]);
 
-void			ft_parse_and_execute(t_lst *input, t_mtrx_lst *mrtx_lst_env);
-void			ft_parse_and_execute2(t_lst *input, t_mtrx_lst *mrtx_lst_env, int op);
+void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mini *mini);
+void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mini	*mini, t_ast_n *ast_n);
 
 #endif

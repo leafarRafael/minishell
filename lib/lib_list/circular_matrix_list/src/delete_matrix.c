@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   delete_matrix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 16:09:29 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:23:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-int	ft_delete_matrix(t_mtrx_lst *matrix)
+int	ft_delete_matrix(t_mlst *matrix)
 {
 	if (!matrix)
 		return (-1);

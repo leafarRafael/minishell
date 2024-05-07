@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   build_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:29:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:45:15 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "abstract_syntax_tree.h"
 
-static void	ft_left(t_ast_node *current_node, t_ast_node *new, int value);
-static void	ft_right(t_ast_node *current_node, t_ast_node *new, int value);
+static void	ft_left(t_ast_n *current_node, t_ast_n *new, int value);
+static void	ft_right(t_ast_n *current_node, t_ast_n *new, int value);
 
 void	ft_build_tree(t_ast *tree, t_mnode *matrix, int value)
 {
@@ -37,7 +37,7 @@ void	ft_build_tree(t_ast *tree, t_mnode *matrix, int value)
 	}
 }
 
-static void	ft_left(t_ast_node *current_node, t_ast_node *new, int value)
+static void	ft_left(t_ast_n *current_node, t_ast_n *new, int value)
 {
 	if (current_node->left == NULL)
 		current_node->left = new;
@@ -50,7 +50,7 @@ static void	ft_left(t_ast_node *current_node, t_ast_node *new, int value)
 	}
 }
 
-static void	ft_right(t_ast_node *current_node, t_ast_node *new, int value)
+static void	ft_right(t_ast_n *current_node, t_ast_n *new, int value)
 {
 	if (current_node->right == NULL)
 		current_node->right = new;

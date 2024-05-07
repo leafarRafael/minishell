@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 11:10:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 12:52:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,15 @@ void	show_str_type(int type)
 		printf("CLOSE_PAREN");
 }
 
-void	ft_print_matrix_line(t_mtrx_lst *m_line)
+void	ft_print_matrix_line(t_mlst *m_line)
 {
 	t_lst_line *temp;
 	int i;
 
+	if (!m_line)
+		return ;
+	if (!m_line->head)
+		return ;
 	i = 1;
 	temp = m_line->head;
 	while (i <= m_line->size)
@@ -187,7 +191,7 @@ static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_asp
 	return (0);
 }
 
-void ft_print_lst_matrix(t_mtrx_mtrx *m_l)
+void ft_print_lst_matrix(t_mmlst *m_l)
 {
 	t_mnode	*temp;
 	int 	i;
@@ -207,7 +211,7 @@ void ft_print_lst_matrix(t_mtrx_mtrx *m_l)
 	}
 }
 
-void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx)
+void	ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx)
 {
 	t_mnode		*temp;
 	char		**matrix;
@@ -232,12 +236,12 @@ void	ft_print_todos_os_tokens_expandidos(t_mtrx_mtrx *mtrx_mtrx)
 	}
 }
 
-void ft_printtree(t_ast_node *root)
+void ft_printtree(t_ast_n *root)
 {
 	if (root != NULL)
 	{
-		ft_printtree(root->left);
 		ft_print_matrix_line(root->m_lst->matrix);
 		printf("=======================================\n");
+		ft_printtree(root->left);
 	}
 }

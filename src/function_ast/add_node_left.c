@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   add_node_left.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:17:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:43:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 11:30:07 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "abstract_syntax_tree.h"
 
-static void	ft_add_left(t_ast_node	*node, t_ast_node *new_node);
+static void	ft_add_left(t_ast_n	*node, t_ast_n *new_node);
+static int	if_have_node(t_ast *tree, t_mnode *mtrx);
 
 void	ft_tree_add_left(t_ast *tree, t_mnode *matrix)
 {
 	t_ast_var	v;
 
 	if (!tree)
+		return ;
+	if (if_have_node(tree, matrix) != 0)
 		return ;
 	v.ast_node = ft_init_new_ast_node();
 	v.ast_node->m_lst = matrix;
@@ -29,10 +32,28 @@ void	ft_tree_add_left(t_ast *tree, t_mnode *matrix)
 		ft_add_left(tree->root, v.ast_node);
 }
 
-static void	ft_add_left(t_ast_node	*node, t_ast_node *new_node)
+static void	ft_add_left(t_ast_n	*node, t_ast_n *new_node)
 {
 	if (node->left == NULL)
 		node->left = new_node;
 	else
 		ft_add_left(node->left, new_node);
+}
+
+static int	if_have_node(t_ast *tree, t_mnode *mtrx)
+{
+	t_ast_n *temp;
+
+	if (!tree)
+		return (-1);
+	if (!tree->root)
+		return (0);
+	temp = tree->root;
+	while (temp != NULL)
+	{
+		if (temp->m_lst == mtrx)
+			return (-1);
+		temp = temp->left;
+	}
+	return (0);
 }

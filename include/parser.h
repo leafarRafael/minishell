@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 14:41:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 16:57:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ typedef struct s_var_parse
 
 }				t_var_parse;
 
-int				ft_expander_variable(t_mtrx_lst *m_lst);
+int				ft_expander_variable(t_mlst *m_lst);
 
-t_node			*ask_to_expansion(t_mtrx_lst *m_lst);
-t_node			*ask_expansion(t_mtrx_lst *m_lst);
+t_node			*ask_to_expansion(t_mlst *m_lst);
+t_node			*ask_expansion(t_mlst *m_lst);
 char			*ft_expand(t_node *node, t_node *l_node);
 
 int				ft_scanner_for_quotes(t_lst *lst);
 
-void			ft_valid_op_in_subshell(t_mtrx_mtrx *m_m_lst);
+void			ft_valid_op_in_subshell(t_mmlst *m_m_lst);
 
 #endif

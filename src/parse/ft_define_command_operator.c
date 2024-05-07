@@ -6,17 +6,17 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/30 10:18:00 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_define_cmd_opertor(t_mtrx_mtrx *m_m_lst);
-static void	ft_define_infile(t_mtrx_mtrx *m_m_lst);
-static void	ft_define_outfile(t_mtrx_mtrx *m_m_lst);
+static void	ft_define_cmd_opertor(t_mmlst *m_m_lst);
+static void	ft_define_infile(t_mmlst *m_m_lst);
+static void	ft_define_outfile(t_mmlst *m_m_lst);
 
-int	ft_define_cmd_status(t_mtrx_mtrx *m_m_lst)
+int	ft_define_cmd_status(t_mmlst *m_m_lst)
 {
 	if (!m_m_lst)
 		return (-1);
@@ -28,7 +28,7 @@ int	ft_define_cmd_status(t_mtrx_mtrx *m_m_lst)
 	return (0);
 }
 
-static void	ft_define_cmd_opertor(t_mtrx_mtrx *m_m_lst)
+static void	ft_define_cmd_opertor(t_mmlst *m_m_lst)
 {
 	int		i;
 	t_mnode	*temp;
@@ -43,7 +43,7 @@ static void	ft_define_cmd_opertor(t_mtrx_mtrx *m_m_lst)
 	}
 }
 
-static void	ft_define_infile(t_mtrx_mtrx *m_m_lst)
+static void	ft_define_infile(t_mmlst *m_m_lst)
 {
 	int			count[2];
 	t_mnode		*mnoode_temp;
@@ -69,7 +69,7 @@ static void	ft_define_infile(t_mtrx_mtrx *m_m_lst)
 	}
 }
 
-static void	ft_define_outfile(t_mtrx_mtrx *m_m_lst)
+static void	ft_define_outfile(t_mmlst *m_m_lst)
 {
 	int			count[2];
 	t_mnode		*mnoode_temp;

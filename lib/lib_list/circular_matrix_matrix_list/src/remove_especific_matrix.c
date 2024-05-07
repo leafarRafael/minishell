@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   remove_especific_matrix.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:49:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:29:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_matrix_lst.h"
 
-static int	ft_check_in_m_matrix(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx);
-static int	ft_others_cases(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx);
+static int	ft_check_in_m_matrix(t_mmlst *m_matrix, t_mnode *node_mtrx);
+static int	ft_others_cases(t_mmlst *m_matrix, t_mnode *node_mtrx);
 
-int	ft_remove_specific_matrix(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx)
+int	ft_remove_specific_matrix(t_mmlst *m_matrix, t_mnode *node_mtrx)
 {
 	if (!m_matrix)
 		return (-1);
@@ -32,7 +32,7 @@ int	ft_remove_specific_matrix(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx)
 	return (-1);
 }
 
-static int	ft_others_cases(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx)
+static int	ft_others_cases(t_mmlst *m_matrix, t_mnode *node_mtrx)
 {
 	t_var_m_mlst	v;
 
@@ -48,7 +48,7 @@ static int	ft_others_cases(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx)
 	return (0);
 }
 
-static int	ft_check_in_m_matrix(t_mtrx_mtrx *m_matrix, t_mnode *node_mtrx)
+static int	ft_check_in_m_matrix(t_mmlst *m_matrix, t_mnode *node_mtrx)
 {
 	t_var_m_mlst	v;
 

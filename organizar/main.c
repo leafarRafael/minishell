@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/06 10:08:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 15:02:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,24 @@ int	main(void)
 			__environ = mini.env;
 			mini.input_lst = ft_init_lst();
 			ft_add_string_in_list(mini.input_lst, mini.input);
+			free(mini.input);
 			ft_scanner_input(mini.input_lst);
-			new_lst = ft_duplst(mini.input_lst, ft_cpynode, ft_add_node_back);
 			mini.fd_std[0] = dup(STDIN_FILENO);
 			mini.fd_std[1] = dup(STDOUT_FILENO);
-			ft_parse_and_execute(mini.input_lst, mini.m_lst_env);
+			mini.mmlst = init_mmlst();
+			mini.ast = ft_init_ast();
+				while (mini.input_lst->size > 0)
+			ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
+			ft_define_cmd_status(mini.mmlst);
+			ft_remove_cmd_status(mini.mmlst);
+			ft_populetree_left(mini.ast, mini.mmlst);
+			ft_parse_exe(mini.input_lst, mini.m_lst_env, &mini, mini.ast->root);
+			ft_delete_mmlst(mini.mmlst);
+			ft_delete_tree(mini.ast);
 			dup2(mini.fd_std[0], STDIN_FILENO);
 			dup2(mini.fd_std[1], STDOUT_FILENO);
 			close(mini.fd_std[0]);
 			close(mini.fd_std[1]);
-			if (mini.input_lst)
-				free(mini.input_lst);
 			__environ = temp_environ;
 		}
 	}
@@ -52,50 +59,46 @@ int	main(void)
 	ft_delete_matrix(mini.m_lst_env);
 }
 
-void	ft_parse_and_execute(t_lst *input, t_mtrx_lst *mrtx_lst_env)
+void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mini *mini, t_ast_n *ast_n)
 {
-	t_ast		*new_ast;
-	t_mtrx_mtrx	*new_matrix;
+	t_ast_n	*node;
+	t_ast_n	*temp;
 
-	if (input->size == 0)
-		return ;
-	new_matrix = ft_mtrx_mtrx_lst();
 	while (input->size > 0)
-		ft_matrix_add_back(new_matrix,
-			ft_simple_comand(input));
-	ft_define_cmd_status(new_matrix);
-	ft_remove_cmd_status(new_matrix);
-	new_ast = ft_init_ast();
-	ft_populetree(new_ast, new_matrix);
-	ft_execute(new_ast->root, mrtx_lst_env);
-	ft_delete_tree(new_ast);
-	ft_delete_mtrx_mtrx_lst(new_matrix);
-}
-
-void	ft_parse_and_execute2(t_lst *input, t_mtrx_lst *mrtx_lst_env, int op)
-{
-	t_ast		*new_ast;
-	t_mtrx_mtrx	*new_matrix;
-
-	if (input->size == 0)
-		return ;
-	if (input->head->type == OPEN_PAREN)
+		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(input));
+	if (input)
 	{
-		ft_remove_node_front(input);
-		ft_remove_node_back(input);
+		free(input);
+		input = NULL;
 	}
-	if (is_operator(op))
-		ft_create_node_add_back(input, '|');
-	ft_scanner_input(input);
-	new_matrix = ft_mtrx_mtrx_lst();
-	while (input->size > 0)
-		ft_matrix_add_back(new_matrix,
-			ft_simple_comand(input));
-	ft_define_cmd_status(new_matrix);
-	ft_remove_cmd_status(new_matrix);
-	new_ast = ft_init_ast();
-	ft_populetree(new_ast, new_matrix);
-	ft_execute(new_ast->root, mrtx_lst_env);
-	ft_delete_tree(new_ast);
-	ft_delete_mtrx_mtrx_lst(new_matrix);
+	ft_define_cmd_status(mini->mmlst);
+	ft_remove_cmd_status(mini->mmlst);
+	ft_populetree_left(mini->ast, mini->mmlst);
+	if (ast_n == mini->ast->root)
+	{
+		if (!ast_n->m_lst)
+		{
+			temp = ast_n->left;
+			free(ast_n);
+			mini->ast->root = temp;
+		}
+	}
+	if (!ast_n->m_lst)
+	{
+		node = mini->ast->root;
+		while (node->left != NULL)
+		{
+			if (node->left == ast_n)
+			{
+				temp = ast_n->left;
+				free(ast_n);
+				mini->ast->size--;
+				node->left = temp;	
+				ast_n = node;;
+				break ;
+			}
+			node = node->left;
+		}
+	}
+	ft_execute(ast_n, mlst_env, mini);
 }

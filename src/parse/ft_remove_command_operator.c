@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 13:28:48 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_remove_cmd_opertor(t_mtrx_mtrx *m_m_lst);
-static void	ft_remove_rdrct(t_mtrx_mtrx *m_m_lst);
+static void	ft_remove_cmd_opertor(t_mmlst *m_m_lst);
+static void	ft_remove_rdrct(t_mmlst *m_m_lst);
 
-int	ft_remove_cmd_status(t_mtrx_mtrx *m_m_lst)
+int	ft_remove_cmd_status(t_mmlst *m_m_lst)
 {
 	if (!m_m_lst)
 		return (-1);
@@ -26,7 +26,7 @@ int	ft_remove_cmd_status(t_mtrx_mtrx *m_m_lst)
 }
 
 // TODO
-static void	ft_remove_cmd_opertor(t_mtrx_mtrx *m_m_lst)
+static void	ft_remove_cmd_opertor(t_mmlst *m_m_lst)
 {
 	int		i;
 	t_mnode	*temp;
@@ -41,7 +41,7 @@ static void	ft_remove_cmd_opertor(t_mtrx_mtrx *m_m_lst)
 	}
 }
 
-static void	ft_remove_rdrct(t_mtrx_mtrx *m_m_lst)
+static void	ft_remove_rdrct(t_mmlst *m_m_lst)
 {
 	int			count[2];
 	int			size;

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   path_comand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:18:53 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/26 09:30:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_node *find_head(t_mtrx_lst *m_lst, t_lst *lst);
+static t_node *find_head(t_mlst *m_lst, t_lst *lst);
 
-char	**ft_path_env(t_mtrx_lst *m_lst)
+char	**ft_path_env(t_mlst *m_lst)
 {
 	t_lst	*temp;
 	t_lst	to_array;
@@ -27,7 +27,7 @@ char	**ft_path_env(t_mtrx_lst *m_lst)
 	return (ft_split(ft_cpy_lst_to_array(&to_array), ':'));
 }
 
-static t_node *find_head(t_mtrx_lst *m_lst, t_lst *lst)
+static t_node *find_head(t_mlst *m_lst, t_lst *lst)
 {
 	t_node	*node;
 	int		index;

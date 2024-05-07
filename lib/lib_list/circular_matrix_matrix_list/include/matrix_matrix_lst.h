@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_matrix_lst.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:46:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:35:33 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:38:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 typedef struct s_m_node
 {
-	t_mtrx_lst		*matrix;
+	t_mlst		*matrix;
 	int				type;
 	int				in_parent;
 	struct s_m_node	*next;
@@ -28,7 +28,7 @@ typedef struct s_matrix_matrix_lst
 	t_mnode	*head;
 	t_mnode	*last;
 	int		size;
-}				t_mtrx_mtrx;
+}				t_mmlst;
 
 typedef struct s_var_matrix_mlst
 {
@@ -42,13 +42,13 @@ typedef struct s_var_matrix_mlst
 	int		i;
 }			t_var_m_mlst;
 
-t_mtrx_mtrx	*ft_mtrx_mtrx_lst(void);
+t_mmlst	*init_mmlst(void);
 t_mnode		*init_matrix_node(void);
-int			ft_matrix_add_front(t_mtrx_mtrx *lst_m, t_mtrx_lst *matrix);
-int			ft_matrix_add_back(t_mtrx_mtrx *lst_m, t_mtrx_lst *matrix);
-int			ft_remove_matrix_front(t_mtrx_mtrx *ma_lst);
-int			ft_remove_matrix_back(t_mtrx_mtrx *ma_lst);
-int			ft_remove_specific_matrix(t_mtrx_mtrx *m_matrix, t_mnode *matrix);
-int			ft_delete_mtrx_mtrx_lst(t_mtrx_mtrx *m_matrix);
+int			ft_matrix_add_front(t_mmlst *lst_m, t_mlst *matrix);
+int			ft_mmlst_add_back(t_mmlst *lst_m, t_mlst *matrix);
+int			ft_remove_matrix_front(t_mmlst *ma_lst);
+int			ft_remove_matrix_back(t_mmlst *ma_lst);
+int			ft_remove_specific_matrix(t_mmlst *m_matrix, t_mnode *matrix);
+int			ft_delete_mmlst(t_mmlst *m_matrix);
 
 #endif

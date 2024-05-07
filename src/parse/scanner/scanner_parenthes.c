@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_parenthes.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:23:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 16:41:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 09:11:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scanner.h"
+#include <stdio.h>
 
 static void	ft_close_open_parant(char c, int *ctrl_parent, int *parenth);
 
@@ -18,7 +19,7 @@ void	ft_scanner_parenthes(t_lst *lst)
 {
 	t_scan	v;
 
-	v.i = 0;
+	v.i = 1;
 	v.parentheses = 0;
 	v.node = lst->head;
 	while (v.i <= lst->size)
@@ -28,6 +29,8 @@ void	ft_scanner_parenthes(t_lst *lst)
 		v.node = v.node->next;
 		v.i++;
 	}
+	printf("\n");
+
 }
 
 static void	ft_close_open_parant(char c, int *ctrl_parent, int *parenth)

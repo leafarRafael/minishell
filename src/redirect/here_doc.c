@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:05:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/06 09:58:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "expanding.h"
 
 static void	ft_open(t_lst *lst);
-static t_mtrx_lst	*ft_read_std(t_lst *lst);
+static t_mlst	*ft_read_std(t_lst *lst);
 
-void	ft_open_here_doc(t_mtrx_lst *mtrix, t_lst_line *lst)
+void	ft_open_here_doc(t_mlst *mtrix, t_lst_line *lst)
 {
 	ft_open(lst->lst);
 	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
@@ -24,7 +24,7 @@ void	ft_open_here_doc(t_mtrx_lst *mtrix, t_lst_line *lst)
 
 static void	ft_open(t_lst *lst)
 {
-	t_mtrx_lst	*new_mtrx;
+	t_mlst	*new_mtrx;
 	t_lst_line	*temp;
 	int			here_doc[2];
 	int			i;
@@ -48,9 +48,9 @@ static void	ft_open(t_lst *lst)
 	close(here_doc[0]);
 }
 
-static t_mtrx_lst	*ft_read_std(t_lst *lst)
+static t_mlst	*ft_read_std(t_lst *lst)
 {
-	t_mtrx_lst	*new_mtrx;
+	t_mlst	*new_mtrx;
 	t_lst		*temp;
 	char		*read_line;
 	char		*limiter;

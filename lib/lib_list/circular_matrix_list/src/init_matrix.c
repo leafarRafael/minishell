@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:18:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:23:59 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-t_mtrx_lst	*ft_init_matrix(void)
+t_mlst	*ft_init_matrix(void)
 {
-	t_mtrx_lst	*matrix;
+	t_mlst	*matrix;
 
-	matrix = malloc(sizeof(t_mtrx_lst));
+	matrix = malloc(sizeof(t_mlst));
 	if (!matrix)
 		return (NULL);
 	matrix->head = NULL;
