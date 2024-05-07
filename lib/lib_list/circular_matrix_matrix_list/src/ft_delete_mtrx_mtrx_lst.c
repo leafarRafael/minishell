@@ -17,7 +17,7 @@ int	ft_delete_mmlst(t_mmlst *m_matrix)
 	if (!m_matrix)
 		return (-1);
 	while (m_matrix->size > 0)
-		ft_remove_matrix_back(m_matrix);
+		ft_remove_matrix_front(m_matrix);
 	free(m_matrix);
 	m_matrix = NULL;
 	return (0);

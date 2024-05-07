@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 15:02:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 15:30:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,10 @@ int	main(void)
 			mini.fd_std[0] = dup(STDIN_FILENO);
 			mini.fd_std[1] = dup(STDOUT_FILENO);
 			mini.mmlst = init_mmlst();
-			mini.ast = ft_init_ast();
-				while (mini.input_lst->size > 0)
-			ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
-			ft_define_cmd_status(mini.mmlst);
-			ft_remove_cmd_status(mini.mmlst);
-			ft_populetree_left(mini.ast, mini.mmlst);
-			ft_parse_exe(mini.input_lst, mini.m_lst_env, &mini, mini.ast->root);
+			while (mini.input_lst->size > 0)
+				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
+			ft_parse_exe(mini.input_lst, mini.m_lst_env, mini.mmlst);
 			ft_delete_mmlst(mini.mmlst);
-			ft_delete_tree(mini.ast);
 			dup2(mini.fd_std[0], STDIN_FILENO);
 			dup2(mini.fd_std[1], STDOUT_FILENO);
 			close(mini.fd_std[0]);
@@ -59,46 +54,21 @@ int	main(void)
 	ft_delete_matrix(mini.m_lst_env);
 }
 
-void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mini *mini, t_ast_n *ast_n)
+void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mmlst *mmlst)
 {
-	t_ast_n	*node;
-	t_ast_n	*temp;
+	t_ast		*ast;
 
+	ast = ft_init_ast();
 	while (input->size > 0)
-		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(input));
+		ft_mmlst_add_back(mmlst, ft_token_cmd(input));
 	if (input)
 	{
 		free(input);
 		input = NULL;
 	}
-	ft_define_cmd_status(mini->mmlst);
-	ft_remove_cmd_status(mini->mmlst);
-	ft_populetree_left(mini->ast, mini->mmlst);
-	if (ast_n == mini->ast->root)
-	{
-		if (!ast_n->m_lst)
-		{
-			temp = ast_n->left;
-			free(ast_n);
-			mini->ast->root = temp;
-		}
-	}
-	if (!ast_n->m_lst)
-	{
-		node = mini->ast->root;
-		while (node->left != NULL)
-		{
-			if (node->left == ast_n)
-			{
-				temp = ast_n->left;
-				free(ast_n);
-				mini->ast->size--;
-				node->left = temp;	
-				ast_n = node;;
-				break ;
-			}
-			node = node->left;
-		}
-	}
-	ft_execute(ast_n, mlst_env, mini);
+	ft_define_cmd_status(mmlst);
+	ft_remove_cmd_status(mmlst);
+	ft_populetree_left(ast, mmlst);
+	ft_execute(ast->root, mlst_env, mmlst);
+	ft_delete_tree(ast);
 }

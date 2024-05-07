@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 14:52:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 16:06:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void ft_execve(t_ast_n *cmd, t_mlst *env_list, int tube[2]);
 
-void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mini *mini)
+void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 {
 	t_var_exe	var;
 	t_lst		*new_lst;
@@ -24,20 +24,19 @@ void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mini *mini)
 
 	if (cmd == NULL)
 		return ;
-	ft_execute(cmd->left, env_list, mini);
-	if (cmd->m_lst->matrix->head->lst->head->c != '(')
-		ft_print_matrix_line(cmd->m_lst->matrix);
+	ft_execute(cmd->left, env_list, mmlst);
 	if (cmd->m_lst->matrix->head->lst->head->c == '(')
 	{
 		temp = cmd->m_lst->matrix->head->lst;
 		new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
-		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
-		cmd->m_lst = NULL;
+		ft_remove_specific_matrix(mmlst, cmd->m_lst);
+		//cmd->m_lst = NULL;
 		ft_remove_node_back(new_lst);
 		ft_remove_node_front(new_lst);
-		ft_parse_exe(new_lst, env_list, mini, cmd);
-		return ;
+		ft_parse_exe(new_lst, env_list, mmlst);
 	}
+	else
+		ft_print_matrix_line(cmd->m_lst->matrix);
 }
 
 static void ft_execve(t_ast_n *cmd, t_mlst *env_list, int tube[2])

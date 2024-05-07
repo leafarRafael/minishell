@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 14:35:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 15:31:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 typedef struct s_variables_minishell
 {
 	t_mmlst		*mmlst;
-	t_ast		*ast;
 	t_mlst		*m_lst_env;
 	t_lst		*input_lst;
 	char		*input;
@@ -95,7 +94,7 @@ char			*ft_get_executable(char *command, char **path);
 void			ft_pipe(int pipe[2]);
 void			ft_pipe_parent(int pipe[2]);
 
-void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mini *mini);
-void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mini	*mini, t_ast_n *ast_n);
+void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst);
+void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mmlst *mmlst);
 
 #endif

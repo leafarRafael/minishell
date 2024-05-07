@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:46:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:38:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 15:40:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 typedef struct s_m_node
 {
 	t_mlst		*matrix;
-	int				type;
-	int				in_parent;
+	int			type;
+	int			in_parent;
+	int			in_tree;
 	struct s_m_node	*next;
 	struct s_m_node	*prev;
 }				t_mnode;

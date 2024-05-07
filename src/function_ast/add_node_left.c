@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:17:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 11:30:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 15:40:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_tree_add_left(t_ast *tree, t_mnode *matrix)
 		return ;
 	if (if_have_node(tree, matrix) != 0)
 		return ;
+	matrix->in_tree = 0;
 	v.ast_node = ft_init_new_ast_node();
 	v.ast_node->m_lst = matrix;
 	tree->size++;

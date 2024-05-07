@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 14:35:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/07 15:44:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ void	ft_populetree_left(t_ast *tree, t_mmlst *mmlst)
 	while (i <= mmlst->size)
 	{
 		if (!is_operator(type))
-			ft_tree_add_left(tree, temp);
+		{
+			if (temp->in_tree == -42)
+				ft_tree_add_left(tree, temp);
+		}
 		temp = temp->prev;
+	
 		type = temp->type;
 		i++;
 	}
