@@ -6,45 +6,65 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 11:59:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 20:33:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/wait.h>
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast);
+static void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+static int	ft_valid_next(t_mlst *mlst);
 
-void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast)
+void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
 	t_lst		*new_lst;
 	t_lst		*temp;
 
 	if (cmd == NULL)
 		return ;
-	ft_execute(cmd->left, env_list, mmlst, ast);
+	ft_execute(cmd->left, mini, ast);
+
+	if (cmd->m_lst->matrix->size == 0)
+		return ;
 	if (cmd->m_lst->matrix->head->lst->head->c == '(')
 	{
 		temp = cmd->m_lst->matrix->head->lst;
 		new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
 		ft_scanner_input(new_lst);
-		ft_remove_specific_matrix(mmlst, cmd->m_lst);
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 		ft_remove_node_back(new_lst);
 		ft_remove_node_front(new_lst);
-		ft_parse_exe(new_lst, env_list, mmlst);
+		ft_parse_exe(new_lst, mini);
 	}
 	else
-		ft_execve(cmd, env_list, mmlst, ast);
+	{
+/* 		printf("\n\n\n\n\n");
+		ft_print_matrix_line(cmd->m_lst->matrix);
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst); */
+		ft_execve(cmd, mini, ast);
+	}
+
 }
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast)
+static void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
 	t_var_exe	var;
 	int			tube[2];
 	
 	if (cmd->m_lst->next->type == PIPE)
 		pipe(tube);
-	ft_redirect(cmd->m_lst->matrix);
+	if (ft_valid_next(cmd->m_lst->next->matrix) == 1)
+	{
+		if (ft_redirect(cmd->m_lst->next->matrix) < 0)
+			return ;
+		if (cmd->m_lst->next->matrix->size == 0)
+			ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next);
+	}
+	if (ft_redirect(cmd->m_lst->matrix) < 0)
+		return ;
+	if (cmd->m_lst->matrix->size == 0)
+		return ;
 	var.pid = fork();
 	if (var.pid == 0)
 	{
@@ -56,18 +76,12 @@ static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast
 			close(tube[0]);
 			close(tube[1]);
 		}
-		var.env = ft_path_env(env_list);
+		var.env = ft_path_env(mini->m_lst_env);
 		var.command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 		var.path_exe = ft_get_executable(var.command_m[0], var.env);
 		if (var.path_exe)
 			execve(var.path_exe, &var.command_m[0], var.env);
-		ft_delete_tree(ast);
-		ft_delete_mmlst(mmlst);
-		ft_delete_matrix(env_list);
-		ft_delete_cmatrix(var.env);
-		ft_delete_cmatrix(var.command_m);
-		perror("command not found: ");
-		free(var.path_exe);
+		free_memory(mini, &var,ast);
 		exit(1);
 	}
 	else
@@ -80,7 +94,28 @@ static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast
 			close(tube[1]);
 		}
 		if (cmd->m_lst->next->type == PIPE)
-			ft_remove_specific_matrix(mmlst, cmd->m_lst->next);
-		ft_remove_specific_matrix(mmlst, cmd->m_lst);
+			ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next);
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 	}
+}
+
+static int	ft_valid_next(t_mlst *mlst)
+{
+	t_lst_line	*line;
+	int			op_redir;
+	int			i;
+
+	i = 1;
+	op_redir = 0;
+	line = mlst->head;
+	while (i <= mlst->size)
+	{
+		if (is_operator_redirect(line->rdrct))
+			op_redir++;
+		i++;
+		line = line->next;
+	}
+	if (i -1 == op_redir)
+		return (1);
+	return (0);
 }

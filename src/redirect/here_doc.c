@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:05:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 15:53:30 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 static void	ft_open(t_lst *lst);
 static t_mlst	*ft_read_std(t_lst *lst);
 
-void	ft_open_here_doc(t_mlst *mtrix, t_lst_line *lst)
+int	here_doc(t_mlst *mtrix, t_lst_line *lst)
 {
 	ft_open(lst->lst);
 	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
+	return (0);
 }
 
 static void	ft_open(t_lst *lst)
@@ -32,6 +33,8 @@ static void	ft_open(t_lst *lst)
 	pipe(here_doc);
 	new_mtrx = NULL;
 	new_mtrx = ft_read_std(lst);
+	if (!new_mtrx)
+		return ;
 	ft_expand_m_lst(new_mtrx);
 	i = 1;
 	temp = new_mtrx->head;
@@ -51,10 +54,10 @@ static void	ft_open(t_lst *lst)
 static t_mlst	*ft_read_std(t_lst *lst)
 {
 	t_mlst	*new_mtrx;
-	t_lst		*temp;
-	char		*read_line;
-	char		*limiter;
-	int			size;
+	t_lst	*temp;
+	char	*read_line;
+	char	*limiter;
+	int		size;
 
 	size = ft_strlen(limiter = ft_cpy_lst_to_array(lst));
 	new_mtrx = ft_init_matrix();
@@ -77,5 +80,10 @@ static t_mlst	*ft_read_std(t_lst *lst)
 		read_line = NULL;
 	}
 	free(limiter);
+	if (new_mtrx->size == 0)
+	{
+		free(new_mtrx);
+		new_mtrx = NULL;
+	}
 	return (new_mtrx);
 }

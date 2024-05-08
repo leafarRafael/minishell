@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/08 11:06:56 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/08 16:12:41 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,8 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/ft_remove_command_operator.c\
 				./src/parse/define_priority_operator.c
 
+ERROR			:= ./src/error/memory_free.c
+
 KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/control_operators.c\
 				./src/key_words/dollar_sign.c\
@@ -71,7 +73,9 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/string_delimiters.c\
 				./src/key_words/words_delimiters.c
 
-SRC				:= $(FILES) $(AS_TREE) $(PARSE) $(KEY_WORDS) $(SIMPLE) $(REDIRECT)
+SRC				:= $(FILES) $(AS_TREE) $(PARSE)\
+				$(KEY_WORDS) $(SIMPLE) $(REDIRECT)\
+				$(ERROR)
 
 INCLUDE			:= -I ./include\
 				-I lib/lib_get_print/includes\

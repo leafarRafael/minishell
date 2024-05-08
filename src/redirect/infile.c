@@ -6,31 +6,43 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:08:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 14:46:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
 
-static void	ft_open(char *file);
+static int	ft_open(char *file);
 
-void	ft_open_infile(t_mlst *mtrix, t_lst_line *lst)
+int	open_in(t_mlst *mtrix, t_lst_line *lst)
 {
 	char	*infile;
+	int		valid_open;
 
+	valid_open = 0;
 	infile = ft_cpy_lst_to_array(lst->lst);
-	ft_open(infile);
+	valid_open = ft_open(infile);
 	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
 	free(infile);
+	lst = NULL;
+	return (valid_open);
 }
 
-static void	ft_open(char *file)
+static int	ft_open(char *file)
 {
 	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		exit(1);
-	dup2(fd, STDIN_FILENO);
+	{
+		perror(file);
+		return (-1);
+	}
+	if (dup2(fd, STDIN_FILENO) < 0)
+	{
+		perror("dup2: ");
+		return (-1);
+	}
 	close(fd);
+	return (0);
 }

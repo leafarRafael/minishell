@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 11:51:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 16:10:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(void)
 			mini.mmlst = init_mmlst();
 			while (mini.input_lst->size > 0)
 				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
-			ft_parse_exe(mini.input_lst, mini.m_lst_env, mini.mmlst);
+			ft_parse_exe(mini.input_lst, &mini);
 			ft_delete_mmlst(mini.mmlst);
 			dup2(mini.fd_std[0], STDIN_FILENO);
 			dup2(mini.fd_std[1], STDOUT_FILENO);
@@ -54,21 +54,21 @@ int	main(void)
 	ft_delete_matrix(mini.m_lst_env);
 }
 
-void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mmlst *mmlst)
+void	ft_parse_exe(t_lst *input, t_mini *mini)
 {
 	t_ast		*ast;
 
 	ast = ft_init_ast();
 	while (input->size > 0)
-		ft_mmlst_add_back(mmlst, ft_token_cmd(input));
+		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(input));
 	if (input)
 	{
 		free(input);
 		input = NULL;
 	}
-	ft_define_cmd_status(mmlst);
-	ft_remove_cmd_status(mmlst);
-	ft_populetree_left(ast, mmlst);
-	ft_execute(ast->root, mlst_env, mmlst, ast);
+	ft_define_cmd_status(mini->mmlst);
+	ft_remove_cmd_status(mini->mmlst);
+	ft_populetree_left(ast, mini->mmlst);
+	ft_execute(ast->root, mini, ast);
 	ft_delete_tree(ast);
 }

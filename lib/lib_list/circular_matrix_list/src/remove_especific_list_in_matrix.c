@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 08:58:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 15:05:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_rmv_spcfc_lst_mtrx(t_mlst *matrix, t_lst_line *line_lst)
 		return (-1);
 	if (matrix->head == line_lst)
 		return (ft_remove_lst_front(matrix));
-	if (matrix->last == line_lst)
+	else if (matrix->last == line_lst)
 		return (ft_remove_list_back(matrix));
-	if (matrix->head != line_lst || matrix->last != line_lst)
+	else
 		return (ft_other_cases(matrix, line_lst));
 	return (-1);
 }
@@ -60,6 +60,5 @@ static int	ft_other_cases(t_mlst *matrix, t_lst_line *line_list)
 	if (ft_delete_list(line_list->lst))
 		return (-1);
 	free(line_list);
-	line_list = NULL;
 	return (0);
 }
