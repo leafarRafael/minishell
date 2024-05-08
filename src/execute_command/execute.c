@@ -6,25 +6,23 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 11:26:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 11:59:07 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/wait.h>
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst);
+static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast);
 
-void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
+void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast)
 {
 	t_lst		*new_lst;
 	t_lst		*temp;
-	int			i;
 
-	i = 0;
 	if (cmd == NULL)
 		return ;
-	ft_execute(cmd->left, env_list, mmlst);
+	ft_execute(cmd->left, env_list, mmlst, ast);
 	if (cmd->m_lst->matrix->head->lst->head->c == '(')
 	{
 		temp = cmd->m_lst->matrix->head->lst;
@@ -36,22 +34,10 @@ void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 		ft_parse_exe(new_lst, env_list, mmlst);
 	}
 	else
-	{
-/* 		if (cmd->m_lst->next->type == PIPE)
-		{
-			ft_print_matrix_line(cmd->m_lst->next->matrix);
-			ft_remove_specific_matrix(mmlst, cmd->m_lst->next);
-
-		}
-		ft_print_matrix_line(cmd->m_lst->matrix);
-		ft_remove_specific_matrix(mmlst, cmd->m_lst); */
-		ft_execve(cmd, env_list, mmlst);
-	}
-		
-		
+		ft_execve(cmd, env_list, mmlst, ast);
 }
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
+static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast)
 {
 	t_var_exe	var;
 	int			tube[2];
@@ -75,6 +61,13 @@ static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 		var.path_exe = ft_get_executable(var.command_m[0], var.env);
 		if (var.path_exe)
 			execve(var.path_exe, &var.command_m[0], var.env);
+		ft_delete_tree(ast);
+		ft_delete_mmlst(mmlst);
+		ft_delete_matrix(env_list);
+		ft_delete_cmatrix(var.env);
+		ft_delete_cmatrix(var.command_m);
+		perror("command not found: ");
+		free(var.path_exe);
 		exit(1);
 	}
 	else

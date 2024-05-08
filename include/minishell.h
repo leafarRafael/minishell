@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 09:12:12 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 11:51:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char			*ft_get_executable(char *command, char **path);
 void			ft_pipe(int pipe[2]);
 void			ft_pipe_parent(int pipe[2]);
 
-void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst);
+void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst, t_ast *ast);
 void	ft_parse_exe(t_lst *input, t_mlst *mlst_env, t_mmlst *mmlst);
 
 #endif
