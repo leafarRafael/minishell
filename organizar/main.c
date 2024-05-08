@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/03 10:01:56 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 15:53:13 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(void)
 	while (1)
 	{
 		mini.input = readline("minishell ~:");
+		th_parse_param(mini.input);
+
 		if (!ft_exit(mini.input))
 			break ;
 		if (!ft_input_is_valid(mini.input))
@@ -33,8 +35,16 @@ int	main(void)
 			__environ = mini.env;
 			mini.input_lst = ft_init_lst();
 			ft_add_string_in_list(mini.input_lst, mini.input);
+
+			printf("\nREADLINE: \n");
+			ft_print_array_lst(mini.input_lst, 0);
+			printf("\n");
+
 			ft_scanner_input(mini.input_lst);
-			ft_parse_and_execute(mini.input_lst, mini.m_lst_env);
+			printf("TYPES:\n");
+			ft_print_array_lst_content_type(mini.input_lst);
+
+			// ft_parse_and_execute(mini.input_lst, mini.m_lst_env);
 			if (mini.input_lst)
 				free(mini.input_lst);
 			__environ = temp_environ;
