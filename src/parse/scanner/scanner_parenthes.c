@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:23:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 09:11:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 11:25:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ void	ft_scanner_parenthes(t_lst *lst)
 	v.node = lst->head;
 	while (v.i <= lst->size)
 	{
-		v.node->type = is_simple_type(v.node->c);
-		ft_close_open_parant(v.node->c, &v.parentheses, &v.node->paren);
+		if (v.node->type & (OPEN_PAREN | CLOSE_PAREN))
+			ft_close_open_parant(v.node->c, &v.parentheses, &v.node->paren);
 		v.node = v.node->next;
 		v.i++;
 	}
-	printf("\n");
-
 }
 
 static void	ft_close_open_parant(char c, int *ctrl_parent, int *parenth)
