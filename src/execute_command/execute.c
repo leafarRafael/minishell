@@ -6,22 +6,22 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 18:54:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 11:01:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/wait.h>
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list);
+static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst);
 
 void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 {
-	t_var_exe	var;
 	t_lst		*new_lst;
 	t_lst		*temp;
-	int			tube[2];
+	int			i;
 
+	i = 0;
 	if (cmd == NULL)
 		return ;
 	ft_execute(cmd->left, env_list, mmlst);
@@ -35,11 +35,12 @@ void	ft_execute(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 		ft_parse_exe(new_lst, env_list, mmlst);
 	}
 	else
-		ft_execve(cmd, env_list);
-		//ft_print_matrix_line(cmd->m_lst->matrix);
+		ft_execve(cmd, env_list, mmlst);
+		
+		
 }
 
-static void ft_execve(t_ast_n *cmd, t_mlst *env_list)
+static void ft_execve(t_ast_n *cmd, t_mlst *env_list, t_mmlst *mmlst)
 {
 	t_var_exe	var;
 	int			tube[2];
@@ -74,5 +75,8 @@ static void ft_execve(t_ast_n *cmd, t_mlst *env_list)
 			close(tube[0]);
 			close(tube[1]);
 		}
+		if (cmd->m_lst->next->type == PIPE)
+			ft_remove_specific_matrix(mmlst, cmd->m_lst->next);
+		ft_remove_specific_matrix(mmlst, cmd->m_lst);
 	}
 }

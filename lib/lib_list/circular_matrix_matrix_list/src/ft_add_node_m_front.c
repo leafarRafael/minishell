@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:56:33 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 09:09:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_first(t_mmlst *lst_m, t_mnode *new_mnode);
 static void	ft_second(t_mmlst *lst_m, t_mnode *new_mnode);
 static void	ft_third_onwards(t_mmlst *lst_m, t_mnode *new_mnode);
 
-int	ft_matrix_add_front(t_mmlst *lst_m, t_mlst *matrix)
+int	ft_mmlst_add_front(t_mmlst *lst_m, t_mlst *matrix)
 {
 	t_mnode			*new_mnode;
 

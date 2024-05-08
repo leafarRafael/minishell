@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:49:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/08 09:05:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_remove_specific_matrix(t_mmlst *m_matrix, t_mnode *node_mtrx)
 		return (-1);
 	if (m_matrix->head == node_mtrx)
 		return (ft_remove_matrix_front(m_matrix));
-	if (m_matrix->last == node_mtrx)
+	else if (m_matrix->last == node_mtrx)
 		return (ft_remove_matrix_back(m_matrix));
-	if (m_matrix->last == node_mtrx || m_matrix->head == node_mtrx)
+	else
 		return (ft_others_cases(m_matrix, node_mtrx));
 	return (-1);
 }
@@ -38,8 +38,8 @@ static int	ft_others_cases(t_mmlst *m_matrix, t_mnode *node_mtrx)
 
 	v.next = node_mtrx->next;
 	v.prev = node_mtrx->prev;
-	v.prev->next = v.next;
 	v.next->prev = v.prev;
+	v.prev->next = v.next;
 	m_matrix->size--;
 	if (ft_delete_matrix(node_mtrx->matrix))
 		return (-1);
