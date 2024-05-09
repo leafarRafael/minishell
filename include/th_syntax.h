@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:42:32 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/08 15:40:06 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:46:38 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,17 @@ typedef struct s_args
 	char	**envp;
 }			t_args;
 
-typedef struct s_parse
+typedef struct s_parse	t_parse;
+struct s_parse
 {
-	t_type_character			type;
-	int							start;
-	int							size;
-	int							close;
-	struct s_parse				*next;
-}								t_parse;
+	t_type_character	type;
+	int					start;
+	int					size;
+	int					close;
+	t_parse				*next;
+	t_parse				*sub;
+
+};
 
 // /* UTILS Functions */
 // void	check_nb_args(int argc, char **argv, int min, int max);

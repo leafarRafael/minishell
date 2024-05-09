@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/08 19:45:14 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/09 16:14:24 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ static void	parse_prnths(char *str, t_parse *parse, t_parse **ptr, int *index);
 static void	parse_s_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
 static void	parse_d_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
 
+void	print_parenth(t_parse *parse)
+{
+	printf("\n");
+	while (parse)
+	{
+		printf("[");
+		show_str_type(parse->type);
+		printf("] ");
+		printf("START[%d] LEN[%d]", parse->start, parse->size);
+		printf(" [END]\n");
+		parse = parse->next;
+	}
+}
+
 t_parse	*th_parse_param(char *str)
 {
 	t_parse	*parse;
@@ -26,74 +40,73 @@ t_parse	*th_parse_param(char *str)
 	size_t	len;
 
 	len = ft_strlen(str);
-	printf("\n============================================================================\n");
 	printf("READLINE LEN = [%zu]\n", len);
-
 	// parse = malloc((len + 1) * sizeof(parse));
-
-	parse = parse_new(NO_OP_TYPE, 0);
-	ptr = parse;
+	parse = NULL;
 	index = 0;
 	while (str[index])
 	{
-		while (ft_is_tab(str[index]) && ptr->type == NO_OP_TYPE)
-		{
+		while (ft_is_tab(str[index]))
 			index++;
-			ptr->start++;
-		}
-
 		if (str[index] == '(')
 		{
+			parse_add_back(&parse, parse_new(OPEN_PAREN, index));
+			ptr = parse_last(parse);
+			while (str[index])
+			{
+				if (str[index++] == ')')
+					break ;
+				else if (str[index] == '\0')
+				{
+					parse_free(parse);
+					printf("Syntax ERROR, no clossing [)]");
+					return(parse);
+				}
+				else
+					ptr->size++;
+			}
 			index++;
-			printf("OPEN PARENTHESIS\n");
 		}
 		else if (str[index] == '\"')
 		{
-			index++;
+			parse_add_back(&parse, parse_new(D_QUOTES, index));
+			ptr = parse_last(parse);
 			while (str[index])
 			{
 				if (str[index++] == '\"')
 					break ;
 				else if (str[index] == '\0')
-				{
-					printf("SYNTAX ERROR, NO CLOSED DOUBLE QUOTES\n");
 					return(parse);
-				}
 				else
-					parse->size++;
+					ptr->size++;
 			}
-			printf("LEN[%d]\n", parse->size);
+			index++;
 		}
 		else if (str[index] == '\'')
 		{
-			index++;
+			parse_add_back(&parse, parse_new(S_QUOTES, index));
+			ptr = parse_last(parse);
 			while (str[index])
 			{
 				if (str[index++] == '\'')
 					break ;
 				else if (str[index] == '\0')
-				{
-					printf("SYNTAX ERROR, NO CLOSED SINGLE QUOTES\n");
 					return(parse);
-				}
 				else
-					parse->size++;
+					ptr->size++;
 			}
-			printf("LEN[%d]\n", parse->size);
+			index++;
 		}
 		else
 		{
 			index++;
-			ptr->start++;
 		}
 
-
-
-		if (str[index] == ')' && ptr->type == NO_OP_TYPE)
-		{
-			printf("SYNTAX ERROR, CLOSE PARENTHESIS BEFORE OPEN ONE\n");
-			return(parse);
-		}
+		// if (str[index] == ')' && ptr->type == NO_OP_TYPE)
+		// {
+		// 	printf("SYNTAX ERROR, CLOSE PARENTHESIS BEFORE OPEN ONE\n");
+		// 	return(parse);
+		// }
 		// else if (str[index] == ')' && ptr->type == OPEN_PAREN)
 		// {
 		// 	printf("CLOSE PARENTHESIS\n");
@@ -166,18 +179,8 @@ t_parse	*th_parse_param(char *str)
 		// else if (ptr->type == NO_OP_TYPE && str[index])
 		// 	parse_txt(str, parse, &ptr, &index);
 	}
-	printf("\n");
-	while (parse)
-	{
-		printf("[");
-		show_str_type(parse->type);
-		printf("] ");
-		printf("START[%d] LEN[%d]", parse->start, parse->size);
-		printf(" [END]\n");
-		parse = parse->next;
-	}
+	print_parenth(parse);
 	return (parse);
-
 }
 
 // static void	rcsv_parse(char *str, t_parse *parse, t_parse **ptr, int *index)
@@ -323,3 +326,8 @@ static void	parse_d_qts(char *str, t_parse *parse, t_parse **ptr, int *index)
 		// }
 	}
 }
+
+/*
+()'1'"12"
+01234567
+ */
