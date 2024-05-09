@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:45:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/09 16:13:00 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:01:57 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ t_parse	*parse_new(t_type_character type, int start)
 		return (NULL);
 	parse->type = type;
 	parse->start = start;
-	parse->size = -1;
+	parse->size = 0;
 	parse->close = 0;
 	parse->next = NULL;
+	parse->sub = NULL;
 	return (parse);
 }
 

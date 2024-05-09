@@ -6,13 +6,14 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/09 16:14:24 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:10:07 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	ft_is_tab(int ch);
+static int	check_quote(char *str, t_parse **parse, int *index, char quote);
 static void	parse_cmd(char *str, t_parse *parse, t_parse **ptr, int *index);
 static void	parse_prnths(char *str, t_parse *parse, t_parse **ptr, int *index);
 static void	parse_s_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
@@ -21,6 +22,7 @@ static void	parse_d_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
 void	print_parenth(t_parse *parse)
 {
 	printf("\n");
+	printf("RESULT\n");
 	while (parse)
 	{
 		printf("[");
@@ -32,12 +34,30 @@ void	print_parenth(t_parse *parse)
 	}
 }
 
+void	syntax_error(t_parse *parse, char quote)
+{
+	char	*msg;
+
+	if (quote == ')')
+		msg = "PARENTHESIS";
+	else if (quote == '\"')
+		msg = "DOUBLE QUOTES";
+	else if (quote == '\'')
+		msg = "SINGLE QUOTES";
+	parse_free(parse);
+	printf("Syntax ERROR, no clossing %s\n", msg);
+}
+
 t_parse	*th_parse_param(char *str)
 {
 	t_parse	*parse;
 	t_parse	*ptr;
+	t_parse	*sub;
 	int		index;
 	size_t	len;
+	int		status;
+
+	status = 1;
 
 	len = ft_strlen(str);
 	printf("READLINE LEN = [%zu]\n", len);
@@ -48,213 +68,83 @@ t_parse	*th_parse_param(char *str)
 	{
 		while (ft_is_tab(str[index]))
 			index++;
-		if (str[index] == '(')
+		if (status && str[index] == '(')
 		{
-			parse_add_back(&parse, parse_new(OPEN_PAREN, index));
+			parse_add_back(&parse, parse_new(OPEN_PAREN, index + 1));
 			ptr = parse_last(parse);
-			while (str[index])
+			while (status && str[index++])
 			{
-				if (str[index++] == ')')
-					break ;
-				else if (str[index] == '\0')
+				// printf("%d[%c] ", index, str[index]);
+				if (status && str[index] == '\"' || str[index] == '\'')
 				{
-					parse_free(parse);
-					printf("Syntax ERROR, no clossing [)]");
-					return(parse);
+					// if (parse->sub == NULL)
+					// 	sub = parse->sub;
+					// status = check_quote(str, &parse, &index, str[index]);
+					status = check_quote(str, &parse->sub, &index, str[index]);
+					if (status == -1)
+						return (NULL);
+					index--;
+					// ptr->size += 2 + parse_last(parse)->size;
+					ptr->size += 2 + parse_last(parse->sub)->size;
+				}
+				else if (status && str[index] == '\0')
+				{
+					syntax_error(parse, ')');
+					return (NULL);
+				}
+				else if (status && str[index] == ')')
+				{
+					index++;
+					break ;
 				}
 				else
 					ptr->size++;
 			}
-			index++;
 		}
-		else if (str[index] == '\"')
-		{
-			parse_add_back(&parse, parse_new(D_QUOTES, index));
-			ptr = parse_last(parse);
-			while (str[index])
-			{
-				if (str[index++] == '\"')
-					break ;
-				else if (str[index] == '\0')
-					return(parse);
-				else
-					ptr->size++;
-			}
-			index++;
-		}
-		else if (str[index] == '\'')
-		{
-			parse_add_back(&parse, parse_new(S_QUOTES, index));
-			ptr = parse_last(parse);
-			while (str[index])
-			{
-				if (str[index++] == '\'')
-					break ;
-				else if (str[index] == '\0')
-					return(parse);
-				else
-					ptr->size++;
-			}
-			index++;
-		}
+		else if (status && (str[index] == '\"' || str[index] == '\''))
+			status = check_quote(str, &parse, &index, str[index]);
 		else
 		{
 			index++;
 		}
-
-		// if (str[index] == ')' && ptr->type == NO_OP_TYPE)
-		// {
-		// 	printf("SYNTAX ERROR, CLOSE PARENTHESIS BEFORE OPEN ONE\n");
-		// 	return(parse);
-		// }
-		// else if (str[index] == ')' && ptr->type == OPEN_PAREN)
-		// {
-		// 	printf("CLOSE PARENTHESIS\n");
-		// 	ptr->type = NO_OP_TYPE;
-		// 	index++;
-		// 	ptr->start++;
-		// }
-
-		// // SET STATE
-		// if (str[index] == '(' && ptr->type == NO_OP_TYPE)
-		// {
-		// 	printf("OPEN PARENTHESIS\n");
-		// 	ptr->type = OPEN_PAREN;
-		// 	// index++;
-		// 	ptr->start++;
-		// }
-		// else if (str[index] == '\'' && ptr->type == NO_OP_TYPE)
-		// {
-		// 	printf("OPEN SINGLE QUOTES\n");
-		// 	ptr->type = S_QUOTES;
-		// 	// index++;
-		// 	ptr->start++;
-		// }
-		// else if (str[index] == '\"' && ptr->type == NO_OP_TYPE)
-		// {
-		// 	printf("OPEN DOUBLE QUOTES\n");
-		// 	ptr->type = D_QUOTES;
-		// 	// index++;
-		// 	ptr->start++;
-		// }
-		// // END
-
-		// // HANDLE STATE
-		// if (ptr->type == S_QUOTES)
-		// {
-		// 	parse_s_qts(str, parse, &ptr, &index);
-		// 	if (index == len && ptr->type == S_QUOTES)
-		// 	{
-		// 		printf("SYNTAX ERROR, NO CLOSED SINGLE QUOTES\n");
-		// 		return(parse);
-		// 	}
-		// }
-		// else if (ptr->type == D_QUOTES)
-		// {
-		// 	parse_d_qts(str, parse, &ptr, &index);
-		// 	if (index == len && ptr->type == D_QUOTES)
-		// 	{
-		// 		printf("SYNTAX ERROR, NO CLOSED DOUBLE QUOTES\n");
-		// 		return(parse);
-		// 	}
-		// }
-		// else if (ptr->type == OPEN_PAREN)
-		// {
-		// 	parse_prnths(str, parse, &ptr, &index);
-		// 	if (index == len && ptr->type == OPEN_PAREN)
-		// 	{
-		// 		printf("SYNTAX ERROR, NO CLOSED PARENTHESIS\n");
-		// 		return(parse);
-		// 	}
-		// }
-		// else
-		// {
-		// 	index++;
-		// 	ptr->start++;
-		// }
-
-		// END
-		// if (ptr->type == CMD && str[index])
-		// 	parse_cmd(str, parse, &ptr, &index);
-		// else if (ptr->type == NO_OP_TYPE && str[index])
-		// 	parse_txt(str, parse, &ptr, &index);
+		if (status == -1)
+			return (NULL);
 	}
 	print_parenth(parse);
 	return (parse);
 }
 
-// static void	rcsv_parse(char *str, t_parse *parse, t_parse **ptr, int *index)
-// {
-// 	while (str[index])
-// 	{
-// 		while (ft_is_tab(str[index]) && ptr->type == NO_OP_TYPE)
-// 		{
-// 			index++;
-// 			ptr->start++;
-// 		}
-// 		if (str[index] == ')' && ptr->type == NO_OP_TYPE)
-// 		{
-// 			printf("SYNTAX ERROR, CLOSE PARENTHESIS BEFORE CLOSE ONE\n");
-// 			return(parse);
-// 		}
-// 		else if (str[index] == ')' && ptr->type == OPEN_PAREN)
-// 		{
-// 			printf("CLOSE PARENTHESIS\n");
-// 			ptr->type = NO_OP_TYPE;
-// 			index++;
-// 			ptr->start++;
-// 		}
-// 		// SET STATE
-// 		if (str[index] == '(' && ptr->type == NO_OP_TYPE)
-// 		{
-// 			printf("OPEN PARENTHESIS\n");
-// 			ptr->type = OPEN_PAREN;
-// 			// index++;
-// 			ptr->start++;
-// 		}
-// 		else if (str[index] == '\'' && ptr->type == NO_OP_TYPE)
-// 		{
-// 			printf("OPEN SINGLE QUOTES\n");
-// 			ptr->type = S_QUOTES;
-// 			ptr->start++;
-// 		}
-// 		else if (str[index] == '\"' && ptr->type == NO_OP_TYPE)
-// 		{
-// 			printf("OPEN DOUBLE QUOTES\n");
-// 			ptr->type = D_QUOTES;
-// 			ptr->start++;
-// 		}
-// 		// END
-// 		// HANDLE STATE
-// 		if (ptr->type == S_QUOTES)
-// 		{
-// 			parse_s_qts(str, parse, &ptr, &index);
-// 			if (index == len && ptr->type == S_QUOTES)
-// 			{
-// 				printf("SYNTAX ERROR, NO CLOSED SINGLE QUOTES\n");
-// 				return(parse);
-// 			}
-// 		}
-// 		else if (ptr->type == D_QUOTES)
-// 		{
-// 			parse_d_qts(str, parse, &ptr, &index);
-// 			if (index == len && ptr->type == D_QUOTES)
-// 			{
-// 				printf("SYNTAX ERROR, NO CLOSED DOUBLE QUOTES\n");
-// 				return(parse);
-// 			}
-// 		}
-// 		else if (ptr->type == OPEN_PAREN)
-// 		{
-// 			parse_prnths(str, parse, &ptr, &index);
-// 			if (index == len && ptr->type == OPEN_PAREN)
-// 			{
-// 				printf("SYNTAX ERROR, NO CLOSED PARENTHESIS\n");
-// 				return(parse);
-// 			}
-// 		}
-// 	}
-// }
+static int	check_quote(char *str, t_parse **parse, int *index, char quote)
+{
+	t_parse				*ptr;
+	t_type_character	type;
+
+	if (quote =='\"')
+		type = S_QUOTES;
+	else if (quote =='\'')
+		type = D_QUOTES;
+	parse_add_back(parse, parse_new(type, *index + 1));
+	ptr = parse_last(*parse);
+	// printf("\n");
+	while (str[(*index)++])
+	{
+		// printf("%d[%c]", *index, str[*index]);
+		if (str[*index] == '\0')
+		{
+			syntax_error(*parse, quote);
+			return (-1);
+		}
+		else if (str[*index] == quote)
+		{
+			(*index)++;
+			// printf("BREAK AT [%c]", str[*index]);
+			break ;
+		}
+		else
+			ptr->size++;
+	}
+	return (1);
+}
 
 static int	ft_is_tab(int ch)
 {
