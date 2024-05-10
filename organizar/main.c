@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/09 15:37:35 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:22:05 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(void)
 		printf("\n============================================================================\n");
 		mini.input = readline("minishell ~:");
 		th_parse_param(mini.input);
+		// FREE THE PARSE FOR TEST
 
 		if (!ft_exit(mini.input))
 			break ;
