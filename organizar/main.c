@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 16:10:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/11 09:40:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(void)
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini.env = ft_cpy_mtrllst_to_cmtrx(mini.m_lst_env);
 	__environ = mini.env;
+				mini.fd_std[0] = dup(STDIN_FILENO);
+			mini.fd_std[1] = dup(STDOUT_FILENO);
 	while (1)
 	{
 		mini.input = readline("minishell ~:");
@@ -36,8 +38,7 @@ int	main(void)
 			ft_add_string_in_list(mini.input_lst, mini.input);
 			free(mini.input);
 			ft_scanner_input(mini.input_lst);
-			mini.fd_std[0] = dup(STDIN_FILENO);
-			mini.fd_std[1] = dup(STDOUT_FILENO);
+
 			mini.mmlst = init_mmlst();
 			while (mini.input_lst->size > 0)
 				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));

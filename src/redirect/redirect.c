@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 16:23:10 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 16:22:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/10 18:12:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
 
 static int valid(t_mlst *mtrix, t_lst_line *line);
+static int valid_here_doc(t_mlst *mtrix, t_lst_line *line);
 
 int	ft_redirect(t_mlst *mtrix)
 {
@@ -57,5 +58,13 @@ static int valid(t_mlst *mtrix, t_lst_line *line)
 		if (open_trnc(mtrix, line) < 0)
 			return (-1);
 	}
+	return (0);
+}
+
+static int valid_here_doc(t_mlst *mtrix, t_lst_line *line)
+{
+	if (here_doc(mtrix, line) < 0)
+		return (-1);
+
 	return (0);
 }

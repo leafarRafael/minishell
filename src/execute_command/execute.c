@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 20:33:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/10 17:53:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,42 @@
 #include <sys/wait.h>
 
 static void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+static void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 static int	ft_valid_next(t_mlst *mlst);
 
 void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
-	t_lst		*new_lst;
-	t_lst		*temp;
-
 	if (cmd == NULL)
 		return ;
+	if (ft_valid_next(cmd->m_lst->matrix) == 1)
+	{
+		if (ft_redirect(cmd->m_lst->matrix) < 0)
+			return ;
+		if (cmd->m_lst->matrix->size == 0)
+			ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
+	}
 	ft_execute(cmd->left, mini, ast);
-
 	if (cmd->m_lst->matrix->size == 0)
 		return ;
 	if (cmd->m_lst->matrix->head->lst->head->c == '(')
-	{
-		temp = cmd->m_lst->matrix->head->lst;
-		new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
-		ft_scanner_input(new_lst);
-		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
-		ft_remove_node_back(new_lst);
-		ft_remove_node_front(new_lst);
-		ft_parse_exe(new_lst, mini);
-	}
+		ft_expand_subshell(cmd, mini, ast);
 	else
-	{
-/* 		printf("\n\n\n\n\n");
-		ft_print_matrix_line(cmd->m_lst->matrix);
-		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst); */
 		ft_execve(cmd, mini, ast);
-	}
+
+}
+
+static void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
+{
+	t_lst		*new_lst;
+	t_lst		*temp;
+
+	temp = cmd->m_lst->matrix->head->lst;
+	new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
+	ft_scanner_input(new_lst);
+	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
+	ft_remove_node_back(new_lst);
+	ft_remove_node_front(new_lst);
+	ft_parse_exe(new_lst, mini);
 
 }
 
@@ -52,30 +58,25 @@ static void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	t_var_exe	var;
 	int			tube[2];
 	
+	if (cmd == NULL)
+		return ;
 	if (cmd->m_lst->next->type == PIPE)
 		pipe(tube);
-	if (ft_valid_next(cmd->m_lst->next->matrix) == 1)
-	{
-		if (ft_redirect(cmd->m_lst->next->matrix) < 0)
-			return ;
-		if (cmd->m_lst->next->matrix->size == 0)
-			ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next);
-	}
-	if (ft_redirect(cmd->m_lst->matrix) < 0)
-		return ;
 	if (cmd->m_lst->matrix->size == 0)
 		return ;
 	var.pid = fork();
 	if (var.pid == 0)
 	{
 		ft_remove_quote_m_lst(cmd->m_lst->matrix);
-		ft_expand_m_lst(cmd->m_lst->matrix);
 		if (cmd->m_lst->next->type == PIPE)
 		{
 			dup2(tube[1], STDOUT_FILENO);
 			close(tube[0]);
 			close(tube[1]);
 		}
+		if (ft_redirect(cmd->m_lst->matrix) < 0)
+			return ;
+		ft_expand_m_lst(cmd->m_lst->matrix);
 		var.env = ft_path_env(mini->m_lst_env);
 		var.command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 		var.path_exe = ft_get_executable(var.command_m[0], var.env);
@@ -105,17 +106,17 @@ static int	ft_valid_next(t_mlst *mlst)
 	int			op_redir;
 	int			i;
 
-	i = 1;
+	i = 0;
 	op_redir = 0;
 	line = mlst->head;
-	while (i <= mlst->size)
+	while (i < mlst->size)
 	{
 		if (is_operator_redirect(line->rdrct))
 			op_redir++;
 		i++;
 		line = line->next;
 	}
-	if (i -1 == op_redir)
+	if (i == op_redir)
 		return (1);
 	return (0);
 }

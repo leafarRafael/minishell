@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_define_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/09 17:18:14 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	ft_define_cmd_opertor(t_mmlst *m_m_lst)
 	t_mnode	*temp;
 
 	temp = m_m_lst->head;
+	if (temp->matrix->size == 0)
+		return ;
 	i = 1;
 	while (i <= m_m_lst->size)
 	{

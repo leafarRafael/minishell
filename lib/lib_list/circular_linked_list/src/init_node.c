@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 09:54:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:08:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/10 11:19:13 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_node	*ft_init_node(char c)
 	new_node->type = -42;
 	new_node->paren = -42;
 	new_node->priority = -42;
+	new_node->fd_here_doc = -1;
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	return (new_node);
