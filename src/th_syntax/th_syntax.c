@@ -6,27 +6,45 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/10 20:50:56 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/11 21:15:02 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	ft_is_tab(int ch);
-static int	check_prnths(char *str, t_parse **parse, int *index, char quote);
+static int	check_prnths(char *str, t_parse **parse, int *index);
 static int	check_quote(char *str, t_parse **parse, int *index, char quote);
 static void	parse_cmd(char *str, t_parse *parse, t_parse **ptr, int *index);
 static void	parse_prnths(char *str, t_parse *parse, t_parse **ptr, int *index);
 static void	parse_s_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
 static void	parse_d_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
 
-void	print_parenth(t_parse *parse)
+void	print_tabs(int len)
+{
+	int	len0;
+
+	len0 = len;
+	while (len--)
+		printf("    ");
+	printf("|\n");
+	while (len0--)
+		printf("    ");
+	printf("|--");
+}
+
+void	print_parenth(t_parse *parse, int len)
 {
 	t_parse	*print;
+	int		sub_len;
 
 	print = parse;
 	while (print)
 	{
+		if (len > 0)
+			print_tabs(len);
+		else
+			printf("\n---");
 		printf("[");
 		show_str_type(print->type);
 		printf("] ");
@@ -34,8 +52,9 @@ void	print_parenth(t_parse *parse)
 		printf(" [END]\n");
 		if (print->sub)
 		{
-			printf("SUB\n");
-			print_parenth(print->sub);
+			// printf("|\n");
+			sub_len = len + 1;
+			print_parenth(print->sub, sub_len);
 		}
 		print = print->next;
 	}
@@ -78,25 +97,21 @@ t_parse	*th_parse_param(char *str)
 		if (status && str[index] == ')')
 			status = syntax_error(parse, ')');
 		else if (status && str[index] == '(')
-		{
-			status = check_prnths(str, &parse, &index, str[index]);
-		}
+			status = check_prnths(str, &parse, &index);
 		else if (status && (str[index] == '\"' || str[index] == '\''))
 			status = check_quote(str, &parse, &index, str[index]);
 		else
-		{
 			index++;
-		}
 		if (status == -1)
 			return (NULL);
 	}
 	printf("\n");
 	printf("RESULT\n");
-	print_parenth(parse);
+	print_parenth(parse, 0);
 	return (parse);
 }
 
-static int	check_prnths(char *str, t_parse **parse, int *index, char quote)
+static int	check_prnths(char *str, t_parse **parse, int *index)
 {
 	t_parse				*ptr;
 	t_parse				*sub;
@@ -108,7 +123,17 @@ static int	check_prnths(char *str, t_parse **parse, int *index, char quote)
 	ptr = parse_last(*parse);
 	while (status && str[(*index)++])
 	{
-		if (status && str[*index] == '\"' || str[*index] == '\'')
+		if (status && str[*index] == '(')
+		{
+			sub = NULL;
+			status = check_prnths(str, &sub, index);
+			if (status == -1)
+				return (-1);
+			(*index)--;
+			ptr->size += 2 + parse_last(sub)->size;
+			parse_add_back(&ptr->sub, sub);
+		}
+		else if (status && str[*index] == '\"' || str[*index] == '\'')
 		{
 			// printf("%d[%c]  ", *index, str[*index]);
 			// sub = (*parse)->sub;
@@ -124,10 +149,9 @@ static int	check_prnths(char *str, t_parse **parse, int *index, char quote)
 			// printf("03 %d[%c]\n",  *index, str[*index]);
 			// ptr->sub = sub;
 			parse_add_back(&ptr->sub, sub);
-
 		}
 		else if (status && str[*index] == '\0')
-			return (syntax_error(*parse, ')'));
+			return (syntax_error(*parse, '('));
 		else if (status && str[*index] == ')')
 		{
 			// printf("05 BREAK %d[%c]\n",  *index, str[*index]);
@@ -139,14 +163,6 @@ static int	check_prnths(char *str, t_parse **parse, int *index, char quote)
 		// printf("04 %d[%c]\n",  *index, str[*index]);
 	}
 	// printf("06 INDEX: %d\n",  *index);
-	// if (*parse)
-	// 	printf("TRUE\n");
-	// if ((*parse)->sub)
-	// 	printf("SUB TRUE\n");
-	// if (sub)
-	// 	printf("sub TRUE\n");
-	// if (sub->next)
-	// 	printf("sub next TRUE\n");
 	return (1);
 }
 
@@ -160,16 +176,13 @@ static int	check_quote(char *str, t_parse **parse, int *index, char quote)
 		type = D_QUOTES;
 	parse_add_back(parse, parse_new(type, *index + 1));
 	ptr = parse_last(*parse);
-	// printf("\n");
 	while (str[(*index)++])
 	{
-		// printf("%d[%c]  ", *index, str[*index]);
 		if (str[*index] == '\0')
 			return (syntax_error(*parse, quote));
 		else if (str[*index] == quote)
 		{
 			(*index)++;
-			// printf("BREAK AT [%c]\n", str[*index]);
 			break ;
 		}
 		else
@@ -252,4 +265,7 @@ static void	parse_d_qts(char *str, t_parse *parse, t_parse **ptr, int *index)
 /*
 ()'1'"12"
 01234567
+|__\///
+\
+ \
  */
