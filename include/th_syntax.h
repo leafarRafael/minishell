@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:42:32 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/09 14:46:38 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:22:47 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,19 @@
 # include <sys/wait.h>
 # include "libft.h"
 
-// typedef enum s_type
-// {
-// 	CMD,
-// 	TEXT,TH_SYNTAX_H
-// }			t_type;
+// syntax error near unexpected token `||'
+
+typedef enum s_sytx_er
+{
+	NO_ERROR,
+	NO_CLOSSINSG_PARENTH,
+	NO_OPENING_PARENTH,
+	NO_CLOSSINSG_D_QUOTES,
+	NO_CLOSSINSG_S_QUOTES,
+	NON_OPERATOR_TYPE,
+	BAD_OPERATOR_SYNTAX,
+	SYNTAX_ERROR,
+}			t_sytx_er;
 
 typedef struct s_args
 {
@@ -75,5 +83,15 @@ t_parse	*th_parse_param(char *str);
 // /* Arguments */
 // char	**parse_args(char *str);
 // void	free_args(char **args);
+
+int	ft_is_tab(int ch);
+int	ft_is_in_set(char ch, char *set);
+
+void	print_tabs(int len);
+void	print_parenth(t_parse *parse, int len);
+
+int		syntax_error(t_parse *parse, char quote);
+
+
 
 #endif
