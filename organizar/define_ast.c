@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/09 09:04:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/13 09:18:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_mnode *find_ptr_op(t_mmlst *mmlst, t_mnode *ptr, int next_or_prev, int op);
 
-void	ft_populetree_left(t_ast *tree, t_mmlst *mmlst)
+void	ft_define_ast(t_ast *tree, t_mmlst *mmlst)
 {
 	t_mnode *temp;
 	int i;
@@ -54,7 +54,7 @@ void	ft_populetree_right(t_ast *tree, t_mmlst *mmlst)
 		i++;
 	}
 }
-
+/* 
 void	ft_define_ast(t_ast *tree, t_mmlst *mmlst)
 {
 	t_mnode	*new_ptr;
@@ -67,7 +67,7 @@ void	ft_define_ast(t_ast *tree, t_mmlst *mmlst)
 		new_ptr = mmlst->head;
 	ft_tree_add_left(tree, new_ptr);
 }
-
+ */
 static t_mnode *find_ptr_op(t_mmlst *mmlst, t_mnode *ptr, int next_or_prev, int op)
 {
 	t_mnode *temp;

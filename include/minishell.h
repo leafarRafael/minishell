@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 16:11:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/13 16:20:27 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 # define PATH "PATH=/"
 # define SIZE_PATH 6
+# define PATH_HERE_DOC "<< /bin/tmp/0000"
 
 typedef struct s_variables_minishell
 {
@@ -60,6 +61,15 @@ typedef struct s_var_executable
 	int			pipe[2];
 }				t_var_exe;
 
+typedef enum s_here_doc
+{
+	UNIT = 0,
+	TEN = 1,
+	HUNDRED = 2,
+	THOUSAND = 3
+
+}	t_here_doc;
+
 /*
 			Function parse
 */
@@ -69,7 +79,7 @@ void			ft_scanner_input(t_lst *lst);
 int				ft_delete_cmatrix(char **matrix);
 int				ft_define_cmd_status(t_mmlst *m_m_lst);
 int				ft_remove_cmd_status(t_mmlst *m_m_lst);
-void			ft_populetree_left(t_ast *tree, t_mmlst *mmlst);
+void			ft_define_ast(t_ast *tree, t_mmlst *mmlst);
 void			ft_populetree_right(t_ast *tree, t_mmlst *mmlst);
 
 void			ft_printf_matrix(char **matrix);
