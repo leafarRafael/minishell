@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:42:32 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/12 19:22:47 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/12 21:27:41 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 typedef enum s_sytx_er
 {
 	NO_ERROR,
-	NO_CLOSSINSG_PARENTH,
-	NO_OPENING_PARENTH,
-	NO_CLOSSINSG_D_QUOTES,
-	NO_CLOSSINSG_S_QUOTES,
-	NON_OPERATOR_TYPE,
-	BAD_OPERATOR_SYNTAX,
+	NO_CLOSE_PRNTH,
+	NO_OPEN_PRNTH,
+	NO_CLOSSE_DQTS,
+	NO_CLOSSE_SQTS,
+	NON_OPRTR_TYPE,
+	BAD_OPRTR_SYNTAX,
 	SYNTAX_ERROR,
 }			t_sytx_er;
 
@@ -87,10 +87,9 @@ t_parse	*th_parse_param(char *str);
 int	ft_is_tab(int ch);
 int	ft_is_in_set(char ch, char *set);
 
-void	print_tabs(int len);
-void	print_parenth(t_parse *parse, int len);
+void	th_print_parenth(char *str, t_parse *parse, int len);
 
-int		syntax_error(t_parse *parse, char quote);
+int	th_syntax_error(t_parse *parse, t_sytx_er error);
 
 
 
