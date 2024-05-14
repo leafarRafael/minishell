@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:08:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 14:46:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 14:43:24 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ static int	ft_open(char *file)
 		perror(file);
 		return (-1);
 	}
-	if (dup2(fd, STDIN_FILENO) < 0)
-	{
-		perror("dup2: ");
-		return (-1);
+	if (fd != -1)
+	{	
+		if (dup2(fd, STDIN_FILENO) < 0)
+		{
+			perror("dup2: ");
+			return (-1);
+		}
+		close(fd);
 	}
-	close(fd);
 	return (0);
 }

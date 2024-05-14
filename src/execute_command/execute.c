@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 12:36:34 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 18:59:34 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
 	if (cmd == NULL)
 		return ;
-	if (ft_valid_next(cmd->m_lst->matrix) == 1)
+	if (ft_valid_next(cmd->m_lst->matrix))
 	{
+		ft_print_matrix_line(cmd->m_lst->matrix);
 		if (ft_redirect(cmd->m_lst->matrix) < 0)
 			return ;
-		if (cmd->m_lst->matrix->size == 0)
-			ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
-	}
-	ft_execute(cmd->left, mini, ast);
-	if (cmd->m_lst->matrix->size == 0)
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
+		ft_execute(cmd->left, mini, ast);
 		return ;
+	}
+	else
+		ft_execute(cmd->left, mini, ast);
 	if (cmd->m_lst->matrix->head->lst->head->c == '(')
 		ft_expand_subshell(cmd, mini, ast);
 	else
@@ -58,13 +59,19 @@ static void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	
 	if (cmd == NULL)
 		return ;
+	if (ft_redirect(cmd->m_lst->matrix) < 0)
+		return ;
+	if (cmd->m_lst->matrix->size == 0)
+	{
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
+		return  ;
+	}
 	if (cmd->m_lst->next->type == PIPE)
 		pipe(tube);
-	if (cmd->m_lst->matrix->size == 0)
-		return ;
 	var.pid = fork();
 	if (var.pid == 0)
 	{
+		ft_expand_m_lst(cmd->m_lst->matrix);
 		ft_remove_quote_m_lst(cmd->m_lst->matrix);
 		if (cmd->m_lst->next->type == PIPE)
 		{
@@ -72,9 +79,6 @@ static void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 			close(tube[0]);
 			close(tube[1]);
 		}
-		if (ft_redirect(cmd->m_lst->matrix) < 0)
-			return ;
-		ft_expand_m_lst(cmd->m_lst->matrix);
 		var.env = ft_path_env(mini->m_lst_env);
 		var.command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 		var.path_exe = ft_get_executable(var.command_m[0], var.env);
@@ -107,14 +111,14 @@ static int	ft_valid_next(t_mlst *mlst)
 	i = 0;
 	op_redir = 0;
 	line = mlst->head;
-	while (i < mlst->size)
+	while (i <= mlst->size)
 	{
-		if (is_operator_redirect(line->rdrct))
+		if (line->rdrct != -42)
 			op_redir++;
 		i++;
 		line = line->next;
 	}
 	if (i == op_redir)
-		return (1);
+		return (-1);
 	return (0);
 }

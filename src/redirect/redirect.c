@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 16:23:10 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 11:48:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 15:00:02 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	ft_redirect(t_mlst *mtrix)
 			return (-1);
 		v.index++;
 		v.c = v.next;
+		if (v.next == v.next->next)
+		{
+			valid(mtrix,v.next);
+			break ;
+		}
 		v.next = v.next->next;
 	}
 	return (0);
