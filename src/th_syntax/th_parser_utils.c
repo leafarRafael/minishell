@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   th_paser_utils.c                                   :+:      :+:    :+:   */
+/*   th_parser_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:48:36 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/12 16:49:14 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:29:07 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_is_tab(int ch)
+int	th_is_tab(int ch)
 {
 	if ((7 <= ch && ch <= 13) || ch == ' ')
 		return (1);
 	return (0);
 }
 
-int	ft_is_in_set(char ch, char *set)
+int	th_is_in_set(char ch, char *set)
 {
 	while (*set)
 	{
@@ -27,4 +27,27 @@ int	ft_is_in_set(char ch, char *set)
 			return (1);
 	}
 	return (0);
+}
+
+int	th_is_logical_oprtr(char *str, int index)
+{
+	int	result;
+
+	result = 0;
+	result += (str[index] == '|' && str[index + 1] != '|') * PIPE;
+	result += (str[index] == '|' && str[index + 1] == '|') * AND_OP;
+	result += (str[index] == '&' && str[index + 1] == '&') * OR_OP;
+	return (result);
+}
+
+int	th_is_io_redirect(char *str, int index)
+{
+	int	result;
+
+	result = 0;
+	result += (str[index] == '<' && str[index + 1] != '<') * REDI_IN;
+	result += (str[index] == '>' && str[index + 1] != '>') * REDI_OUT;
+	result += (str[index] == '<' && str[index + 1] == '<') * HERE_DOC;
+	result += (str[index] == '>' && str[index + 1] == '>') * APPEND;
+	return (result);
 }

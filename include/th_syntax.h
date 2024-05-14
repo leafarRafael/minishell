@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:42:32 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/12 21:27:41 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/14 18:18:39 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ t_parse	*th_parse_param(char *str);
 // char	**parse_args(char *str);
 // void	free_args(char **args);
 
-int	ft_is_tab(int ch);
-int	ft_is_in_set(char ch, char *set);
+int	th_is_tab(int ch);
+int	th_is_in_set(char ch, char *set);
+int	th_is_logical_oprtr(char *str, int index);
 
 void	th_print_parenth(char *str, t_parse *parse, int len);
 
