@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   insert_nodes_between.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 17:16:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:11:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 09:38:24 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-static void	empyt_lst_dst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n);
+static void	empyt_lst_dst(t_lst *lst_d, t_lst *lst_n);
 static int	list_dest_size_one(t_lst *lst_d, t_lst *lst_n);
 static void	list_dest_size_two_more(t_node *n_a, t_node *n_b, t_lst *lst_n);
 static int	node_in_list(t_lst *lst_d, t_node *node);
 
 int	ft_lst_btwn_lst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n)
 {
-	if (!lst_d || !lst_n || !n_a || !n_b)
+	if (!lst_d || !lst_n)
 		return (-1);
 	if (lst_d == lst_n)
 		return (-1);
 	if (lst_d->size == 0)
 	{
-		empyt_lst_dst(lst_d, n_a, n_b, lst_n);
+		empyt_lst_dst(lst_d, lst_n);
 		return (0);
 	}
 	if (node_in_list(lst_d, n_a) || node_in_list(lst_d, n_a))
@@ -45,12 +45,10 @@ int	ft_lst_btwn_lst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n)
 	return (-1);
 }
 
-static void	empyt_lst_dst(t_lst *lst_d, t_node *n_a, t_node *n_b, t_lst *lst_n)
+static void	empyt_lst_dst(t_lst *lst_d, t_lst *lst_n)
 {
-	n_a = lst_n->head;
-	n_b = lst_n->last;
-	lst_d->head = n_a;
-	lst_d->last = n_b;
+	lst_d->head = lst_n->head;
+	lst_d->last = lst_n->last;
 	lst_d->size = lst_n->size;
 	lst_n->size = 0;
 }

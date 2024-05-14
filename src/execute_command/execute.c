@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/13 09:18:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 12:36:34 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,20 @@ void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
 	if (cmd == NULL)
 		return ;
-/* 	if (ft_valid_next(cmd->m_lst->matrix) == 1)
+	if (ft_valid_next(cmd->m_lst->matrix) == 1)
 	{
 		if (ft_redirect(cmd->m_lst->matrix) < 0)
 			return ;
 		if (cmd->m_lst->matrix->size == 0)
 			ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
-	} */
+	}
 	ft_execute(cmd->left, mini, ast);
 	if (cmd->m_lst->matrix->size == 0)
 		return ;
 	if (cmd->m_lst->matrix->head->lst->head->c == '(')
 		ft_expand_subshell(cmd, mini, ast);
 	else
-		ft_print_matrix_line(cmd->m_lst->matrix);
-
-//ft_execve(cmd, mini, ast);
-
+		ft_execve(cmd, mini, ast);
 }
 
 static void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
@@ -52,7 +49,6 @@ static void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	ft_remove_node_back(new_lst);
 	ft_remove_node_front(new_lst);
 	ft_parse_exe(new_lst, mini);
-
 }
 
 static void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)

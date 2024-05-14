@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:02:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/04 18:29:02 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 10:16:24 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,8 @@ int	is_operator_redirect(int type)
 	return (type & (REDI_IN | REDI_OUT | HERE_DOC | APPEND));
 }
 
+int	ft_hdoc_limiter(int	type)
+{
+	return (type &(OPEN_PAREN | CLOSE_PAREN | PIPE | AND_OP | OR_OP
+			| REDI_IN | REDI_OUT | HERE_DOC | APPEND | WH_SPACE));
+}

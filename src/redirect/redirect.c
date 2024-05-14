@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 16:23:10 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/10 18:12:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 11:48:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int valid(t_mlst *mtrix, t_lst_line *line)
 	}
 	else if (line->rdrct == HERE_DOC)
 	{
-		if (here_doc(mtrix, line) < 0)
+		if (open_here_doc(mtrix, line) < 0)
 			return (-1);
 	}
 	else if (line->rdrct == REDI_IN)
@@ -58,13 +58,5 @@ static int valid(t_mlst *mtrix, t_lst_line *line)
 		if (open_trnc(mtrix, line) < 0)
 			return (-1);
 	}
-	return (0);
-}
-
-static int valid_here_doc(t_mlst *mtrix, t_lst_line *line)
-{
-	if (here_doc(mtrix, line) < 0)
-		return (-1);
-
 	return (0);
 }

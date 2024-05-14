@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_words.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 11:59:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/14 10:16:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	ft_close_parent(char c);
 int	is_simple_type(char current_c);
 int	ft_is_composite_type(char current_c, char next_c);
 int	ft_words_delemiter(char current);
+int	ft_hdoc_limiter(int	type);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/08 16:12:41 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/14 11:28:30 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,10 @@ REDIRECT		:= ./src/redirect/redirect.c\
 				./src/redirect/here_doc.c\
 				./src/redirect/infile.c\
 				./src/redirect/outfile_append.c\
-				./src/redirect/outfile_trucate.c
+				./src/redirect/outfile_trucate.c\
+				./src/redirect/here_doc/here_doc_create_file.c\
+				./src/redirect/here_doc/new_lst_heredoc.c\
+				./src/redirect/here_doc/write_here_doc.c
 
 SIMPLE			:=./src/execute_command/execute.c ./src/execute_command/get_executable.c
 
