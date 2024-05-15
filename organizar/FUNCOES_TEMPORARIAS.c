@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 11:10:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/15 15:25:55 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	print_all_type()
 
 void	show_str_type(int type)
 {
+	if (type == COMMAND)
+		printf("COMMAND");
 	if (type == META_LITERAL)
 		printf("META_LITERAL");
 	if (type == NO_OP_TYPE)

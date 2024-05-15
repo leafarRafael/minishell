@@ -6,14 +6,14 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/14 21:45:03 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:19:42 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	parse_prnth(char *str, t_parse **parse, int *index);
-static int	parse_quote(char *str, t_parse **parse, int *index, char quote);
+static int	parse_quote(char *str, t_parse **parse, int *index);
 static int	parse_oprtr(char *str, t_parse **parse, int *index);
 static int	parse_rdrct(char *str, t_parse **parse, int *index);
 static int	parse_text(char *str, t_parse **parse, int *index);
@@ -37,13 +37,15 @@ t_parse	*th_parse_param(char *str)
 		if (th_is_tab(str[index]))
 			index++;
 		else if (str[index] == ')')
-			status = th_syntax_error(parse, NO_OPEN_PRNTH);
+			status = th_syntax_error(parse, N_OPN_PRNTH);
 		else if (str[index] == '(')
 			status = parse_prnth(str, &parse, &index);
 		else if (th_is_quote(str, index))
-			status = parse_quote(str, &parse, &index, str[index]);
+			status = parse_quote(str, &parse, &index);
 		else if (th_is_logical_oprtr(str, index))
 			status = parse_oprtr(str, &parse, &index);
+		else if (th_is_io_rdrct(str, index))
+			status = parse_rdrct(str, &parse, &index);
 		else
 			status = parse_text(str, &parse, &index);
 		if (status > 0)
@@ -84,7 +86,7 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 			parse_add_back(&ptr->sub, sub);
 		}
 		else if (str[*index] == '\0')
-			return (th_syntax_error(*parse, NO_CLOSE_PRNTH));
+			return (th_syntax_error(*parse, N_CLS_PRNTH));
 		else if (str[*index] == ')')
 		{
 			(*index)++;
@@ -92,7 +94,7 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 		}
 		else if (th_is_quote(str, *index))
 		{
-			status = parse_quote(str, &sub, index, str[*index]);
+			status = parse_quote(str, &sub, index);
 			if (status > 0)
 				return (status);
 			(*index)--;
@@ -132,16 +134,16 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 	return (0);
 }
 
-static int	parse_quote(char *str, t_parse **parse, int *index, char quote)
+static int	parse_quote(char *str, t_parse **parse, int *index)
 {
 	t_parse				*ptr;
 	t_type_character	type;
 	t_sytx_er			error;
+	char				quote;
 
 	type = th_is_quote(str, *index);
-	error = NO_CLOSSE_DQTS;
-	if (type == S_QUOTES)
-		error = NO_CLOSSE_SQTS;
+	error = (type == D_QUOTES) * N_CLS_DQTS + (type == S_QUOTES) * N_CLS_SQTS;
+	quote = (type == D_QUOTES) * '\"' + (type == S_QUOTES) * '\'';
 	parse_add_back(parse, parse_new(type, *index + 1));
 	ptr = parse_last(*parse);
 	while (str[(*index)++])
@@ -169,7 +171,7 @@ static int	parse_oprtr(char *str, t_parse **parse, int *index)
 	ptr = parse_last(*parse);
 	ptr->size = 1;
 	(*index)++;
-	if (type == OR_OP || type == AND_OP)
+	if (type & (OR_OP | AND_OP))
 	{
 		ptr->size++;
 		(*index)++;
@@ -187,7 +189,7 @@ static int	parse_rdrct(char *str, t_parse **parse, int *index)
 	ptr = parse_last(*parse);
 	ptr->size = 1;
 	(*index)++;
-	if (type == HERE_DOC || type == APPEND)
+	if (type & (HERE_DOC |  APPEND))
 	{
 		ptr->size++;
 		(*index)++;

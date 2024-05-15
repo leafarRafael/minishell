@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:42:32 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/14 21:33:22 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:29:07 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 typedef enum s_sytx_er
 {
 	NO_ERROR,
-	NO_CLOSE_PRNTH,
-	NO_OPEN_PRNTH,
-	NO_CLOSSE_DQTS,
-	NO_CLOSSE_SQTS,
+	N_CLS_PRNTH,
+	N_OPN_PRNTH,
+	N_CLS_DQTS,
+	N_CLS_SQTS,
 	NON_OPRTR_TYPE,
 	BAD_OPRTR_SYNTAX,
 	SYNTAX_ERROR,
@@ -78,12 +78,19 @@ t_parse	*parse_last(t_parse *parse);
 void	parse_add_back(t_parse **parse, t_parse *new_node);
 int		parse_len(t_parse *parse);
 void	parse_free(t_parse *parse);
-/* Parameters */
-t_parse	*th_parse_param(char *str);
-// /* Arguments */
-// char	**parse_args(char *str);
-// void	free_args(char **args);
 
+
+/** Parser **/
+t_parse	*th_parse_param(char *str);
+
+/* Types */
+int	parse_quote(char *str, t_parse **parse, int *index);
+int	parse_oprtr(char *str, t_parse **parse, int *index);
+int	parse_rdrct(char *str, t_parse **parse, int *index);
+int	parse_text(char *str, t_parse **parse, int *index);
+
+
+/* Utils */
 int	th_is_tab(int ch);
 int	th_is_in_set(char ch, char *set);
 int	th_is_quote(char *str, int index);
