@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/14 20:54:27 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:45:03 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,8 @@
 static int	parse_prnth(char *str, t_parse **parse, int *index);
 static int	parse_quote(char *str, t_parse **parse, int *index, char quote);
 static int	parse_oprtr(char *str, t_parse **parse, int *index);
+static int	parse_rdrct(char *str, t_parse **parse, int *index);
 static int	parse_text(char *str, t_parse **parse, int *index);
-
-static void	parse_cmd(char *str, t_parse *parse, t_parse **ptr, int *index);
-static void	Xparse_prnth(char *str, t_parse *parse, t_parse **ptr, int *index);
-static void	parse_s_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
-static void	parse_d_qts(char *str, t_parse *parse, t_parse **ptr, int *index);
 
 t_parse	*th_parse_param(char *str)
 {
@@ -38,19 +34,18 @@ t_parse	*th_parse_param(char *str)
 	while (str[index])
 	{
 		printf("BASE index[%d] [%c]\n", index, str[index]);
-		while (th_is_tab(str[index]))
+		if (th_is_tab(str[index]))
 			index++;
-		if (str[index] == ')')
+		else if (str[index] == ')')
 			status = th_syntax_error(parse, NO_OPEN_PRNTH);
 		else if (str[index] == '(')
 			status = parse_prnth(str, &parse, &index);
-		else if (str[index] == '\"' || str[index] == '\'')
+		else if (th_is_quote(str, index))
 			status = parse_quote(str, &parse, &index, str[index]);
 		else if (th_is_logical_oprtr(str, index))
 			status = parse_oprtr(str, &parse, &index);
 		else
 			status = parse_text(str, &parse, &index);
-
 		if (status > 0)
 		{
 			parse_free(parse);
@@ -77,20 +72,11 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 	{
 		printf("PARENTH index[%d] [%c]\n", *index, str[*index]);
 		sub = NULL;
-		if (str[*index] == ' ')
+		if (th_is_tab(str[*index]))
 			ptr->size++;
 		else if (str[*index] == '(')
 		{
 			status = parse_prnth(str, &sub, index);
-			if (status > 0)
-				return (status);
-			(*index)--;
-			ptr->size += 2 + parse_last(sub)->size;
-			parse_add_back(&ptr->sub, sub);
-		}
-		else if (str[*index] == '\"' || str[*index] == '\'')
-		{
-			status = parse_quote(str, &sub, index, str[*index]);
 			if (status > 0)
 				return (status);
 			(*index)--;
@@ -104,9 +90,27 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 			(*index)++;
 			break ;
 		}
+		else if (th_is_quote(str, *index))
+		{
+			status = parse_quote(str, &sub, index, str[*index]);
+			if (status > 0)
+				return (status);
+			(*index)--;
+			ptr->size += 2 + parse_last(sub)->size;
+			parse_add_back(&ptr->sub, sub);
+		}
 		else if (th_is_logical_oprtr(str, *index))
 		{
 			status = parse_oprtr(str, &sub, index);
+			if (status > 0)
+				return (1);
+			(*index)--;
+			ptr->size += parse_last(sub)->size;
+			parse_add_back(&ptr->sub, sub);
+		}
+		else if (th_is_io_rdrct(str, *index))
+		{
+			status = parse_rdrct(str, &sub, index);
 			if (status > 0)
 				return (1);
 			(*index)--;
@@ -134,13 +138,10 @@ static int	parse_quote(char *str, t_parse **parse, int *index, char quote)
 	t_type_character	type;
 	t_sytx_er			error;
 
-	type = D_QUOTES;
+	type = th_is_quote(str, *index);
 	error = NO_CLOSSE_DQTS;
-	if (quote =='\'')
-	{
-		type = S_QUOTES;
+	if (type == S_QUOTES)
 		error = NO_CLOSSE_SQTS;
-	}
 	parse_add_back(parse, parse_new(type, *index + 1));
 	ptr = parse_last(*parse);
 	while (str[(*index)++])
@@ -176,6 +177,24 @@ static int	parse_oprtr(char *str, t_parse **parse, int *index)
 	return (0);
 }
 
+static int	parse_rdrct(char *str, t_parse **parse, int *index)
+{
+	t_parse	*ptr;
+	int		type;
+
+	type = th_is_io_rdrct(str, *index);
+	parse_add_back(parse, parse_new(type, *index));
+	ptr = parse_last(*parse);
+	ptr->size = 1;
+	(*index)++;
+	if (type == HERE_DOC || type == APPEND)
+	{
+		ptr->size++;
+		(*index)++;
+	}
+	return (0);
+}
+
 static int	parse_text(char *str, t_parse **parse, int *index)
 {
 	t_parse	*ptr;
@@ -187,83 +206,13 @@ static int	parse_text(char *str, t_parse **parse, int *index)
 	while (str[(*index)] && !th_is_in_set(str[(*index)], "|<>() "))
 	{
 		if (str[*index] == '&' && str[*index + 1] == '&')
-		{
-			printf("BREAKL\n");
-			// (*index)--;
 			break ;
-		}
 		printf("TXT index[%d] [%c]\n", *index, str[*index]);
 		ptr->size++;
 		(*index)++;
 	}
 	return (0);
 
-}
-
-
-
-static void	parse_cmd(char *str, t_parse *parse, t_parse **ptr, int *index)
-{
-	(*ptr)->size++;
-	if (th_is_tab(str[++(*index)]))
-	{
-		parse_add_back(&parse, parse_new(NO_OP_TYPE, ++(*index)));
-		*ptr = parse_last(parse);
-	}
-}
-
-static void	Xparse_prnth(char *str, t_parse *parse, t_parse **ptr, int *index)
-{
-	(*ptr)->size++;
-	(*index)++;
-	if (str[*index] == ')')
-	{
-		(*ptr)->size--;
-		parse->close = 1;
-		// if (th_is_tab(str[++(*index)]))
-		// {
-			parse_add_back(&parse, parse_new(NO_OP_TYPE, ++(*index)));
-			*ptr = parse_last(parse);
-			printf("CLOSED PARENTHESIS\n");
-
-		// }
-	}
-}
-
-static void	parse_s_qts(char *str, t_parse *parse, t_parse **ptr, int *index)
-{
-	(*ptr)->size++;
-	(*index)++;
-	if (str[*index] == '\'')
-	{
-		(*ptr)->size--;
-		parse->close = 1;
-		// if (th_is_tab(str[++(*index)]))
-		// {
-			parse_add_back(&parse, parse_new(NO_OP_TYPE, ++(*index)));
-			*ptr = parse_last(parse);
-			printf("CLOSED SINGLE QUOTES\n");
-
-		// }
-	}
-}
-
-static void	parse_d_qts(char *str, t_parse *parse, t_parse **ptr, int *index)
-{
-	(*ptr)->size++;
-	// (*index)++;
-	if (str[*index] == '\"')
-	{
-		(*ptr)->size--;
-		parse->close = 1;
-		// if (th_is_tab(str[++(*index)]))
-		// {
-			parse_add_back(&parse, parse_new(NO_OP_TYPE, ++(*index)));
-			*ptr = parse_last(parse);
-			printf("CLOSED DOUBLE QUOTES\n");
-
-		// }
-	}
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:48:36 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/14 19:29:07 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:32:48 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ int	th_is_in_set(char ch, char *set)
 	return (0);
 }
 
+int	th_is_quote(char *str, int index)
+{
+	int	result;
+
+	result = 0;
+	result += (str[index] == '\"') * D_QUOTES;
+	result += (str[index] == '\'') * S_QUOTES;
+	return (result);
+}
+
+
 int	th_is_logical_oprtr(char *str, int index)
 {
 	int	result;
@@ -40,7 +51,7 @@ int	th_is_logical_oprtr(char *str, int index)
 	return (result);
 }
 
-int	th_is_io_redirect(char *str, int index)
+int	th_is_io_rdrct(char *str, int index)
 {
 	int	result;
 
