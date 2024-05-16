@@ -1,0 +1,7 @@
+name			:= minishell
+all: $(name)
+$(name): $(src) $(libft) $(linked_list) $(matrix_list) $(mtrx_mtrx_l)
+$(name):
+	@$(cc) $(src) $(libft) $(linked_list) $(include) -o $(name) -g3 -lreadline
+	@$(cmd_clean) $(name)
+	@$(cmd_clean) $(name)

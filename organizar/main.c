@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 12:26:40 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 11:24:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ int	main(void)
 			ft_add_string_in_list(mini.input_lst, mini.input);
 			free(mini.input);
 			ft_scanner_input(mini.input_lst);
-			ft_valid_syntax_open_here_doc(mini.input_lst);	
+			ft_valid_syntax_open_here_doc(mini.input_lst);
 			mini.mmlst = init_mmlst();
 			while (mini.input_lst->size > 0)
 				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
 			mini.fd_std[0] = dup(STDIN_FILENO);
 			mini.fd_std[1] = dup(STDOUT_FILENO);
 			ft_parse_exe(mini.input_lst, &mini);
+			waitpid(-1, 0, 0);
 			dup2(mini.fd_std[0], STDIN_FILENO);
 			dup2(mini.fd_std[1], STDOUT_FILENO);
 			close(mini.fd_std[0]);

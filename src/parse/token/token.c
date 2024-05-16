@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 18:29:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 10:21:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,5 @@ static void	muve_token_parent(t_lst *lst, t_mlst *matrix)
 			break ;
 	}
 	ft_add_list_back(matrix, v.new_lst);
+	muve_node_token_command(lst, matrix);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 11:26:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 10:24:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 # include "scanner.h"
 # include "string.h"
 # include "token.h"
+# include "redirect.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include "redirect.h"
-
+# include <sys/wait.h>
 
 # define PATH "PATH=/"
 # define SIZE_PATH 6
@@ -58,7 +58,7 @@ typedef struct s_var_executable
 	char		**env;
 	char		**command_m;
 	pid_t		pid;
-	int			pipe[2];
+	int			tube[2];
 }				t_var_exe;
 
 typedef enum s_here_doc
@@ -104,9 +104,20 @@ char			*ft_get_executable(char *command, char **path);
 void			ft_pipe(int pipe[2]);
 void			ft_pipe_parent(int pipe[2]);
 
-void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+
+
 void	ft_parse_exe(t_lst *input, t_mini *mini);
 
 int		free_memory(t_mini *mini, t_var_exe	*var, t_ast *ast);
+/* 
+		FUNCTION IN SRC/EXECUTE_COMMAND
+*/
+void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+void	ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+void	ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+
+
+
+
 
 #endif
