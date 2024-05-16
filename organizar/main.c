@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 11:24:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 15:29:54 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(void)
 			mini.mmlst = init_mmlst();
 			while (mini.input_lst->size > 0)
 				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
+
 			mini.fd_std[0] = dup(STDIN_FILENO);
 			mini.fd_std[1] = dup(STDOUT_FILENO);
 			ft_parse_exe(mini.input_lst, &mini);
@@ -55,6 +56,11 @@ int	main(void)
 			ft_delete_mmlst(mini.mmlst);
 		}
 	}
+	close(mini.fd_std[0]);
+	close(mini.fd_std[1]);
+	close(0);
+	close(1);
+	close(2);
 	ft_delete_cmatrix(mini.env);
 	ft_delete_matrix(mini.m_lst_env);
 }

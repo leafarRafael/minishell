@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_matrix_lst.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:46:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 09:09:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 13:57:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_var_matrix_mlst
 	t_mnode	*current;
 	int		i;
 }			t_var_m_mlst;
+
 
 t_mmlst	*init_mmlst(void);
 t_mnode		*init_matrix_node(void);
