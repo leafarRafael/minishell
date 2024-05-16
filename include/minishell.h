@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 14:29:03 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:23:35 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# include "th_syntax.h"
+// # include "th_syntax.h"
 
 # define PATH "PATH=/"
 # define SIZE_PATH 6

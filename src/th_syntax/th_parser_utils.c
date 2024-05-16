@@ -6,11 +6,11 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:48:36 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/14 21:32:48 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:25:18 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "th_parser.h"
 
 int	th_is_tab(int ch)
 {

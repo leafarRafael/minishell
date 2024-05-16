@@ -6,17 +6,16 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/15 16:19:42 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:02:48 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "th_parser.h"
+#include "th_syntax.h"
 
 static int	parse_prnth(char *str, t_parse **parse, int *index);
-static int	parse_quote(char *str, t_parse **parse, int *index);
-static int	parse_oprtr(char *str, t_parse **parse, int *index);
-static int	parse_rdrct(char *str, t_parse **parse, int *index);
-static int	parse_text(char *str, t_parse **parse, int *index);
+static int append_sub(char *str, t_parse *parse, int *index, t_parse_func func);
 
 t_parse	*th_parse_param(char *str)
 {
@@ -33,7 +32,7 @@ t_parse	*th_parse_param(char *str)
 	index = 0;
 	while (str[index])
 	{
-		printf("BASE index[%d] [%c]\n", index, str[index]);
+		// printf("BASE index[%d] [%c]\n", index, str[index]);
 		if (th_is_tab(str[index]))
 			index++;
 		else if (str[index] == ')')
@@ -57,6 +56,8 @@ t_parse	*th_parse_param(char *str)
 	printf("\n");
 	printf("RESULT\n");
 	th_print_parenth(str, parse, 0);
+	printf("RESULT\n");
+	th_print_parenth(str, parse, 0);
 	return (parse);
 }
 
@@ -68,11 +69,11 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 	int					status;
 
 	status = 0;
-	parse_add_back(parse, parse_new(OPEN_PAREN, *index + 1));
-	ptr = parse_last(*parse);
+	ptr = parse_add_back(parse, parse_new(OPEN_PAREN, *index + 1));
+	// ptr = parse_last(*parse);
 	while (str[(*index)++])
 	{
-		printf("PARENTH index[%d] [%c]\n", *index, str[*index]);
+		// printf("PARENTH index[%d] [%c]\n", *index, str[*index]);
 		sub = NULL;
 		if (th_is_tab(str[*index]))
 			ptr->size++;
@@ -82,8 +83,9 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 			if (status > 0)
 				return (status);
 			(*index)--;
-			ptr->size += 2 + parse_last(sub)->size;
+			/* CHANGE THE PTR */
 			parse_add_back(&ptr->sub, sub);
+			ptr->size += 2 + parse_last(sub)->size;
 		}
 		else if (str[*index] == '\0')
 			return (th_syntax_error(*parse, N_CLS_PRNTH));
@@ -94,39 +96,43 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 		}
 		else if (th_is_quote(str, *index))
 		{
-			status = parse_quote(str, &sub, index);
-			if (status > 0)
-				return (status);
-			(*index)--;
-			ptr->size += 2 + parse_last(sub)->size;
-			parse_add_back(&ptr->sub, sub);
+			status  = append_sub(str, ptr, index, parse_quote);
+			// status = parse_quote(str, &sub, index);
+			// if (status > 0)
+			// 	return (status);
+			// (*index)--;
+			// ptr->size += 2 + parse_last(sub)->size;
+			// parse_add_back(&ptr->sub, sub);
 		}
 		else if (th_is_logical_oprtr(str, *index))
 		{
-			status = parse_oprtr(str, &sub, index);
-			if (status > 0)
-				return (1);
-			(*index)--;
-			ptr->size += parse_last(sub)->size;
-			parse_add_back(&ptr->sub, sub);
+			status  = append_sub(str, ptr, index, parse_oprtr);
+			// status = parse_oprtr(str, &sub, index);
+			// if (status > 0)
+			// 	return (1);
+			// (*index)--;
+			// ptr->size += parse_last(sub)->size;
+			// parse_add_back(&ptr->sub, sub);
 		}
 		else if (th_is_io_rdrct(str, *index))
 		{
-			status = parse_rdrct(str, &sub, index);
-			if (status > 0)
-				return (1);
-			(*index)--;
-			ptr->size += parse_last(sub)->size;
-			parse_add_back(&ptr->sub, sub);
+			status  = append_sub(str, ptr, index, parse_rdrct);
+			// status = parse_rdrct(str, &sub, index);
+			// if (status > 0)
+			// 	return (1);
+			// (*index)--;
+			// ptr->size += parse_last(sub)->size;
+			// parse_add_back(&ptr->sub, sub);
 		}
 		else
 		{
-			status = parse_text(str, &sub, index);
-			if (status > 0)
-				return (1);
-			(*index)--;
-			ptr->size += parse_last(sub)->size;
-			parse_add_back(&ptr->sub, sub);
+			status  = append_sub(str, ptr, index, parse_text);
+			// status = parse_text(str, &sub, index);
+			// if (status > 0)
+			// 	return (1);
+			// (*index)--;
+			// ptr->size += parse_last(sub)->size;
+			// parse_add_back(&ptr->sub, sub);
 		}
 		if (status > 0)
 			return (status);
@@ -134,88 +140,25 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 	return (0);
 }
 
-static int	parse_quote(char *str, t_parse **parse, int *index)
+static int append_sub(char *str, t_parse *parse, int *index, t_parse_func func)
 {
-	t_parse				*ptr;
-	t_type_character	type;
-	t_sytx_er			error;
-	char				quote;
+	t_parse	*sub;
+	t_parse	*last;
+	int		status;
 
-	type = th_is_quote(str, *index);
-	error = (type == D_QUOTES) * N_CLS_DQTS + (type == S_QUOTES) * N_CLS_SQTS;
-	quote = (type == D_QUOTES) * '\"' + (type == S_QUOTES) * '\'';
-	parse_add_back(parse, parse_new(type, *index + 1));
-	ptr = parse_last(*parse);
-	while (str[(*index)++])
-	{
-		if (str[*index] == '\0')
-			return (th_syntax_error(*parse, error));
-		else if (str[*index] == quote)
-		{
-			(*index)++;
-			break ;
-		}
-		else
-			ptr->size++;
-	}
+	sub = NULL;
+	// status = parse_oprtr(str, &sub, index);
+	status = func(str, &sub, index);
+	if (status > 0)
+		return (status);
+	(*index)--;
+	last = parse_add_back(&parse->sub, sub);
+	/* FIX THIS SIZE */
+	// parse->size += 2 + parse_last(sub)->size;
+	parse->size += 2 + last->size;
 	return (0);
 }
 
-static int	parse_oprtr(char *str, t_parse **parse, int *index)
-{
-	t_parse	*ptr;
-	int		type;
-
-	type = th_is_logical_oprtr(str, *index);
-	parse_add_back(parse, parse_new(type, *index));
-	ptr = parse_last(*parse);
-	ptr->size = 1;
-	(*index)++;
-	if (type & (OR_OP | AND_OP))
-	{
-		ptr->size++;
-		(*index)++;
-	}
-	return (0);
-}
-
-static int	parse_rdrct(char *str, t_parse **parse, int *index)
-{
-	t_parse	*ptr;
-	int		type;
-
-	type = th_is_io_rdrct(str, *index);
-	parse_add_back(parse, parse_new(type, *index));
-	ptr = parse_last(*parse);
-	ptr->size = 1;
-	(*index)++;
-	if (type & (HERE_DOC |  APPEND))
-	{
-		ptr->size++;
-		(*index)++;
-	}
-	return (0);
-}
-
-static int	parse_text(char *str, t_parse **parse, int *index)
-{
-	t_parse	*ptr;
-	int		type;
-	int		cmd = 0;
-
-	parse_add_back(parse, parse_new(COMMAND, *index));
-	ptr = parse_last(*parse);
-	while (str[(*index)] && !th_is_in_set(str[(*index)], "|<>() "))
-	{
-		if (str[*index] == '&' && str[*index + 1] == '&')
-			break ;
-		printf("TXT index[%d] [%c]\n", *index, str[*index]);
-		ptr->size++;
-		(*index)++;
-	}
-	return (0);
-
-}
 
 /*
 ()'1'"12"
@@ -229,4 +172,9 @@ static int	parse_text(char *str, t_parse **parse, int *index)
 (cmd1&|||&&&cmd2)
 
 cmd&&&cmd&&|(cmd&||(cmd|||(cmd||&(cmd|&&(cmd&|&(cmd|&|cmd))))))
+
+// syntax error near unexpected token `||'
+
+<<eof cmd "arg" arg"1" "arg"2 || (cmd && (cmd | cmd > file ))
+
  */

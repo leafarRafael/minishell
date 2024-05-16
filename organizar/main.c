@@ -6,11 +6,13 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/09 20:22:05 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:59:46 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "th_syntax.h"
+#include "th_parser.h"
 
 void	ft_define_node_tree(t_ast *ast);
 
@@ -27,7 +29,12 @@ int	main(void)
 	{
 		printf("\n============================================================================\n");
 		mini.input = readline("minishell ~:");
-		th_parse_param(mini.input);
+		t_parse	*parser = th_parse_param(mini.input);
+		if (parser)
+		{
+			printf(" ============ FREE PARSER! ============ ");
+			parse_free(parser);
+		}
 		// FREE THE PARSE FOR TEST
 
 		if (!ft_exit(mini.input))
@@ -43,8 +50,8 @@ int	main(void)
 			printf("\n");
 
 			ft_scanner_input(mini.input_lst);
-			printf("TYPES:\n");
-			ft_print_array_lst_content_type(mini.input_lst);
+			// printf("TYPES:\n");
+			// ft_print_array_lst_content_type(mini.input_lst);
 
 			// ft_parse_and_execute(mini.input_lst, mini.m_lst_env);
 			if (mini.input_lst)

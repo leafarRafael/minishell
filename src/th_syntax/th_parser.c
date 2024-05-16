@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   th_parse_utils.c                                   :+:      :+:    :+:   */
+/*   th_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:45:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/09 20:01:57 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:07:15 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "th_parser.h"
 
 t_parse	*parse_new(t_type_character type, int start)
 {
@@ -37,7 +37,8 @@ t_parse	*parse_last(t_parse *parse)
 	return (parse);
 }
 
-void	parse_add_back(t_parse **parse, t_parse *new_node)
+// void	parse_add_back(t_parse **parse, t_parse *new_node)
+t_parse	*parse_add_back(t_parse **parse, t_parse *new_node)
 {
 	t_parse	*last;
 
@@ -46,6 +47,7 @@ void	parse_add_back(t_parse **parse, t_parse *new_node)
 		*parse = new_node;
 	else
 		last->next = new_node;
+	return (new_node);
 }
 
 int	parse_len(t_parse *parse)

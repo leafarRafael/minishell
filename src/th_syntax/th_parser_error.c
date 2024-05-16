@@ -6,11 +6,11 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/15 15:48:57 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:27:57 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "th_parser.h"
 
 static int	err_msg(char *msg1, char *msg2, t_sytx_er error);
 

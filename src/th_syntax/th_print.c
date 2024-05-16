@@ -6,11 +6,11 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:42:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/12 21:51:31 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:25:34 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "th_parser.h"
 
 static void	th_print_tabs(int len);
 static void	print_str_from_to(char *str, t_parse *parse);
