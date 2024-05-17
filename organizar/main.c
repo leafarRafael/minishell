@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 15:29:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:16:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	main(void)
 	while (1)
 	{
 		mini.input = readline("minishell ~:");
+
+		if (!mini.input)
+			exit(0);
+
 		if (!ft_exit(mini.input))
 			break ;
 		if (!ft_input_is_valid(mini.input))

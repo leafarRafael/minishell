@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 12:16:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:19:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_mlst	*ft_read_std(char *eof)
 	while (1)
 	{
 		write(2, ">> ", 3);
-		h_doc.read_line = get_next_line(STDOUT_FILENO);
+		h_doc.read_line = get_next_line(STDIN_FILENO);
 		if (!h_doc.read_line)
 			return NULL;
 		if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)

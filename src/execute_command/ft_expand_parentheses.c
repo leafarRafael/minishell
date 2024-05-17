@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 12:18:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:08:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	remove_parent(new_lst);
 	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 	ft_parse_exe(new_lst, mini);
+
 }
 
 static void remove_parent(t_lst *new_lst)
