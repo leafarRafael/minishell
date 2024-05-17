@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 18:08:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/17 10:45:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	t_lst		*new_lst;
 	t_lst		*temp;
 
+	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+		return ;
+	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+		return ;
 	temp = cmd->m_lst->matrix->head->lst;
 	new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
 	remove_parent(new_lst);

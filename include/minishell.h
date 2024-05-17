@@ -6,12 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 10:24:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/17 09:45:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+extern int status_child;
 
 # include "abstract_syntax_tree.h"
 # include "array_lst.h"
@@ -34,6 +36,9 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+# include <wait.h>
 
 # define PATH "PATH=/"
 # define SIZE_PATH 6

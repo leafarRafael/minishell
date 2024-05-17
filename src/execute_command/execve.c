@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 15:35:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/17 10:45:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 
 	if (cmd == NULL)
 		return ;
+	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+		return ;
+	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+		return ;
 	if (cmd->m_lst->next->type == PIPE)
 		pipe(var.tube);
 	var.pid = fork();
@@ -34,6 +38,7 @@ void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 
 static void ft_parent(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe	*var)
 {
+	waitpid(-1, &status_child, 2);
 	if (cmd->m_lst->next->type == PIPE)
 	{
 		dup2(var->tube[0], STDIN_FILENO);
@@ -67,7 +72,8 @@ static void children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe	*var)
 	if (var->path_exe)
 		execve(var->path_exe, &var->command_m[0], var->env);
 	free_memory(mini, var, ast);
-	exit(1);
+	status_child = 10;
+	exit(status_child);
 }
 
 static int valid_redirect(t_mlst *mtrix)

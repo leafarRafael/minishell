@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 18:16:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/17 10:48:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	ft_define_node_tree(t_ast *ast);
 static int ft_valid_syntax_open_here_doc(t_lst *lst);
 static int	*ft_init_ctrl_name(void);
 
+int status_child;
+
 int	main(void)
 {
 	t_mini	mini;
 	char	**temp_environ;
 	t_lst	*new_lst;
-
 
 	temp_environ = __environ;
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
@@ -30,10 +31,7 @@ int	main(void)
 	while (1)
 	{
 		mini.input = readline("minishell ~:");
-
-		if (!mini.input)
-			exit(0);
-
+		status_child = 0;
 		if (!ft_exit(mini.input))
 			break ;
 		if (!ft_input_is_valid(mini.input))
@@ -47,11 +45,9 @@ int	main(void)
 			mini.mmlst = init_mmlst();
 			while (mini.input_lst->size > 0)
 				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
-
 			mini.fd_std[0] = dup(STDIN_FILENO);
 			mini.fd_std[1] = dup(STDOUT_FILENO);
 			ft_parse_exe(mini.input_lst, &mini);
-			waitpid(-1, 0, 0);
 			dup2(mini.fd_std[0], STDIN_FILENO);
 			dup2(mini.fd_std[1], STDOUT_FILENO);
 			close(mini.fd_std[0]);
