@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/18 14:13:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/18 17:58:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
 		return ;
-	if (cmd->m_lst->next->type == PIPE && cmd->m_lst->next != mini->mmlst->last)
+	if (cmd->m_lst->next->type == PIPE)
 		pipe(var.tube);
 	var.pid = fork();
 	if (var.pid == 0)
@@ -82,7 +82,11 @@ static void ft_parent(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe	*var)
 		close(var->tube[0]);
 		close(var->tube[1]);
 	}
-
+/* 	if (cmd->m_lst->next->type == PIPE)
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next); */
+/* 	if (cmd->m_lst->prev->type &( OR_OP | AND_OP))
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->prev); */
+	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 }
 
 

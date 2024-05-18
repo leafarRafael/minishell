@@ -7,7 +7,8 @@ SRC				:= ./src/ft_add_node_m_back.c\
 				./src/remove_mlst_front.c\
 				./src/remove_mlst_back.c\
 				./src/remove_especific_matrix.c\
-				./src/ft_delete_mtrx_mtrx_lst.c
+				./src/ft_delete_mtrx_mtrx_lst.c\
+				./src/insert_mnodes_between.c
 
 NUM_FILES		:= $(words $(SRC))
 OBJS			:= ./objs_matrix_matrix_list
