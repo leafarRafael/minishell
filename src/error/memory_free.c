@@ -3,41 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   memory_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 13:33:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/18 14:10:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int free_memory(t_mini *mini, t_var_exe	*var, t_ast *ast)
-{
-	int i;
+static void ft_close();
 
-	i = 0;
+void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast)
+{
 	if (mini)
 	{
 		if (mini->mmlst)
-			i += ft_delete_mmlst(mini->mmlst);
+			ft_delete_mmlst(mini->mmlst);
 		if (mini->m_lst_env)
-			i += ft_delete_matrix(mini->m_lst_env);
+			ft_delete_matrix(mini->m_lst_env);
+		if (mini->env)
+			ft_delete_cmatrix(mini->env);
 	}
 	if (ast)
-	{
 		ft_delete_tree(ast);
-		if (ast != NULL)
-			i++;
-	}
 	if (var)
 	{
-		if (var->env)
-			i += ft_delete_cmatrix(var->env);
-		if (var->command_m)
-			i += ft_delete_cmatrix(var->command_m);
 		if (var->path_exe)
 			free(var->path_exe);
+		if (var->env)
+			ft_delete_cmatrix(var->env);
+		if (var->command_m)
+			ft_delete_cmatrix(var->command_m);
 	}
-	return (i);
+	ft_close();
 }
+
+static void ft_close(void)
+{
+	close(0);
+	close(1);
+	close(2);
+}
+

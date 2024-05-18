@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_mtrx_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:40:13 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/18 14:24:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,36 @@ void	ft_remove_quote_m_lst(t_mlst *lst_matrix)
 
 	if (!lst_matrix)
 		return ;
+	if (lst_matrix->size == 0)
+		return ;
 	v.current_lst = lst_matrix->head;
-	v.index = 0;
+	v.next_lst = v.current_lst->next;
 	v.i = 1;
 	while (v.i <= lst_matrix->size)
 	{
-		node = v.current_lst->lst->head;
-		next = node->next;
-		x = 1;
-		while(x <= v.current_lst->lst->size)
+		if (v.current_lst->lst->size != 0)
 		{
-			if (node->type &(D_QUOTES | S_QUOTES))
+			node = v.current_lst->lst->head;
+			next = node->next;
+			x = 1;
+			while(x <= v.current_lst->lst->size)
 			{
-				ft_remove_specific_node(v.current_lst->lst, node);
-				x--;
+				if (node->type &(D_QUOTES | S_QUOTES))
+				{
+					ft_remove_specific_node(v.current_lst->lst, node);
+					x--;
+				}
+				node = next;
+				if (v.current_lst->lst->size == 0)
+					break ;
+				next = next->next;
+				x++;
 			}
-			node = next;
-			next = next->next;
-			x++;
 		}
-		v.current_lst = v.current_lst->next;
+		if (lst_matrix->size == 0)
+			break ;
+		v.current_lst = v.next_lst;
+		v.next_lst = v.next_lst->next;
 		v.i++;
 	}
 }

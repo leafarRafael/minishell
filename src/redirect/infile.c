@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infile.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:08:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 14:43:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/18 14:14:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int	ft_open(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
+		ft_putstr_fd("minishell: ", 2);
 		perror(file);
 		return (-1);
 	}

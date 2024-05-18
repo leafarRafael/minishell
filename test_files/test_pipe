@@ -1,0 +1,14 @@
+cat Makefile | grep NAME
+
+
+cat Makefile | grep NAME | ls
+
+cat Makefile | grep NAME | tr A-Z a-z 
+
+cat Makefile | grep NAME | tr A-Z a-z && echo oi
+
+cat Makefile | grep NAME | tr A-Z a-z && "" || echo seila
+
+cat teste_input | grep NAME | tr A-Z a-z && "" || echo seila
+
+cat < teste_input | grep NAME | tr A-Z a-z && "" || echo seila

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/17 10:45:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/18 13:12:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
 	t_lst		*new_lst;
 	t_lst		*temp;
+	t_lst		*temp2;
 
 	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
 		return ;
@@ -26,6 +27,14 @@ void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	temp = cmd->m_lst->matrix->head->lst;
 	new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
 	remove_parent(new_lst);
+	if (cmd->m_lst->next->type & (PIPE | AND_OP | OR_OP))
+	{
+		temp2 = cmd->m_lst->next->matrix->head->lst;
+		ft_add_node_back(new_lst, temp2->head);
+		if (temp2->size == 1)
+			ft_add_node_back(new_lst, temp2->head);
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next);
+	}
 	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 	ft_parse_exe(new_lst, mini);
 

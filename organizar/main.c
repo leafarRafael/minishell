@@ -6,21 +6,24 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/17 10:48:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/18 13:12:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_define_node_tree(t_ast *ast);
-static int ft_valid_syntax_open_here_doc(t_lst *lst);
+void		ft_define_node_tree(t_ast *ast);
+static int	ft_valid_syntax_open_here_doc(t_lst *lst);
 static int	*ft_init_ctrl_name(void);
+static void	close_fd(t_mini *mini);
+static void swap_tty(int copy_restore, t_mini *mini);
 
 int status_child;
 
 int	main(void)
 {
 	t_mini	mini;
+	char	*input;
 	char	**temp_environ;
 	t_lst	*new_lst;
 
@@ -30,37 +33,29 @@ int	main(void)
 	__environ = mini.env;
 	while (1)
 	{
-		mini.input = readline("minishell ~:");
-		status_child = 0;
-		if (!ft_exit(mini.input))
+		input = readline("minishell ~:");
+		if (!input)
 			break ;
-		if (!ft_input_is_valid(mini.input))
+		if (!ft_exit(input))
+			break ;
+		if (!ft_input_is_valid(input))
 		{
+			add_history(input);
 			__environ = mini.env;
 			mini.input_lst = ft_init_lst();
-			ft_add_string_in_list(mini.input_lst, mini.input);
-			free(mini.input);
+			mini.mmlst = init_mmlst();
+			ft_add_string_in_list(mini.input_lst, input);
 			ft_scanner_input(mini.input_lst);
 			ft_valid_syntax_open_here_doc(mini.input_lst);
-			mini.mmlst = init_mmlst();
-			while (mini.input_lst->size > 0)
-				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
-			mini.fd_std[0] = dup(STDIN_FILENO);
-			mini.fd_std[1] = dup(STDOUT_FILENO);
+			swap_tty(COPY, &mini);
 			ft_parse_exe(mini.input_lst, &mini);
-			dup2(mini.fd_std[0], STDIN_FILENO);
-			dup2(mini.fd_std[1], STDOUT_FILENO);
-			close(mini.fd_std[0]);
-			close(mini.fd_std[1]);
+			swap_tty(RESTORE, &mini);
 			__environ = temp_environ;
 			ft_delete_mmlst(mini.mmlst);
 		}
 	}
-	close(mini.fd_std[0]);
-	close(mini.fd_std[1]);
-	close(0);
-	close(1);
-	close(2);
+	rl_clear_history();
+	close_fd(&mini);
 	ft_delete_cmatrix(mini.env);
 	ft_delete_matrix(mini.m_lst_env);
 }
@@ -117,4 +112,29 @@ static int	*ft_init_ctrl_name(void)
 	hdoc_ctrlname[HUNDRED] = 0;
 	hdoc_ctrlname[THOUSAND] = 0;
 	return (hdoc_ctrlname);
+}
+
+static void close_fd(t_mini *mini)
+{
+	close(mini->fd_std[0]);
+	close(mini->fd_std[1]);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+}
+
+static void swap_tty(int copy_restore, t_mini *mini)
+{
+	if (copy_restore == COPY)
+	{
+		mini->fd_std[0] = dup(STDIN_FILENO);
+		mini->fd_std[1] = dup(STDOUT_FILENO);
+	}
+	if (copy_restore == RESTORE)
+	{
+		dup2(mini->fd_std[0], STDIN_FILENO);
+		dup2(mini->fd_std[1], STDOUT_FILENO);
+		close(mini->fd_std[0]);
+		close(mini->fd_std[1]);
+	}
 }

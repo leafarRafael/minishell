@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_especific_matrix.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 12:49:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 09:05:00 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/18 11:37:16 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

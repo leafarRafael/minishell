@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:27:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 17:08:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/17 15:45:21 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ int	ft_input_is_valid(char *array)
 	int i;
 	int size;
 
+	status_child = 0;
 	i = 0;
 	size = 0;
-	if (!array)
-		return (-1);
 	size = ft_strlen(array);
 	if (size == 0)
 	{

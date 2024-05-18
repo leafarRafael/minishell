@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/17 09:45:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/17 16:05:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_variables_minishell
 	t_mmlst		*mmlst;
 	t_mlst		*m_lst_env;
 	t_lst		*input_lst;
-	char		*input;
 	char		**env;
 	char		**temp_environ;
 	int			fd_std[2];
@@ -58,8 +57,6 @@ typedef struct s_variables_minishell
 typedef struct s_var_executable
 {
 	char		*path_exe;
-	char		*infile;
-	char		*outfile;
 	char		**env;
 	char		**command_m;
 	pid_t		pid;
@@ -72,8 +69,13 @@ typedef enum s_here_doc
 	TEN = 1,
 	HUNDRED = 2,
 	THOUSAND = 3
-
 }	t_here_doc;
+
+typedef enum s_cpy_restore
+{
+	COPY = 0,
+	RESTORE = 1
+}	t_cpy_restore;
 
 /*
 			Function parse
@@ -104,7 +106,6 @@ int				ft_input_is_valid(char *array);
 int				ft_exit(char *input);
 void			ft_free_memory_revert_environ(t_mini *v);
 char			**ft_path_env(t_mlst *m_lst);
-char			*ft_get_executable(char *command, char **path);
 
 void			ft_pipe(int pipe[2]);
 void			ft_pipe_parent(int pipe[2]);
@@ -113,13 +114,14 @@ void			ft_pipe_parent(int pipe[2]);
 
 void	ft_parse_exe(t_lst *input, t_mini *mini);
 
-int		free_memory(t_mini *mini, t_var_exe	*var, t_ast *ast);
+void		free_memory(t_mini *mini, t_var_exe	*var, t_ast *ast);
 /* 
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
 void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 void	ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 void	ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+char	*ft_get_executable(t_mini *mini, t_var_exe *var, t_ast *ast);
 
 
 
