@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/19 12:06:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/19 13:51:22 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
 	new_mmlst = init_mmlst();
 	while (new_lst->size > 0)
 		ft_mmlst_add_back(new_mmlst, ft_token_cmd(new_lst));
-	if (mini->mmlst->size == 1)
+	ft_insert_mnode_between(mini->mmlst, cmd->m_lst, new_mmlst);
+/* 	if (mini->mmlst->size == 1)
 	{
 		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 		mini->mmlst->head = new_mmlst->head;
@@ -75,8 +76,8 @@ static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
 		temp->prev = new_mmlst->last;
 		new_mmlst->last->next = temp;
 		mini->mmlst->size += new_mmlst->size;
-		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
-	}
+	} */
+	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 	if (new_lst)
 	{
 		free(new_lst);
