@@ -6,16 +6,20 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 17:16:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/19 13:50:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/19 15:42:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_matrix_lst.h"
 
-int	*ft_insert_mnode_between(t_mmlst *mmlst, t_mnode *mnode, t_mmlst *new_mmlst)
+int	ft_insert_mnode_between(t_mmlst *mmlst, t_mnode *mnode, t_mmlst *new_mmlst)
 {
 	t_mnode		*temp;
 
+	if (!mmlst || !mnode || !new_mmlst)
+		return (-1);
+	if (mmlst->size == 0 || new_mmlst->size == 0)
+		return (-1);
 	if (mmlst->size == 1)
 	{
 		mnode->next = new_mmlst->head;

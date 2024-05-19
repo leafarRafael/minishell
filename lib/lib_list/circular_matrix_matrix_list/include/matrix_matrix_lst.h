@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:46:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/19 13:39:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/19 15:42:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_var_matrix_mlst
 t_mmlst	*init_mmlst(void);
 t_mnode	*init_matrix_node(void);
 int		ft_mmlst_add_front(t_mmlst *lst_m, t_mlst *matrix);
-int		*ft_insert_mnode_between(t_mmlst *mmlst, t_mnode *mnode, t_mmlst *new_mmlst);
+int		ft_insert_mnode_between(t_mmlst *mmlst, t_mnode *mnode, t_mmlst *new_mmlst);
 int		ft_mmlst_add_back(t_mmlst *lst_m, t_mlst *matrix);
 int		ft_remove_matrix_front(t_mmlst *ma_lst);
 int		ft_remove_matrix_back(t_mmlst *ma_lst);
