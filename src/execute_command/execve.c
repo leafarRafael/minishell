@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/18 17:58:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/19 11:48:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,6 @@ static void ft_parent(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe	*var)
 		close(var->tube[0]);
 		close(var->tube[1]);
 	}
-/* 	if (cmd->m_lst->next->type == PIPE)
-		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next); */
-/* 	if (cmd->m_lst->prev->type &( OR_OP | AND_OP))
-		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->prev); */
-	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 }
 
 

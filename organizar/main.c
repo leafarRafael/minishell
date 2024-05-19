@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/18 18:45:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/19 12:18:21 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ int	main(void)
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	while (1)
 	{
-		mini.env = ft_cpy_mtrllst_to_cmtrx(mini.m_lst_env);
-		temp_environ = __environ;
-		__environ = mini.env;
 		input = readline("minishell ~:");
 		if (!input)
 			break ;
@@ -40,25 +37,31 @@ int	main(void)
 			break ;
 		if (!ft_input_is_valid(input))
 		{
+			mini.env = ft_cpy_mtrllst_to_cmtrx(mini.m_lst_env);
+			temp_environ = __environ;
+			__environ = mini.env;
 			add_history(input);
 			__environ = mini.env;
 			mini.input_lst = ft_init_lst();
 			mini.mmlst = init_mmlst();
 			ft_add_string_in_list(mini.input_lst, input);
+			free(input);
 			ft_scanner_input(mini.input_lst);
+			ft_valid_syntax_open_here_doc(mini.input_lst);
 			while (mini.input_lst->size > 0)
 				ft_mmlst_add_back(mini.mmlst, ft_token_cmd(mini.input_lst));
-			ft_valid_syntax_open_here_doc(mini.input_lst);
+			free(mini.input_lst);
+			mini.input_lst = NULL;
 			swap_tty(COPY, &mini);
 			ft_parse_exe(mini.input_lst, &mini);
 			swap_tty(RESTORE, &mini);
 			__environ = temp_environ;
+			ft_delete_cmatrix(mini.env);
 			ft_delete_mmlst(mini.mmlst);
 		}
 	}
 	rl_clear_history();
 	close_fd(&mini);
-	ft_delete_cmatrix(mini.env);
 	ft_delete_matrix(mini.m_lst_env);
 }
 
@@ -67,39 +70,6 @@ void	ft_parse_exe(t_lst *input, t_mini *mini)
 	t_ast		*ast;
 
 	ast = ft_init_ast();
-	while (input->size > 0)
-		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(input));
-	if (input)
-	{
-		free(input);
-		input = NULL;
-	}
-	ft_define_cmd_status(mini->mmlst);
-	ft_remove_cmd_status(mini->mmlst);
-	ft_define_ast(ast, mini->mmlst);
-	ft_execute(ast->root, mini, ast);
-	ft_delete_tree(ast);
-}
-
-void	ft_parse_exe2(t_lst *input, t_mini *mini, t_mnode *mnode, t_mnode *next)
-{
-	t_ast		*ast;
-
-	ast = ft_init_ast();
-	while (input->size > 0)
-	{
-		if (mnode == mini->mmlst->head)
-			ft_mmlst_add_front(mini->mmlst, ft_token_cmd(input));
-		else if (mnode == mini->mmlst->last)
-			ft_mmlst_add_back(mini->mmlst, ft_token_cmd(input));
-		else
-			ft_insert_mnode_between(mini->mmlst, mnode, ft_token_cmd(input));
-	}
-	if (input)
-	{
-		free(input);
-		input = NULL;
-	}
 	ft_define_cmd_status(mini->mmlst);
 	ft_remove_cmd_status(mini->mmlst);
 	ft_define_ast(ast, mini->mmlst);

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   insert_mnodes_between.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 17:16:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/18 18:44:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/19 11:29:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_matrix_lst.h"
-
+/* 
 int	*ft_insert_mnode_between(t_mmlst *mmlst, t_mnode *pointer, t_mlst *content)
 {
 	t_mnode *next;
@@ -46,3 +46,4 @@ int	*ft_insert_mnode_between(t_mmlst *mmlst, t_mnode *pointer, t_mlst *content)
 	}
 	return (0);
 }
+ */
