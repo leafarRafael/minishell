@@ -6,19 +6,19 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 10:26:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
 
-static void	ft_first_line(t_mlst *matrix_lst, t_lst_line *new_line);
-static void	ft_second_line(t_mlst *matrix_lst, t_lst_line *new_line);
-static void	ft_third_onwards_line(t_mlst *matrix_lst, t_lst_line *new_line);
+static void	ft_first_line(t_mlst *matrix_lst, t_llst *new_line);
+static void	ft_second_line(t_mlst *matrix_lst, t_llst *new_line);
+static void	ft_third_onwards_line(t_mlst *matrix_lst, t_llst *new_line);
 
 int	ft_add_list_back(t_mlst *matrix_lst, t_lst *lst)
 {
-	t_lst_line	*new_line;
+	t_llst	*new_line;
 
 	if (!matrix_lst || !lst)
 		return (-1);
@@ -44,7 +44,7 @@ int	ft_add_list_back(t_mlst *matrix_lst, t_lst *lst)
 	return (-1);
 }
 
-static void	ft_first_line(t_mlst *matrix_lst, t_lst_line *new_line)
+static void	ft_first_line(t_mlst *matrix_lst, t_llst *new_line)
 {
 	new_line->next = new_line;
 	new_line->prev = new_line;
@@ -53,7 +53,7 @@ static void	ft_first_line(t_mlst *matrix_lst, t_lst_line *new_line)
 	matrix_lst->size++;
 }
 
-static void	ft_second_line(t_mlst *matrix_lst, t_lst_line *new_line)
+static void	ft_second_line(t_mlst *matrix_lst, t_llst *new_line)
 {
 	new_line->next = matrix_lst->head;
 	new_line->prev = matrix_lst->head;
@@ -63,7 +63,7 @@ static void	ft_second_line(t_mlst *matrix_lst, t_lst_line *new_line)
 	matrix_lst->size++;
 }
 
-static void	ft_third_onwards_line(t_mlst *matrix_lst, t_lst_line *new_line)
+static void	ft_third_onwards_line(t_mlst *matrix_lst, t_llst *new_line)
 {
 	t_var_matrix	var;
 

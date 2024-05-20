@@ -10,7 +10,8 @@ SRC				:= ./src/init_matrix.c\
 				./src/delete_matrix.c\
 				./src/cpy_mtrllst_to_cmtrx.c\
 				./src/cpy_cmtrx_to_mtrx_lst.c\
-				./src/find_str_in_matrixlst.c
+				./src/find_str_in_matrixlst.c\
+				./src/mlst_insert_lnode_between.c
 
 NUM_FILES		:= $(words $(SRC))
 OBJS			:= ./objs_matrix_list

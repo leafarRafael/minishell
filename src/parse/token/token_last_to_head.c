@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_last_to_head.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/11 10:03:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:46:42 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_mlst	*ft_token_cmd_last_to_head(t_lst *lst)
 		ft_remove_node_back(lst);
 	while (lst->head->type == WH_SPACE)
 		ft_remove_node_front(lst);
-	new_matrix = ft_init_matrix();
+	new_matrix = init_mlst();
 	if (lst->last->type == CLOSE_PAREN)
 	{
 		muve_token_parent(lst, new_matrix);

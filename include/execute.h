@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:05:04 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 17:05:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_execute
 	char		*comand;
 	pid_t		*pid;
 	int			pipe[2];
-	t_lst_line	*temp;
+	t_llst	*temp;
 
 }				t_execute;
 

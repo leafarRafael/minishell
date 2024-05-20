@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_define_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/09 17:18:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_define_infile(t_mmlst *m_m_lst)
 {
 	int			count[2];
 	t_mnode		*mnoode_temp;
-	t_lst_line	*lst_temp;
+	t_llst	*lst_temp;
 
 	mnoode_temp = m_m_lst->head;
 	count[0] = 1;
@@ -75,7 +75,7 @@ static void	ft_define_outfile(t_mmlst *m_m_lst)
 {
 	int			count[2];
 	t_mnode		*mnoode_temp;
-	t_lst_line	*lst_temp;
+	t_llst	*lst_temp;
 
 	mnoode_temp = m_m_lst->head;
 	count[0] = 1;

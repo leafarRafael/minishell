@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 08:07:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:58:02 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	show_str_type(int type)
 
 void	ft_print_matrix_line(t_mlst *m_line)
 {
-	t_lst_line *temp;
+	t_llst *temp;
 	int i;
 
 	if (!m_line)
@@ -143,7 +143,7 @@ void	ft_print_matrix_line(t_mlst *m_line)
 	while (i <= m_line->size)
 	{
 		ft_print_array_lst(temp->lst, 0);
-		printf("\n");
+		ft_putstr_fd("\n", 2);
 		i++;
 		temp = temp->next;
 	}

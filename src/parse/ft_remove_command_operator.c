@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	ft_remove_rdrct(t_mmlst *m_m_lst)
 	int			count[2];
 	int			size;
 	t_mnode		*mnoode_temp;
-	t_lst_line	*lst_temp;
-	t_lst_line	*lst_next;
+	t_llst	*lst_temp;
+	t_llst	*lst_next;
 
 	mnoode_temp = m_m_lst->head;
 	count[0] = 1;

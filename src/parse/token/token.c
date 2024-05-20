@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 12:16:12 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 18:36:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	muve_token_parent(t_lst *lst, t_mlst *matrix);
 
 t_mlst	*ft_token_cmd(t_lst	*lst)
 {
-	t_token			v;
+	t_token		v;
 	t_mlst		*new_matrix;
 
 	if (!lst)
@@ -30,7 +30,7 @@ t_mlst	*ft_token_cmd(t_lst	*lst)
 		ft_remove_node_back(lst);
 	while (lst->head->type == WH_SPACE)
 		ft_remove_node_front(lst);
-	new_matrix = ft_init_matrix();
+	new_matrix = init_mlst();
 	if (lst->head->type == OPEN_PAREN)
 	{
 		muve_token_parent(lst, new_matrix);

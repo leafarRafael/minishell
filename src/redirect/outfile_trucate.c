@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 14:13:36 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 14:42:01 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
 
-int	open_trnc(t_mlst *mtrix, t_lst_line *lst)
+int	open_trnc(t_mlst *mtrix, t_llst *lst)
 {
 	char	*outfile;
 	int		valid_open;

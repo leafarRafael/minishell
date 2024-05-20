@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 18:19:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_open(char *c_file, char *eof, int expand)
 	int			i;
 	int			fd;
 	t_mlst		*mlst;
-	t_lst_line	*line;
+	t_llst	*line;
 
 	fd = ft_open_create_here_doc(c_file);
 	mlst = ft_read_std(eof);
@@ -68,7 +68,7 @@ static t_mlst	*ft_read_std(char *eof)
 	t_redirect	h_doc;
 
 	h_doc.size = ft_strlen(eof);
-	h_doc.new_mtrx = ft_init_matrix();
+	h_doc.new_mtrx = init_mlst();
 	while (1)
 	{
 		write(2, ">> ", 3);
