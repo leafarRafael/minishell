@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/18 14:10:32 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 09:26:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void ft_close();
 
-void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast)
+void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 {
 	if (mini)
 	{
@@ -37,6 +37,7 @@ void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast)
 			ft_delete_cmatrix(var->command_m);
 	}
 	ft_close();
+	exit(status_exit);
 }
 
 static void ft_close(void)

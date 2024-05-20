@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/17 16:05:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 10:47:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,17 @@ void			ft_pipe_parent(int pipe[2]);
 
 void	ft_parse_exe(t_lst *input, t_mini *mini);
 
-void		free_memory(t_mini *mini, t_var_exe	*var, t_ast *ast);
+void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit);
 /* 
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
-void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+void	ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 void	ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast);
-void	ft_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 char	*ft_get_executable(t_mini *mini, t_var_exe *var, t_ast *ast);
 
-
+void	ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
 
 

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   expand_mtrx_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:40:13 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/18 14:24:00 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 09:37:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expanding.h"
 #include "minishell.h"
 
-void	ft_expand_m_lst(t_mlst *lst_matrix)
+void	ft_expand_m_lst(t_mlst *mlst)
 {
 	t_var_matrix	v;
 
-	if (!lst_matrix)
+	if (!mlst)
 		return ;
-	v.current_lst = lst_matrix->head;
+	v.current_lst = mlst->head;
 	v.index = 0;
 	v.i = 1;
-	while (v.i <= lst_matrix->size)
+	while (v.i <= mlst->size)
 	{
 		ft_expander_lst_token(v.current_lst->lst);
 		v.current_lst = v.current_lst->next;

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/19 13:46:00 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 10:41:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_parse_exe(t_lst *input, t_mini *mini)
 	ft_define_cmd_status(mini->mmlst);
 	ft_remove_cmd_status(mini->mmlst);
 	ft_define_ast(ast, mini->mmlst);
-	ft_execute(ast->root, mini, ast);
+	ft_call_and_exec_manager(ast->root, mini, ast);
 	ft_delete_tree(ast);
 }
 

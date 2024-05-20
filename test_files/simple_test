@@ -1,15 +1,8 @@
 ls -la
-
 sleep 1
-
 echo oi 
-
 sleep 1
-
 cat Makefile | grep NAME
-
 sleep 1
-
 cat Makefile | grep -o NAME
-
 sleep 1

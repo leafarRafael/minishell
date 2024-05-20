@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/16 10:23:36 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/20 10:44:32 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,12 @@ REDIRECT		:= ./src/redirect/redirect.c\
 				./src/redirect/here_doc/new_lst_heredoc.c\
 				./src/redirect/here_doc/write_here_doc.c
 
-SIMPLE			:=./src/execute_command/execute.c\
-				./src/execute_command/get_executable.c\
-				./src/execute_command/ft_expand_parentheses.c\
-				./src/execute_command/execve.c
+SIMPLE			:=./src/struct_the_call_execution/call_and_exec_manager.c\
+				./src/struct_the_call_execution/get_executable.c\
+				./src/struct_the_call_execution/ft_expand_parentheses.c\
+				./src/struct_the_call_execution/execve/exec_manager.c\
+				./src/struct_the_call_execution/execve/children.c\
+				./src/struct_the_call_execution/execve/parent.c
 
 AS_TREE			:=./src/function_ast/build_tree.c\
 				./src/function_ast/init_ast.c\
