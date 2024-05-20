@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:19:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 19:15:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:29:12 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	ft_expand_token(cmd->m_lst->matrix);
 	ft_remove_quote_m_lst(cmd->m_lst->matrix);
 	ft_manager_fd(cmd, mini, ast, var);
+	ft_valid_builtin(cmd, mini, ast, var);
 	ft_valid_command(cmd, mini, ast, var);
 	build_var_and_run_execve(cmd, mini, ast, var);
 }
@@ -97,7 +98,7 @@ static void	token_expand(t_mlst *mlst, t_llst *llist)
 
 	if (llist->lst->head->type != D_QUOTES)
 	{
-		
+
 		i = 1;
 		node = llist->lst->head;
 		while(i <= llist->lst->size)

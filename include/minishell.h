@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 14:19:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:28:20 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	ft_parse_exe(t_lst *input, t_mini *mini);
 
 void 	free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit);
 void	ft_msg_error(char *invalid_input, char *msg_error);
-/* 
+/*
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
 void	ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
@@ -129,6 +129,7 @@ void	ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 void	parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
-
+// BUILTIN
+int	ft_valid_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 
 #endif
