@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   outfile_trucate.c                                  :+:      :+:    :+:   */
+/*   msg_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 14:13:36 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 14:42:01 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/20 13:25:37 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/20 13:54:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirect.h"
+#include "minishell.h"
 
-int	open_trnc(t_mlst *mtrix, t_lst_line *lst)
+void	ft_msg_error(char *invalid_input, char *msg_error)
 {
-	char	*outfile;
-	int		valid_open;
-
-	valid_open = 0;
-	outfile = ft_cpy_lst_to_array(lst->lst);
-	valid_open = ft_myopen(outfile,  O_WRONLY | O_CREAT | O_TRUNC, 0000644, STDOUT_FILENO);
-	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
-	free(outfile);
-	return (valid_open);
+	ft_putstr_fd(PROGRAM_NAME, STDERR_FILENO);
+	ft_putstr_fd(invalid_input, STDERR_FILENO);
+	ft_putstr_fd(" :", STDERR_FILENO);
+	ft_putstr_fd(msg_error, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 }

@@ -6,13 +6,11 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 11:44:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:34:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
-
-static int	ft_open(char *file);
 
 int	open_here_doc(t_mlst *mtrix, t_lst_line *lst)
 {
@@ -21,28 +19,9 @@ int	open_here_doc(t_mlst *mtrix, t_lst_line *lst)
 
 	valid_open = 0;
 	infile = ft_cpy_lst_to_array(lst->lst);
-	valid_open = ft_open(infile);
+	valid_open = ft_myopen(infile, O_RDONLY, 0, STDIN_FILENO);
 	ft_rmv_spcfc_lst_mtrx(mtrix, lst);
 	free(infile);
 	lst = NULL;
 	return (valid_open);
-}
-
-static int	ft_open(char *file)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(file);
-		return (-1);
-	}
-	if (dup2(fd, STDIN_FILENO) < 0)
-	{
-		perror("dup2: ");
-		return (-1);
-	}
-	close(fd);
-	return (0);
 }

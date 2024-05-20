@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 10:47:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:19:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ extern int status_child;
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 # include <wait.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <errno.h>
 
+# define PROGRAM_NAME "minishell: "
 # define PATH "PATH=/"
 # define SIZE_PATH 6
 # define PATH_HERE_DOC "<< tmp/0000"
@@ -114,7 +116,8 @@ void			ft_pipe_parent(int pipe[2]);
 
 void	ft_parse_exe(t_lst *input, t_mini *mini);
 
-void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit);
+void 	free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit);
+void	ft_msg_error(char *invalid_input, char *msg_error);
 /* 
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */

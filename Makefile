@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/20 10:44:32 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/20 14:30:22 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,11 @@ REDIRECT		:= ./src/redirect/redirect.c\
 				./src/redirect/outfile_trucate.c\
 				./src/redirect/here_doc/here_doc_create_file.c\
 				./src/redirect/here_doc/new_lst_heredoc.c\
-				./src/redirect/here_doc/write_here_doc.c
+				./src/redirect/here_doc/write_here_doc.c\
+				./src/redirect/ft_open.c
 
 SIMPLE			:=./src/struct_the_call_execution/call_and_exec_manager.c\
-				./src/struct_the_call_execution/get_executable.c\
+				./src/struct_the_call_execution/path_executable/get_executable.c\
 				./src/struct_the_call_execution/ft_expand_parentheses.c\
 				./src/struct_the_call_execution/execve/exec_manager.c\
 				./src/struct_the_call_execution/execve/children.c\
@@ -70,7 +71,7 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/ft_remove_command_operator.c\
 				./src/parse/define_priority_operator.c
 
-ERROR			:= ./src/error/memory_free.c
+ERROR			:= ./src/error/memory_free.c ./src/error/msg_error.c
 
 KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/control_operators.c\

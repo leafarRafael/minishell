@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:19:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 10:31:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:15:14 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,7 @@ static void	ft_valid_command(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *
 {
 	if (cmd->m_lst->matrix->size == 1 && cmd->m_lst->matrix->head->lst->size == 0)
 	{
-		write(STDERR_FILENO, "''", 2);
-		write(STDERR_FILENO, " : ", 3);
-		write(STDERR_FILENO, "command not found \n", 19);
-		close (mini->fd_std[0]);
-		close (mini->fd_std[1]);
+		ft_msg_error("''", " command not found");
 		free_memory(mini, var, ast, 126);
 	}
 }

@@ -6,14 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 11:01:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/20 14:18:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	init_variables(t_var_exe *var);
-static int	operator_manager(t_ast_n *cmd, t_var_exe *var);
+static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 static void free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini);
 
 void ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
@@ -21,7 +21,7 @@ void ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	t_var_exe	var;
 
 	init_variables(&var);
-	if (operator_manager(cmd, &var) == -1)
+	if (operator_manager(cmd, mini, ast, &var) == -1)
 		return ;
 	var.pid = fork();
 	if (var.pid == 0)
@@ -33,7 +33,7 @@ void ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	}
 }
 
-static int	operator_manager(t_ast_n *cmd, t_var_exe *var)
+static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	if (cmd == NULL)
 		return (-1);
@@ -45,8 +45,8 @@ static int	operator_manager(t_ast_n *cmd, t_var_exe *var)
 	{
 		if (pipe(var->tube) < 0)
 		{
-			perror("pipe error");
-			return (-1);
+			ft_msg_error("pipe error" , strerror(errno));
+			free_memory(mini, var, ast, 1);;
 		}
 		return (0);
 	}
