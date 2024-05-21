@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 10:41:40 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 15:39:43 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int	main(void)
 	t_lst	*new_lst;
 
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
+
+	// PRINT ENV
+	// ft_print_matrix_line(mini.m_lst_env);
+	// ft_printf_matrix(mini.m_lst_env);
+	// END
+
+
 	while (1)
 	{
 		input = readline("minishell ~:");
@@ -38,6 +45,12 @@ int	main(void)
 		if (!ft_input_is_valid(input))
 		{
 			mini.env = ft_cpy_mtrllst_to_cmtrx(mini.m_lst_env);
+
+			// PRINT ENV
+			// ft_print_matrix_line(mini.m_lst_env);
+			// ft_printf_matrix(mini.env);
+			// END
+
 			temp_environ = __environ;
 			__environ = mini.env;
 			add_history(input);

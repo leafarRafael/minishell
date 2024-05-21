@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 19:28:20 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:38:21 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,10 @@ void			ft_define_ast(t_ast *tree, t_mmlst *mmlst);
 void			ft_populetree_right(t_ast *tree, t_mmlst *mmlst);
 
 void			ft_printf_matrix(char **matrix);
-void			ft_print_array_lst(t_lst *lst, int front_back);
 void			ft_print_array_lst_content_type(t_lst *lst);
 void			show_str_type(int type);
 void			print_all_type(void);
 void			print_operator(t_lst *lst);
-void			ft_print_matrix_line(t_mlst *m_line);
 int				ft_separate_operators(t_mlst *matrix_lst,
 					t_lst *input_user);
 void			ft_print_lst_matrix(t_mmlst *m_l);
@@ -131,5 +129,10 @@ void	parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
 // BUILTIN
 int	ft_valid_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+// ENV
+void	ft_env(t_mini *mini);
+void	ft_print_array_lst(t_lst *lst);
+void	ft_print_matrix_line(t_mlst *m_line);
+
 
 #endif

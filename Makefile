@@ -6,7 +6,7 @@
 #    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/20 19:29:29 by tforster         ###   ########.fr        #
+#    Updated: 2024/05/21 15:08:36 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/words_delimiters.c
 
 BUILTIN			:= ./src/builtin/builtin.c\
+				./src/builtin/env.c\
 
 SRC				:= $(FILES) $(AS_TREE) $(PARSE)\
 				$(KEY_WORDS) $(SIMPLE) $(REDIRECT)\

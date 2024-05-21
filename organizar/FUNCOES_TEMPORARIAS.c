@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FUNCOES_TEMPORARIAS.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:58:02 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 15:15:16 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,31 @@ void	ft_printf_matrix(char **matrix)
 	}
 }
 
-void	ft_print_array_lst(t_lst *lst, int front_back)
-{
-	int i;
-	t_node *temp;
+// void	ft_print_array_lst(t_lst *lst, int front_back)
+// {
+// 	int i;
+// 	t_node *temp;
 
-	if (!lst)
-		return ;
-	if (!lst->head && !lst->last)
-		return ;
-	i = 1;
-	if (front_back == 0)
-		temp = lst->head;
-	else
-		temp = lst->last;
-	while (i <= lst->size)
-	{
-		ft_putchar_fd(temp->c, STDERR_FILENO);
-		if (front_back == 0)
-			temp = temp->next;
-		else
-			temp = temp->prev;
-		i++;
-	}
-	ft_putchar_fd('\n', STDERR_FILENO);
-}
+// 	if (!lst)
+// 		return ;
+// 	if (!lst->head && !lst->last)
+// 		return ;
+// 	i = 1;
+// 	if (front_back == 0)
+// 		temp = lst->head;
+// 	else
+// 		temp = lst->last;
+// 	while (i <= lst->size)
+// 	{
+// 		ft_putchar_fd(temp->c, STDERR_FILENO);
+// 		if (front_back == 0)
+// 			temp = temp->next;
+// 		else
+// 			temp = temp->prev;
+// 		i++;
+// 	}
+// 	ft_putchar_fd('\n', STDERR_FILENO);
+// }
 
 void	ft_print_array_lst_content_type(t_lst *lst)
 {
@@ -129,25 +129,25 @@ void	show_str_type(int type)
 		printf("CLOSE_PAREN");
 }
 
-void	ft_print_matrix_line(t_mlst *m_line)
-{
-	t_llst *temp;
-	int i;
+// void	ft_print_matrix_line(t_mlst *m_line)
+// {
+// 	t_llst *temp;
+// 	int i;
 
-	if (!m_line)
-		printf("\nNULL\n");;
-	if (!m_line->head)
-		return ;
-	i = 1;
-	temp = m_line->head;
-	while (i <= m_line->size)
-	{
-		ft_print_array_lst(temp->lst, 0);
-		ft_putstr_fd("\n", 2);
-		i++;
-		temp = temp->next;
-	}
-}
+// 	if (!m_line)
+// 		printf("\nNULL\n");;
+// 	if (!m_line->head)
+// 		return ;
+// 	i = 1;
+// 	temp = m_line->head;
+// 	while (i <= m_line->size)
+// 	{
+// 		ft_print_array_lst(temp->lst, 0);
+// 		ft_putstr_fd("\n", 2);
+// 		i++;
+// 		temp = temp->next;
+// 	}
+// }
 
 void	print_operator(t_lst *lst)
 {
