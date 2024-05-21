@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 09:26:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:13:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 		if (mini->m_lst_env)
 			ft_delete_matrix(mini->m_lst_env);
 		if (mini->env)
-			ft_delete_cmatrix(mini->env);
+			ft_delcmtrx(mini->env);
 	}
 	if (ast)
 		ft_delete_tree(ast);
@@ -32,9 +32,9 @@ void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 		if (var->path_exe)
 			free(var->path_exe);
 		if (var->env)
-			ft_delete_cmatrix(var->env);
+			ft_delcmtrx(var->env);
 		if (var->command_m)
-			ft_delete_cmatrix(var->command_m);
+			ft_delcmtrx(var->command_m);
 	}
 	ft_close();
 	exit(status_exit);

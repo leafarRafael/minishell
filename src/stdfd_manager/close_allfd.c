@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ask_to_operador.c                                  :+:      :+:    :+:   */
+/*   close_allfd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/29 10:44:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 14:59:29 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/21 11:07:25 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/21 11:08:42 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_have_operator(t_lst *lst)
+void close_allfd(t_mini *mini)
 {
-	t_var	var;
-
-	var.current_node = lst->head;
-	var.i = 1;
-	while (var.i <= lst->size)
-	{
-		if (is_operator(var.current_node->type))
-			return (-1);
-		var.i++;
-		var.current_node = var.current_node->next;
-	}
-	return (0);
+	close(mini->fd_std[0]);
+	close(mini->fd_std[1]);
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 }

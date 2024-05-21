@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_priority_operator.c                         :+:      :+:    :+:   */
+/*   swap_environ.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/17 13:01:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 07:58:04 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/21 11:24:11 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/21 11:30:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_valid_op_in_subshell(t_mmlst *m_m_lst)
+void	ft_swap_environ(t_mini *mini, int swap_restore)
 {
-	t_var_m_mlst	v;
-
-	v.i = 1;
-	v.current = m_m_lst->head;
-	while (v.i <= m_m_lst->size)
+	if (swap_restore == SWAP)
 	{
-		if (v.current->type == OPEN_PAREN || v.current->type == CLOSE_PAREN)
-			v.current->in_parent = v.current->matrix->head->lst->head->paren;
-		else
-			v.current->in_parent = -42;
-		v.current = v.current->next;
-		v.i++;
+		mini->env = ft_cpy_mtrllst_to_cmtrx(mini->m_lst_env);
+		mini->temp_environ = __environ;
+		__environ = mini->env;
+	}
+	if (swap_restore == RESTORE)
+	{
+		__environ = mini->temp_environ;
+		ft_delcmtrx(mini->env);
 	}
 }

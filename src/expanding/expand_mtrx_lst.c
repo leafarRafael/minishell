@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_cmatrix.c                                   :+:      :+:    :+:   */
+/*   expand_mtrx_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/11 14:27:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 17:08:00 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/01 10:40:13 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/21 09:29:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "expanding.h"
 #include "minishell.h"
 
-int	ft_delete_cmatrix(char **matrix)
+void	ft_expand_m_lst(t_mlst *mlst)
 {
-	int	i;
+	t_var_matrix	v;
 
-	i = 0;
-	if (!matrix)
-		return (-1);
-	while (matrix[i])
+	if (!mlst)
+		return ;
+	v.current_lst = mlst->head;
+	v.index = 0;
+	v.i = 1;
+	while (v.i <= mlst->size)
 	{
-		free(matrix[i]);
-		i++;
+		ft_expander_lst_token(v.current_lst->lst);
+		v.current_lst = v.current_lst->next;
+		v.i++;
 	}
-	free(matrix);
-	matrix = NULL;
-	return (0);
 }

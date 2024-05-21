@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   remove_quotes_lst.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 12:58:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 09:02:43 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/21 09:44:46 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/21 09:45:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#include "expanding.h"
 
-# include "array_lst.h"
-# include "key_words.h"
-# include "matrix_lst.h"
-
-typedef struct s_token
+void ft_remove_quotes_lst(t_lst *lst)
 {
-	t_lst	*new_lst;
 	t_node	*node;
 	t_node	*next;
-	char	*new_str;
-	t_lst	temp_lst;
-	int		i;
-	int		type;
-}			t_token;
+	int		counter;
 
-t_mlst	*ft_token_cmd(t_lst *lst);
-void	token_command(t_lst *lst, t_mlst *matrix);
-void	token_operator(t_lst *lst, t_mlst *matrix);
-void	token_parent(t_lst *lst, t_mlst *matrix);
-
-#endif
+	node = lst->head;
+	next = node->next;
+	counter = 1;
+	while(counter <= lst->size)
+	{
+		if (node->type &(D_QUOTES | S_QUOTES))
+		{
+			ft_remove_specific_node(lst, node);
+			counter--;
+		}
+		node = next;
+		if (lst->size == 0)
+			break ;
+		next = next->next;
+		counter++;
+	}
+}

@@ -14,7 +14,8 @@ FILES = libft/src_ctype/ft_isalnum.c libft/src_ctype/ft_isascii.c libft/src_ctyp
 		get_next_line/get_next_line_utils.c get_next_line/get_next_line.c\
 		ft_printf/ft_putpointer.c ft_printf/ft_putstr.c ft_printf/ft_putnbr_base.c\
 		ft_printf/ft_strl.c ft_printf/ft_putchar.c ft_printf/ft_printf.c\
-		libft/src_stdlib/ft_atol.c libft/src_stdlib/ft_atoll.c libft/src_string/src_str/ft_mtrxdup.c
+		libft/src_stdlib/ft_atol.c libft/src_stdlib/ft_atoll.c libft/src_string/src_str/ft_mtrxdup.c\
+		libft/src_string/src_str/ft_delcmtrx.c
 
 NUM_FILES	:= $(words $(FILES))
 

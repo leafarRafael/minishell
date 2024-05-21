@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 11:24:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:11:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
 	remove_parent(new_lst);
 	add_new_token(new_lst, cmd, mini);
-	ft_parse_exe(new_lst, mini);
+	builds_execution_call(new_lst, mini);
 }
 
 static void remove_parent(t_lst *new_lst)

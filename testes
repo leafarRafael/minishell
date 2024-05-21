@@ -1,2 +1,0 @@
-(cat Makefile | (grep NAME | (tr A-Z a-z))) | (tr 'a' 'A' | (tr 'b' 'B' | (tr 'l' 'LL'))) | (tr '(' '[' | (tr ')' ']' | (tr '$' '"'))) | tr 'c' '|' | tr ':' '&&'
-((<Makefile cat | (grep NAME | (tr A-Z a-z>1)>2)>3)>4 | < Makefile cat | (tr 'a' 'A' | (tr 'b' 'B' | (tr 'l' 'LL'))) | (tr '(' '[' | (tr ')' ']' | (tr '$' '"'>>1)>>2)>>3)>>4 | (< Makefile cat | (grep NAME)) | tr 'c' '|' | tr ':' '&&' | (tr '_' '<') | (tr '= ' '<<') | tr 'is' '>>' | (tr '3' '>' | ( tr "n" "'"))) >42

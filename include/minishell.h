@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 14:19:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:34:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_variables_minishell
 	t_mmlst		*mmlst;
 	t_mlst		*m_lst_env;
 	t_lst		*input_lst;
+	char		*input;
 	char		**env;
 	char		**temp_environ;
 	int			fd_std[2];
@@ -76,19 +77,19 @@ typedef enum s_here_doc
 typedef enum s_cpy_restore
 {
 	COPY = 0,
-	RESTORE = 1
+	RESTORE = 1,
+	SWAP = 2
 }	t_cpy_restore;
 
 /*
 			Function parse
 */
 void			ft_scanner_input(t_lst *lst);
-int				ft_have_operator(t_lst *lst);
 void			ft_scanner_input(t_lst *lst);
-int				ft_delete_cmatrix(char **matrix);
+int				ft_delcmtrx(char **matrix);
 int				ft_define_cmd_status(t_mmlst *m_m_lst);
 int				ft_remove_cmd_status(t_mmlst *m_m_lst);
-void			ft_define_ast(t_ast *tree, t_mmlst *mmlst);
+void			command_call_structure(t_ast *tree, t_mmlst *mmlst);
 void			ft_populetree_right(t_ast *tree, t_mmlst *mmlst);
 
 void			ft_printf_matrix(char **matrix);
@@ -98,8 +99,7 @@ void			show_str_type(int type);
 void			print_all_type(void);
 void			print_operator(t_lst *lst);
 void			ft_print_matrix_line(t_mlst *m_line);
-int				ft_separate_operators(t_mlst *matrix_lst,
-					t_lst *input_user);
+
 void			ft_print_lst_matrix(t_mmlst *m_l);
 void			ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx);
 void			ft_printtree(t_ast_n *root);
@@ -107,14 +107,10 @@ void			ft_printtree(t_ast_n *root);
 int				ft_input_is_valid(char *array);
 int				ft_exit(char *input);
 void			ft_free_memory_revert_environ(t_mini *v);
-char			**ft_path_env(t_mlst *m_lst);
-
-void			ft_pipe(int pipe[2]);
-void			ft_pipe_parent(int pipe[2]);
+char			**path_system_bin(t_mlst *m_lst);
 
 
-
-void	ft_parse_exe(t_lst *input, t_mini *mini);
+void	builds_execution_call(t_lst *input, t_mini *mini);
 
 void 	free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit);
 void	ft_msg_error(char *invalid_input, char *msg_error);
@@ -129,6 +125,13 @@ void	ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 void	parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
+void	ft_remove_quote_mlst(t_mlst *mlst);
+void	ft_remove_quotes_lst(t_lst *lst);
 
+int		ft_valid_syntax_open_here_doc(t_lst *lst);
+void	swap_tty(int copy_restore, t_mini *mini);
+void	close_allfd(t_mini *mini);
+
+void	ft_swap_environ(t_mini *mini, int swap_restore);
 
 #endif

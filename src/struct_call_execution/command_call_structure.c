@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define_ast.c                                       :+:      :+:    :+:   */
+/*   command_call_structure.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/17 13:19:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:36:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_define_ast(t_ast *tree, t_mmlst *mmlst)
+void	command_call_structure(t_ast *tree, t_mmlst *mmlst)
 {
-	t_mnode *temp;
-	int i;
-	int type;
+	t_mnode	*temp;
+	int		i;
+	int		type;
 
 	i = 1;
 	temp = mmlst->last;

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:52:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:05:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_hdoc
 	int		is_last;
 }		t_hdoc;
 
-int	ft_redirect(t_mlst *mtrix);
+int	ft_redirect_manager(t_mlst *mtrix);
 int	ft_myopen(char *file, int oflag, int prmssn, int stdfd);
 int	open_in(t_mlst *mtrix, t_llst *lst);
 int	open_appnd(t_mlst *mtrix, t_llst *lst);

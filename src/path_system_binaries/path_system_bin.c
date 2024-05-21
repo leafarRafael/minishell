@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_comand.c                                      :+:      :+:    :+:   */
+/*   path_system_bin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:18:53 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/08 12:13:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:43:33 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_node *find_head(t_mlst *m_lst, t_lst *lst);
 
-char	**ft_path_env(t_mlst *m_lst)
+char	**path_system_bin(t_mlst *m_lst)
 {
 	t_lst	*temp;
 	t_lst	to_array;

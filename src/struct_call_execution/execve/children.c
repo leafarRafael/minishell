@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:19:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 19:15:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:46:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	token_expand(t_mlst *mlst, t_llst *llist);
 void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	rl_clear_history();
-	ft_expand_token(cmd->m_lst->matrix);
-	ft_remove_quote_m_lst(cmd->m_lst->matrix);
+	ft_expand_m_lst(cmd->m_lst->matrix);
+	ft_remove_quote_mlst(cmd->m_lst->matrix);
 	ft_manager_fd(cmd, mini, ast, var);
 	ft_valid_command(cmd, mini, ast, var);
 	build_var_and_run_execve(cmd, mini, ast, var);
@@ -30,7 +30,7 @@ void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 
 static void build_var_and_run_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	var->env = ft_path_env(mini->m_lst_env);
+	var->env = path_system_bin(mini->m_lst_env);
 	var->command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 	var->path_exe = ft_get_executable(mini, var, ast);
 	if (execve(var->path_exe, &var->command_m[0], var->env) < 0)
@@ -57,7 +57,7 @@ static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var
 		close(var->tube[0]);
 		close(var->tube[1]);
 	}
-	if (ft_redirect(cmd->m_lst->matrix) < 0)
+	if (ft_redirect_manager(cmd->m_lst->matrix) < 0)
 		free_memory(mini, var, ast, 1);
 }
 

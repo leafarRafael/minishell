@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:58:02 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:13:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,7 @@ void	ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx)
 		if (is_operator(temp->next->type))
 			printf("\n\n\n");
 		ft_printf_matrix(matrix);
-		ft_delete_cmatrix(matrix);
+		ft_delcmtrx(matrix);
 		temp = temp->next;
 		i++;
 	}
