@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 15:15:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_open(char *c_file, char *eof, int expand)
 	fd = ft_open_create_here_doc(c_file);
 	mlst = ft_read_std(eof);
 	if (expand == 0)
-		ft_expand_m_lst(mlst);
+		ft_expand_m_lst_heredoc(mlst);
 	i = 1;
 	line = mlst->head;
 	while (i <= mlst->size)
