@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/01 15:57:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 13:53:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expanding.h"
-#include "scanner.h"
-#include <stdio.h>
+#include "minishell.h"
 
 static int		find_variable(t_lst *lst, t_lst *lst_temp);
 static void		ft_remove_node_var(t_lst *lst, t_lst *temp);
 static void		ft_replace_lst(t_lst *lst, t_lst *temp, char *env);
-static t_node	*ft_line_less(t_node *node, int *i);
 
 int	ft_expander_lst_token(t_lst *lst)
 {
@@ -51,45 +49,41 @@ static int	find_variable(t_lst *lst, t_lst *lst_temp)
 	t_expand	v;
 
 	v.i = 1;
-	v.node = lst->head;
-	while (v.i <= lst->size)
+	lst_temp->head = find_type_return_ptr(lst, DOLLAR);
+	if (!lst_temp->head)
+		return (-1);
+	lst_temp->head->type = NO_OP_TYPE;
+	lst_temp->size++;
+	lst_temp->last = lst_temp->head;
+	v.node = lst_temp->head->next;
+	if (v.node == lst_temp->head)
+		return (-1);
+	while (v.node->type == NO_OP_TYPE && v.node != lst->head)
 	{
-		if (v.node->type == DOLLAR)
-		{
-			v.node->type = NO_OP_TYPE;
-			lst_temp->head = v.node;
-			lst_temp->last = v.node;
-			lst_temp->size++;
-			v.node = ft_line_less(v.node, &v.i);
-			while (v.node->type == NO_OP_TYPE && v.i <= lst->size)
-			{
-				lst_temp->size++;
-				lst_temp->last = v.node;
-				v.node = ft_line_less(v.node, &v.i);
-			}
-			return (0);
-		}
-		v.node = ft_line_less(v.node, &v.i);
+		lst_temp->size++;
+		lst_temp->last = v.node;
+		v.node = v.node->next;
 	}
-	return (-1);
+	return (0);
 }
 
 static void	ft_remove_node_var(t_lst *lst, t_lst *temp)
 {
-	t_expand	v;
+	t_node	*node;
+	t_node	*next;
 
 	if (temp->head == temp->last && temp->size == 1)
 		return ;
-	v.node = temp->head;
-	v.next_node = v.node->next;
+	node = temp->head;
+	next = node->next;
 	while (temp->size > 0)
 	{
-		ft_remove_specific_node(lst, v.node);
+		ft_remove_specific_node(lst, node);
 		temp->size--;
 		if (temp->size == 0)
 			break ;
-		v.node = v.next_node;
-		v.next_node = v.node->next;
+		node = next;
+		next = node->next;
 	}
 }
 
@@ -97,31 +91,9 @@ static void	ft_replace_lst(t_lst *lst, t_lst *temp, char *env)
 {
 	t_expand	v;
 
-	v.is_head = 0;
-	v.is_last = 0;
-	v.node = temp->head;
-	v.next_node = v.node->next;
-	v.prev_head = temp->head->prev;
-	v.next_last = temp->last->next;
-	if (temp->head == lst->head)
-		v.is_head++;
-	if (temp->last == lst->last)
-		v.is_last++;
-	ft_remove_node_var(lst, temp);
 	v.poin_lst = ft_init_lst();
 	ft_add_string_in_list(v.poin_lst, env);
 	ft_scanner_add_literal(v.poin_lst);
-	ft_lst_btwn_lst(lst, v.prev_head, v.next_last, v.poin_lst);
-	if (v.is_head > 0)
-		lst->head = v.poin_lst->head;
-	if (v.is_last > 0)
-		lst->last = v.poin_lst->last;
-	free(v.poin_lst);
-}
-
-static t_node	*ft_line_less(t_node *node, int *i)
-{
-	node = node->next;
-	(*i)++;
-	return (node);
+	insert_node_between(lst, temp->last, v.poin_lst);
+	ft_remove_node_var(lst, temp);
 }

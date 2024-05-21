@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 11:34:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:56:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void			ft_print_matrix_line(t_mlst *m_line);
 void			ft_print_lst_matrix(t_mmlst *m_l);
 void			ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx);
 void			ft_printtree(t_ast_n *root);
+char			**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix);
 
 int				ft_input_is_valid(char *array);
 int				ft_exit(char *input);

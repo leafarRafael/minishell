@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:19:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 10:46:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:06:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ static void	token_expand(t_mlst *mlst, t_llst *llist)
 
 	if (llist->lst->head->type != D_QUOTES)
 	{
-		
 		i = 1;
 		node = llist->lst->head;
 		while(i <= llist->lst->size)

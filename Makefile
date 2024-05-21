@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/21 11:35:21 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/21 12:55:55 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ MTRX_MTRX_L		:= ./lib/lib_list/lib_list.a
 MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
 FILES			:= ./REMOVER_FUNCOES_DEBUG/FUNCOES_TEMPORARIAS.c\
+				./REMOVER_FUNCOES_DEBUG/expand_m_lst_to_cmtrx.c
 
 MAIN			:= ./src/minishell.c
 
@@ -75,7 +76,6 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 
 EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_mtrx_lst.c\
-				./src/expanding/expand_m_lst_to_cmtrx.c
 
 ERROR			:= ./src/error_and_free_memory/memory_free.c\
 				./src/error_and_free_memory/msg_error.c

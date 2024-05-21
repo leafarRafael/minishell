@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:48:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 09:30:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 12:56:22 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_expandig
 }			t_expand;
 
 int			ft_expander_lst_token(t_lst *lst);
-char		**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix);
 void		ft_expand_m_lst(t_mlst *lst_matrix);
 
 #endif
