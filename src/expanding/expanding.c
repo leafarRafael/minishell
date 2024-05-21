@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 13:53:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 14:55:48 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ static void	ft_replace_lst(t_lst *lst, t_lst *temp, char *env)
 
 	v.poin_lst = ft_init_lst();
 	ft_add_string_in_list(v.poin_lst, env);
-	ft_scanner_add_literal(v.poin_lst);
+	ft_scanner_after_expand(v.poin_lst);
 	insert_node_between(lst, temp->last, v.poin_lst);
 	ft_remove_node_var(lst, temp);
+	free(v.poin_lst);
 }

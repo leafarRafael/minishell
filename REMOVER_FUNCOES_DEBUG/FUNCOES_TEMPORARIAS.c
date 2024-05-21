@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 10:13:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/21 14:36:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	ft_print_matrix_line(t_mlst *m_line)
 	int i;
 
 	if (!m_line)
-		printf("\nNULL\n");;
+		ft_putstr_fd("\nNULL\n", 2);;
 	if (!m_line->head)
 		return ;
 	i = 1;

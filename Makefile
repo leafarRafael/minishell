@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/21 12:55:55 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/21 14:25:11 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ AS_TREE			:=./src/function_ast/build_tree.c\
 TOKEN			:= ./src/parse/token/token.c\
 				./src/parse/token/token_word.c\
 				./src/parse/token/token_operator.c\
-				./src/parse/token/token_parentheses.c
+				./src/parse/token/token_parentheses.c\
+				./src/parse/token/token_after_expandig.c
 				
 DEL_QUOTES		:= ./src/remove_quotes/remove_quotes_lst.c\
 				./src/remove_quotes/remove_quotes_mlst.c
@@ -72,7 +73,8 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_parenthes.c\
 				./src/parse/scanner/scanner_quotes.c\
 				./src/parse/scanner/scanner_simple_op.c\
-				./src/parse/scanner/scanner_for_priotity.c
+				./src/parse/scanner/scanner_for_priotity.c\
+				./src/parse/scanner/scanner_after_expanding.c
 
 EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_mtrx_lst.c\
