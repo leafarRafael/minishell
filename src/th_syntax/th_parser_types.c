@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/22 18:22:16 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:53:50 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,14 @@ int	token_is_oprtr(t_parse *parse)
 
 int	compare_token(t_parse *parse)
 {
-	// t_type_character	frst;
-	// t_type_character	scnd;
-
-	// frst = parse->prev->type;
-	// scnd = parse->type;
-
-	if (parse->prev->type & (PIPE | AND_OP | OR_OP))
+	if (token_is_oprtr(parse->prev))
 	{
-		if (parse->type & (PIPE | AND_OP | OR_OP))
+		if (token_is_oprtr(parse))
 		{
 			printf("==>> SYNTAX ERROR\n");
 			return (th_syntax_error(parse, BAD_OPRTR_SYNTAX));
 		}
 	}
-
-	// if (parse->type & (PIPE | AND_OP | OR_OP))
-	// 	return (1);
 	return (0);
 }
 
@@ -100,8 +91,8 @@ int	parse_oprtr(char *str, t_parse **parse, int *index)
 	}
 	// if (ptr->prev && token_is_oprtr(ptr->prev) && token_is_oprtr(ptr))
 	// 	return (th_syntax_error(ptr, BAD_OPRTR_SYNTAX));
-	// if (ptr->prev)
-	// 	return (compare_token(ptr));
+	if (ptr->prev)
+		return (compare_token(ptr));
 	return (0);
 }
 

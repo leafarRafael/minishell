@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/22 18:22:10 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/22 20:00:21 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 		else if (str[*index] == '(')
 			status  = append_sub(str, ptr, index, parse_prnth);
 		else if (str[*index] == '\0')
+		// CAHNGE TO STATUS TO PRINT THE ERROR IN THE END!!!
 			return (th_syntax_error(*parse, N_CLS_PRNTH));
 		else if (str[*index] == ')')
 		{
@@ -103,6 +104,7 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 		else
 			status  = append_sub(str, ptr, index, parse_text);
 		if (status > 0)
+		// MOVE ALL ERROR MESSAGES TO HERE!!!!!!
 			return (status);
 	}
 	return (status);
@@ -117,31 +119,29 @@ int append_sub(char *str, t_parse *parse, int *index, t_parse_func func)
 	int		size;
 
 	// sub = NULL;
+	status = func(str, &parse->sub, index);
+	// if (status > 0)
+	// 	return (status);
+	(*index)--;
+	// last = parse_add_back(&parse->sub, sub);
+	last = parse_last(parse->sub);
+	size = 2 * ((last->type & (OPEN_PAREN | D_QUOTES | S_QUOTES)) > 0);
+	parse->size += size + last->size;
+	// if (parse->type == OPEN_PAREN && (parse->sub->type & (PIPE | AND_OP | OR_OP)))
+	if (parse->type == OPEN_PAREN && token_is_oprtr(parse->sub))
+		// return (th_syntax_error(parse, 1));
+		return (th_syntax_error(parse, BAD_PRNTH_SYNTAX));
+	return (status);
 
+	// sub = NULL;
+	// status = func(str, &sub, index);
+	// // if (status > 0)
+	// // 	return (status);
+	// (*index)--;
 	// last = parse_add_back(&parse->sub, sub);
 	// size = 2 * ((sub->type & (OPEN_PAREN | D_QUOTES | S_QUOTES)) > 0);
 	// parse->size += size + last->size;
 
-	// status = func(str, &sub, index);
-	// if (status > 0)
-	// 	return (status);
-	// (*index)--;
-
-	// return (0);
-
-	sub = NULL;
-	status = func(str, &sub, index);
-	// if (status > 0)
-	// 	return (status);
-	(*index)--;
-	last = parse_add_back(&parse->sub, sub);
-	size = 2 * ((sub->type & (OPEN_PAREN | D_QUOTES | S_QUOTES)) > 0);
-	parse->size += size + last->size;
-
-	// if (last->prev && token_is_oprtr(last->prev) && token_is_oprtr(last))
-	// 	return (th_syntax_error(last, BAD_OPRTR_SYNTAX));
-	// if (last->prev)
-	// 	return (compare_token(last));
 
 	return (status);
 }
