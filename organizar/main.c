@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 15:29:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/16 20:43:16 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "th_syntax.h"
+#include "th_parser.h"
 
 void	ft_define_node_tree(t_ast *ast);
 static int ft_valid_syntax_open_here_doc(t_lst *lst);
@@ -29,7 +31,13 @@ int	main(void)
 	__environ = mini.env;
 	while (1)
 	{
+		printf("\n============================================================================\n");
 		mini.input = readline("minishell ~:");
+		t_parse	*parse = th_parse_param(mini.input);
+		if (parse)
+			parse_free(parse);
+		// FREE THE PARSE FOR TEST
+
 		if (!ft_exit(mini.input))
 			break ;
 		if (!ft_input_is_valid(mini.input))
@@ -37,8 +45,21 @@ int	main(void)
 			__environ = mini.env;
 			mini.input_lst = ft_init_lst();
 			ft_add_string_in_list(mini.input_lst, mini.input);
-			free(mini.input);
+			// free(mini.input);
 			ft_scanner_input(mini.input_lst);
+
+			// PRINT THE TOKENS TYPE
+			// ft_print_array_lst_content_type(mini.input_lst);
+			ft_delete_list(mini.input_lst);
+			free(mini.input);
+
+			// CREATE NADA INPUT
+			mini.input = "NADA";
+			mini.input_lst = ft_init_lst();
+			ft_add_string_in_list(mini.input_lst, mini.input);
+			ft_scanner_input(mini.input_lst);
+
+			// CONTINUE
 			ft_valid_syntax_open_here_doc(mini.input_lst);
 			mini.mmlst = init_mmlst();
 			while (mini.input_lst->size > 0)

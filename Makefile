@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/16 10:23:36 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/16 16:49:09 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,9 +79,17 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/string_delimiters.c\
 				./src/key_words/words_delimiters.c
 
+TH_FUNC			:= ./src/th_syntax/th_syntax.c\
+				./src/th_syntax/th_parser.c\
+				./src/th_syntax/th_parser_types.c\
+				./src/th_syntax/th_parser_utils.c\
+				./src/th_syntax/th_parser_error.c\
+				./src/th_syntax/th_print.c
+
 SRC				:= $(FILES) $(AS_TREE) $(PARSE)\
 				$(KEY_WORDS) $(SIMPLE) $(REDIRECT)\
-				$(ERROR)
+				$(ERROR)\
+				$(TH_FUNC)
 
 INCLUDE			:= -I ./include\
 				-I lib/lib_get_print/includes\
@@ -148,7 +156,7 @@ libft:
 
 libft_clean:
 	@$(MAKE) -C $(PATH_MAKE_LIB) clean --no-print-directory
-	
+
 libft_fclean:
 	@$(MAKE) -C $(PATH_MAKE_LIB) fclean --no-print-directory
 
@@ -161,4 +169,4 @@ clean:
 fclean: clean libft_fclean linked_list_fclean matrix_list_fclean matrix_matrix_list_fclean
 	@$(CMD_CLEAN) $(NAME)
 
-re: libft_clean linked_list_clean matrix_list_clean matrix_matrix_list_clean clean all 
+re: libft_clean linked_list_clean matrix_list_clean matrix_matrix_list_clean clean all
