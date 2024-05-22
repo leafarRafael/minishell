@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/21 14:25:11 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/22 09:31:43 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,8 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 
 PATH_SYSTEM_BIN := ./src/path_system_binaries/path_system_bin.c\
 
-BUILD_IN		:= ./src/build_in/exit.c
+BUILTINS		:= ./src/builtins/exit.c\
+				./src/builtins/builtins_cd.c
 
 SYNTAX_VALID	:= ./src/syntax_validation/valid_input.c\
 				./src/syntax_validation/syntax_and_here_doc.c
@@ -107,7 +108,7 @@ SRC				:= $(MAIN) $(FILES) $(AS_TREE) $(PARSE)\
 				$(KEY_WORDS) $(SIMPLE) $(REDIRECT)\
 				$(ERROR) $(TOKEN) $(DEL_QUOTES)\
 				$(EXPANDER) $(PATH_SYSTEM_BIN)\
-				$(BUILD_IN) $(SYNTAX_VALID)\
+				$(BUILTINS) $(SYNTAX_VALID)\
 				$(STDFD) $(ENVIRON)
 
 INCLUDE			:= -I ./include\

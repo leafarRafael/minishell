@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 12:56:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/22 18:36:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 extern int status_child;
+
 
 # include "abstract_syntax_tree.h"
 # include "array_lst.h"
@@ -29,12 +30,14 @@ extern int status_child;
 # include "string.h"
 # include "token.h"
 # include "redirect.h"
+# include "builtins.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <dirent.h>
 # include <sys/wait.h>
 # include <wait.h>
 # include <fcntl.h>
