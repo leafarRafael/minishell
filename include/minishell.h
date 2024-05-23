@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 15:44:13 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:42:22 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ extern int	status_child;
 # include <fcntl.h>
 # include <unistd.h>
 # include <errno.h>
+#include "color.h"
 
 # define PROGRAM_NAME "minishell: "
 # define PATH "PATH=/"
@@ -88,6 +89,13 @@ typedef enum s_boolean
 	FALSE = 0,
 	TRUE = 1
 }	t_boolean;
+
+
+typedef enum s_string_or_lst
+{
+	STRING = 0,
+	LIST,
+}	t_strlst;
 
 /*
 			Function parse
@@ -145,5 +153,10 @@ void	swap_tty(int copy_restore, t_mini *mini);
 void	close_allfd(t_mini *mini);
 
 void	ft_swap_environ(t_mini *mini, int swap_restore);
+
+int		ft_cd(t_ast_n *cmd);
+t_mlst	*expand_asterisk(t_ast_n *cmd);
+void	*getdir_list_string(int str_lst);
+void	ft_put_program_name();
 
 #endif

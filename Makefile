@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/23 15:43:22 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/23 18:19:27 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,8 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_quotes.c\
 				./src/parse/scanner/scanner_simple_op.c\
 				./src/parse/scanner/scanner_for_priotity.c\
-				./src/parse/scanner/scanner_after_expanding.c
+				./src/parse/scanner/scanner_after_expanding.c\
+				./src/parse/scanner/scanner_wildcard.c
 
 EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_mtrx_lst.c\
@@ -91,12 +92,16 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 				./src/key_words/parentheses.c\
 				./src/key_words/redirection_ctrl_op.c\
 				./src/key_words/string_delimiters.c\
-				./src/key_words/words_delimiters.c
+				./src/key_words/words_delimiters.c\
+				./src/key_words/wildcard.c
 
 PATH_SYSTEM_BIN := ./src/path_system_binaries/path_system_bin.c\
 
 BUILTINS		:= ./src/builtins/exit.c\
-				./src/builtins/builtins_cd.c
+				./src/builtins/builtins_cd.c\
+				./src/builtins/getdir_list_or_string.c\
+				./src/builtins/init_color.c\
+				./src/builtins/put_pathname.c
 
 SYNTAX_VALID	:= ./src/syntax_validation/valid_input.c\
 				./src/syntax_validation/syntax_and_here_doc.c

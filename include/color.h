@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_str_in_list.c                                 :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 14:46:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 17:08:52 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/23 17:59:45 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/23 18:41:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#ifndef COLOR_H
+# define COLOR_H
 
-int	ft_find_str_inlist(t_lst *lst, char *str, int size)
-{
-	t_var	v;
-	int		index;
+#define RESET "\033[0m"
+#define AMARELO "\033[33m"
 
-	v.i = 1;
-	index = 0;
-	v.temp_node = lst->head;
-	while (v.i <= lst->size && v.i <= size)
-	{
-		if (str[index] == v.temp_node->c)
-			index++;
-		else
-			index = 0;
-		if (index == size)
-			break ;
-		v.temp_node = v.temp_node->next;
-		v.i++;
-	}
-	if (index == size)
-		return (index);
-	return (-1);
-}
+char	**ft_init_color();
+
+#endif

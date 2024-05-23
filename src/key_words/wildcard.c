@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_str_in_list.c                                 :+:      :+:    :+:   */
+/*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 14:46:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 17:08:52 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/23 16:28:19 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/23 16:41:48 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+# include "key_words.h"
 
-int	ft_find_str_inlist(t_lst *lst, char *str, int size)
+int	whildcard(char c)
 {
-	t_var	v;
-	int		index;
-
-	v.i = 1;
-	index = 0;
-	v.temp_node = lst->head;
-	while (v.i <= lst->size && v.i <= size)
-	{
-		if (str[index] == v.temp_node->c)
-			index++;
-		else
-			index = 0;
-		if (index == size)
-			break ;
-		v.temp_node = v.temp_node->next;
-		v.i++;
-	}
-	if (index == size)
-		return (index);
-	return (-1);
+	return (c == '*');
 }

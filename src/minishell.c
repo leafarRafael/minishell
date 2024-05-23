@@ -6,30 +6,43 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 15:32:23 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:44:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_execute_minishell(t_mini *mini);
+static void	getpwd(t_mlst *envlst);
 int status_child;
+
 
 int	main(void)
 {
 	t_mini	mini;
+	char	*name;
+	char	**color;
+	int		i;
 
+	//expand_asterisk(NULL);
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
+	color = ft_init_color();
+	i = 0;
 	while (1)
 	{
-		status_child = 0;
-		mini.input = readline("minishell ~:");
+		ft_put_program_name();
+		mini.input = readline(" ~: ");
+		ft_putstr_fd(color[i], 0);
 		if (!mini.input)
 			break ;
 		if (!ft_exit(mini.input))
 			break ;
 		if (!ft_input_is_valid(mini.input))
 			ft_execute_minishell(&mini);
+		i++;
+		if (i == 6)
+			i = 0;
+		ft_putstr_fd(RESET, 0);
 	}
 	rl_clear_history();
 	close_allfd(&mini);
@@ -57,5 +70,23 @@ static void	ft_execute_minishell(t_mini *mini)
 	ft_delete_mmlst(mini->mmlst);
 }
 
+static void	getpwd(t_mlst *envlst)
+{
+	t_llst	*node;
+	t_lst	*lst_pwd;
+	char	*current_dir;
+	char	buf[300];
 
+	current_dir = getcwd(buf, 300);
+	lst_pwd = ft_init_lst();
+	ft_add_string_in_list(lst_pwd, current_dir);
+	ft_putlst_fd(lst_pwd, 1, 2);
+	node = envlst->head;
+	while(node->next != envlst->head)
+	{
+		if (ft_find_str_inlist(node->lst, "PWD", 3) != -1)
+			ft_putlst_fd(node->lst, 1, 2);
+		node = node->next;
+	}
+}
 

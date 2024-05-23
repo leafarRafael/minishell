@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_str_in_list.c                                 :+:      :+:    :+:   */
+/*   getdir_list_or_string.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 14:46:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 17:08:52 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/23 17:38:05 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/23 17:54:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "array_lst.h"
+#include "minishell.h"
 
-int	ft_find_str_inlist(t_lst *lst, char *str, int size)
+void	*getdir_list_string(int str_lst)
 {
-	t_var	v;
-	int		index;
+	t_lst	*lstdir;
+	char	*strdir;
+	char	buf[300];
 
-	v.i = 1;
-	index = 0;
-	v.temp_node = lst->head;
-	while (v.i <= lst->size && v.i <= size)
+	strdir = getcwd(buf, 300);
+	if (!strdir)
 	{
-		if (str[index] == v.temp_node->c)
-			index++;
-		else
-			index = 0;
-		if (index == size)
-			break ;
-		v.temp_node = v.temp_node->next;
-		v.i++;
+		perror("..");
+		return (NULL);
 	}
-	if (index == size)
-		return (index);
-	return (-1);
+	if (str_lst == STRING)
+		return (ft_strdup(strdir));
+	lstdir = ft_init_lst();
+	if (ft_add_string_in_list(lstdir, strdir))
+		return (NULL);
+	free(strdir);
+	return (lstdir);
 }

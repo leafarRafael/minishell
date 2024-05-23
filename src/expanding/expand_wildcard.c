@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_cd.c                                      :+:      :+:    :+:   */
+/*   expand_wildcard.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 16:25:35 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/23 16:53:18 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/23 16:59:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "expanding.h"
 #include "minishell.h"
 
-int	ft_cd(t_ast_n *cmd)
+int	expand_whildcard(t_mlst *mlst)
 {
-	DIR				*dir;
-	struct dirent	*dirent;
-	char			*dir_name;
-
-	dir = opendir("/nfs/homes/rbutzke/minishell/Makefile");
-	if (dir == NULL)
-	{
-		ft_putstr_fd("cd: ", 2);
-		ft_msg_error("/nfs/homes/rbutzke/minishell/Makefile", strerror(errno));
-		return (-1);
-	}
-	while (1)
-	{
-		dirent = readdir(dir);
-		if (dirent == NULL)
-			break ;
-		printf("%s", dirent->d_name);
-	}
-	return (1);
+	
 }
 
 t_mlst	*expand_asterisk(t_ast_n *cmd)
