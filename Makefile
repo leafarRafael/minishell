@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/22 09:31:43 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/23 15:43:22 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ SIMPLE			:=./src/struct_call_execution/call_and_exec_manager.c\
 				./src/struct_call_execution/execve/exec_manager.c\
 				./src/struct_call_execution/execve/children.c\
 				./src/struct_call_execution/execve/parent.c\
+				./src/struct_call_execution/execve/init_fork.c\
+				./src/struct_call_execution/execve/subshell.c\
 				./src/struct_call_execution/command_call_structure.c\
 				./src/struct_call_execution/builds_execution_call.c
 

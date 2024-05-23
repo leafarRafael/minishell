@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/22 14:30:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:32:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(void)
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	while (1)
 	{
+		status_child = 0;
 		mini.input = readline("minishell ~:");
 		if (!mini.input)
 			break ;

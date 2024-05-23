@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand_parentheses.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/22 18:25:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/23 14:42:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void remove_parent(t_lst *new_lst);
+static void command_in_subshell(t_mmlst *mmlst);
 static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini);
 
 void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
@@ -64,6 +65,7 @@ static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
 	new_mmlst = init_mmlst();
 	while (new_lst->size > 0)
 		ft_mmlst_add_back(new_mmlst, ft_token_cmd(new_lst));
+	command_in_subshell(new_mmlst);
 	ft_insert_mnode_between(mini->mmlst, cmd->m_lst, new_mmlst);
 	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 	if (new_lst)
@@ -73,4 +75,17 @@ static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
 	}
 	free(new_mmlst);
 	new_mmlst = NULL;
+}
+
+static void command_in_subshell(t_mmlst *mmlst)
+{
+	t_mnode	*node;
+
+	node = mmlst->head;
+	node->in_parent = 1;
+	while(node->next != mmlst->head)
+	{
+		node->in_parent = 1;
+		node = node->next;
+	}
 }

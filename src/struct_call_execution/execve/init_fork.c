@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_node_m_mtrx_lst.c                             :+:      :+:    :+:   */
+/*   init_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 13:53:40 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 14:37:47 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/23 15:41:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "matrix_matrix_lst.h"
+#include "minishell.h"
 
-t_mnode	*init_matrix_node(void)
+void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	t_mnode	*new_matrix_node;
-
-	new_matrix_node = malloc(sizeof(t_mnode));
-	new_matrix_node->matrix = NULL;
-	new_matrix_node->type = -42;
-	new_matrix_node->in_tree = -42;
-	new_matrix_node->in_parent = 0;
-	new_matrix_node->next = NULL;
-	new_matrix_node->prev = NULL;
-	return (new_matrix_node);
+	var->pid = fork();
+	if (var->pid == 0)
+		children(cmd, mini, ast, var);
+	else
+	{
+		parent(cmd, mini, var);
+		free_cmd_operator_executed(cmd, mini);
+	}
 }

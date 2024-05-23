@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/22 18:36:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:44:13 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-extern int status_child;
-
+extern int	status_child;
 
 # include "abstract_syntax_tree.h"
 # include "array_lst.h"
@@ -84,6 +83,12 @@ typedef enum s_cpy_restore
 	SWAP = 2
 }	t_cpy_restore;
 
+typedef enum s_boolean
+{
+	FALSE = 0,
+	TRUE = 1
+}	t_boolean;
+
 /*
 			Function parse
 */
@@ -128,6 +133,9 @@ char	*ft_get_executable(t_mini *mini, t_var_exe *var, t_ast *ast);
 void	ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
 void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 void	parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini);
 
 void	ft_remove_quote_mlst(t_mlst *mlst);
 void	ft_remove_quotes_lst(t_lst *lst);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/22 14:12:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/23 15:44:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	init_variables(t_var_exe *var);
 static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-static void free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini);
 
 void ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
@@ -23,14 +22,10 @@ void ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	init_variables(&var);
 	if (operator_manager(cmd, mini, ast, &var) == -1)
 		return ;
-	var.pid = fork();
-	if (var.pid == 0)
-		children(cmd, mini, ast, &var);
+	if (cmd->m_lst->in_parent)
+		subshell(cmd, mini, ast, &var);
 	else
-	{
-		parent(cmd, mini, &var);
-		free_cmd_operator_executed(cmd, mini);
-	}
+		init_fork(cmd, mini, ast, &var);
 }
 
 static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
@@ -53,7 +48,7 @@ static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *v
 	return (0);
 }
 
-static void	free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini)
+void	free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini)
 {
 	if (cmd->m_lst->next->type == PIPE)
 		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next);
