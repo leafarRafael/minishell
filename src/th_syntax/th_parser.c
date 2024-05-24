@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:45:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/16 21:13:30 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:34:20 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ t_parse	*parse_new(t_type_character type, int start)
 
 t_parse	*parse_last(t_parse *parse)
 {
-	if (!parse)
+	t_parse	*last;
+
+	last = parse;
+	if (!last)
 		return (NULL);
-	while (parse->next)
-		parse = parse->next;
-	return (parse);
+	while (last->next)
+		last = last->next;
+	return (last);
 }
 
 // void	parse_add_back(t_parse **parse, t_parse *new_node)

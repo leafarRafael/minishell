@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:32:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/22 19:49:50 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:41:05 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ typedef enum s_sytx_er
 	N_OPN_PRNTH,
 	N_CLS_DQTS,
 	N_CLS_SQTS,
-	BAD_PRNTH_SYNTAX,
+	BAD_O_PRNTH_STX,
+	BAD_C_PRNTH_STX,
 	BAD_OPRTR_SYNTAX,
+	BAD_RDRTC_SYNTAX,
+	MSSNG_FILE,
 	SYNTAX_ERROR,
 }			t_sytx_er;
 
@@ -31,6 +34,7 @@ typedef struct s_parse	t_parse;
 struct s_parse
 {
 	t_type_character	type;
+	int					first;
 	int					start;
 	int					size;
 	int					close;
@@ -61,6 +65,8 @@ int	parse_text(char *str, t_parse **parse, int *index);
 
 /* Tokens */
 int	token_is_oprtr(t_parse *parse);
+int	token_is_rdrct(t_parse *parse);
+
 int	compare_token(t_parse *parse);
 
 /* Utils */

@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/22 20:00:21 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:58:28 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,6 @@ t_parse	*th_parse_param(char *str)
 	printf("\n");
 	printf("PARSER RESULT:\n");
 	th_print_parenth(str, parse, 0);
-	// printf("RESULT\n");
-	// printf("SIZE = [%d]\n", parse->size);
-	// printf("SIZE = [%d]\n", parse->next->size);
-	// printf("SIZE = [%d]\n", parse->next->prev->size);
-
 	return (parse);
 }
 
@@ -86,10 +81,17 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 		else if (str[*index] == '(')
 			status  = append_sub(str, ptr, index, parse_prnth);
 		else if (str[*index] == '\0')
-		// CAHNGE TO STATUS TO PRINT THE ERROR IN THE END!!!
 			return (th_syntax_error(*parse, N_CLS_PRNTH));
 		else if (str[*index] == ')')
 		{
+			// printf("==>> CHECK CLOSSE PARENTH ERROR\n");
+			if (ptr->sub && (token_is_oprtr(parse_last(ptr->sub)) || token_is_rdrct(parse_last(ptr->sub))))
+			{
+				// printf("ERRO 00\n");
+				// show_str_type(ptr->sub->type);
+				// printf("\n");
+				return(th_syntax_error(parse_last(ptr->sub), BAD_C_PRNTH_STX));
+			}
 			(*index)++;
 			break ;
 		}
@@ -103,15 +105,25 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 		// 	break;
 		else
 			status  = append_sub(str, ptr, index, parse_text);
+
+		if (ptr->sub && (parse_last(ptr->sub)->prev && token_is_rdrct(parse_last(ptr->sub)->prev) && (parse_last(ptr->sub)->type != COMMAND)))
+		{
+			printf("==>> OPRTR ERROR\n");
+			show_str_type(parse_last(ptr->sub)->prev->type);
+			printf("\n");
+			show_str_type(parse_last(ptr->sub)->type);
+			printf("\n");
+			printf("[%d]==>> IO REDIRECT ERROR\n", *index);
+			return(th_syntax_error(parse_last(ptr->sub), MSSNG_FILE));
+		}
 		if (status > 0)
-		// MOVE ALL ERROR MESSAGES TO HERE!!!!!!
 			return (status);
 	}
 	return (status);
 }
 
 // MOVE THIS TO THE PASER.H
-int append_sub(char *str, t_parse *parse, int *index, t_parse_func func)
+int append_sub(char *str, t_parse *parse, int *index, t_parse_func parse_func)
 {
 	t_parse	*sub;
 	t_parse	*last;
@@ -119,7 +131,7 @@ int append_sub(char *str, t_parse *parse, int *index, t_parse_func func)
 	int		size;
 
 	// sub = NULL;
-	status = func(str, &parse->sub, index);
+	status = parse_func(str, &parse->sub, index);
 	// if (status > 0)
 	// 	return (status);
 	(*index)--;
@@ -130,7 +142,7 @@ int append_sub(char *str, t_parse *parse, int *index, t_parse_func func)
 	// if (parse->type == OPEN_PAREN && (parse->sub->type & (PIPE | AND_OP | OR_OP)))
 	if (parse->type == OPEN_PAREN && token_is_oprtr(parse->sub))
 		// return (th_syntax_error(parse, 1));
-		return (th_syntax_error(parse, BAD_PRNTH_SYNTAX));
+		return (th_syntax_error(parse, BAD_O_PRNTH_STX));
 	return (status);
 
 	// sub = NULL;
@@ -180,3 +192,10 @@ TEST OF QUOTES AND TEXT TOGHTER
 
 
 // && ( | ( && ( || && ))) NEW TEST
+
+/*
+THIS WORKS
+( ls || )
+NOT
+( || ls )
+ */

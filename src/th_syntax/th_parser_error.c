@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/22 19:44:16 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/23 21:52:59 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,17 @@ int	th_syntax_error(t_parse *parse, t_sytx_er error)
 		return (err_msg("no clossing", "DOUBLE QUOTES", N_CLS_DQTS));
 	else if (error == N_CLS_SQTS)
 		return (err_msg("no clossing", "SINGLE QUOTES", N_CLS_SQTS));
+	else if (error == BAD_O_PRNTH_STX)
+		return (parse_err(parse, BAD_O_PRNTH_STX));
+	else if (error == BAD_C_PRNTH_STX)
+		return (parse_err(parse, BAD_C_PRNTH_STX));
 	else if (error == BAD_OPRTR_SYNTAX)
 		return (parse_err(parse->prev, BAD_OPRTR_SYNTAX));
-	else if (error == BAD_PRNTH_SYNTAX)
-		return (parse_err(parse, BAD_PRNTH_SYNTAX));
+	else if (error == BAD_RDRTC_SYNTAX)
+		return (parse_err(parse->prev, BAD_RDRTC_SYNTAX));
+	else if (error == MSSNG_FILE)
+		return (parse_err(parse->prev, MSSNG_FILE));
+
 
 
 	// else if (error == BAD_OPRTR_SYNTAX)
@@ -59,6 +66,15 @@ static int	parse_err(t_parse *parse, t_sytx_er error)
 		token = "&&";
 	else if (parse->type == OPEN_PAREN)
 		token = "(";
+	else if (parse->type == REDI_IN)
+		token = "<";
+	else if (parse->type == REDI_OUT)
+		token = ">";
+	else if (parse->type == HERE_DOC)
+		token = "<<";
+	else if (parse->type == APPEND)
+		token = ">>";
+
 	printf("syntax error near unexpected token, '%s'", token);
 	return (error);
 }

@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/22 19:53:50 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/23 20:06:21 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,17 @@ int	compare_token(t_parse *parse)
 			return (th_syntax_error(parse, BAD_OPRTR_SYNTAX));
 		}
 	}
-	return (0);
+	return (NO_ERROR);
+}
+
+int	syntax_oprtr(t_parse *parse)
+{
+	if (parse->prev && token_is_oprtr(parse->prev) && token_is_oprtr(parse))
+	{
+		printf("==>> SYNTAX ERROR\n");
+		return (th_syntax_error(parse, BAD_OPRTR_SYNTAX));
+	}
+	return (NO_ERROR);
 }
 
 int	parse_oprtr(char *str, t_parse **parse, int *index)
@@ -89,12 +99,29 @@ int	parse_oprtr(char *str, t_parse **parse, int *index)
 		ptr->size++;
 		(*index)++;
 	}
-	// if (ptr->prev && token_is_oprtr(ptr->prev) && token_is_oprtr(ptr))
-	// 	return (th_syntax_error(ptr, BAD_OPRTR_SYNTAX));
-	if (ptr->prev)
-		return (compare_token(ptr));
+	return(syntax_oprtr(ptr));
+	// if (ptr->prev)
+	// 	return (compare_token(ptr));
+	// return (NO_ERROR);
+}
+
+int	token_is_rdrct(t_parse *parse)
+{
+	if (parse->type & (REDI_IN | REDI_OUT | HERE_DOC | APPEND))
+		return (1);
 	return (0);
 }
+
+int	syntax_rdrct(t_parse *parse)
+{
+	if (parse->prev && token_is_rdrct(parse->prev) && token_is_rdrct(parse))
+	{
+		printf("==>> SYNTAX ERROR\n");
+		return (th_syntax_error(parse, BAD_RDRTC_SYNTAX));
+	}
+	return (NO_ERROR);
+}
+
 
 int	parse_rdrct(char *str, t_parse **parse, int *index)
 {
@@ -111,7 +138,8 @@ int	parse_rdrct(char *str, t_parse **parse, int *index)
 		ptr->size++;
 		(*index)++;
 	}
-	return (0);
+	return (syntax_rdrct(ptr));
+	// return (NO_ERROR);
 }
 
 int	parse_text(char *str, t_parse **parse, int *index)
