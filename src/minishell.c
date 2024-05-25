@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 18:44:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/24 14:39:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ int	main(void)
 	char	**color;
 	int		i;
 
-	//expand_asterisk(NULL);
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
-	color = ft_init_color();
 	i = 0;
 	while (1)
 	{
-		ft_put_program_name();
-		mini.input = readline(" ~: ");
-		ft_putstr_fd(color[i], 0);
+		name = ft_get_program_name();
+		mini.input = readline(name);
+		free(name);
 		if (!mini.input)
 			break ;
 		if (!ft_exit(mini.input))
@@ -42,7 +40,6 @@ int	main(void)
 		i++;
 		if (i == 6)
 			i = 0;
-		ft_putstr_fd(RESET, 0);
 	}
 	rl_clear_history();
 	close_allfd(&mini);

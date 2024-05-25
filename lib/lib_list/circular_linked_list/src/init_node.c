@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_node.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 09:54:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/10 11:19:13 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:50:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_node	*ft_init_node(char c)
 	if (!new_node)
 		return (NULL);
 	new_node->c = c;
+	new_node->lex_val = (int) c;
 	new_node->type = -42;
 	new_node->paren = -42;
 	new_node->priority = -42;

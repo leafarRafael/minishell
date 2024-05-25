@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:19:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/22 09:20:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/24 15:02:24 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var
 void	children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	rl_clear_history();
+	expand_wildcard(cmd->m_lst->matrix);
 	ft_expand_m_lst(cmd->m_lst->matrix);
 	ft_remove_quote_mlst(cmd->m_lst->matrix);
 	ft_manager_fd(cmd, mini, ast, var);
