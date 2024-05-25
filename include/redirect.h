@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:52:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 10:05:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/25 11:59:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ int	open_here_doc(t_mlst *mtrix, t_llst *lst);
 void ft_finished_hdoc(t_lst *lst, t_node *nd, int *hdoc_ctrlname);
 t_lst *ft_initialize_hdoc_lst(int *hdoc_ctrlname);
 void	ft_write_here_doc(t_lst *l_file, t_lst *l_eof);
+t_mlst	*read_directory(char *path);
+t_mlst	*expand_current_directory(void);
 
 #endif

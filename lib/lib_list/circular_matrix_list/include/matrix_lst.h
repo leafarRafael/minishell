@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_lst.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:34:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/24 16:54:13 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/25 11:51:22 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int			insert_lnode_between(t_mlst *mlst, t_llst *lnode, t_mlst *new_mlst);
 t_llst	*ft_remove_return_mlst_node(t_mlst *mlst, t_llst *lnode);
 int		ft_add_mlstnode_back(t_mlst *mlst, t_llst *lnode);
 int		ft_add_mlstnode_front(t_mlst *mlst, t_llst *lnode);
+t_mlst	*ft_bubble_sort(t_mlst *mlst);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/24 14:39:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/25 11:13:02 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ int	main(void)
 	char	**color;
 	int		i;
 
+	color = ft_init_color();
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
-	i = 0;
+	i = 1;
 	while (1)
 	{
 		name = ft_get_program_name();
 		mini.input = readline(name);
 		free(name);
+		ft_putstr_fd(color[i], 2);
 		if (!mini.input)
 			break ;
 		if (!ft_exit(mini.input))
@@ -39,7 +41,8 @@ int	main(void)
 			ft_execute_minishell(&mini);
 		i++;
 		if (i == 6)
-			i = 0;
+			i = 1;
+		ft_putstr_fd(RESET, 2);
 	}
 	rl_clear_history();
 	close_allfd(&mini);

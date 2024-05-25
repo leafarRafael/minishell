@@ -21,7 +21,8 @@ SRC				:= ./src/init_list.c\
 				./src/ft_duplst.c\
 				./src/ft_cpynode.c\
 				./src/lst_insert_node_between.c\
-				./src/find_type_return_ptr.c
+				./src/find_type_return_ptr.c\
+				./src/find_str_head_last.c
 
 NUM_FILES		:= $(words $(SRC))
 OBJS			:= ./objs_circular_linked_list

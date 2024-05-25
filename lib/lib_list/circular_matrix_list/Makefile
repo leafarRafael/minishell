@@ -14,7 +14,8 @@ SRC				:= ./src/init_matrix.c\
 				./src/mlst_insert_lnode_between.c\
 				./src/remove_and_return_lline.c\
 				./src/add_nodeline_back.c\
-				./src/add_nodeline_front.c
+				./src/add_nodeline_front.c\
+				./src/bubble_mlst.c
 
 NUM_FILES		:= $(words $(SRC))
 OBJS			:= ./objs_matrix_list

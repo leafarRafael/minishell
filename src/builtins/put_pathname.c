@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_pathname.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:55:33 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/24 09:27:26 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/25 09:17:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	addcolor_matrix(char **mtrix)
 		i++;
 	}
 	ft_delcmtrx(color);
+	return (0);
 }
 
 char	*ft_mtrx_to_str(char **mtrx)
