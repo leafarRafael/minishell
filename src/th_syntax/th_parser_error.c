@@ -6,38 +6,43 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/23 21:52:59 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/25 20:48:22 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
 
 static int	err_msg(char *msg1, char *msg2, t_sytx_er error);
-static int	parse_err(t_parse *parse, t_sytx_er error);
+static int	parse_err(t_parse *parse, char* str, t_sytx_er error);
 
 // remove the t_parse parse from the function
-int	th_syntax_error(t_parse *parse, t_sytx_er error)
+int	th_syntax_error(t_parse *parse, char *str, t_sytx_er error)
 {
-	printf("ERROR MSG\n");
+	printf("ERROR MSG [%d]\n", error);
 	if (error == N_CLS_PRNTH)
 		return (err_msg("no clossing", "PARENTHESIS", N_CLS_PRNTH));
 	else if (error == N_OPN_PRNTH)
 		return (err_msg("no opennig", "PARENTHESIS", N_OPN_PRNTH));
+	else if (error == EMPTY_PRNTH)
+		return (err_msg("empty", "PARENTHESIS", EMPTY_PRNTH));
 	else if (error == N_CLS_DQTS)
 		return (err_msg("no clossing", "DOUBLE QUOTES", N_CLS_DQTS));
 	else if (error == N_CLS_SQTS)
 		return (err_msg("no clossing", "SINGLE QUOTES", N_CLS_SQTS));
-	else if (error == BAD_O_PRNTH_STX)
-		return (parse_err(parse, BAD_O_PRNTH_STX));
-	else if (error == BAD_C_PRNTH_STX)
-		return (parse_err(parse, BAD_C_PRNTH_STX));
+	else if (error == STX_OPN_PRNTH_OPRTR)
+		return (parse_err(parse, str, STX_OPN_PRNTH_OPRTR));
+	else if (error == STX_OPRTR_CLS_PRNTH)
+		return (parse_err(parse, str, STX_OPRTR_CLS_PRNTH));
 	else if (error == BAD_OPRTR_SYNTAX)
-		return (parse_err(parse->prev, BAD_OPRTR_SYNTAX));
+		return (parse_err(parse->prev, str, BAD_OPRTR_SYNTAX));
 	else if (error == BAD_RDRTC_SYNTAX)
-		return (parse_err(parse->prev, BAD_RDRTC_SYNTAX));
+		return (parse_err(parse->prev, str, BAD_RDRTC_SYNTAX));
 	else if (error == MSSNG_FILE)
-		return (parse_err(parse->prev, MSSNG_FILE));
-
+		return (parse_err(parse->prev, str, MSSNG_FILE));
+	else if (error == STX_TOKEN_AFTER)
+		return (parse_err(parse, str, STX_TOKEN_AFTER));
+	else if (error == STX_TOKEN_BEFORE)
+		return (parse_err(parse->prev, str, STX_TOKEN_BEFORE));
 
 
 	// else if (error == BAD_OPRTR_SYNTAX)
@@ -53,11 +58,30 @@ static int	err_msg(char *msg1, char *msg2, t_sytx_er error)
 	return (error);
 }
 
-static int	parse_err(t_parse *parse, t_sytx_er error)
+static char	*token_name(t_parse *parse, char *str)
+{
+	int	index;
+	char *token;
+
+	index = 0;
+	token = malloc((parse->size + 1) * sizeof(char));
+	while (index < parse->size)
+	{
+		token[index] = str[parse->start + index];
+		index++;
+	}
+	token[index] = '\0';
+	return (token);
+}
+
+static int	parse_err(t_parse *parse, char* str, t_sytx_er error)
 {
 	char	*token;
+	int		flag;
 
-	printf("ERROR MSG 00\n");
+	// printf("ERROR MSG 00\n");
+	token = "??";
+	flag = 0;
 	if (parse->type == PIPE)
 		token = "|";
 	else if (parse->type == AND_OP)
@@ -74,7 +98,28 @@ static int	parse_err(t_parse *parse, t_sytx_er error)
 		token = "<<";
 	else if (parse->type == APPEND)
 		token = ">>";
+	else if (parse->type & (COMMAND | D_QUOTES | S_QUOTES))
+	{
+		if (error == STX_TOKEN_AFTER)
+			token = ")";
+		if (error == STX_TOKEN_BEFORE)
+		{
+			// int	index;
 
-	printf("syntax error near unexpected token, '%s'", token);
+			// index = 0;
+			// token = malloc((parse->size + 1) * sizeof(char));
+			// while (index < parse->size)
+			// {
+			// 	token[index] = str[parse->start + index];
+			// 	index++;
+			// }
+			// token[index] = '\0';
+			token = token_name(parse, str);
+			flag = 1;
+		}
+	}
+	printf("syntax error near unexpected token, '%s'\n", token);
+	if (flag)
+		free(token);
 	return (error);
 }

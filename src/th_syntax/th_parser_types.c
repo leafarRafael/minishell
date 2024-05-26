@@ -6,12 +6,21 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/23 20:06:21 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:42:41 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
 #include "th_syntax.h"
+
+// Check if after a CLOSE PARENTHESIS ")" there is a COMMAND "text"
+int syntax_cls_prnth_cmd(t_parse *parse, char *str, int status)
+{
+	if (parse->prev && parse->prev->type == OPEN_PAREN &&
+		(parse->type & (COMMAND | D_QUOTES | S_QUOTES)))
+		status = th_syntax_error(parse, str, STX_TOKEN_AFTER);
+	return (status);
+}
 
 int	parse_quote(char *str, t_parse **parse, int *index)
 {
@@ -32,114 +41,16 @@ int	parse_quote(char *str, t_parse **parse, int *index)
 	{
 		// printf("QUOTE index[%d] [%c]\n", *index, str[*index]);
 		if (str[*index] == '\0')
-			return (th_syntax_error(*parse, error));
+			return (th_syntax_error(*parse, str, error));
 		else if (str[*index] == quote)
 		{
 			(*index)++;
-			// if (str[*index] && !th_is_io_rdrct(str, *index) && !th_is_logical_oprtr(str, *index) && !th_is_in_set(str[*index], "() "))
-			// {
-			// 	// printf("QUOTES LEN [%d]\n", (*parse)->size);
-			// 	status = append_sub(str, ptr, index, parse_text);
-			// 	ptr->size -= parse_last(ptr)->sub->size;
-			// 	// printf("QUOTES LEN AFTER APPEND [%d]\n", (*parse)->size);
-			// }
 			break ;
 		}
 		else
 			ptr->size++;
 	}
-
-	return (status);
-	// return (0);
-}
-
-int	token_is_oprtr(t_parse *parse)
-{
-	if (parse->type & (PIPE | AND_OP | OR_OP))
-		return (1);
-	return (0);
-}
-
-int	compare_token(t_parse *parse)
-{
-	if (token_is_oprtr(parse->prev))
-	{
-		if (token_is_oprtr(parse))
-		{
-			printf("==>> SYNTAX ERROR\n");
-			return (th_syntax_error(parse, BAD_OPRTR_SYNTAX));
-		}
-	}
-	return (NO_ERROR);
-}
-
-int	syntax_oprtr(t_parse *parse)
-{
-	if (parse->prev && token_is_oprtr(parse->prev) && token_is_oprtr(parse))
-	{
-		printf("==>> SYNTAX ERROR\n");
-		return (th_syntax_error(parse, BAD_OPRTR_SYNTAX));
-	}
-	return (NO_ERROR);
-}
-
-int	parse_oprtr(char *str, t_parse **parse, int *index)
-{
-	t_parse	*ptr;
-	int		type;
-
-	printf("==>> IN PARSE OPERATOR\n");
-	type = th_is_logical_oprtr(str, *index);
-	ptr = parse_add_back(parse, parse_new(type, *index));
-	// ptr = parse_last(*parse);
-	ptr->size = 1;
-	(*index)++;
-	if (type & (OR_OP | AND_OP))
-	{
-		ptr->size++;
-		(*index)++;
-	}
-	return(syntax_oprtr(ptr));
-	// if (ptr->prev)
-	// 	return (compare_token(ptr));
-	// return (NO_ERROR);
-}
-
-int	token_is_rdrct(t_parse *parse)
-{
-	if (parse->type & (REDI_IN | REDI_OUT | HERE_DOC | APPEND))
-		return (1);
-	return (0);
-}
-
-int	syntax_rdrct(t_parse *parse)
-{
-	if (parse->prev && token_is_rdrct(parse->prev) && token_is_rdrct(parse))
-	{
-		printf("==>> SYNTAX ERROR\n");
-		return (th_syntax_error(parse, BAD_RDRTC_SYNTAX));
-	}
-	return (NO_ERROR);
-}
-
-
-int	parse_rdrct(char *str, t_parse **parse, int *index)
-{
-	t_parse	*ptr;
-	int		type;
-
-	type = th_is_io_rdrct(str, *index);
-	parse_add_back(parse, parse_new(type, *index));
-	ptr = parse_last(*parse);
-	ptr->size = 1;
-	(*index)++;
-	if (type & (HERE_DOC |  APPEND))
-	{
-		ptr->size++;
-		(*index)++;
-	}
-	return (syntax_rdrct(ptr));
-	// return (NO_ERROR);
+	return (syntax_cls_prnth_cmd(ptr, str, status));
 }
 
 int	parse_text(char *str, t_parse **parse, int *index)
@@ -157,13 +68,9 @@ int	parse_text(char *str, t_parse **parse, int *index)
 		// printf("TXT index[%d] [%c]\n", *index, str[*index]);
 		if (str[*index] == '&' && str[*index + 1] == '&')
 			break ;
-		// if (th_is_quote(str, *index))
-		// {
-		// 	status = append_sub(str, ptr, index, parse_quote);
-		// 	(*index)++;
-		// }
 		ptr->size++;
 		(*index)++;
 	}
-	return (status);
+	// return (status);
+	return (syntax_cls_prnth_cmd(ptr, str, status));
 }

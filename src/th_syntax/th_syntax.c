@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/23 21:58:28 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/25 21:22:57 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 
 static int	parse_prnth(char *str, t_parse **parse, int *index);
 int append_sub(char *str, t_parse *parse, int *index, t_parse_func func);
+int syntax_rdrct_file(t_parse *parse);
+
+static int syntax_cmd_opn_prnth(t_parse *parse, char *str, int status);
+static int syntax_rdrct_opn_prnth(t_parse *parse, char *str, int status);
+
 
 t_parse	*th_parse_param(char *str)
 {
 	t_parse	*parse;
-	// t_parse	*parse_array;
 	int		index;
-	size_t	len;
 	int		status;
 
 	status = 0;
-	len = ft_strlen(str);
-	// printf("READLINE LEN = [%zu]\n", len);
-	// parse_array = malloc((len + 1) * sizeof(t_parse));
 	parse = NULL;
 	index = 0;
 	while (str[index])
@@ -37,7 +37,7 @@ t_parse	*th_parse_param(char *str)
 		if (th_is_tab(str[index]))
 			index++;
 		else if (str[index] == ')')
-			status = th_syntax_error(parse, N_OPN_PRNTH);
+			status = th_syntax_error(parse, str, N_OPN_PRNTH);
 		else if (str[index] == '(')
 			status = parse_prnth(str, &parse, &index);
 		else if (th_is_quote(str, index))
@@ -48,6 +48,20 @@ t_parse	*th_parse_param(char *str)
 			status = parse_rdrct(str, &parse, &index);
 		else
 			status = parse_text(str, &parse, &index);
+
+		// if (!status && syntax_rdrct_file(parse))
+		// {
+		// 	printf("==>> OPRTR ERROR IN START\n");
+		// 	// show_str_type(parse_last(ptr->sub)->prev->type);
+		// 	// printf("\n");
+		// 	// show_str_type(parse_last(ptr->sub)->type);
+		// 	// printf("\n");	// r (syntax_cls_prnth_cmd(ptr, status));
+
+		// 	// printf("[%d]==>> IO REDIRECT ERROR\n", *index);
+		// 	status = th_syntax_error(parse_last(parse), MSSNG_FILE);
+		// 	printf("RDRCT ERROR [%d]\n", status);
+		// }
+
 		if (status > 0)
 		{
 			break ;
@@ -73,26 +87,36 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 	ptr = parse_add_back(parse, parse_new(OPEN_PAREN, *index + 1));
 	// ptr = parse_add_back(parse, parse_new(COMMAND, *index + 1));
 	while (str[(*index)++])
-	// while (str[++(*index)])
 	{
 		// printf("PARENTH index[%d] [%c]\n", *index, str[*index]);
 		if (th_is_tab(str[*index]))
 			ptr->size++;
 		else if (str[*index] == '(')
+		{
+			// MOVE THE CHECKS FROM THE RETURN, ATT THE END TO HERE!!!!!!!!
+			if (ptr->prev && (ptr->prev->type & (COMMAND | D_QUOTES | S_QUOTES)))
+			{
+				status = th_syntax_error(ptr, str, STX_TOKEN_BEFORE);
+				return (status);
+			}
+
 			status  = append_sub(str, ptr, index, parse_prnth);
+		}
 		else if (str[*index] == '\0')
-			return (th_syntax_error(*parse, N_CLS_PRNTH));
+			return (th_syntax_error(*parse, str, N_CLS_PRNTH));
 		else if (str[*index] == ')')
 		{
-			// printf("==>> CHECK CLOSSE PARENTH ERROR\n");
+			// printf("ERROR 02\n");
 			if (ptr->sub && (token_is_oprtr(parse_last(ptr->sub)) || token_is_rdrct(parse_last(ptr->sub))))
 			{
-				// printf("ERRO 00\n");
-				// show_str_type(ptr->sub->type);
-				// printf("\n");
-				return(th_syntax_error(parse_last(ptr->sub), BAD_C_PRNTH_STX));
+				// printf("ERROR 03\n");
+				return(th_syntax_error(parse_last(ptr->sub), str, STX_OPRTR_CLS_PRNTH));
 			}
+			if (ptr->sub == NULL)
+				return(th_syntax_error(ptr, str, EMPTY_PRNTH));
 			(*index)++;
+			// printf("ERROR 04\n");
+			// printf("STATUS [%d]\n", status);
 			break ;
 		}
 		else if (th_is_quote(str, *index))
@@ -106,19 +130,66 @@ static int	parse_prnth(char *str, t_parse **parse, int *index)
 		else
 			status  = append_sub(str, ptr, index, parse_text);
 
-		if (ptr->sub && (parse_last(ptr->sub)->prev && token_is_rdrct(parse_last(ptr->sub)->prev) && (parse_last(ptr->sub)->type != COMMAND)))
-		{
-			printf("==>> OPRTR ERROR\n");
-			show_str_type(parse_last(ptr->sub)->prev->type);
-			printf("\n");
-			show_str_type(parse_last(ptr->sub)->type);
-			printf("\n");
-			printf("[%d]==>> IO REDIRECT ERROR\n", *index);
-			return(th_syntax_error(parse_last(ptr->sub), MSSNG_FILE));
-		}
+		// if (syntax_rdrct_file(*parse))
+		// 	return(th_syntax_error(parse_last(ptr->sub), MSSNG_FILE));
 		if (status > 0)
 			return (status);
 	}
+	// printf("ERROR 05\n");
+	// printf("STATUS [%d]\n", status);
+
+	return (syntax_cmd_opn_prnth(ptr, str, status) || syntax_rdrct_opn_prnth(ptr, str, status));
+	// return (status);
+}
+
+// Check if there is file after a IO REDIRECT "< , >, <<, >>"
+int syntax_rdrct_file(t_parse *parse)
+{
+	t_parse	*ptr;
+
+	ptr = parse->sub;
+	return (ptr &&
+		(parse_last(ptr)->prev && token_is_rdrct(parse_last(ptr)->prev)) &&
+		(parse_last(ptr)->type != COMMAND));
+}
+
+
+// Check if after a COMMAND "text" there is a OPEN PARENTHESIS "("
+static int syntax_cmd_opn_prnth(t_parse *parse, char *str, int status)
+{
+	if (parse->prev &&
+		(parse->prev->type & (COMMAND | D_QUOTES | S_QUOTES)) &&
+		parse->type == OPEN_PAREN)
+		status = th_syntax_error(parse, str, STX_TOKEN_BEFORE);
+	return (status);
+}
+
+// Check if after a REDIRECT  "< , >, <<, >>" there is a OPEN PARENTHESIS "("
+static int syntax_rdrct_opn_prnth(t_parse *parse, char *str, int status)
+{
+	if (parse->prev &&
+		(parse->prev->type & (REDI_IN | REDI_OUT | HERE_DOC | APPEND)) &&
+		parse->type == OPEN_PAREN)
+		status = th_syntax_error(parse, str, STX_TOKEN_BEFORE);
+	return (status);
+}
+
+// Check if after a CLOSE PARENTHESIS ")" there is a OPEN PARENTHESIS "("
+int sysntax_prnth_opn_prnth(t_parse *parse, int status)
+{
+	return (0);
+}
+
+// Check if after a OPEN PARENTHESIS "(" there is an OPERATOR "|, ||, &&"
+int syntax_opn_prnth_oprtr(t_parse *parse, char *str, int status)
+{
+	// printf("ERROR 00\n");
+	if (parse->type == OPEN_PAREN && token_is_oprtr(parse->sub))
+	{
+		// printf("ERROR 01\n");
+		status = th_syntax_error(parse, str, STX_OPN_PRNTH_OPRTR);
+	}
+	// printf("STATUS [%d]\n", status);
 	return (status);
 }
 
@@ -130,32 +201,13 @@ int append_sub(char *str, t_parse *parse, int *index, t_parse_func parse_func)
 	int		status;
 	int		size;
 
-	// sub = NULL;
 	status = parse_func(str, &parse->sub, index);
-	// if (status > 0)
-	// 	return (status);
 	(*index)--;
-	// last = parse_add_back(&parse->sub, sub);
 	last = parse_last(parse->sub);
 	size = 2 * ((last->type & (OPEN_PAREN | D_QUOTES | S_QUOTES)) > 0);
 	parse->size += size + last->size;
-	// if (parse->type == OPEN_PAREN && (parse->sub->type & (PIPE | AND_OP | OR_OP)))
-	if (parse->type == OPEN_PAREN && token_is_oprtr(parse->sub))
-		// return (th_syntax_error(parse, 1));
-		return (th_syntax_error(parse, BAD_O_PRNTH_STX));
-	return (status);
-
-	// sub = NULL;
-	// status = func(str, &sub, index);
-	// // if (status > 0)
-	// // 	return (status);
-	// (*index)--;
-	// last = parse_add_back(&parse->sub, sub);
-	// size = 2 * ((sub->type & (OPEN_PAREN | D_QUOTES | S_QUOTES)) > 0);
-	// parse->size += size + last->size;
-
-
-	return (status);
+	return (syntax_opn_prnth_oprtr(parse, str, status));
+	// return (status);
 }
 
 
@@ -198,4 +250,12 @@ THIS WORKS
 ( ls || )
 NOT
 ( || ls )
+ */
+
+
+/*
+( cmd || << || )
+(>> file (cdm ) || cmd >> file )
+111(222(333))
+11>>(22>>(33>>(cmd)))
  */

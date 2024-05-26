@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:32:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/23 21:41:05 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/25 19:38:30 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ typedef enum s_sytx_er
 	NO_ERROR,
 	N_CLS_PRNTH,
 	N_OPN_PRNTH,
+	EMPTY_PRNTH,
 	N_CLS_DQTS,
 	N_CLS_SQTS,
-	BAD_O_PRNTH_STX,
-	BAD_C_PRNTH_STX,
+	STX_OPN_PRNTH_OPRTR,
+	STX_OPRTR_CLS_PRNTH,
 	BAD_OPRTR_SYNTAX,
 	BAD_RDRTC_SYNTAX,
 	MSSNG_FILE,
+	STX_TOKEN_AFTER,
+	STX_TOKEN_BEFORE,
 	SYNTAX_ERROR,
 }			t_sytx_er;
 
@@ -67,8 +70,6 @@ int	parse_text(char *str, t_parse **parse, int *index);
 int	token_is_oprtr(t_parse *parse);
 int	token_is_rdrct(t_parse *parse);
 
-int	compare_token(t_parse *parse);
-
 /* Utils */
 int	th_is_tab(int ch);
 int	th_is_in_set(char ch, char *set);
@@ -78,6 +79,6 @@ int	th_is_io_rdrct(char *str, int index);
 
 void	th_print_parenth(char *str, t_parse *parse, int len);
 
-int	th_syntax_error(t_parse *parse, t_sytx_er error);
+int	th_syntax_error(t_parse *parse, char *str, t_sytx_er error);
 
 #endif
