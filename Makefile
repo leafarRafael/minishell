@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/25 11:58:43 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/26 08:50:37 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,8 +81,10 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 
 EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_mtrx_lst.c\
-				./src/expanding/expand_wildcard/expand_wildcard.c\
-				./src/expanding/expand_wildcard/get_directory_content.c
+				./src/expanding/expand_wildcard/expand_wildcard_mlst.c\
+				./src/expanding/expand_wildcard/expand_wildcard_lst.c\
+				./src/expanding/expand_wildcard/get_directory_content.c\
+				./src/expanding/expand_wildcard/get_prefix_suffix.c
 
 ERROR			:= ./src/error_and_free_memory/memory_free.c\
 				./src/error_and_free_memory/msg_error.c

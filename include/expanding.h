@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:48:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/24 14:51:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/26 08:50:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ int			ft_expander_lst_token(t_lst *lst);
 void		ft_expand_m_lst(t_mlst *lst_matrix);
 void		ft_expand_m_lst_heredoc(t_mlst *mlst);
 t_mlst		*expand_current_directory();
-void		expand_wildcard(t_mlst *mlst);
+void		expand_wildcard_mlst(t_mlst *mlst);
+char		*get_prefix(t_node *ptr, t_lst *lst);
+char		*get_suffix(t_node *ptr, t_lst *lst);
+void		ft_expand_lst_wildcard(t_lst *lst, t_mlst *dir_content);
 
 #endif
