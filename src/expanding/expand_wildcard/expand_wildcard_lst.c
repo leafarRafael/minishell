@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:53:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 12:58:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 15:24:48 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static int	find_prefix(t_lst *inlst, t_lst *this_lst);
 static int	find_sufix(t_lst *inlst, t_lst *this_lst);
 static int	find_infix(t_lst *inlst, t_lst *this_lst);
+static int	ft_find_infix_healper(t_lst *inlst, t_lst *this_lst);
 static int	ft_remove_wild_dup(t_lst *inlst, t_lst *this_lst);
 
 void	ft_expand_lst_wildcard(t_lst *lst, t_mlst *dir_content)
@@ -81,8 +82,6 @@ static int	find_sufix(t_lst *inlst, t_lst *this_lst)
 	return (find_infix(inlst, this_lst));
 }
 
-static int	ft_find_infix_healper(t_lst *inlst, t_lst *this_lst);
-
 static int	find_infix(t_lst *inlst, t_lst *this_lst)
 {
 	if (this_lst->size == 0)
@@ -119,6 +118,8 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this_lst)
 		if (node->c != cpy_inlst->last->c)
 			return (ft_delete_list(cpy_inlst) +30);
 		lst_rmv_back(cpy_inlst);
+		if (cpy_inlst->size == 0)
+			return (1);
 		node = node->prev;
 		if (node->type == WILDCARD)
 		{
@@ -130,10 +131,11 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this_lst)
 			}
 			return (lst_rmv_back(in) + find_infix(in, this_lst) + ft_delete_list(cpy_inlst));
 		}
-		if (node == this_lst->last)
+		if (node->prev == this_lst->last)
 		{
 			while (this_lst->size)
 				lst_rmv_back(this_lst);
+			lst_rmv_back(in);
 			return (0);
 		}
 	}
