@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:32:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/25 19:38:30 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:11:42 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum s_sytx_er
 	BAD_OPRTR_SYNTAX,
 	BAD_RDRTC_SYNTAX,
 	MSSNG_FILE,
+	STX_IN_TOKEN,
 	STX_TOKEN_AFTER,
 	STX_TOKEN_BEFORE,
 	SYNTAX_ERROR,
@@ -61,6 +62,7 @@ int		parse_len(t_parse *parse);
 void	parse_free(t_parse *parse);
 
 /* Types */
+int	parse_prnth(char *str, t_parse **parse, int *index);
 int	parse_quote(char *str, t_parse **parse, int *index);
 int	parse_oprtr(char *str, t_parse **parse, int *index);
 int	parse_rdrct(char *str, t_parse **parse, int *index);
@@ -77,8 +79,14 @@ int	th_is_quote(char *str, int index);
 int	th_is_logical_oprtr(char *str, int index);
 int	th_is_io_rdrct(char *str, int index);
 
+/* Syntac Checks */
+int	parse_bfr_fst_prnth(t_parse **parse, char *str, int *index);
+int	parse_bfr_sub_prnth(t_parse *parse, char *str, int *index);
+// int syntax_cmd_opn_prnth(t_parse *parse, char *str);
+// int syntax_rdrct_opn_prnth(t_parse *parse, char *str);
+
 void	th_print_parenth(char *str, t_parse *parse, int len);
 
-int	th_syntax_error(t_parse *parse, char *str, t_sytx_er error);
+int	syntax_error(t_parse *parse, char *str, t_sytx_er error);
 
 #endif

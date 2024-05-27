@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:40:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/25 19:44:19 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:12:49 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	token_is_rdrct(t_parse *parse)
 int	syntax_rdrct(t_parse *parse, char *str)
 {
 	if (parse->prev && token_is_rdrct(parse->prev) && token_is_rdrct(parse))
-		return (th_syntax_error(parse, str, BAD_RDRTC_SYNTAX));
+		return (syntax_error(parse, str, BAD_RDRTC_SYNTAX));
 	return (NO_ERROR);
 }
 

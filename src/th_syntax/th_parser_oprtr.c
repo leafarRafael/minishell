@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:39:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/25 19:43:57 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:12:49 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	token_is_oprtr(t_parse *parse)
 static int	syntax_oprtr(t_parse *parse, char *str)
 {
 	if (parse->prev && token_is_oprtr(parse->prev) && token_is_oprtr(parse))
-		return (th_syntax_error(parse, str, BAD_OPRTR_SYNTAX));
+		return (syntax_error(parse, str, BAD_OPRTR_SYNTAX));
 	return (NO_ERROR);
 }
 
@@ -34,7 +34,7 @@ static int	syntax_oprtr(t_parse *parse, char *str)
 static int	syntax_rdrct_oprtr(t_parse *parse, char *str)
 {
 	if (parse->prev && token_is_rdrct(parse->prev) && token_is_oprtr(parse))
-		return (th_syntax_error(parse, str, MSSNG_FILE));
+		return (syntax_error(parse, str, MSSNG_FILE));
 	return (NO_ERROR);
 }
 

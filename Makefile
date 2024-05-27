@@ -6,7 +6,7 @@
 #    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/25 14:44:19 by tforster         ###   ########.fr        #
+#    Updated: 2024/05/27 12:10:12 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ TH_FUNC			:= ./src/th_syntax/th_syntax.c\
 				./src/th_syntax/th_parser.c\
 				./src/th_syntax/th_parser_types.c\
 				./src/th_syntax/th_parser_utils.c\
+				./src/th_syntax/th_parser_prnth.c\
 				./src/th_syntax/th_parser_oprtr.c\
 				./src/th_syntax/th_parser_rdrct.c\
 				./src/th_syntax/th_parser_error.c\

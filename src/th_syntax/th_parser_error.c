@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/25 20:48:22 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:12:49 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static int	err_msg(char *msg1, char *msg2, t_sytx_er error);
 static int	parse_err(t_parse *parse, char* str, t_sytx_er error);
 
 // remove the t_parse parse from the function
-int	th_syntax_error(t_parse *parse, char *str, t_sytx_er error)
+int	syntax_error(t_parse *parse, char *str, t_sytx_er error)
 {
-	printf("ERROR MSG [%d]\n", error);
+	// printf("ERROR MSG [%d]\n", error);
 	if (error == N_CLS_PRNTH)
 		return (err_msg("no clossing", "PARENTHESIS", N_CLS_PRNTH));
 	else if (error == N_OPN_PRNTH)
@@ -39,6 +39,8 @@ int	th_syntax_error(t_parse *parse, char *str, t_sytx_er error)
 		return (parse_err(parse->prev, str, BAD_RDRTC_SYNTAX));
 	else if (error == MSSNG_FILE)
 		return (parse_err(parse->prev, str, MSSNG_FILE));
+	else if (error == STX_IN_TOKEN)
+		return (parse_err(parse, str, STX_IN_TOKEN));
 	else if (error == STX_TOKEN_AFTER)
 		return (parse_err(parse, str, STX_TOKEN_AFTER));
 	else if (error == STX_TOKEN_BEFORE)
@@ -89,7 +91,12 @@ static int	parse_err(t_parse *parse, char* str, t_sytx_er error)
 	else if (parse->type == OR_OP)
 		token = "&&";
 	else if (parse->type == OPEN_PAREN)
-		token = "(";
+	{
+		if (error == STX_IN_TOKEN)
+			token = ")";
+		else
+			token = "(";
+	}
 	else if (parse->type == REDI_IN)
 		token = "<";
 	else if (parse->type == REDI_OUT)
@@ -100,9 +107,10 @@ static int	parse_err(t_parse *parse, char* str, t_sytx_er error)
 		token = ">>";
 	else if (parse->type & (COMMAND | D_QUOTES | S_QUOTES))
 	{
+		// printf("ERROR MSG 01 [%d]\n", error);
 		if (error == STX_TOKEN_AFTER)
 			token = ")";
-		if (error == STX_TOKEN_BEFORE)
+		if (error == STX_TOKEN_BEFORE || error == STX_IN_TOKEN)
 		{
 			// int	index;
 
