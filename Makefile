@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/27 15:13:11 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/27 15:46:25 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,9 @@ EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_wildcard/expand_wildcard_mlst.c\
 				./src/expanding/expand_wildcard/expand_wildcard_lst.c\
 				./src/expanding/expand_wildcard/get_directory_content.c\
-				./src/expanding/expand_wildcard/get_prefix_suffix.c\
+				./src/expanding/expand_wildcard/find_prefix.c\
+				./src/expanding/expand_wildcard/find_suffix.c\
+				./src/expanding/expand_wildcard/find_infix.c
 
 ERROR			:= ./src/error_and_free_memory/memory_free.c\
 				./src/error_and_free_memory/msg_error.c

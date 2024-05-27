@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:48:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 15:13:01 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 15:48:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ typedef struct s_expandig
 	int		i;
 }			t_expand;
 
-int			ft_expander_lst_token(t_lst *lst);
-void		ft_expand_m_lst(t_mlst *lst_matrix);
-void		ft_expand_m_lst_heredoc(t_mlst *mlst);
-t_mlst		*expand_current_directory();
-void		expand_wildcard_mlst(t_mlst *mlst);
-char		*get_prefix(t_node *ptr, t_lst *lst);
-char		*get_suffix(t_node *ptr, t_lst *lst);
-void		ft_expand_lst_wildcard(t_lst *lst, t_mlst *dir_content);
+int		ft_expander_lst_token(t_lst *lst);
+void	ft_expand_m_lst(t_mlst *lst_matrix);
+void	ft_expand_m_lst_heredoc(t_mlst *mlst);
+t_mlst	*expand_current_directory();
+void	expand_wildcard_mlst(t_mlst *mlst);
+void	ft_expand_lst_wildcard(t_lst *lst, t_mlst *dir_content);
+int		find_prefix(t_lst *inlst, t_lst *this_lst);
+int		find_sufix(t_lst *inlst, t_lst *this_lst);
+int		find_infix(t_lst *inlst, t_lst *this_lst);
+
 
 #endif
