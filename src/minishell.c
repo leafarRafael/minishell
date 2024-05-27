@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/25 11:13:02 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 13:06:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ int	main(void)
 {
 	t_mini	mini;
 	char	*name;
-	char	**color;
 	int		i;
 
-	color = ft_init_color();
+	mini.color = ft_init_color();
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	i = 1;
 	while (1)
@@ -32,7 +31,7 @@ int	main(void)
 		name = ft_get_program_name();
 		mini.input = readline(name);
 		free(name);
-		ft_putstr_fd(color[i], 2);
+		ft_putstr_fd(mini.color[i], 2);
 		if (!mini.input)
 			break ;
 		if (!ft_exit(mini.input))
@@ -46,6 +45,7 @@ int	main(void)
 	}
 	rl_clear_history();
 	close_allfd(&mini);
+	ft_delcmtrx(mini.color);
 	ft_delete_matrix(mini.m_lst_env);
 	return (1);
 }

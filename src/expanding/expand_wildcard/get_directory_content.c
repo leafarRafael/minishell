@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_directory_content.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:57:34 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/25 11:58:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 13:08:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_mlst	*expand_current_directory(void)
 	if (!directory_contents)
 		return (NULL);
 	free(dir_path);
-	return (ft_bubble_sort(directory_contents));
+	return (directory_contents);
 }
 
 t_mlst	*read_directory(char *path)

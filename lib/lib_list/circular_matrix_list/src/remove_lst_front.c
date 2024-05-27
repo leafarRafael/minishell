@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 15:44:00 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 09:35:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static int	remove_size_three_more(t_mlst *matrix)
 {
 	t_var_matrix	v;
 
-	v.second_lst = matrix->head->next;
 	v.head_lst = matrix->head;
+	v.second_lst = matrix->head->next;
 	v.second_lst->prev = matrix->last;
 	matrix->last->next = v.second_lst;
 	matrix->head = v.second_lst;

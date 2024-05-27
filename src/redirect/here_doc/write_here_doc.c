@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 15:15:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:56:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static t_mlst	*ft_read_std(char *eof)
 		}
 		h_doc.new_lst = ft_create_lst_add_str(h_doc.read_line);
 		if (h_doc.new_lst->last->c == '\n')
-			ft_remove_node_back(h_doc.new_lst);
+			lst_rmv_back(h_doc.new_lst);
 		ft_scanner_simple_operator(h_doc.new_lst);
 		ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
 		free(h_doc.read_line);

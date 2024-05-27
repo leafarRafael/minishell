@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 09:02:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:56:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_mlst	*ft_token_cmd(t_lst	*lst)
 static void delete_white_space(t_lst *lst)
 {
 	while (lst->last->type == WH_SPACE)
-		ft_remove_node_back(lst);
+		lst_rmv_back(lst);
 	while (lst->head->type == WH_SPACE)
 		ft_remove_node_front(lst);
 }

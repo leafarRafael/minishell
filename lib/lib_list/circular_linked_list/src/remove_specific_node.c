@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_specific_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:32:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:08:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:56:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_remove_specific_node(t_lst *lst, t_node *node)
 	if (lst->head == node)
 		return (ft_remove_node_front(lst));
 	if (lst->last == node)
-		return (ft_remove_node_back(lst));
+		return (lst_rmv_back(lst));
 	if (lst->last != node || lst->head != node)
 		return (ft_other_cases(lst, node));
 	return (-1);

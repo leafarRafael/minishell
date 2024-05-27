@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_node_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:16:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 10:57:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:56:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	ft_one_node(t_lst *lst);
 static int	ft_two_node(t_lst *lst);
 static int	ft_three_more(t_lst *lst);
 
-int	ft_remove_node_back(t_lst *lst)
+int	lst_rmv_back(t_lst *lst)
 {
 	if (!lst)
 		return (-1);

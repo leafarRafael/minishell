@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/25 12:01:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:56:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		ft_add_node_back(t_lst *lst, t_node *node);
 int		ft_create_add_node_front(t_lst *lst, char content);
 int		ft_add_node_front(t_lst *lst, t_node *node);;
 int		ft_remove_node_front(t_lst *lst);
-int		ft_remove_node_back(t_lst *lst);
+int		lst_rmv_back(t_lst *lst);
 int		ft_remove_specific_node(t_lst *lst, t_node *node);
 int		ft_remove_specific_content(t_lst *lst, char c);
 int		ft_delete_list(t_lst *lst);

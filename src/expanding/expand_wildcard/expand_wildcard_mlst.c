@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard_mlst.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 08:46:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/26 12:46:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/27 13:12:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	expand_wildcard_mlst(t_mlst *mlst)
 	t_llst	*next;
 	t_mlst	*asteric_expand;
 	int		i;
+	int		ctrl;
 
 	i = 0;
+	ctrl = 0;
 	nlst = mlst->head;
 	next = nlst->next;
 	asteric_expand = expand_current_directory();
@@ -28,6 +30,7 @@ void	expand_wildcard_mlst(t_mlst *mlst)
 	{
 		if (find_type_return_ptr(nlst->lst, WILDCARD))
 		{
+			ctrl++;
 			ft_expand_lst_wildcard(nlst->lst, asteric_expand);
 			if (asteric_expand->size != 0)
 			{
@@ -43,4 +46,6 @@ void	expand_wildcard_mlst(t_mlst *mlst)
 		nlst = next;
 		next = next->next;
 	}
+	if (ctrl == 0)
+		ft_delete_matrix(asteric_expand);
 }
