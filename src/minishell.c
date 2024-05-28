@@ -6,14 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 13:06:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/28 13:42:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_execute_minishell(t_mini *mini);
-static void	getpwd(t_mlst *envlst);
+
 int status_child;
 
 
@@ -68,25 +68,5 @@ static void	ft_execute_minishell(t_mini *mini)
 	swap_tty(RESTORE, mini);
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);
-}
-
-static void	getpwd(t_mlst *envlst)
-{
-	t_llst	*node;
-	t_lst	*lst_pwd;
-	char	*current_dir;
-	char	buf[300];
-
-	current_dir = getcwd(buf, 300);
-	lst_pwd = ft_init_lst();
-	ft_add_string_in_list(lst_pwd, current_dir);
-	ft_putlst_fd(lst_pwd, 1, 2);
-	node = envlst->head;
-	while(node->next != envlst->head)
-	{
-		if (ft_find_str_inlist(node->lst, "PWD", 3) != -1)
-			ft_putlst_fd(node->lst, 1, 2);
-		node = node->next;
-	}
 }
 

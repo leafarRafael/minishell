@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/28 08:38:52 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/28 11:23:47 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,11 +103,18 @@ KEY_WORDS		:= ./src/key_words/add_type_content.c\
 
 PATH_SYSTEM_BIN := ./src/path_system_binaries/path_system_bin.c\
 
-BUILTINS		:= ./src/builtins/exit.c\
-				./src/builtins/builtins_cd.c\
-				./src/builtins/getdir_list_or_string.c\
+BUILTINS		:= ./src/builtins/getdir_list_or_string.c\
 				./src/builtins/init_color.c\
-				./src/builtins/get_program_name.c
+				./src/builtins/get_program_name.c\
+				./src/builtins/builtin_manager.c\
+				./src/builtins/cmd/cd.c\
+				./src/builtins/cmd/echo.c\
+				./src/builtins/cmd/env.c\
+				./src/builtins/cmd/exit.c\
+				./src/builtins/cmd/export.c\
+				./src/builtins/cmd/pwd.c\
+				./src/builtins/cmd/unset.c
+				
 
 SYNTAX_VALID	:= ./src/syntax_validation/valid_input.c\
 				./src/syntax_validation/syntax_and_here_doc.c

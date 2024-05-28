@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 16:47:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/28 13:37:54 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ typedef enum s_type_character
 	META_LITERAL = 1 << 13,
 	COMMAND = 1 << 14,
 	END_OF = 1 << 15,
-	WILDCARD = 1 << 16
+	WILDCARD = 1 << 16,
+	EQUAL_SING = 1 << 17
+
 }	t_type_character;
 
 int	ft_or_op(char current, char next);

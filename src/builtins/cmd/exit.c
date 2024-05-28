@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/28 12:33:30 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/28 11:32:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
-
-# include <dirent.h>
-# include "minishell.h"
-
-# define ECHO "echo"
-# define CD "cd"
-# define PWD "pwd"
-# define EXPORT "export"
-# define UNSET "unset"
-# define ENV "env"
-# define EXIT "exit"
-
-typedef enum s_builtin_size
+void	my_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	_BINARY = 0,
-	_CD,
-	_PWD,
-	_ENV,
-	_ECHO,
-	_EXIT,
-	_UNSET,
-	_EXPORT,
-	_NULL
-}	t_builtin_size;
+	ft_putstr_fd("LOGO LOGO exit \n", 2);
+}
 
-#endif
+int	ft_exit(char *input)
+{
+	int	i;
 
+	if (!input)
+		return (-1);
+	i = 0;
+	while (ft_words_delemiter(input[i]))
+		i++;
+	if (ft_strncmp("exit2", &input[i], 5) == 0)
+	{
+		free(input);
+		input = NULL;
+		return (0);
+	}
+	return (-1);
+}
