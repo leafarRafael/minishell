@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/27 15:46:25 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/28 08:38:52 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,7 @@ BUILTINS		:= ./src/builtins/exit.c\
 				./src/builtins/builtins_cd.c\
 				./src/builtins/getdir_list_or_string.c\
 				./src/builtins/init_color.c\
-				./src/builtins/put_pathname.c
+				./src/builtins/get_program_name.c
 
 SYNTAX_VALID	:= ./src/syntax_validation/valid_input.c\
 				./src/syntax_validation/syntax_and_here_doc.c
