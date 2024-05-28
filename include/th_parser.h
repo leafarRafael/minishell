@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:32:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/27 19:11:42 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:21:49 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ typedef enum s_sytx_er
 	EMPTY_PRNTH,
 	N_CLS_DQTS,
 	N_CLS_SQTS,
-	STX_OPN_PRNTH_OPRTR,
-	STX_OPRTR_CLS_PRNTH,
+	TKN_BFR_OPN_PRNTH,
+	TKN_AFT_OPN_PRNTH,
+	TKN_BFR_CLS_PRNTH,
+	TKN_AFT_CLS_PRNTH,
 	BAD_OPRTR_SYNTAX,
 	BAD_RDRTC_SYNTAX,
 	MSSNG_FILE,
-	STX_IN_TOKEN,
-	STX_TOKEN_AFTER,
 	STX_TOKEN_BEFORE,
 	SYNTAX_ERROR,
 }			t_sytx_er;
@@ -49,6 +49,7 @@ struct s_parse
 };
 
 typedef int (*t_parse_func)(char *, t_parse **, int *);
+typedef int (*t_tkn_fc)(t_parse *);
 
 /* PARSE Functions */
 /* Utils*/
@@ -69,8 +70,8 @@ int	parse_rdrct(char *str, t_parse **parse, int *index);
 int	parse_text(char *str, t_parse **parse, int *index);
 
 /* Tokens */
-int	token_is_oprtr(t_parse *parse);
-int	token_is_rdrct(t_parse *parse);
+int	tkn_is_oprtr(t_parse *parse);
+int	tkn_is_rdrct(t_parse *parse);
 
 /* Utils */
 int	th_is_tab(int ch);
@@ -79,9 +80,15 @@ int	th_is_quote(char *str, int index);
 int	th_is_logical_oprtr(char *str, int index);
 int	th_is_io_rdrct(char *str, int index);
 
-/* Syntac Checks */
+/* Parse and Syntax Checks */
+/* OPEN PARENTHESIS */
 int	parse_bfr_fst_prnth(t_parse **parse, char *str, int *index);
 int	parse_bfr_sub_prnth(t_parse *parse, char *str, int *index);
+int	token_aft_opn_prnth(t_parse *parse);
+/* CLOSE PARENTHESIS */
+int	parse_bfr_cls_prnth(t_parse *parse, char *str, int *index);
+
+
 // int syntax_cmd_opn_prnth(t_parse *parse, char *str);
 // int syntax_rdrct_opn_prnth(t_parse *parse, char *str);
 

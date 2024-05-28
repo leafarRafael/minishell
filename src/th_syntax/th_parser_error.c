@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/27 18:12:49 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:34:58 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ int	syntax_error(t_parse *parse, char *str, t_sytx_er error)
 		return (err_msg("no clossing", "DOUBLE QUOTES", N_CLS_DQTS));
 	else if (error == N_CLS_SQTS)
 		return (err_msg("no clossing", "SINGLE QUOTES", N_CLS_SQTS));
-	else if (error == STX_OPN_PRNTH_OPRTR)
-		return (parse_err(parse, str, STX_OPN_PRNTH_OPRTR));
-	else if (error == STX_OPRTR_CLS_PRNTH)
-		return (parse_err(parse, str, STX_OPRTR_CLS_PRNTH));
+	else if (error == TKN_AFT_OPN_PRNTH)
+		return (parse_err(parse, str, TKN_AFT_OPN_PRNTH));
+	else if (error == TKN_BFR_CLS_PRNTH)
+		return (parse_err(parse, str, TKN_BFR_CLS_PRNTH));
 	else if (error == BAD_OPRTR_SYNTAX)
 		return (parse_err(parse->prev, str, BAD_OPRTR_SYNTAX));
 	else if (error == BAD_RDRTC_SYNTAX)
 		return (parse_err(parse->prev, str, BAD_RDRTC_SYNTAX));
 	else if (error == MSSNG_FILE)
 		return (parse_err(parse->prev, str, MSSNG_FILE));
-	else if (error == STX_IN_TOKEN)
-		return (parse_err(parse, str, STX_IN_TOKEN));
-	else if (error == STX_TOKEN_AFTER)
-		return (parse_err(parse, str, STX_TOKEN_AFTER));
+	else if (error == TKN_BFR_OPN_PRNTH)
+		return (parse_err(parse, str, TKN_BFR_OPN_PRNTH));
+	else if (error == TKN_AFT_CLS_PRNTH)
+		return (parse_err(parse, str, TKN_AFT_CLS_PRNTH));
 	else if (error == STX_TOKEN_BEFORE)
 		return (parse_err(parse->prev, str, STX_TOKEN_BEFORE));
 
@@ -92,7 +92,7 @@ static int	parse_err(t_parse *parse, char* str, t_sytx_er error)
 		token = "&&";
 	else if (parse->type == OPEN_PAREN)
 	{
-		if (error == STX_IN_TOKEN)
+		if (error == TKN_BFR_OPN_PRNTH)
 			token = ")";
 		else
 			token = "(";
@@ -108,9 +108,9 @@ static int	parse_err(t_parse *parse, char* str, t_sytx_er error)
 	else if (parse->type & (COMMAND | D_QUOTES | S_QUOTES))
 	{
 		// printf("ERROR MSG 01 [%d]\n", error);
-		if (error == STX_TOKEN_AFTER)
+		if (error == TKN_AFT_CLS_PRNTH)
 			token = ")";
-		if (error == STX_TOKEN_BEFORE || error == STX_IN_TOKEN)
+		if (error == STX_TOKEN_BEFORE || error == TKN_BFR_OPN_PRNTH)
 		{
 			// int	index;
 

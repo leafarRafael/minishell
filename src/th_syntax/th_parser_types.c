@@ -6,21 +6,14 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/27 18:12:49 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:40:33 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
 #include "th_syntax.h"
 
-// Check if after a CLOSE PARENTHESIS ")" there is a COMMAND "text"
-int syntax_cls_prnth_cmd(t_parse *parse, char *str, int status)
-{
-	if (parse->prev && parse->prev->type == OPEN_PAREN &&
-		(parse->type & (COMMAND | D_QUOTES | S_QUOTES)))
-		status = syntax_error(parse, str, STX_TOKEN_AFTER);
-	return (status);
-}
+static int token_afr_cls_prnth(t_parse *parse, char *str, int status);
 
 int	parse_quote(char *str, t_parse **parse, int *index)
 {
@@ -48,7 +41,7 @@ int	parse_quote(char *str, t_parse **parse, int *index)
 		else
 			ptr->size++;
 	}
-	return (syntax_cls_prnth_cmd(ptr, str, status));
+	return (token_afr_cls_prnth(ptr, str, status));
 }
 
 int	parse_text(char *str, t_parse **parse, int *index)
@@ -67,5 +60,14 @@ int	parse_text(char *str, t_parse **parse, int *index)
 		ptr->size++;
 		(*index)++;
 	}
-	return (syntax_cls_prnth_cmd(ptr, str, status));
+	return (token_afr_cls_prnth(ptr, str, status));
+}
+
+// Check if after a CLOSE PARENTHESIS ")" there is a COMMAND "text"
+static int token_afr_cls_prnth(t_parse *parse, char *str, int status)
+{
+	if ((parse->prev && parse->prev->type == OPEN_PAREN) &&
+		(parse->type & (COMMAND | D_QUOTES | S_QUOTES)))
+		status = syntax_error(parse, str, TKN_AFT_CLS_PRNTH);
+	return (status);
 }
