@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/28 14:01:25 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/28 14:28:48 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void	getpwd(t_mlst *envlst)
 	{
 		if (!ft_find_str_inlist2(node->lst, "PWD=", 4))
 		{
-			while (node->lst->last->prev->c != '=')
+			while (node->lst->last->c != '=')
 				lst_rmv_back(node->lst);
 			while (*current_dir)
-				ft_create_node_add_back(node->lst, (*current_dir)++);
+				ft_create_node_add_back(node->lst, *(current_dir++));
 		}
 		node = node->next;
 	}
