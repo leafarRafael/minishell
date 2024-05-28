@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 20:43:16 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:59:07 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main(void)
 	while (1)
 	{
 		printf("\n============================================================================\n");
-		mini.input = readline("minishell ~:");
+		printf("%s\033[1m\u279C  %sminishell ~:%s\033[0m", GRN, CYN, RST);
+		mini.input = readline(" ");
 		t_parse	*parse = th_parse_param(mini.input);
 		if (parse)
 			parse_free(parse);

@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:48:36 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/15 17:25:18 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:22:23 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	th_is_quote(char *str, int index)
 	result += (str[index] == '\'') * S_QUOTES;
 	return (result);
 }
-
 
 int	th_is_logical_oprtr(char *str, int index)
 {

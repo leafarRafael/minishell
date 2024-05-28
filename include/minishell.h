@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 10:24:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/28 18:44:51 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include "color.h"
 
 # define PATH "PATH=/"
 # define SIZE_PATH 6
@@ -109,7 +110,7 @@ void			ft_pipe_parent(int pipe[2]);
 void	ft_parse_exe(t_lst *input, t_mini *mini);
 
 int		free_memory(t_mini *mini, t_var_exe	*var, t_ast *ast);
-/* 
+/*
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
 void	ft_execute(t_ast_n *cmd, t_mini *mini, t_ast *ast);

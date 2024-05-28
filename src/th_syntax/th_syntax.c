@@ -6,15 +6,13 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/28 17:44:23 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:06:26 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "th_parser.h"
 #include "th_syntax.h"
-
-int append_sub(char *str, t_parse *parse, int *index, t_parse_func func);
 
 t_parse	*th_parse_param(char *str)
 {
@@ -55,12 +53,12 @@ t_parse	*th_parse_param(char *str)
 
 int	parse_prnth(char *str, t_parse **parse, int *index)
 {
-	t_parse				*ptr;
-	int					status;
+	t_parse	*ptr;
+	int		status;
 
 	status = NO_ERROR;
 	ptr = parse_add_back(parse, parse_new(OPEN_PAREN, *index + 1));
-	while (str[(*index)++])
+	while (!status && str[(*index)++])
 	{
 		if (th_is_tab(str[*index]))
 			ptr->size++;
@@ -69,39 +67,18 @@ int	parse_prnth(char *str, t_parse **parse, int *index)
 		else if (str[*index] == '\0')
 			return (syntax_error(*parse, str, N_CLS_PRNTH));
 		else if (str[*index] == ')')
-			return(parse_bfr_cls_prnth(ptr, str, index));
+			return (parse_bfr_cls_prnth(ptr, str, index));
 		else if (th_is_quote(str, *index))
-			status  = append_sub(str, ptr, index, parse_quote);
+			status = append_sub(str, ptr, index, parse_quote);
 		else if (th_is_logical_oprtr(str, *index))
-			status  = append_sub(str, ptr, index, parse_oprtr);
+			status = append_sub(str, ptr, index, parse_oprtr);
 		else if (th_is_io_rdrct(str, *index))
-			status  = append_sub(str, ptr, index, parse_rdrct);
+			status = append_sub(str, ptr, index, parse_rdrct);
 		else
-			status  = append_sub(str, ptr, index, parse_text);
-		if (status > 0)
-			return (status);
+			status = append_sub(str, ptr, index, parse_text);
 	}
 	return (status);
 }
-
-// MOVE THIS TO THE PASER.H
-int append_sub(char *str, t_parse *parse, int *index, t_parse_func parse_func)
-{
-	t_parse	*sub;
-	t_parse	*last;
-	int		status;
-	int		size;
-
-	status = parse_func(str, &parse->sub, index);
-	(*index)--;
-	last = parse_last(parse->sub);
-	size = 2 * ((last->type & (OPEN_PAREN | D_QUOTES | S_QUOTES)) > 0);
-	parse->size += size + last->size;
-	if (token_aft_opn_prnth(parse))
-		return (syntax_error(parse, str, TKN_AFT_OPN_PRNTH));
-	return (status);
-}
-
 
 /*
 ()'1'"12"

@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/16 17:58:15 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:53:46 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,40 +95,57 @@ void	print_all_type()
 	printf("%d CLOSE_PAREN\n", CLOSE_PAREN);
 }
 
+// [COMMAND]
+// printf("%s\033[1m\u279C  %sminishell ~:%s\033[0m", GRN, CYN, RST);
+void	print_type(char *str, int len)
+{
+	printf(BLU "[");
+	len--;
+	len -= ft_strlen(str) - 1;
+	printf(CYN "%s", str);
+	printf(BLU "]");
+	len--;
+	while (len--)
+	{
+		printf(RST " ");
+	}
+}
+
+
 void	show_str_type(int type)
 {
 	if (type == COMMAND)
-		printf("COMMAND");
+		print_type("COMMAND", 13);
 	if (type == META_LITERAL)
-		printf("META_LITERAL");
+		print_type("META_LITERAL", 13);
 	if (type == NO_OP_TYPE)
-		printf("NO_OP_TYPE");
+		print_type("NO_OP_TYPE", 13);
 	if (type == S_QUOTES)
-		printf("S_QUOTES");
+		print_type("S_QUOTES", 13);
 	if (type == D_QUOTES)
-		printf("D_QUOTES");
+		print_type("D_QUOTES", 13);
 	if (type == WH_SPACE)
-		printf("WH_SPACE");
+		print_type("WH_SPACE", 13);
 	if (type == DOLLAR)
-		printf("DOLLAR_SING");
+		print_type("DOLLAR_SING", 13);
 	if (type == REDI_IN)
-		printf("REDI_IN");
+		print_type("REDI_IN", 13);
 	if (type == REDI_OUT)
-		printf("REDI_OUT");
+		print_type("REDI_OUT", 13);
 	if (type == HERE_DOC)
-		printf("HERE_DOC");
+		print_type("HERE_DOC", 13);
 	if (type == APPEND)
-		printf("APPEND");
+		print_type("APPEND", 13);
 	if (type == PIPE)
-		printf("PIPE");
+		print_type("PIPE", 13);
 	if (type == AND_OP)
-		printf("AND_OP");
+		print_type("AND_OP", 13);
 	if (type == OR_OP)
-		printf("OR_OP");
+		print_type("OR_OP", 13);
 	if (type == OPEN_PAREN)
-		printf("OPEN_PAREN");
+		print_type("OPEN_PAREN", 13);
 	if (type == CLOSE_PAREN)
-		printf("CLOSE_PAREN");
+		print_type("CLOSE_PAREN", 13);
 }
 
 void	ft_print_matrix_line(t_mlst *m_line)

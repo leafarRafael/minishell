@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:45:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/23 20:34:20 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:06:28 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_parse	*parse_last(t_parse *parse)
 	return (last);
 }
 
-// void	parse_add_back(t_parse **parse, t_parse *new_node)
 t_parse	*parse_add_back(t_parse **parse, t_parse *new_node)
 {
 	t_parse	*last;

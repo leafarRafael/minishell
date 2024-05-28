@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:42:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/15 17:25:34 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:58:58 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,7 @@ void	th_print_parenth(char *str, t_parse *parse, int len)
 	{
 		if (len > 0)
 			th_print_tabs(len);
-		else
-			printf("\n---");
-		printf("[");
 		show_str_type(print->type);
-		printf("] ");
 		print_str_from_to(str, print);
 		if (print->sub)
 		{
@@ -44,12 +40,14 @@ static void	th_print_tabs(int len)
 	int	len0;
 
 	len0 = len;
+	if (len0 > 1)
+	{
+		while (--len0)
+			printf("   ");
+	}
 	while (len--)
-		printf("    ");
-	printf("|\n");
-	while (len0--)
-		printf("    ");
-	printf("|--");
+		printf("   ");
+	printf(BLU "\u2502\u2015\u2015" RST);
 }
 
 static void	print_str_from_to(char *str, t_parse *parse)
@@ -57,14 +55,20 @@ static void	print_str_from_to(char *str, t_parse *parse)
 	int	index = 0;
 	int	len = 0;
 
-	printf("S[%d] L[%d]  {", parse->start, parse->size);
+	if (parse->type == OPEN_PAREN)
+	{
+		printf("%s(%s......%s)\n", YEL, RED, YEL);
+		return ;
+	}
+	// printf("S[%d] L[%d]  {", parse->start, parse->size);
+	printf(YEL "{ " RST);
 	while (index < parse->start)
 		index++;
 	while (len < parse->size)
 	{
-		printf("%c", str[index]);
+		printf(RED "%c", str[index]);
 		index++;
 		len++;
 	}
-	printf("}\n");
+	printf(YEL " }\n" RST);
 }

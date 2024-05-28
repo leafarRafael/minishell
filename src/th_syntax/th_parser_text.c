@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   th_parser_types.c                                  :+:      :+:    :+:   */
+/*   th_parser_text.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/28 16:40:33 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:28:20 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
 #include "th_syntax.h"
 
-static int token_afr_cls_prnth(t_parse *parse, char *str, int status);
+static int	token_afr_cls_prnth(t_parse *parse, char *str, int status);
 
 int	parse_quote(char *str, t_parse **parse, int *index)
 {
@@ -27,8 +27,7 @@ int	parse_quote(char *str, t_parse **parse, int *index)
 	type = th_is_quote(str, *index);
 	error = (type == D_QUOTES) * N_CLS_DQTS + (type == S_QUOTES) * N_CLS_SQTS;
 	quote = (type == D_QUOTES) * '\"' + (type == S_QUOTES) * '\'';
-	parse_add_back(parse, parse_new(type, *index + 1));
-	ptr = parse_last(*parse);
+	ptr = parse_add_back(parse, parse_new(type, *index + 1));
 	while (str[(*index)++])
 	{
 		if (str[*index] == '\0')
@@ -51,8 +50,7 @@ int	parse_text(char *str, t_parse **parse, int *index)
 	int		status;
 
 	status = 0;
-	parse_add_back(parse, parse_new(COMMAND, *index));
-	ptr = parse_last(*parse);
+	ptr = parse_add_back(parse, parse_new(COMMAND, *index));
 	while (str[(*index)] && !th_is_in_set(str[(*index)], "|<>() \'\""))
 	{
 		if (str[*index] == '&' && str[*index + 1] == '&')
@@ -64,10 +62,10 @@ int	parse_text(char *str, t_parse **parse, int *index)
 }
 
 // Check if after a CLOSE PARENTHESIS ")" there is a COMMAND "text"
-static int token_afr_cls_prnth(t_parse *parse, char *str, int status)
+static int	token_afr_cls_prnth(t_parse *parse, char *str, int status)
 {
-	if ((parse->prev && parse->prev->type == OPEN_PAREN) &&
-		(parse->type & (COMMAND | D_QUOTES | S_QUOTES)))
+	if ((parse->prev && parse->prev->type == OPEN_PAREN)
+		&& (parse->type & (COMMAND | D_QUOTES | S_QUOTES)))
 		status = syntax_error(parse, str, TKN_AFT_CLS_PRNTH);
 	return (status);
 }
