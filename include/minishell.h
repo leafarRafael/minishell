@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/28 11:27:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/29 09:09:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,5 +175,12 @@ void	my_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 void	export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 void	pwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 void	unset(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+
+
+void	ft_manager_fd2(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	ft_valid_command2(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	finished_builtin2(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+
+int	ft_strlstcmp(t_lst *lst, char *str, int size);
 
 #endif

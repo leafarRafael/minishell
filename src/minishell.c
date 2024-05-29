@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/28 13:42:00 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/29 13:54:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_execute_minishell(t_mini *mini);
-
+void	ft_scanner_env(t_mlst *mlst);
 int status_child;
 
 
@@ -28,6 +28,7 @@ int	main(void)
 	i = 1;
 	while (1)
 	{
+		ft_scanner_env(mini.m_lst_env);
 		name = ft_get_program_name();
 		mini.input = readline(name);
 		free(name);
@@ -70,3 +71,17 @@ static void	ft_execute_minishell(t_mini *mini)
 	ft_delete_mmlst(mini->mmlst);
 }
 
+void	ft_scanner_env(t_mlst *mlst)
+{
+	t_llst	*node;
+	int		i;
+
+	node = mlst->head;
+	i = 0;
+	while (i < mlst->size)
+	{
+		ft_scanner_equal(node->lst);
+		node = node->next;
+		i++;
+	}
+}

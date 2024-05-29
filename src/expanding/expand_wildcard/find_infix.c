@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_infix.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 15:43:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/29 08:33:15 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this)
 		if (node->prev == this->last)
 			return (is_last_content(this, in, cpyin));
 	}
+	return (1);
 }
 
 static int	is_wildcard_content(t_lst *this, t_lst *in, t_lst *cpyin)

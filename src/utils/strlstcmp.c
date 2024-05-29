@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scanner_wildcard.c                                 :+:      :+:    :+:   */
+/*   strlstcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 16:38:27 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 10:27:41 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/05/29 08:39:56 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/05/29 10:05:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scanner.h"
+# include "minishell.h"
 
-void	ft_scanner_wildcard(t_lst *lst)
+int	ft_strlstcmp(t_lst *lst, char *str, int size)
 {
-	t_node	*node;
+	char	*new;
 	int		i;
 
-	i = 1;
-	node = lst->head;
-	while(i <= lst->size)
-	{
-		if (whildcard(node->c))
-			node->type = WILDCARD;
-		node = node->next;
-		i++;
-	}
+	i = 0;
+	new = ft_cpy_lst_to_array(lst);
+	i = ft_memcmp(str, new, size);
+	free(new);
+	return (i);
 }

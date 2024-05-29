@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/28 11:23:47 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/29 10:26:52 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_simple_op.c\
 				./src/parse/scanner/scanner_for_priotity.c\
 				./src/parse/scanner/scanner_after_expanding.c\
-				./src/parse/scanner/scanner_wildcard.c
+				./src/parse/scanner/scanner_wildcard.c\
+				./src/parse/scanner/scanner_equal.c
 
 EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_mtrx_lst.c\
@@ -113,8 +114,9 @@ BUILTINS		:= ./src/builtins/getdir_list_or_string.c\
 				./src/builtins/cmd/exit.c\
 				./src/builtins/cmd/export.c\
 				./src/builtins/cmd/pwd.c\
-				./src/builtins/cmd/unset.c
-				
+				./src/builtins/cmd/unset.c\
+				./src/builtins/cmd/communs.c
+
 
 SYNTAX_VALID	:= ./src/syntax_validation/valid_input.c\
 				./src/syntax_validation/syntax_and_here_doc.c
@@ -124,12 +126,14 @@ STDFD			:= ./src/stdfd_manager/swap_tty.c\
 
 ENVIRON			:=./src/environ_variable_ctrl/swap_environ.c
 
+UTILS			:= ./src/utils/strlstcmp.c
+
 SRC				:= $(MAIN) $(FILES) $(AS_TREE) $(PARSE)\
 				$(KEY_WORDS) $(SIMPLE) $(REDIRECT)\
 				$(ERROR) $(TOKEN) $(DEL_QUOTES)\
 				$(EXPANDER) $(PATH_SYSTEM_BIN)\
 				$(BUILTINS) $(SYNTAX_VALID)\
-				$(STDFD) $(ENVIRON)
+				$(STDFD) $(ENVIRON) $(UTILS)
 
 INCLUDE			:= -I ./include\
 				-I lib/lib_get_print/includes\
