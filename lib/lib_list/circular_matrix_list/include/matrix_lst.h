@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:34:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/25 11:51:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/29 18:37:07 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_lst_line
 {
 	t_lst				*lst;
+	int					is_pipe;
 	int					lex_val;
 	int					rdrct;
 	struct s_lst_line	*next;

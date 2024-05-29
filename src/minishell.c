@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 13:54:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/29 16:24:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(void)
 	{
 		ft_scanner_env(mini.m_lst_env);
 		name = ft_get_program_name();
-		mini.input = readline(name);
-		free(name);
+		ft_putstr_fd(name, 2);
+		mini.input = readline("\n");
 		ft_putstr_fd(mini.color[i], 2);
 		if (!mini.input)
 			break ;
@@ -42,6 +42,7 @@ int	main(void)
 		i++;
 		if (i == 6)
 			i = 1;
+		free(name);
 		ft_putstr_fd(RESET, 2);
 	}
 	rl_clear_history();

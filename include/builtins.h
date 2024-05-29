@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/28 12:33:30 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/29 17:35:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ typedef enum s_builtin_size
 	_ECHO,
 	_EXIT,
 	_UNSET,
-	_EXPORT,
-	_NULL
+	_EXPORT
 }	t_builtin_size;
 
 #endif
