@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   th_syntax.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 17:59:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 16:08:28 by tforster         ###   ########.fr       */
+/*   Created: 2024/03/11 11:42:32 by tforster          #+#    #+#             */
+/*   Updated: 2024/05/30 16:28:22 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef TH_SYNTAX_H
+# define TH_SYNTAX_H
 
-#define RED	"\x1B[31m"
-#define GRN	"\x1B[32m"
-#define YEL	"\x1B[33m"
-#define BLU	"\x1B[34m"
-#define MAG	"\x1B[35m"
-#define CYN	"\x1B[36m"
-#define WHT	"\x1B[37m"
-#define RST	"\x1B[0m"
+# include "th_parser.h"
 
-#define RESET "\033[0m"
-#define AMARELO "\033[33m"
+typedef struct s_stx	t_stx;
+struct s_stx
+{
+	int	error;
+	int	here_doc;
+};
 
-char	**ft_init_color();
+int	th_parse_param(char *str, t_stx *stx);
 
 #endif

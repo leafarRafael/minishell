@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/30 10:18:43 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/05/30 16:10:02 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ TOKEN			:= ./src/parse/token/token.c\
 				./src/parse/token/token_operator.c\
 				./src/parse/token/token_parentheses.c\
 				./src/parse/token/token_after_expandig.c
-				
+
 DEL_QUOTES		:= ./src/remove_quotes/remove_quotes_lst.c\
 				./src/remove_quotes/remove_quotes_mlst.c
 
@@ -79,6 +79,17 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_after_expanding.c\
 				./src/parse/scanner/scanner_wildcard.c\
 				./src/parse/scanner/scanner_equal.c
+
+TH_FUNC			:= ./src/th_syntax/th_syntax.c\
+				./src/th_syntax/th_parser.c\
+				./src/th_syntax/th_parser_utils.c\
+				./src/th_syntax/th_parser_append.c\
+				./src/th_syntax/th_parser_open_prnth.c\
+				./src/th_syntax/th_parser_close_prnth.c\
+				./src/th_syntax/th_parser_text.c\
+				./src/th_syntax/th_parser_oprtr_rdrct.c\
+				./src/th_syntax/th_parser_error.c\
+				./src/th_syntax/th_print.c
 
 EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_mtrx_lst.c\
@@ -133,7 +144,9 @@ SRC				:= $(MAIN) $(FILES) $(AS_TREE) $(PARSE)\
 				$(ERROR) $(TOKEN) $(DEL_QUOTES)\
 				$(EXPANDER) $(PATH_SYSTEM_BIN)\
 				$(BUILTINS) $(SYNTAX_VALID)\
-				$(STDFD) $(ENVIRON) $(UTILS)
+				$(STDFD) $(ENVIRON) $(UTILS)\
+				$(TH_FUNC)
+
 
 INCLUDE			:= -I ./include\
 				-I lib/lib_get_print/includes\
@@ -200,7 +213,7 @@ libft:
 
 libft_clean:
 	@$(MAKE) -C $(PATH_MAKE_LIB) clean --no-print-directory
-	
+
 libft_fclean:
 	@$(MAKE) -C $(PATH_MAKE_LIB) fclean --no-print-directory
 
@@ -213,4 +226,4 @@ clean:
 fclean: clean libft_fclean linked_list_fclean matrix_list_fclean matrix_matrix_list_fclean
 	@$(CMD_CLEAN) $(NAME)
 
-re: libft_clean linked_list_clean matrix_list_clean matrix_matrix_list_clean clean all 
+re: libft_clean linked_list_clean matrix_list_clean matrix_matrix_list_clean clean all
