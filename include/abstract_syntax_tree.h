@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 08:23:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/18 10:01:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/30 10:24:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "matrix_lst.h"
 # include "matrix_matrix_lst.h"
 
-typedef struct s_ast_node
+typedef struct  __attribute__((packed)) s_ast_node
 {
 	t_mnode				*m_lst;
 	int					type;
@@ -25,9 +25,10 @@ typedef struct s_ast_node
 	struct s_ast_node	*right;
 }						t_ast_n;
 
-typedef struct s_ast
+
+typedef struct __attribute__((packed)) s_ast
 {
-	t_ast_n			*root;
+	t_ast_n				*root;
 	int					size;
 }						t_ast;
 

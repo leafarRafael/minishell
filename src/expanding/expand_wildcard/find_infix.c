@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 08:33:15 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/30 08:34:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this)
 	cpyin = ft_duplst(in, ft_cpynode, ft_add_node_back);
 	while (cpyin->last->c == node->c)
 	{
-		if (node->c != cpyin->last->c)
-			return (ft_delete_list(cpyin) +30);
 		lst_rmv_back(cpyin);
 		if (cpyin->size == 0)
 			return (ft_delete_list(cpyin) +30);
@@ -61,8 +59,10 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this)
 			return (is_wildcard_content(this, in, cpyin));
 		if (node->prev == this->last)
 			return (is_last_content(this, in, cpyin));
+		if (node->c != cpyin->last->c)
+			return (ft_delete_list(cpyin) +30);
 	}
-	return (1);
+	return (ft_delete_list(cpyin) + 11);
 }
 
 static int	is_wildcard_content(t_lst *this, t_lst *in, t_lst *cpyin)

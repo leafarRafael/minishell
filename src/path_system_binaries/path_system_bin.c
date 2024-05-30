@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_system_bin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 17:18:53 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 10:43:33 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/30 15:29:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	**path_system_bin(t_mlst *m_lst)
 	char	**env;
 	char	*array_env;
 
+	if (!m_lst)
+		return (NULL);
 	env = NULL;
 	temp = find_str_in_matrixlst(m_lst, PATH, SIZE_PATH);
 	to_array.head = find_head(m_lst, temp);
@@ -38,6 +40,8 @@ static t_node *find_head(t_mlst *m_lst, t_lst *lst)
 	int		index;
 	int		i;
 
+	if (!lst)
+		return (NULL);
 	i = 1;
 	index = 0;
 	node = lst->head;

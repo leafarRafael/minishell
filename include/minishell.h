@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 09:09:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/30 14:45:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_variables_minishell
 	char		**temp_environ;
 	char		**color;
 	int			fd_std[2];
+	int			loping;
+	t_ast		*ast;
 }				t_mini;
 
 typedef struct s_var_executable

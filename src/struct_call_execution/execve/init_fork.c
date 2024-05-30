@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 18:33:48 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/30 11:51:33 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	*select_function();
 void	valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func);
+static int ft_valid_command(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 
 void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
@@ -23,10 +24,13 @@ void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
  	expand_wildcard_mlst(cmd->m_lst->matrix);
 	ft_expand_m_lst(cmd->m_lst->matrix);
 	ft_remove_quote_mlst(cmd->m_lst->matrix);
+	if (ft_valid_command(cmd, mini, ast, var))
+	{
+		free_cmd_operator_executed(cmd, mini);
+		return ;
+	}
 	ctrl_func = 0;
 	ctrl_func = is_builtin(cmd, mini);
-	ft_putnbr_fd(ctrl_func, 2);
-	ft_putstr_fd ("\n ", 2);
 	function = select_function(ctrl_func);
 	valid_fork(&var->pid, cmd, ctrl_func);
 	if (var->pid != -42)
@@ -39,7 +43,7 @@ void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			free_cmd_operator_executed(cmd, mini);
 		}
 	}
-	else 
+	else
 		function(cmd, mini, ast, var);
 }
 
@@ -69,4 +73,16 @@ void valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func)
 	}
 	else
 		(*pid) = fork();
+}
+
+static int ft_valid_command(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+{
+	if (cmd->m_lst->matrix->size == 1 && cmd->m_lst->matrix->head->lst->size == 0)
+	{
+		ft_msg_error("''", " command not found");
+		return (1);
+	}
+	if (cmd->m_lst->matrix->size == 0)
+		return (1);
+	return (0);
 }
