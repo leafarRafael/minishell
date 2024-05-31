@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 16:45:17 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:43:05 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	ft_execute_minishell(t_mini *mini);
 void	ft_scanner_env(t_mlst *mlst);
 int status_child;
 
+// ARRUMAR PASTA /TEMP
 
 int	main(void)
 {
@@ -29,6 +30,14 @@ int	main(void)
 	mini.color = ft_init_color();
 	i = 1;
 	mini.loping = 1;
+
+	int	index = 0;
+	while (index < 40)
+	{
+		mini.ast[index] = NULL;
+		index++;
+	}
+
 	while (mini.loping)
 	{
 		ft_scanner_env(mini.m_lst_env);
@@ -51,6 +60,16 @@ int	main(void)
 				i = 1;
 		}
 		ft_putstr_fd(RESET, 2);
+
+		int	index = 0;
+		while (mini.ast[index] && index < 40)
+		{
+			ft_printf("INDEX = [%d]\n", index);
+			ft_delete_tree(mini.ast[index]);
+			mini.ast[index] = NULL;
+			index++;
+		}
+
 	}
 	ft_delcmtrx(mini.color);
 	rl_clear_history();

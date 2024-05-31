@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_parentheses.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 15:09:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/31 17:46:22 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
 	remove_parent(new_lst);
 	add_new_token(new_lst, cmd, mini);
-	mini->ast = ast;
 	builds_execution_call(new_lst, mini);
 }
 

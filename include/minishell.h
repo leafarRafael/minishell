@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 14:45:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/31 17:50:37 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_variables_minishell
 	char		**color;
 	int			fd_std[2];
 	int			loping;
-	t_ast		*ast;
+	t_ast		*ast[40];
 }				t_mini;
 
 typedef struct s_var_executable
@@ -141,7 +141,7 @@ void	builds_execution_call(t_lst *input, t_mini *mini);
 
 void 	free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit);
 void	ft_msg_error(char *invalid_input, char *msg_error);
-/* 
+/*
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
 void	ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);

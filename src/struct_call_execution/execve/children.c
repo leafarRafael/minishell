@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:19:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 17:22:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/31 18:37:57 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void build_var_and_run_execve(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_v
 	var->env = path_system_bin(mini->m_lst_env);
 	var->command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 	var->path_exe = ft_get_executable(mini, var, ast);
-	if (execve(var->path_exe, &var->command_m[0], var->env) < 0)
+
+	if (execve(var->path_exe, &var->command_m[0], __environ) < 0)
 		perror(var->path_exe);
 	free_memory(mini, var, ast, 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:40:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 14:01:22 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/31 17:37:58 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_delete_tree(t_ast *tree)
 	if (tree->root)
 		ft_delete(tree, tree->root);
 	free(tree);
+	tree = NULL;
 }
 
 static void	ft_delete(t_ast *tree, t_ast_n *node)
@@ -34,6 +35,6 @@ static void	ft_delete(t_ast *tree, t_ast_n *node)
 		ft_delete(tree, node->right);
 		free(node);
 		node = NULL;
-		tree->root--;
+		tree->size--;
 	}
 }

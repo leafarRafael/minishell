@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   memory_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 14:07:59 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/31 19:08:04 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void ft_close();
+
+// void free_BUILTIN_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 
 void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 {
@@ -27,8 +29,19 @@ void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 		if (mini->color)
 			ft_delcmtrx(mini->color);
 	}
-	if (ast)
-		ft_delete_tree(ast);
+
+	int	index = 0;
+	while (mini->ast[index]  && index < 40)
+	{
+		ft_printf("INDEX = [%d]\n", index);
+		ft_delete_tree(mini->ast[index]);
+		mini->ast[index] = NULL;
+		index++;
+	}
+
+	// if (ast)1
+	// 	ft_delete_tree(ast);
+
 	if (var)
 	{
 		if (var->path_exe)
@@ -50,4 +63,3 @@ static void ft_close(int fd_std[2])
 	close(1);
 	close(2);
 }
-
