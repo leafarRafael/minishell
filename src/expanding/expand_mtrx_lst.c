@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_mtrx_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:40:13 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 15:14:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/31 09:19:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_expand_m_lst_heredoc(t_mlst *mlst)
 	t_var_matrix	v;
 
 	if (!mlst)
+		return ;
+	if (mlst->size == 0)
 		return ;
 	v.current_lst = mlst->head;
 	v.next_lst = v.current_lst->next;
