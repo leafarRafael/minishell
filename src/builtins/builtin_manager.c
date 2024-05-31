@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:01:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 17:49:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/05/31 09:22:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ int	is_builtin(t_ast_n *cmd, t_mini *mini)
 	int		nbr_builtin;
 
 	line = cmd->m_lst->matrix->head;
-	i = 1;
+	i = 0;
 	while (i <= cmd->m_lst->matrix->size)
 	{
-		nbr_builtin = 0;
-		nbr_builtin = valid_builtin(line->lst);
-		if (nbr_builtin)
+		if (line->rdrct == -42)
+		{
+			nbr_builtin = 0;
+			nbr_builtin = valid_builtin(line->lst);
 			return (nbr_builtin);
+		}
 		line = line->next;
 		i++;
 	}
