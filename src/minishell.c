@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 18:43:05 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/31 21:36:19 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(void)
 		int	index = 0;
 		while (mini.ast[index] && index < 40)
 		{
-			ft_printf("INDEX = [%d]\n", index);
+			// ft_printf("INDEX = [%d]\n", index);
 			ft_delete_tree(mini.ast[index]);
 			mini.ast[index] = NULL;
 			index++;

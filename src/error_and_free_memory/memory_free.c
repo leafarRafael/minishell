@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 19:08:04 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/31 21:35:58 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 	int	index = 0;
 	while (mini->ast[index]  && index < 40)
 	{
-		ft_printf("INDEX = [%d]\n", index);
+		// ft_printf("INDEX = [%d]\n", index);
 		ft_delete_tree(mini->ast[index]);
 		mini->ast[index] = NULL;
 		index++;

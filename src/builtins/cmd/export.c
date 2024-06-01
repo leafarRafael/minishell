@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 19:33:18 by tforster         ###   ########.fr       */
+/*   Updated: 2024/05/31 21:22:19 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,39 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 		}
 	}
 	else
+	{
+		t_llst	*llst;
+		t_node	*node;
+		int		llst_size;
+		int		node_size;
+
+		llst = cmd->m_lst->matrix->head->next;
+		llst_size = cmd->m_lst->matrix->size - 1;
+		printf("llst_size [%d]\n", llst_size);
+
+		while (llst_size)
+		{
+			node = llst->lst->head;
+			node_size = llst->lst->size;
+			printf("node size [%d]\n", node_size);
+			// while (cmd->m_lst->matrix->head->lst->head->c != 'n')
+			while (node_size)
+			{
+				// printf("[%c]\n", llst->lst->head->c);
+				printf("[%c]\n", node->c);
+				if (node->c == '=')
+				{
+					ft_putstr_fd("THERE IS A =\n", 2);
+				}
+				node = node->next;
+				node_size--;
+			}
+			llst = llst->next;
+			llst_size--;
+		}
+
 		ft_putstr_fd("INCLUIR EXPORT\n", 2);
+	}
 }
 
 static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
