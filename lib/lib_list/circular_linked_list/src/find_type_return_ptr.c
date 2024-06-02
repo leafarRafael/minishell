@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_type_return_ptr.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:59:03 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 13:03:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/02 19:07:00 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
