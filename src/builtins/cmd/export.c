@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/02 19:04:14 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 08:54:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			var = NULL;
 			ft_print_array_lst(llst->lst, 0);
 			var = get_prefix(find_equal_return_ptr(llst->lst, '='), llst->lst);
-			// var = get_sufix(find_equal_return_ptr(llst->lst, '='), llst->lst);
 			printf("===>>> VAR [ %s ]\n", var);
 
 			while(ft_strlen(var) && index < mini->m_lst_env->size)
@@ -172,16 +171,12 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 				{
 					if (!ft_strncmp(var, prefix, ft_strlen(prefix) + 1))
 					{
-						// printf("[ %zu ] [ %zu ]\n", ft_strlen(var), ft_strlen(prefix));
 						printf("===>>> PREFIX [ %s ]\n", prefix);
+						ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
 						ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, env);
-						// ft_add_mlstnode_back(mini->m_lst_env, llst);
-						ft_add_list_back(mini->m_lst_env, llst->lst);
 						ft_print_array_lst(llst->lst, 0);
-					// 	// ft_putstr_fd("===>>> PREFIX = ", 2);
-					// 	// ft_putstr_fd(prefix, 2);
-					// 	ft_putstr_fd("\n", 2);
 						free(prefix);
+						free(var);
 						return ;
 					}
 				}
@@ -193,58 +188,13 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			{
 				printf("ADD NEW VAR = \n");
 				ft_print_array_lst(llst->lst, 0);
-				ft_add_mlstnode_back(mini->m_lst_env, llst);
-				// ft_add_list_back(mini->m_lst_env, llst->lst);
+				ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
+				free(var);
 			}
 
 			llst = llst->next;
 			llst_size--;
 		}
-
-		// llst = cmd->m_lst->matrix->head->next;
-		// llst_size = cmd->m_lst->matrix->size - 1;
-		// printf("llst size [%d]\n", llst_size);
-		// while (llst_size)
-		// {
-		// 	node = llst->lst->head;
-		// 	node_size = llst->lst->size;
-		// 	printf("\nnode size [%d]\n", node_size);
-		// 	int	prfx_len;
-		// 	int	str_len;
-		// 	prfx_len = 0;
-		// 	str_len = 0;
-		// 	while (node_size)
-		// 	{
-
-		// 		printf("[%c]\n", node->c);
-		// 		if (node->c == '=')
-		// 		{
-		// 			prfx_len = str_len;
-		// 			str_len = -1;
-		// 		}
-		// 		str_len++;
-		// 		node = node->next;
-		// 		node_size--;
-		// 	}
-		// 	if (prfx_len == 0 )
-		// 			printf("prefix size [%d]\n", str_len);
-		// 	else
-		// 	{
-		// 		printf("prefix size [%d]\n", prfx_len);
-		// 		printf("str size [%d]\n", str_len);
-		// 	}
-
-		// 	llst = llst->next;
-		// 	llst_size--;
-
-		// 	char	*prfx;
-		// 	prfx = malloc(prfx_len * sizeof(*prfx));
-		// 	if (prfx == NULL)
-		// 		return ;
-
-		// }
-
-		// ft_putstr_fd("INCLUIR EXPORT\n", 2);
 	}
 }
 

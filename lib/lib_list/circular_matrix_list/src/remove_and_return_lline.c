@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:05:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/24 18:51:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 08:41:51 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_llst *ft_size_one(t_mlst *mlst, t_llst *lnode);
 
-t_llst	*ft_remove_return_mlst_node(t_mlst *mlst, t_llst *lnode)
+t_llst	*mlst_rmv_return_lnode(t_mlst *mlst, t_llst *lnode)
 {
 	t_var_matrix	var;
 

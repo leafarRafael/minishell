@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_lst.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 08:34:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 18:37:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 08:41:51 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char		**ft_cpy_mtrllst_to_cmtrx(t_mlst *lst_matrix);
 t_mlst	*ft_cmtrix_to_mtrx_lst(char **matrix);
 t_lst		*find_str_in_matrixlst(t_mlst *m_lst, char *str, int size);
 int			insert_lnode_between(t_mlst *mlst, t_llst *lnode, t_mlst *new_mlst);
-t_llst	*ft_remove_return_mlst_node(t_mlst *mlst, t_llst *lnode);
+t_llst	*mlst_rmv_return_lnode(t_mlst *mlst, t_llst *lnode);
 int		ft_add_mlstnode_back(t_mlst *mlst, t_llst *lnode);
 int		ft_add_mlstnode_front(t_mlst *mlst, t_llst *lnode);
 t_mlst	*ft_bubble_sort(t_mlst *mlst);

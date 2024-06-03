@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bubble_mlst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:49:24 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/25 11:53:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 08:41:51 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_mlst	*ft_bubble_sort(t_mlst *mlst)
 		node_a = find_less(mlst);
 		if (node_a == NULL)
 			break ;
-		new_n = ft_remove_return_mlst_node(mlst, node_a);
+		new_n = mlst_rmv_return_lnode(mlst, node_a);
 		ft_add_mlstnode_back(sort, new_n);
 	}
 	free(mlst);
