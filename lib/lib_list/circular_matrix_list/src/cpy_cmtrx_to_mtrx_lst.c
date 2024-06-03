@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:54:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:46:42 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:03:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_mlst	*ft_cmtrix_to_mtrx_lst(char **matrix)
 {
 	t_mlst	*new_mtrx_lst;
-	t_lst		*new_lst;
-	int			i;
+	t_lst	*new_lst;
+	int		i;
 
 	if (!matrix)
 		return (NULL);

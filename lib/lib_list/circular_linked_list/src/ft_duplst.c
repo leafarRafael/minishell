@@ -6,13 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 09:12:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/06 09:54:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:09:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "array_lst.h"
 
-t_lst	*ft_duplst(t_lst *ori_lst, t_node (*ft_cpy(t_node *)), int (*add_n)(t_lst *, t_node *))
+t_lst	*ft_duplst(t_lst *ori_lst,
+			t_node (*ft_cpy(t_node *)), int (*add_n)(t_lst *, t_node *))
 {
 	t_lst	*new_lst;
 	t_node	*node;
