@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builds_execution_call.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:11:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 18:42:51 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:34:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ void	builds_execution_call(t_lst *input, t_mini *mini)
 	ft_remove_cmd_status(mini->mmlst);
 	command_call_structure(ast, mini->mmlst);
 	ft_call_and_exec_manager(ast->root, mini, ast);
-	//ft_delete_tree(ast);
 }

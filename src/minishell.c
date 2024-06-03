@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 12:07:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:06:48 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(void)
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini.color = ft_init_color();
 	i = 1;
-	mini.loping = 1;
 	mini.status = 0;
 
 	int	index = 0;
@@ -38,7 +37,7 @@ int	main(void)
 		mini.ast[index] = NULL;
 		index++;
 	}
-	while (mini.loping)
+	while (1)
 	{
 		
 		ft_scanner_env(mini.m_lst_env);
@@ -59,10 +58,8 @@ int	main(void)
 			i++;
 			if (i == 6)
 				i = 1;
-			status_child = WEXITSTATUS(mini.status);
 		}
 		ft_putstr_fd(RESET, 2);
-
 		int	index = 0;
 		while (mini.ast[index] && index < 40)
 		{
