@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 21:35:58 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 09:20:16 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,13 @@ void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 		if (mini->color)
 			ft_delcmtrx(mini->color);
 	}
-
 	int	index = 0;
 	while (mini->ast[index]  && index < 40)
 	{
-		// ft_printf("INDEX = [%d]\n", index);
 		ft_delete_tree(mini->ast[index]);
 		mini->ast[index] = NULL;
 		index++;
 	}
-
-	// if (ast)1
-	// 	ft_delete_tree(ast);
-
 	if (var)
 	{
 		if (var->path_exe)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 17:50:37 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 09:13:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,9 @@ void	pwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 void	unset(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 
 
-void	ft_manager_fd2(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void	ft_valid_command2(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void	finished_builtin2(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	ft_valid_command_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void	finished_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 
 int	ft_strlstcmp(t_lst *lst, char *str, int size);
 

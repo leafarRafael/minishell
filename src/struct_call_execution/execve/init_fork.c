@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 11:51:33 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 09:16:54 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	if (var->pid != -42)
 	{
 		if (var->pid == 0)
+		{
+			rl_clear_history();
 			function(cmd, mini, ast, var);
+		}
 		else
 		{
 			parent(cmd, mini, var);

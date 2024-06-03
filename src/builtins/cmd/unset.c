@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:19:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/02 14:37:04 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 09:13:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 static void	remove_variable(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 static char	*get_prefix(t_node *ptr, t_lst *lst);
 
-
 void	unset(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	ft_manager_fd2(cmd, mini, ast, var);
-	ft_valid_command2(cmd, mini, ast, var);
+	ft_manager_fd_builtin(cmd, mini, ast, var);
+	ft_valid_command_builtin(cmd, mini, ast, var);
 	remove_variable(cmd, mini, ast, var);
-	finished_builtin2(cmd, mini, ast, var);
+	finished_builtin(cmd, mini, ast, var);
 }
 
 static void	remove_variable(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)

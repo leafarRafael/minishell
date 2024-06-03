@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_infix.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 08:34:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 09:35:01 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this);
 int	find_infix(t_lst *inlst, t_lst *this_lst)
 {
 	if (this_lst->size == 0)
-		return (0);
+		return (ft_delete_list(inlst) + ft_delete_list(this_lst));
 	if (inlst->size == 0 && this_lst->size != 0)
-		return (1);
+		return (ft_delete_list(inlst) + ft_delete_list(this_lst) +1);
 	if (ft_remove_wild_dup(inlst, this_lst))
 		return (ft_delete_list(inlst) + ft_delete_list(this_lst));
 	while (inlst->size > 0)
@@ -32,12 +32,12 @@ int	find_infix(t_lst *inlst, t_lst *this_lst)
 		{
 			lst_rmv_back(inlst);
 			if (inlst->size == 0)
-				return (1);
+				return (ft_delete_list(inlst) + ft_delete_list(this_lst) +1);
 		}
 		else
-			return(0);
+			return (ft_delete_list(inlst) + ft_delete_list(this_lst));
 	}
-	return (1);
+	return (ft_delete_list(inlst) + ft_delete_list(this_lst) +1);
 }
 
 static int	ft_find_infix_healper(t_lst *in, t_lst *this)
@@ -46,7 +46,7 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this)
 	t_lst	*cpyin;
 
 	if (this->size == 1 && this->last->c == in->last->c)
-		return (0);
+		return (ft_delete_list(in) + ft_delete_list(this));
 	node = this->last;
 	cpyin = ft_duplst(in, ft_cpynode, ft_add_node_back);
 	while (cpyin->last->c == node->c)

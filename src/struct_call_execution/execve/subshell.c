@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:38:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 17:43:12 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 09:18:25 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,7 @@ void	subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	if (pid_subshell == 0)
 	{
 		init_fork(cmd, mini, ast, var);
-
-		int	index = 0;
-		// while (mini->ast[index])
-		// {
-		// 	ft_printf("INDEX = [%d]\n", index);
-		// 	ft_delete_tree(mini->ast[index]);
-		// 	index++;
-		// }
+		rl_clear_history();
 		free_memory(mini, var, ast, status_child);
 	}
 	else

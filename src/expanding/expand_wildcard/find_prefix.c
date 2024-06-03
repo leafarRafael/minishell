@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:44:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 15:45:25 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 09:38:26 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	find_prefix(t_lst *inlst, t_lst *this_lst)
 	while(this_cpy->head->type != WILDCARD)
 	{
 		if (inlst_cpy->size == 0)
-			return (1);
+			return (ft_delete_list(inlst_cpy) + ft_delete_list(this_cpy) + 1);
 		if (inlst_cpy->head->c != this_cpy->head->c)
-			return (1) ;
+			return (ft_delete_list(inlst_cpy) + ft_delete_list(this_cpy) + 1);
 		ft_remove_node_front(this_cpy);
 		ft_remove_node_front(inlst_cpy);
 	}
