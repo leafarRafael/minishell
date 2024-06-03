@@ -6,15 +6,15 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:49:24 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 08:41:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:07:26 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
-
+/* 
 t_llst	*find_less(t_mlst *mlst);
-int	add_lexicographic_value(t_mlst *mlst, char limiter);
-int	ft_find_the_smallest_size(t_mlst *mlst);
+int		add_lexicographic_value(t_mlst *mlst, char limiter);
+int		ft_find_the_smallest_size(t_mlst *mlst);
 
 t_mlst	*ft_bubble_sort(t_mlst *mlst)
 {
@@ -60,6 +60,7 @@ t_llst	*find_less(t_mlst *mlst)
 
 int	add_lexicographic_value(t_mlst *mlst, char limiter)
 {
+	t_var_matrix	v;
 	t_node	*node;
 	t_llst	*lnode;
 	int		i_m;
@@ -103,3 +104,4 @@ int	ft_find_the_smallest_size(t_mlst *mlst)
 	}
 	return (size);
 }
+ */

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_lst_fd.c                                       :+:      :+:    :+:   */
+/*   ft_putlst_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 09:35:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/06 09:58:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:20:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putlst_fd(t_lst *lst, int new_line, int fd)
 {
 	int		i;
-	t_node *current;
+	t_node	*current;
 
 	if (fd < 0)
 		return ;
@@ -31,6 +31,6 @@ void	ft_putlst_fd(t_lst *lst, int new_line, int fd)
 		current = current->next;
 		i++;
 	}
-	if(new_line)
+	if (new_line)
 		write(fd, "\n", 1);
 }

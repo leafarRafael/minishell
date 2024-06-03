@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_str_head_last.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 12:01:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/25 14:58:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:11:02 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_find_last(t_lst *lst, char *str, int size)
 	t_node	*node;
 	int		index;
 
-	index = size-1;
+	index = size -1;
 	node = lst->last;
 	while (index >= 0)
 	{
@@ -26,7 +26,7 @@ int	ft_find_last(t_lst *lst, char *str, int size)
 		node = node->prev;
 		index--;
 	}
-	if (index+1 == 0)
+	if (index +1 == 0)
 		return (1);
 	return (0);
 }
