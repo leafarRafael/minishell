@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 09:16:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 10:16:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func)
 {
 	if (ctrl_func > 0)
 	{
-		if (cmd->m_lst->next->type == PIPE || cmd->m_lst->prev->type == PIPE)
+		if (cmd->m_lst->next->type == PIPE || cmd->m_lst->prev_pipe)
 		    (*pid) = fork();
 		else
 			(*pid) = -42;

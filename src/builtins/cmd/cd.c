@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 09:13:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 10:07:54 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,15 @@ void	cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 
 void build_var_exe(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
+	if (cmd->m_lst->matrix->size == 1)
+	{
+		chdir(getenv("HOME"));
+		return ;
+	}
 	var->command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 	chdir(var->command_m[1]);
 	setpwd(mini->m_lst_env);
+	ft_delcmtrx(var->command_m);
 }
 
 static void	setpwd(t_mlst *envlst)

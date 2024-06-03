@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:46:47 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/19 15:42:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 10:10:46 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_m_node
 	int			type;
 	int			in_parent;
 	int			in_tree;
+	int			prev_pipe;
 	struct s_m_node	*next;
 	struct s_m_node	*prev;
 }				t_mnode;
