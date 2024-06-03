@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 09:35:01 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 15:48:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this)
 	t_lst	*cpyin;
 
 	if (this->size == 1 && this->last->c == in->last->c)
-		return (ft_delete_list(in) + ft_delete_list(this));
+		return (0);
 	node = this->last;
 	cpyin = ft_duplst(in, ft_cpynode, ft_add_node_back);
 	while (cpyin->last->c == node->c)
 	{
 		lst_rmv_back(cpyin);
-		if (cpyin->size == 0)
-			return (ft_delete_list(cpyin) +30);
 		node = node->prev;
 		if (node->type == WILDCARD)
 			return (is_wildcard_content(this, in, cpyin));
-		if (node->prev == this->last)
+		if (node->prev == this->last && cpyin->last->c == node->c)
 			return (is_last_content(this, in, cpyin));
 		if (node->c != cpyin->last->c)
+			return (ft_delete_list(cpyin) +30);
+		if (cpyin->size == 0)
 			return (ft_delete_list(cpyin) +30);
 	}
 	return (ft_delete_list(cpyin) + 11);
@@ -87,23 +87,23 @@ static int is_last_content(t_lst *this, t_lst *in, t_lst *cpyin)
 
 static int ft_remove_wild_dup(t_lst *inlst, t_lst *this_lst)
 {
-	if (this_lst->last->type == WILDCARD)
-		while (this_lst->size > 0)
-		{
-			if (this_lst->last->type != WILDCARD)
-				break ;
-			lst_rmv_back(this_lst);
-			if (this_lst->size == 0)
-				return (1);
-		}
-	if (this_lst->head->type == WILDCARD)
-		while (this_lst->size > 0)
-		{
-			if (this_lst->head->type != WILDCARD)
-				break ;
-			ft_remove_node_front(this_lst);
-			if (this_lst->size == 0)
-				return (1);
-		}
+	while (this_lst->size > 0)
+	{
+		if (this_lst->last->type != WILDCARD)
+			break ;
+		lst_rmv_back(this_lst);
+		if (this_lst->size == 0)
+			break ;
+	}
+	while (this_lst->size > 0)
+	{
+		if (this_lst->head->type != WILDCARD)
+			break ;
+		ft_remove_node_front(this_lst);
+		if (this_lst->size == 0)
+			break ;
+	}
+	if (this_lst->size == 0)
+		return (1) ;
 	return (0);
 }

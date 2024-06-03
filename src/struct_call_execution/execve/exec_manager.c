@@ -6,16 +6,17 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 10:12:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:52:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	init_variables(t_var_exe *var);
-static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static int	operator_manager(t_ast_n *cmd,
+				t_mini *mini, t_ast *ast, t_var_exe *var);
 
-void ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
+void	ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
 	t_var_exe	var;
 
@@ -28,7 +29,8 @@ void ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 		init_fork(cmd, mini, ast, &var);
 }
 
-static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static int	operator_manager(t_ast_n *cmd,
+				t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	if (cmd == NULL)
 		return (-1);
@@ -40,8 +42,8 @@ static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *v
 	{
 		if (pipe(var->tube) < 0)
 		{
-			ft_msg_error("pipe error" , strerror(errno));
-			free_memory(mini, var, ast, 1);;
+			ft_msg_error("pipe error", strerror(errno));
+			free_memory(mini, var, ast, 1);
 		}
 		return (0);
 	}
@@ -55,7 +57,7 @@ void	free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini)
 		cmd->m_lst->next->next->prev_pipe = 1;
 		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next);
 	}
-	if (cmd->m_lst->prev->type &( OR_OP | AND_OP))
+	if (cmd->m_lst->prev->type & (OR_OP | AND_OP))
 		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->prev);
 	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 }

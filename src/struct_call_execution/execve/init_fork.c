@@ -6,22 +6,23 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 10:16:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:56:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*select_function();
-void	valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func);
-static int ft_valid_command(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	*select_function(int i);
+static void	valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func);
+static int	ft_valid_command(t_ast_n *cmd,
+				t_mini *mini, t_ast *ast, t_var_exe *var);
 
 void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	void	(*function)(t_ast_n *, t_mini *, t_ast *, t_var_exe *);
 	int		ctrl_func;
 
- 	expand_wildcard_mlst(cmd->m_lst->matrix);
+	expand_wildcard_mlst(cmd->m_lst->matrix);
 	ft_expand_m_lst(cmd->m_lst->matrix);
 	ft_remove_quote_mlst(cmd->m_lst->matrix);
 	if (ft_valid_command(cmd, mini, ast, var))
@@ -50,7 +51,7 @@ void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 		function(cmd, mini, ast, var);
 }
 
-void *select_function(int i)
+static void	*select_function(int i)
 {
 	void	(*function[9]);
 
@@ -65,7 +66,7 @@ void *select_function(int i)
 	return (function[i]);
 }
 
-void valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func)
+static void	valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func)
 {
 	if (ctrl_func > 0)
 	{
