@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:58:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/03 18:09:49 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:27:00 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,6 @@ int	token_aft_opn_prnth(t_parse *parse)
 		return (1);
 	return (0);
 }
+
+// test
+
