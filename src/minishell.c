@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 09:10:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:07:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(void)
 	mini.color = ft_init_color();
 	i = 1;
 	mini.loping = 1;
+	mini.status = 0;
 
 	int	index = 0;
 	while (index < 40)
@@ -37,9 +38,9 @@ int	main(void)
 		mini.ast[index] = NULL;
 		index++;
 	}
-
 	while (mini.loping)
 	{
+		
 		ft_scanner_env(mini.m_lst_env);
 		name = ft_get_program_name();
 		ft_putstr_fd(name, 2);
@@ -58,6 +59,7 @@ int	main(void)
 			i++;
 			if (i == 6)
 				i = 1;
+			status_child = WEXITSTATUS(mini.status);
 		}
 		ft_putstr_fd(RESET, 2);
 

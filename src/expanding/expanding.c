@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 14:55:48 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 11:59:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static int		find_variable(t_lst *lst, t_lst *lst_temp);
 static void		ft_remove_node_var(t_lst *lst, t_lst *temp);
 static void		ft_replace_lst(t_lst *lst, t_lst *temp, char *env);
+static int		ft_status(t_lst *lst);
 
 int	ft_expander_lst_token(t_lst *lst)
 {
@@ -24,12 +25,18 @@ int	ft_expander_lst_token(t_lst *lst)
 	v.lst_temp.size = 0;
 	if (!lst || lst->size == 0)
 		return (-1);
-	if (lst->size == 1)
+	if (lst->size == 1 && lst->head->type == DOLLAR)
+	{
+		lst->head->type = META_LITERAL;
+		return (-1);
+	}
+	if (ft_status(lst))
 		return (-1);
 	if (find_variable(lst, &v.lst_temp))
 		return (-1);
 	v.array_var = ft_cpy_lst_to_array(&v.lst_temp);
 	v.env = getenv(&v.array_var[1]);
+	ft_putstr_fd(v.env, 2);
 	free(v.array_var);
 	if (v.env)
 	{
@@ -97,4 +104,24 @@ static void	ft_replace_lst(t_lst *lst, t_lst *temp, char *env)
 	insert_node_between(lst, temp->last, v.poin_lst);
 	ft_remove_node_var(lst, temp);
 	free(v.poin_lst);
+}
+
+static int	ft_status(t_lst *lst)
+{
+	char	*status;
+	t_lst	*temp;
+
+	if (lst->head->next->c != '?')
+		return (0);
+	ft_remove_node_front(lst);
+	ft_remove_node_front(lst);
+	temp = ft_init_lst();
+	status = ft_itoa(status_child);
+	ft_add_string_in_list(temp, status);
+	ft_scanner_after_expand(temp);
+	while (temp->size)
+		ft_add_node_front(lst, ft_remove_return_node(temp, temp->last));
+	free(status);
+	free(temp);
+	return (-1);
 }

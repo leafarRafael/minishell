@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/28 11:32:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:08:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	my_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	ft_putstr_fd("LOGO LOGO exit \n", 2);
+	ft_manager_fd_builtin(cmd, mini, ast, var);
+	ft_valid_command_builtin(cmd, mini, ast, var);
+	free_memory(mini, var, ast, 0);
 }
 
 int	ft_exit(char *input)

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:19:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 09:13:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 10:44:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,11 @@ static void	remove_variable(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *v
 	{
 		prefix = NULL;
 		prefix = get_prefix(find_type_return_ptr(current->lst, EQUAL_SING), current->lst);
-/* 		if (prefix)
-			ft_putstr_fd(prefix, 2); */
 		if (prefix)
 		{
 			if (!ft_strlstcmp(lst, prefix, ft_strlen(prefix)))
 			{
-				ft_putlst_fd(current->lst, 1, 2);
 				ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, current);
-				ft_putstr_fd(prefix, 2);
-
-				ft_putstr_fd("\n", 2);
 				free(prefix);
 				break ;
 			}

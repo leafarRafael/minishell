@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 09:00:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 10:17:12 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:08:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	finished_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	{
 		close (mini->fd_std[0]);
 		close (mini->fd_std[1]);
-		status_child = 0;
-		free_memory(mini, var, ast, status_child);
+		free_memory(mini, var, ast, 0);
 	}
 }

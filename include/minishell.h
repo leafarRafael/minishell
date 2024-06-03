@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 09:13:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:03:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_variables_minishell
 	char		**color;
 	int			fd_std[2];
 	int			loping;
+	int			status;
 	t_ast		*ast[40];
 }				t_mini;
 

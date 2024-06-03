@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 09:21:26 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 13:46:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 11:49:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_get_executable(t_mini *mini, t_var_exe *var, t_ast *ast)
 		temp2 = NULL;
 		i++;
 	}
-	ft_msg_error(var->command_m[0], " command not found");
+	ft_msg_error(var->command_m[0], "command not found");
 	free_memory(mini, var, ast, 127);
 	return (NULL);
 }
