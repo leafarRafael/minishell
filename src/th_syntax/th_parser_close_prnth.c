@@ -6,16 +6,18 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:44:38 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/30 16:42:15 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:10:06 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
-#include "th_syntax.h"
 
 static int	token_bfr_cls_prnth(t_parse *parse);
 
-// Check if there is an EMPTY PARENTHESIS "(...)"
+/**
+ * @brief Syntax Check:
+ * @note if there is an EMPTY PARENTHESIS "(...)"
+*/
 int	parse_bfr_cls_prnth(t_parse *parse, char *str, int *index)
 {
 	if (token_bfr_cls_prnth(parse))
@@ -26,8 +28,11 @@ int	parse_bfr_cls_prnth(t_parse *parse, char *str, int *index)
 	return (NO_ERROR);
 }
 
-// Check if after an OPERATOR "|, ||, &&" there is CLOSE PARENTHESIS ")"
-// Check if after a REDIRECT  "< , >, <<, >>" there is CLOSE PARENTHESIS ")"
+/**
+ * @brief Syntax Check:
+ * @note Check if after an OPERATOR "|, ||, &&" there is CLOSE PRNTHSS ")"
+ * @note Check if after a REDIRECT  "< , >, <<, >>" there is CLOSE PRNTHSS ")"
+*/
 static int	token_bfr_cls_prnth(t_parse *parse)
 {
 	if (parse->sub && (tkn_is_oprtr(parse_last(parse->sub))

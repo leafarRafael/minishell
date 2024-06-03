@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/28 18:28:20 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:13:05 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	parse_quote(char *str, t_parse **parse, int *index)
 	type = th_is_quote(str, *index);
 	error = (type == D_QUOTES) * N_CLS_DQTS + (type == S_QUOTES) * N_CLS_SQTS;
 	quote = (type == D_QUOTES) * '\"' + (type == S_QUOTES) * '\'';
-	ptr = parse_add_back(parse, parse_new(type, *index + 1));
+	ptr = parse_add_back(parse, parse_init(type, *index + 1));
 	while (str[(*index)++])
 	{
 		if (str[*index] == '\0')
@@ -50,7 +50,7 @@ int	parse_text(char *str, t_parse **parse, int *index)
 	int		status;
 
 	status = 0;
-	ptr = parse_add_back(parse, parse_new(COMMAND, *index));
+	ptr = parse_add_back(parse, parse_init(COMMAND, *index));
 	while (str[(*index)] && !th_is_in_set(str[(*index)], "|<>() \'\""))
 	{
 		if (str[*index] == '&' && str[*index + 1] == '&')
@@ -61,7 +61,10 @@ int	parse_text(char *str, t_parse **parse, int *index)
 	return (token_afr_cls_prnth(ptr, str, status));
 }
 
-// Check if after a CLOSE PARENTHESIS ")" there is a COMMAND "text"
+/**
+ * @brief Syntax Check:
+ * @note Check if after a CLOSE PARENTHESIS ")" there is a COMMAND "text"
+*/
 static int	token_afr_cls_prnth(t_parse *parse, char *str, int status)
 {
 	if ((parse->prev && parse->prev->type == OPEN_PAREN)

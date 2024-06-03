@@ -6,12 +6,17 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:07:47 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/28 18:20:18 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 20:22:30 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
 
+/**
+ * @brief Syntax Check:
+ * @note Check if after a OPEN PRNTHS "(" there is an OPERATOR "|, ||, &&". *
+ * @note The check is done at the end of the append sub-parse.
+*/
 int	append_sub(char *str, t_parse *parse, int *index, t_parse_func parse_func)
 {
 	t_parse	*sub;

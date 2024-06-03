@@ -6,12 +6,11 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:58:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/28 18:27:35 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:09:49 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
-#include "th_syntax.h"
 
 static int	token_bfr_opn_prnth(t_parse *parse);
 
@@ -29,9 +28,12 @@ int	parse_bfr_sub_prnth(t_parse *parse, char *str, int *index)
 	return (append_sub(str, parse, index, parse_prnth));
 }
 
-// Check if after a CLOSE PARENTHESIS ")" there is a OPEN PARENTHESIS "("
-// Check if after a COMMAND "text" there is a OPEN PARENTHESIS "("
-// Check if after a REDIRECT  "< , >, <<, >>" there is a OPEN PARENTHESIS "("
+/**
+ * @brief Syntax Check:
+ * @note Check if after a CLOSE PRNTHSS ")" there is a OPEN PRNTHSS "("
+ * @note Check if after a COMMAND "text" there is a OPEN PRNTHSS "("
+ * @note Check if after a REDIRECT  "< , >, <<, >>" there is a OPEN PRNTHS "("
+*/
 static int	token_bfr_opn_prnth(t_parse *parse)
 {
 	int	type;
@@ -43,7 +45,10 @@ static int	token_bfr_opn_prnth(t_parse *parse)
 	return (0);
 }
 
-// Check if after a OPEN PARENTHESIS "(" there is an OPERATOR "|, ||, &&"
+/**
+ * @brief Syntax Check:
+ * @note Check if after a OPEN PARENTHESIS "(" there is an OPERATOR "|, ||, &&"
+*/
 int	token_aft_opn_prnth(t_parse *parse)
 {
 	if (parse->type == OPEN_PAREN && tkn_is_oprtr(parse->sub))

@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"minishell.h": "c",
-		"array_lst.h": "c"
+		"array_lst.h": "c",
+		"th_syntax.h": "c",
+		"th_parser.h": "c"
 	}
 }

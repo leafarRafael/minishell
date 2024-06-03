@@ -6,7 +6,7 @@
 #    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/05/30 16:10:02 by tforster         ###   ########.fr        #
+#    Updated: 2024/06/03 18:20:14 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 
 TH_FUNC			:= ./src/th_syntax/th_syntax.c\
 				./src/th_syntax/th_parser.c\
+				./src/th_syntax/th_parser_init.c\
 				./src/th_syntax/th_parser_utils.c\
 				./src/th_syntax/th_parser_append.c\
 				./src/th_syntax/th_parser_open_prnth.c\
@@ -89,6 +90,7 @@ TH_FUNC			:= ./src/th_syntax/th_syntax.c\
 				./src/th_syntax/th_parser_text.c\
 				./src/th_syntax/th_parser_oprtr_rdrct.c\
 				./src/th_syntax/th_parser_error.c\
+				./src/th_syntax/th_parser_error_utils.c\
 				./src/th_syntax/th_print.c
 
 EXPANDER		:= ./src/expanding/expanding.c\

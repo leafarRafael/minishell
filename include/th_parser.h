@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:32:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/29 18:59:07 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:28:33 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ typedef	int (*t_tkn_fc) (t_parse *);
 
 /* PARSE Functions */
 /* Utils*/
-t_parse	*parse_new(t_type_character type, int start);
+t_parse	*parse_init(t_type_character type, int start);
 t_parse	*parse_last(t_parse *parse);
 t_parse	*parse_add_back(t_parse **parse, t_parse *new_node);
 int		parse_len(t_parse *parse);
 void	parse_free(t_parse *parse);
 
 /* Parse Types */
+int		parse_out_prnht(char *str, t_parse **parse, int *index);
 int		parse_prnth(char *str, t_parse **parse, int *index);
 int		parse_quote(char *str, t_parse **parse, int *index);
 int		parse_oprtr(char *str, t_parse **parse, int *index);
@@ -84,6 +85,9 @@ int		parse_bfr_cls_prnth(t_parse *parse, char *str, int *index);
 
 /* ERROR message */
 int		syntax_error(t_parse *parse, char *str, t_sytx_er error);
+char	*error_opn_prnth(t_sytx_er error);
+char	*error_name(t_parse *parse, char *str, t_sytx_er error, int *flag);
+
 
 void	th_print_parenth(char *str, t_parse *parse, int len, int more);
 

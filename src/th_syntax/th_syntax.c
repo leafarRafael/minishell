@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/31 22:41:29 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:38:22 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,71 +14,31 @@
 #include "th_parser.h"
 #include "th_syntax.h"
 
+int	last_tkn(char *str, t_parse *parse, int status)
+{
+	t_parse		*last;
+
+	last = parse_last(parse);
+	if (!status && parse && (tkn_is_oprtr(last) || tkn_is_rdrct(last)))
+		return (syntax_error(last, str, TKN_BFR_CLS_PRNTH));
+	return (status);
+}
+
 int	th_parse_param(char *str, t_stx *stx)
 {
 	t_parse	*parse;
 	int		index;
 	int		status;
 
-	status = 0;
 	parse = NULL;
 	index = 0;
-	while (str[index])
-	{
-		// printf("BASE index[%d] [%c]\n", index, str[index]);
-		if (th_is_tab(str[index]))
-			index++;
-		else if (str[index] == ')')
-			status = syntax_error(parse, str, N_OPN_PRNTH);
-		else if (str[index] == '(')
-			status = parse_bfr_fst_prnth(&parse, str, &index);
-		else if (th_is_quote(str, index))
-			status = parse_quote(str, &parse, &index);
-		else if (th_is_logical_oprtr(str, index))
-			status = parse_oprtr(str, &parse, &index);
-		else if (th_is_io_rdrct(str, index))
-			status = parse_rdrct(str, &parse, &index);
-		else
-			status = parse_text(str, &parse, &index);
-		if (status > 0)
-			break ;
-	}
-	// index = -1;
-	// status = parse_prnth(str, &parse, &index);
-	// printf("\n");
-	// printf("PARSER RESULT:\n");
-	// th_print_parenth(str, parse, 0, 0);
+	status = parse_out_prnht(str, &parse, &index);
+	status = last_tkn(str, parse, status);
+	printf("\n");
+	printf("PARSER RESULT:\n");
+	th_print_parenth(str, parse, 0, 0);
 	if (parse)
-			parse_free(parse);
-	return (status);
-}
-
-int	parse_prnth(char *str, t_parse **parse, int *index)
-{
-	t_parse	*ptr;
-	int		status;
-
-	status = NO_ERROR;
-	ptr = parse_add_back(parse, parse_new(OPEN_PAREN, *index + 1));
-	while (!status && str[(*index)++])
-	{
-		if (th_is_tab(str[*index]))
-			ptr->size++;
-		else if (str[*index] == '(')
-			status = parse_bfr_sub_prnth(ptr, str, index);
-		else if (str[*index] == '\0')
-			return (syntax_error(*parse, str, N_CLS_PRNTH));
-		else if (str[*index] == ')')
-			return (parse_bfr_cls_prnth(ptr, str, index));
-		else if (th_is_quote(str, *index))
-			status = append_sub(str, ptr, index, parse_quote);
-		else if (th_is_logical_oprtr(str, *index))
-			status = append_sub(str, ptr, index, parse_oprtr);
-		else if (th_is_io_rdrct(str, *index))
-			status = append_sub(str, ptr, index, parse_rdrct);
-		else
-			status = append_sub(str, ptr, index, parse_text);
-	}
+		parse_free(parse);
 	return (status);
 }
 
@@ -103,4 +63,8 @@ NOT
 (>> file (cdm ) || cmd >> file )
 111(222(333))
 11>>(22>>(33>>(cmd)))
+ */
+
+/*
+|| (ls) && (ls) >>
  */

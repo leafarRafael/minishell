@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/28 18:21:58 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:46:22 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	err_msg(char *msg1, char *msg2, t_sytx_er error);
 static int	parse_err(t_parse *parse, char *str, t_sytx_er error);
+static char	*slct_type(t_parse *parse, char *str, t_sytx_er error, char *tkn);
 
 int	syntax_error(t_parse *parse, char *str, t_sytx_er error)
 {
@@ -42,66 +43,43 @@ int	syntax_error(t_parse *parse, char *str, t_sytx_er error)
 
 static int	err_msg(char *msg1, char *msg2, t_sytx_er error)
 {
-	printf("Syntax ERROR, %s %s\n", msg1, msg2);
+	printf("%sSyntax ERROR, %s%s %s\n", RED, RST, msg1, msg2);
 	return (error);
-}
-
-static char	*token_name(t_parse *parse, char *str)
-{
-	int		index;
-	char	*token;
-
-	index = 0;
-	token = malloc((parse->size + 1) * sizeof(char));
-	while (index < parse->size)
-	{
-		token[index] = str[parse->start + index];
-		index++;
-	}
-	token[index] = '\0';
-	return (token);
 }
 
 static int	parse_err(t_parse *parse, char *str, t_sytx_er error)
 {
-	char	*token;
+	char	*tkn;
 	int		flag;
 
-	token = "??";
+	tkn = NULL;
 	flag = 0;
-	if (parse->type == PIPE)
-		token = "|";
-	else if (parse->type == AND_OP)
-		token = "||";
-	else if (parse->type == OR_OP)
-		token = "&&";
-	else if (parse->type == OPEN_PAREN)
-	{
-		if (error == TKN_BFR_OPN_PRNTH)
-			token = ")";
-		else
-			token = "(";
-	}
-	else if (parse->type == REDI_IN)
-		token = "<";
-	else if (parse->type == REDI_OUT)
-		token = ">";
-	else if (parse->type == HERE_DOC)
-		token = "<<";
-	else if (parse->type == APPEND)
-		token = ">>";
-	else if (parse->type & (COMMAND | D_QUOTES | S_QUOTES))
-	{
-		if (error == TKN_AFT_CLS_PRNTH)
-			token = ")";
-		if (error == TKN_BFR_OPN_PRNTH)
-		{
-			token = token_name(parse, str);
-			flag = 1;
-		}
-	}
-	printf("syntax error near unexpected token, '%s'\n", token);
+	tkn = slct_type(parse, str, error, tkn);
+	if (parse->type & (COMMAND | D_QUOTES | S_QUOTES))
+		tkn = error_name(parse, str, error, &flag);
+	printf("%sSyntax ERROR: %snear unexpected token, '%s'\n", RED, RST, tkn);
 	if (flag)
-		free(token);
+		free(tkn);
 	return (error);
+}
+
+static char	*slct_type(t_parse *parse, char *str, t_sytx_er error, char *tkn)
+{
+	if (parse->type == PIPE)
+		tkn = "|";
+	else if (parse->type == AND_OP)
+		tkn = "||";
+	else if (parse->type == OR_OP)
+		tkn = "&&";
+	else if (parse->type == OPEN_PAREN)
+		tkn = error_opn_prnth(error);
+	else if (parse->type == REDI_IN)
+		tkn = "<";
+	else if (parse->type == REDI_OUT)
+		tkn = ">";
+	else if (parse->type == HERE_DOC)
+		tkn = "<<";
+	else if (parse->type == APPEND)
+		tkn = ">>";
+	return (tkn);
 }

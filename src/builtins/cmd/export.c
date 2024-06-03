@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 08:54:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/03 15:03:22 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,9 +159,9 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			index = 0;
 			prefix = NULL;
 			var = NULL;
-			ft_print_array_lst(llst->lst, 0);
+			// ft_print_array_lst(llst->lst, 0);
 			var = get_prefix(find_equal_return_ptr(llst->lst, '='), llst->lst);
-			printf("===>>> VAR [ %s ]\n", var);
+			// printf("===>>> VAR [ %s ]\n", var);
 
 			while(ft_strlen(var) && index < mini->m_lst_env->size)
 			{
@@ -171,10 +171,10 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 				{
 					if (!ft_strncmp(var, prefix, ft_strlen(prefix) + 1))
 					{
-						printf("===>>> PREFIX [ %s ]\n", prefix);
+						// printf("===>>> PREFIX [ %s ]\n", prefix);
 						ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
 						ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, env);
-						ft_print_array_lst(llst->lst, 0);
+						// ft_print_array_lst(llst->lst, 0);
 						free(prefix);
 						free(var);
 						return ;
@@ -186,8 +186,8 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			}
 			if (ft_strlen(var))
 			{
-				printf("ADD NEW VAR = \n");
-				ft_print_array_lst(llst->lst, 0);
+				// printf("ADD NEW VAR = \n");
+				// ft_print_array_lst(llst->lst, 0);
 				ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
 				free(var);
 			}

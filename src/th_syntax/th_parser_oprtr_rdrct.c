@@ -6,12 +6,11 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:39:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/28 18:36:27 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:12:26 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
-#include "th_syntax.h"
 
 static int	tkn_and_tkn(t_parse *parse, char *str, t_tkn_fc f1, t_tkn_fc f2);
 static int	syntax_oprtr(t_parse *parse, char *str);
@@ -30,9 +29,12 @@ int	tkn_is_rdrct(t_parse *parse)
 	return (0);
 }
 
-// Check if after an OPERATOR "|,||,&&" there is another OPERATOR "|,||,&&"
-// Check if after an REDIRECT  "<,>,<<,>>" there is another OPERATOR "|,||,&&"
-// Check if after a REDIRECT "<,>,<<,>>" there is another REDIRECT "<,>,<<,>>"
+/**
+ * @brief Syntax Check:
+ * @note Check if after an OPRTR "|,||,&&" there is another OPRTR "|,||,&&"
+ * @note Check if after an RDRCT  "<,>,<<,>>" there is another OPRTR "|,||,&&"
+ * @note Check if after a RDRCT "<,>,<<,>>" there is another RDRCT "<,>,<<,>>"
+*/
 static int	tkn_and_tkn(t_parse *parse, char *str, t_tkn_fc f1, t_tkn_fc f2)
 {
 	if (parse->prev && f1(parse->prev) && f2(parse))
@@ -46,7 +48,7 @@ int	parse_oprtr(char *str, t_parse **parse, int *index)
 	int		type;
 
 	type = th_is_logical_oprtr(str, *index);
-	ptr = parse_add_back(parse, parse_new(type, *index));
+	ptr = parse_add_back(parse, parse_init(type, *index));
 	ptr->size = 1;
 	(*index)++;
 	if (type & (OR_OP | AND_OP))
@@ -64,7 +66,7 @@ int	parse_rdrct(char *str, t_parse **parse, int *index)
 	int		type;
 
 	type = th_is_io_rdrct(str, *index);
-	ptr = parse_add_back(parse, parse_new(type, *index));
+	ptr = parse_add_back(parse, parse_init(type, *index));
 	ptr->size = 1;
 	(*index)++;
 	if (type & (HERE_DOC | APPEND))
