@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/03 18:13:05 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:41:38 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	parse_quote(char *str, t_parse **parse, int *index)
 int	parse_text(char *str, t_parse **parse, int *index)
 {
 	t_parse	*ptr;
-	int		type;
 	int		status;
 
 	status = 0;

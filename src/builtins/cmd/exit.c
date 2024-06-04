@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:34:23 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 static int	valid_number(t_lst *lst);
 
-void	my_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (!cmd)
 		return ;
@@ -23,17 +23,17 @@ void	my_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	ft_manager_fd_builtin(cmd, mini, ast, var);
-	ft_valid_command_builtin(cmd, mini, ast, var);
+	ft_manager_fd_builtin(cmd, mini, var);
+	ft_valid_command_builtin(cmd);
 	if (cmd->m_lst->matrix->size == 1)
 	{
 		ft_putlst_fd(cmd->m_lst->matrix->head->lst, 1, 2);
 		free_memory(mini, var, g_status_child);
 	}
-	exe_exit(cmd, mini, ast, var);
+	exe_exit(cmd, mini, var);
 }
 
-static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	char	*nbr_exit;
 	int		nbr;

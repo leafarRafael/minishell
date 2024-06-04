@@ -3,32 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:37:41 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	exe_echo(t_ast_n *cmd,
-				t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	exe_echo(t_ast_n *cmd);
 
-void	echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void	echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	ft_manager_fd_builtin(cmd, mini, ast, var);
-	ft_valid_command_builtin(cmd, mini, ast, var);
-	exe_echo(cmd, mini, ast, var);
+	ft_manager_fd_builtin(cmd, mini, var);
+	ft_valid_command_builtin(cmd);
+	exe_echo(cmd);
 	g_status_child = 0;
-	finished_builtin(cmd, mini, ast, var);
+	finished_builtin(cmd, mini, var);
 }
 
-static void	exe_echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	exe_echo(t_ast_n *cmd)
 {
 	int	i;
 
@@ -39,7 +38,7 @@ static void	exe_echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return ;
 	}
-	if (!ft_strlstcmp(cmd->m_lst->matrix->head->lst, "-n", 2))
+	if (!ft_strlstcmp(cmd->m_lst->matrix->head->lst, "-n"))
 	{
 		ft_remove_lst_front(cmd->m_lst->matrix);
 		i = 0;

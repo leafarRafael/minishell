@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   subshell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:38:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:50:50 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void	subshell(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	pid_t	pid_subshell;
 
 	pid_subshell = fork();
 	if (pid_subshell == 0)
 	{
-		init_fork(cmd, mini, ast, var);
+		init_fork(cmd, mini, var);
 		rl_clear_history();
 		free_memory(mini, var, g_status_child);
 	}

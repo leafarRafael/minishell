@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_lst.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:47:19 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 14:08:26 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:46:36 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		ft_find_str_inlist(t_lst *lst, char *str, int size);
 char	*ft_cpy_lst_to_array(t_lst *lst);
 void	ft_putlst_fd(t_lst *lst, int new_line, int fd);
 int		insert_node_between(t_lst *lst, t_node *node, t_lst *new_lst);
-t_node	*find_type_return_ptr(t_lst *lst, int type);
+t_node	*find_type_rtrn_ptr(t_lst *lst, int type);
 int		ft_find_head(t_lst *lst, char *str, int size);
 int		ft_find_last(t_lst *lst, char *str, int size);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 14:02:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:52:09 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int			ft_input_is_valid(char *array);
 void		ft_free_memory_revert_environ(t_mini *v);
 char		**path_system_bin(t_mlst *m_lst);
 
-void		builds_execution_call(t_lst *input, t_mini *mini);
+void		builds_execution_call(t_mini *mini);
 
 void		free_memory(t_mini *mini, t_var_exe *var, int status_exit);
 void		ft_msg_error(char *invalid_input, char *msg_error);
@@ -140,14 +140,14 @@ void		ft_msg_error(char *invalid_input, char *msg_error);
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
 void		ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
-void		ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast);
-char		*ft_get_executable(t_mini *mini, t_var_exe *var, t_ast *ast);
+void		ft_expand_subshell(t_ast_n *cmd, t_mini *mini);
+char		*ft_get_executable(t_mini *mini, t_var_exe *var);
 
-void		ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
-void		children(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void		ft_exec_manager(t_ast_n *cmd, t_mini *mini);
+void		children(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void		init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+void		subshell(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		init_fork(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini);
 
 void		ft_remove_quote_mlst(t_mlst *mlst);
@@ -164,22 +164,19 @@ void		*getdir_list_string(int str_lst);
 char		*ft_get_program_name(void);
 
 /*    BUILTINS		*/
-int			is_builtin(t_ast_n *cmd, t_mini *mini);
-void		cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void		echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void		env(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void		my_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void		export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void		pwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
-void		unset(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+int			is_builtin(t_ast_n *cmd);
+void		cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		env(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		export(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		pwd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
-void		ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast,
-				t_var_exe *var);
-void		ft_valid_command_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast,
-				t_var_exe *var);
-void		finished_builtin(t_ast_n *cmd, t_mini *mini, t_ast *ast,
-				t_var_exe *var);
-
-int			ft_strlstcmp(t_lst *lst, char *str, int size);
+void		ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		ft_valid_command_builtin(t_ast_n *cmd);
+void		finished_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+char	*get_prfx(t_node *ptr, t_lst *lst);
+int			ft_strlstcmp(t_lst *lst, char *str);
 
 #endif

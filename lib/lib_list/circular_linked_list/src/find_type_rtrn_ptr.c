@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_type_return_ptr.c                             :+:      :+:    :+:   */
+/*   find_type_rtrn_ptr.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "array_lst.h"
 
-t_node	*find_type_return_ptr(t_lst *lst, int type)
+t_node	*find_type_rtrn_ptr(t_lst *lst, int type)
 {
 	int		i;
 	t_node	*node;

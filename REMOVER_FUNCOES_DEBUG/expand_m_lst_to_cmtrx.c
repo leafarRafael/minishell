@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   expand_m_lst_to_cmtrx.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:18:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:35:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:20:38 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expanding.h"
 #include "minishell.h"
 
-static int	ft_expande_before_copie(t_mlst *lst_matrix);
+// static int	ft_expande_before_copie(t_mlst *lst_matrix);
 
 char	**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix)
 {
@@ -39,31 +39,31 @@ char	**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix)
 	return (v.matrix);
 }
 
-static int	ft_expande_before_copie(t_mlst *lst_matrix)
-{
-	t_var_matrix	v;
-	int				size;
+// static int	ft_expande_before_copie(t_mlst *lst_matrix)
+// {
+// 	t_var_matrix	v;
+// 	int				size;
 
-	v.current_lst = lst_matrix->head;
-	size = lst_matrix->size;
-	v.i = 1;
-	while (v.i <= size)
-	{
-		ft_expander_lst_token(v.current_lst->lst);
-		if (v.current_lst->lst->size == 0)
-		{
-			ft_rmv_spcfc_lst_mtrx(lst_matrix, v.current_lst);
-			if (lst_matrix->size == 0)
-				return (-1);
-			v.current_lst = lst_matrix->head;
-			size = lst_matrix->size;
-			v.i = 1;
-		}
-		else
-		{
-			v.current_lst = v.current_lst->next;
-			v.i++;
-		}
-	}
-	return (0);
-}
+// 	v.current_lst = lst_matrix->head;
+// 	size = lst_matrix->size;
+// 	v.i = 1;
+// 	while (v.i <= size)
+// 	{
+// 		ft_expander_lst_token(v.current_lst->lst);
+// 		if (v.current_lst->lst->size == 0)
+// 		{
+// 			ft_rmv_spcfc_lst_mtrx(lst_matrix, v.current_lst);
+// 			if (lst_matrix->size == 0)
+// 				return (-1);
+// 			v.current_lst = lst_matrix->head;
+// 			size = lst_matrix->size;
+// 			v.i = 1;
+// 		}
+// 		else
+// 		{
+// 			v.current_lst = v.current_lst->next;
+// 			v.i++;
+// 		}
+// 	}
+// 	return (0);
+// }

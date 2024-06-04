@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parent.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:54:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:55:57 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 
 static void	status_process_manager(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
-	int	status;
-
 	if (cmd->m_lst->next->type & (AND_OP | OR_OP))
 		waitpid(var->pid, &mini->status, 0);
 	else

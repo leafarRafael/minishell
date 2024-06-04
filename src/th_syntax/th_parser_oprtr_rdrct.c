@@ -6,14 +6,13 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:39:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/03 18:12:26 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:40:40 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
 
 static int	tkn_and_tkn(t_parse *parse, char *str, t_tkn_fc f1, t_tkn_fc f2);
-static int	syntax_oprtr(t_parse *parse, char *str);
 
 int	tkn_is_oprtr(t_parse *parse)
 {

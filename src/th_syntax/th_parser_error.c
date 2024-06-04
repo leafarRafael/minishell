@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/03 18:46:22 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:43:12 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	err_msg(char *msg1, char *msg2, t_sytx_er error);
 static int	parse_err(t_parse *parse, char *str, t_sytx_er error);
-static char	*slct_type(t_parse *parse, char *str, t_sytx_er error, char *tkn);
+static char	*slct_type(t_parse *parse, t_sytx_er error, char *tkn);
 
 int	syntax_error(t_parse *parse, char *str, t_sytx_er error)
 {
@@ -54,7 +54,7 @@ static int	parse_err(t_parse *parse, char *str, t_sytx_er error)
 
 	tkn = NULL;
 	flag = 0;
-	tkn = slct_type(parse, str, error, tkn);
+	tkn = slct_type(parse, error, tkn);
 	if (parse->type & (COMMAND | D_QUOTES | S_QUOTES))
 		tkn = error_name(parse, str, error, &flag);
 	printf("%sSyntax ERROR: %snear unexpected token, '%s'\n", RED, RST, tkn);
@@ -63,7 +63,7 @@ static int	parse_err(t_parse *parse, char *str, t_sytx_er error)
 	return (error);
 }
 
-static char	*slct_type(t_parse *parse, char *str, t_sytx_er error, char *tkn)
+static char	*slct_type(t_parse *parse, t_sytx_er error, char *tkn)
 {
 	if (parse->type == PIPE)
 		tkn = "|";

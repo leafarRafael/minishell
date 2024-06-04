@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/03 20:31:14 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:39:01 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	last_tkn(char *str, t_parse *parse, int status)
 	return (status);
 }
 
-int	th_parse_param(char *str, t_stx *stx)
+int	th_parse_param(char *str)
 {
 	t_parse	*parse;
 	int		index;

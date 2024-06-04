@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:07:47 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/03 20:22:30 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:39:59 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 */
 int	append_sub(char *str, t_parse *parse, int *index, t_parse_func parse_func)
 {
-	t_parse	*sub;
 	t_parse	*last;
 	int		status;
 	int		size;

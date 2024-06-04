@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard_mlst.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 08:46:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 09:20:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:46:36 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	find_asterisk(t_mlst *mlst)
 	line = mlst->head;
 	while (i <= mlst->size)
 	{
-		if (find_type_return_ptr(line->lst, WILDCARD))
+		if (find_type_rtrn_ptr(line->lst, WILDCARD))
 			return (0);
 		line = line->next;
 		i++;
@@ -58,7 +58,7 @@ static void	search_replace_token(t_mlst *mlst)
 	next = nlst->next;
 	while (i < mlst->size)
 	{
-		if (find_type_return_ptr(nlst->lst, WILDCARD))
+		if (find_type_rtrn_ptr(nlst->lst, WILDCARD))
 			replace(mlst, nlst, &i);
 		i++;
 		nlst = next;

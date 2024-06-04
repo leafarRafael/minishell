@@ -3,46 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:21:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:35:00 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	putpwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	putpwd(t_mini *mini);
 
-void	pwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void	pwd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	ft_manager_fd_builtin(cmd, mini, ast, var);
-	ft_valid_command_builtin(cmd, mini, ast, var);
-	putpwd(cmd, mini, ast, var);
-	finished_builtin(cmd, mini, ast, var);
+	ft_manager_fd_builtin(cmd, mini, var);
+	ft_valid_command_builtin(cmd);
+	putpwd(mini);
+	finished_builtin(cmd, mini, var);
 }
 
-static void	putpwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	putpwd(t_mini *mini)
 {
-	t_llst	*node;
+	t_llst	*env;
+	char	*prefix;
 	int		i;
 
-	node = mini->m_lst_env->head;
+	env = mini->m_lst_env->head;
 	i = 0;
 	while (i < mini->m_lst_env->size)
 	{
-		if (!ft_strlstcmp(node->lst, "PWD=", 4))
+		prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL_SING), env->lst);
+		if (!ft_strncmp("PWD", prefix, ft_strlen(prefix) + 1))
 		{
 			ft_putstr_fd(mini->color[0], STDOUT_FILENO);
-			ft_putlst_fd(node->lst, 1, STDOUT_FILENO);
+			ft_putlst_fd(env->lst, 1, STDOUT_FILENO);
 			ft_putstr_fd(RESET, STDOUT_FILENO);
 			break ;
 		}
-		node = node->next;
+		env = env->next;
 		i++;
 	}
 }

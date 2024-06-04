@@ -3,34 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:19:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:37:50 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	remove_variable(t_ast_n *cmd,
-				t_mini *mini, t_ast *ast, t_var_exe *var);
-static char	*get_prefix(t_node *ptr, t_lst *lst);
+static void	remove_variable(t_ast_n *cmd, t_mini *mini);
 
-void	unset(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void	unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	ft_manager_fd_builtin(cmd, mini, ast, var);
-	ft_valid_command_builtin(cmd, mini, ast, var);
-	remove_variable(cmd, mini, ast, var);
+	ft_manager_fd_builtin(cmd, mini, var);
+	ft_valid_command_builtin(cmd);
+	remove_variable(cmd, mini);
 	g_status_child = 0;
-	finished_builtin(cmd, mini, ast, var);
+	finished_builtin(cmd, mini, var);
 }
 
-static void	remove_variable(t_ast_n *cmd,
-			t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	remove_variable(t_ast_n *cmd, t_mini *mini)
 {
 	t_llst	*current;
 	t_lst	*lst;
@@ -44,10 +41,10 @@ static void	remove_variable(t_ast_n *cmd,
 	while (i < mini->m_lst_env->size)
 	{
 		prefix = NULL;
-		prefix = get_prefix(find_type_return_ptr(current->lst, EQUAL_SING), current->lst);
+		prefix = get_prfx(find_type_rtrn_ptr(current->lst, EQUAL_SING), current->lst);
 		if (prefix)
 		{
-			if (!ft_strlstcmp(lst, prefix, ft_strlen(prefix)))
+			if (!ft_strlstcmp(lst, prefix))
 			{
 				ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, current);
 				free(prefix);
@@ -58,32 +55,4 @@ static void	remove_variable(t_ast_n *cmd,
 		i++;
 		current = current->next;
 	}
-}
-
-static char	*get_prefix(t_node *ptr, t_lst *lst)
-{
-	t_node	*temp;
-	t_lst	*lst_prefix;
-	char	*prefix;
-
-	if (!lst || !ptr)
-		return (NULL);
-	if (ptr == lst->head)
-		return (NULL);
-	temp = ptr->prev;
-	lst_prefix = ft_init_lst();
-	while (1)
-	{
-		ft_add_node_front(lst_prefix, ft_cpynode(temp));
-		temp = temp->prev;
-		if (temp == lst->last)
-			break ;
-		if (temp->type == WILDCARD)
-			break ;
-		if (temp->type != NO_OP_TYPE)
-			break ;
-	}
-	prefix = ft_cpy_lst_to_array(lst_prefix);
-	ft_delete_list(lst_prefix);
-	return (prefix);
 }

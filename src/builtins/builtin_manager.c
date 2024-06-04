@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:01:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 08:52:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:37:30 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	valid_builtin(t_lst *lst);
 
-int	is_builtin(t_ast_n *cmd, t_mini *mini)
+int	is_builtin(t_ast_n *cmd)
 {
 	t_llst	*line;
 	int		i;
@@ -39,19 +39,19 @@ int	is_builtin(t_ast_n *cmd, t_mini *mini)
 
 static int	valid_builtin(t_lst *lst)
 {
-	if (!ft_strlstcmp(lst, CD, lst->size))
+	if (!ft_strlstcmp(lst, CD))
 		return (1);
-	else if (!ft_strlstcmp(lst, PWD, lst->size))
+	else if (!ft_strlstcmp(lst, PWD))
 		return (2);
-	else if (!ft_strlstcmp(lst, ENV, lst->size))
+	else if (!ft_strlstcmp(lst, ENV))
 		return (3);
-	else if (!ft_strlstcmp(lst, ECHO, lst->size))
+	else if (!ft_strlstcmp(lst, ECHO))
 		return (4);
-	else if (!ft_strlstcmp(lst, EXIT, lst->size))
+	else if (!ft_strlstcmp(lst, EXIT))
 		return (5);
-	else if (!ft_strlstcmp(lst, UNSET, lst->size))
+	else if (!ft_strlstcmp(lst, UNSET))
 		return (6);
-	else if (!ft_strlstcmp(lst, EXPORT, lst->size))
+	else if (!ft_strlstcmp(lst, EXPORT))
 		return (7);
 	return (0);
 }

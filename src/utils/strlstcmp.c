@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   strlstcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:39:56 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:54:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:37:09 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_strlstcmp(t_lst *lst, char *str, int size)
+int	ft_strlstcmp(t_lst *lst, char *str)
 {
 	char	*new;
 	int		i;

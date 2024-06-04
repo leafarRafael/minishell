@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:46:56 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:49:41 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 static void	*select_function(int i);
 static void	valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func);
-static void	execute(t_ast_n *cmd,
-				t_mini *mini, t_ast *ast, t_var_exe *var);
-static int	ft_valid_command(t_ast_n *cmd,
-				t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+static int	ft_valid_command(t_ast_n *cmd);
 
-void	init_fork(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void	init_fork(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	expand_wildcard_mlst(cmd->m_lst->matrix);
 	ft_expand_m_lst(cmd->m_lst->matrix);
 	ft_remove_quote_mlst(cmd->m_lst->matrix);
-	if (ft_valid_command(cmd, mini, ast, var))
+	if (ft_valid_command(cmd))
 	{
 		free_cmd_operator_executed(cmd, mini);
 		return ;
 	}
-	execute(cmd, mini, ast, var);
+	execute(cmd, mini, var);
 }
 
 static void	*select_function(int i)
@@ -60,8 +58,7 @@ static void	valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func)
 		(*pid) = fork();
 }
 
-static int	ft_valid_command(t_ast_n *cmd,
-			t_mini *mini, t_ast *ast, t_var_exe *var)
+static int	ft_valid_command(t_ast_n *cmd)
 {
 	if (cmd->m_lst->matrix->size == 1
 		&& cmd->m_lst->matrix->head->lst->size == 0)
@@ -74,14 +71,14 @@ static int	ft_valid_command(t_ast_n *cmd,
 	return (0);
 }
 
-static void	execute(t_ast_n *cmd,
-			t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
-	void	(*function)(t_ast_n *, t_mini *, t_ast *, t_var_exe *);
+	// void	(*function)(t_ast_n *, t_mini *, t_ast *, t_var_exe *);
+	void	(*function)(t_ast_n *, t_mini *, t_var_exe *);
 	int		ctrl_func;
 
 	ctrl_func = 0;
-	ctrl_func = is_builtin(cmd, mini);
+	ctrl_func = is_builtin(cmd);
 	function = select_function(ctrl_func);
 	valid_fork(&var->pid, cmd, ctrl_func);
 	if (var->pid != -42)
@@ -89,7 +86,7 @@ static void	execute(t_ast_n *cmd,
 		if (var->pid == 0)
 		{
 			rl_clear_history();
-			function(cmd, mini, ast, var);
+			function(cmd, mini, var);
 		}
 		else
 		{
@@ -98,5 +95,5 @@ static void	execute(t_ast_n *cmd,
 		}
 	}
 	else
-		function(cmd, mini, ast, var);
+		function(cmd, mini, var);
 }

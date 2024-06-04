@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:40:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 17:37:58 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:21:56 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static void	ft_delete(t_ast *tree, t_ast_n *node);
 
 void	ft_delete_tree(t_ast *tree)
 {
-	t_ast_n	*node;
-
 	if (!tree)
 		return ;
 	if (tree->root)

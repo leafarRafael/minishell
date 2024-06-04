@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:46:36 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	find_variable(t_lst *lst, t_lst *lst_temp)
 	t_expand	v;
 
 	v.i = 1;
-	lst_temp->head = find_type_return_ptr(lst, DOLLAR);
+	lst_temp->head = find_type_rtrn_ptr(lst, DOLLAR);
 	if (!lst_temp->head)
 		return (-1);
 	lst_temp->head->type = NO_OP_TYPE;

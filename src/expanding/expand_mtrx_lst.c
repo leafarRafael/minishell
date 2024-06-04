@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_mtrx_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 10:40:13 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 09:08:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:46:36 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_expand_m_lst(t_mlst *mlst)
 	v.i = 1;
 	while (v.i <= mlst->size)
 	{
-		if (find_type_return_ptr(v.current_lst->lst, DOLLAR) != NULL)
+		if (find_type_rtrn_ptr(v.current_lst->lst, DOLLAR) != NULL)
 		{
 			ft_expander_lst_token(v.current_lst->lst);
 			if (v.current_lst->lst->size != 0)

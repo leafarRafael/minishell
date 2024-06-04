@@ -3,34 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   exec_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:52:03 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	init_variables(t_var_exe *var);
-static int	operator_manager(t_ast_n *cmd,
-				t_mini *mini, t_ast *ast, t_var_exe *var);
+static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
-void	ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
+void	ft_exec_manager(t_ast_n *cmd, t_mini *mini)
 {
 	t_var_exe	var;
 
 	init_variables(&var);
-	if (operator_manager(cmd, mini, ast, &var))
+	if (operator_manager(cmd, mini, &var))
 		return ;
 	if (cmd->m_lst->in_parent)
-		subshell(cmd, mini, ast, &var);
+		subshell(cmd, mini, &var);
 	else
-		init_fork(cmd, mini, ast, &var);
+		init_fork(cmd, mini, &var);
 }
 
-static int	operator_manager(t_ast_n *cmd,
-				t_mini *mini, t_ast *ast, t_var_exe *var)
+static int	operator_manager(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd == NULL)
 		return (1);

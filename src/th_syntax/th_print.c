@@ -6,13 +6,14 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:42:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/05/31 22:41:22 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:44:47 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "th_parser.h"
 
-static void	th_print_tabs(t_parse *parse, int len, int more);
+// static void	th_print_tabs(t_parse *parse, int len, int more);
+static void	th_print_tabs(int len);
 static void	print_str_from_to(char *str, t_parse *parse);
 
 void	print_type(char *str, int len)
@@ -75,7 +76,7 @@ void	th_print_parenth(char *str, t_parse *parse, int len, int more)
 	while (print)
 	{
 		if (len > 0)
-			th_print_tabs(parse, len, 0);
+			th_print_tabs(len);
 		select_type(print->type);
 		print_str_from_to(str, print);
 		if (print->sub)
@@ -89,7 +90,8 @@ void	th_print_parenth(char *str, t_parse *parse, int len, int more)
 	}
 }
 
-static void	th_print_tabs(t_parse *parse, int len, int more)
+// static void	th_print_tabs(t_parse *parse, int len, int more)
+static void	th_print_tabs(int len)
 {
 	int	len0;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 14:03:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:39:23 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(void)
 		// ft_putstr_fd(name, 2);
 		free(name);
 		mini.input = readline(GRN " \033[1mminishel \u279C : \033[0m" RST);
-		stx.error = th_parse_param(mini.input, &stx);
+		stx.error = th_parse_param(mini.input);
 		if (!stx.error)
 		{
 			ft_putstr_fd(mini.color[i], 2);
@@ -86,7 +86,7 @@ static void	ft_execute_minishell(t_mini *mini)
 	while (mini->input_lst->size > 0)
 		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(mini->input_lst));
 	ft_delete_list(mini->input_lst);
-	builds_execution_call(mini->input_lst, mini);
+	builds_execution_call(mini);
 	swap_tty(RESTORE, mini);
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);

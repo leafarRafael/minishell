@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 14:56:25 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:30:39 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 static void	setpwd(t_mlst *envlst);
 
-void	cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void	cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	ft_manager_fd_builtin(cmd, mini, ast, var);
-	ft_valid_command_builtin(cmd, mini, ast, var);
-	if (exe_cd(cmd, mini, ast, var))
+	ft_manager_fd_builtin(cmd, mini, var);
+	ft_valid_command_builtin(cmd);
+	if (exe_cd(cmd, mini, var))
 	{
-		finished_builtin(cmd, mini, ast, var);
+		finished_builtin(cmd, mini, var);
 		return ;
 	}
-	finished_builtin(cmd, mini, ast, var);
+	finished_builtin(cmd, mini, var);
 }
 
-static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	g_status_child = 0;
 	if (cmd->m_lst->matrix->size == 1)
@@ -57,22 +57,23 @@ static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 
 static void	setpwd(t_mlst *envlst)
 {
-	t_llst	*node;
-	t_lst	*lst_pwd;
+	t_llst	*env;
 	char	*current_dir;
 	char	buf[300];
+	char	*prefix;
 
 	current_dir = getcwd(buf, 300);
-	node = envlst->head;
-	while (node->next != envlst->head)
+	env = envlst->head;
+	while (env->next != envlst->head)
 	{
-		if (!ft_strlstcmp(node->lst, "PWD=", 4))
+		prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL_SING), env->lst);
+		if (!ft_strncmp("PWD", prefix, ft_strlen(prefix) + 1))
 		{
-			while (node->lst->last->c != '=')
-				lst_rmv_back(node->lst);
+			while (env->lst->last->c != '=')
+				lst_rmv_back(env->lst);
 			while (*current_dir)
-				ft_create_node_add_back(node->lst, *(current_dir++));
+				ft_create_node_add_back(env->lst, *(current_dir++));
 		}
-		node = node->next;
+		env = env->next;
 	}
 }

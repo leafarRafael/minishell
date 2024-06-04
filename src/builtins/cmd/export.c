@@ -3,73 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:20:41 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_prefix(t_node *ptr, t_lst *lst)
-{
-	t_node	*temp;
-	t_lst	*lst_prefix;
-	char	*prefix;
-
-	if (!lst || !ptr)
-		return (NULL);
-	if (ptr == lst->head)
-		return (NULL);
-	temp = ptr->prev;
-	lst_prefix = ft_init_lst();
-	while (1)
-	{
-		ft_add_node_front(lst_prefix, ft_cpynode(temp));
-		temp = temp->prev;
-		if (temp == lst->last)
-			break ;
-		if (temp->type == WILDCARD)
-			break ;
-		if (temp->type != NO_OP_TYPE)
-			break ;
-	}
-	prefix = ft_cpy_lst_to_array(lst_prefix);
-	ft_delete_list(lst_prefix);
-	return (prefix);
-}
-
-static char	*get_sufix(t_node *ptr, t_lst *lst)
-{
-	t_node	*temp;
-	t_lst	*lst_prefix;
-	char	*prefix;
-
-	if (!lst || !ptr)
-		return (NULL);
-	if (ptr == lst->head)
-		return (NULL);
-	temp = ptr->next;
-	lst_prefix = ft_init_lst();
-	while (1)
-	{
-		ft_add_node_back(lst_prefix, ft_cpynode(temp));
-		temp = temp->next;
-		if (temp == lst->head)
-			// return (NULL);
-			break ;
-		if (temp->type == WILDCARD)
-			break ;
-		if (temp->type != NO_OP_TYPE)
-			break ;
-	}
-	prefix = ft_cpy_lst_to_array(lst_prefix);
-	ft_delete_list(lst_prefix);
-	return (prefix);
-}
-
-static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
 int	ft_cmpvar(t_lst *lst, char *str, int size)
 {
@@ -109,7 +52,7 @@ t_node	*find_equal_return_ptr(t_lst *lst, char ch)
 	return (NULL);
 }
 
-void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+void export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	t_llst	*line;
 	int		i;
@@ -120,7 +63,7 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
 	g_status_child = 0;
-	ft_manager_fd(cmd, mini, ast, var);
+	ft_manager_fd(cmd, mini, var);
 	if (cmd->m_lst->matrix->size == 1)
 	{
 		line = mini->m_lst_env->head;
@@ -147,9 +90,7 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	else
 	{
 		t_llst	*llst;
-		t_node	*node;
 		int		llst_size;
-		int		node_size;
 
 		llst = cmd->m_lst->matrix->head->next;
 		llst_size = cmd->m_lst->matrix->size - 1;
@@ -161,23 +102,17 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 		{
 			env = mini->m_lst_env->head;
 			index = 0;
-			prefix = NULL;
-			var = NULL;
-			// ft_print_array_lst(llst->lst, 0);
-			var = get_prefix(find_equal_return_ptr(llst->lst, '='), llst->lst);
-			// printf("===>>> VAR [ %s ]\n", var);
+			var = get_prfx(find_equal_return_ptr(llst->lst, '='), llst->lst);
 			while(ft_strlen(var) && index < mini->m_lst_env->size)
 			{
 				prefix = NULL;
-				prefix = get_prefix(find_type_return_ptr(env->lst, EQUAL_SING), env->lst);
+				prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL_SING), env->lst);
 				if (prefix)
 				{
 					if (!ft_strncmp(var, prefix, ft_strlen(prefix) + 1))
 					{
-						// printf("===>>> PREFIX [ %s ]\n", prefix);
 						ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
 						ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, env);
-						// ft_print_array_lst(llst->lst, 0);
 						free(prefix);
 						free(var);
 						return ;
@@ -189,8 +124,6 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			}
 			if (ft_strlen(var))
 			{
-				// printf("ADD NEW VAR = \n");
-				// ft_print_array_lst(llst->lst, 0);
 				ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
 				free(var);
 			}
@@ -201,7 +134,7 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	}
 }
 
-static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->next->type == PIPE)
 	{
@@ -211,16 +144,4 @@ static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var
 	}
 	if (ft_redirect_manager(cmd->m_lst->matrix) < 0)
 		free_memory(mini, var, 1);
-}
-
-
-static void	ft_valid_command(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
-{
-	if (cmd->m_lst->matrix->size == 1 && cmd->m_lst->matrix->head->lst->size == 0)
-	{
-		ft_msg_error("''", " command not found");
-		free_memory(mini, var, 126);
-	}
-	if (cmd->m_lst->matrix->size == 0)
-		free_memory(mini, var, 0);
 }

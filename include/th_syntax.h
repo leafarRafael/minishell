@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   th_syntax.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:42:32 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/04 13:33:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:39:17 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ struct					s_stx
 	int					here_doc;
 };
 
-int						th_parse_param(char *str, t_stx *stx);
+int						th_parse_param(char *str);
 
 #endif

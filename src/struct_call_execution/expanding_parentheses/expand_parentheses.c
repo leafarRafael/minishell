@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_parentheses.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 17:03:56 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	remove_parent(t_lst *new_lst);
 static void	command_in_subshell(t_mmlst *mmlst);
 static void	add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini);
 
-void	ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
+void	ft_expand_subshell(t_ast_n *cmd, t_mini *mini)
 {
 	t_lst	*new_lst;
 	t_lst	*temp;
@@ -29,7 +29,7 @@ void	ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	new_lst = ft_duplst(temp, ft_cpynode, ft_add_node_back);
 	remove_parent(new_lst);
 	add_new_token(new_lst, cmd, mini);
-	builds_execution_call(new_lst, mini);
+	builds_execution_call(mini);
 }
 
 static void	remove_parent(t_lst *new_lst)
@@ -60,7 +60,6 @@ static void	remove_parent(t_lst *new_lst)
 static void	add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
 {
 	t_mmlst		*new_mmlst;
-	t_mnode		*temp;
 
 	new_mmlst = init_mmlst();
 	while (new_lst->size > 0)
