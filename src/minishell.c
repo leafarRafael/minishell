@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:50:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 14:03:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	ft_execute_minishell(t_mini *mini);
 void		ft_scanner_env(t_mlst *mlst);
-int	g_status_child;
+int			g_status_child;
 
 // ARRUMAR PASTA /TEMP
 
