@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 09:00:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 11:55:21 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	main(void)
 
 		ft_scanner_env(mini.m_lst_env);
 		name = ft_get_program_name();
-		// ft_putstr_fd(name, 2);
+		//ft_putstr_fd(name, 2);
 		free(name);
-		mini.input = readline(GRN " \033[1mminishel \u279C : \033[0m" RST);
+		mini.input = readline(GRN " \033[1m\nminishel \u279C : \033[0m" RST);
 		stx.error = th_parse_param(mini.input, &stx);
 		if (!stx.error)
 		{
@@ -71,7 +71,7 @@ int	main(void)
 	rl_clear_history();
 	close_allfd(&mini);
 	ft_delete_matrix(mini.m_lst_env);
-	return (1);
+	return (status_child);
 }
 
 static void	ft_execute_minishell(t_mini *mini)
@@ -87,7 +87,6 @@ static void	ft_execute_minishell(t_mini *mini)
 	while (mini->input_lst->size > 0)
 		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(mini->input_lst));
 	ft_delete_list(mini->input_lst);
-	/* swap_tty(COPY, mini); */
 	builds_execution_call(mini->input_lst, mini);
 	swap_tty(RESTORE, mini);
 	ft_swap_environ(mini, RESTORE);
