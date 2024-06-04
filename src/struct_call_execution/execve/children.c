@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:19:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 14:53:42 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:12:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	build_var_and_run_execve(t_ast_n *cmd,
 	var->path_exe = ft_get_executable(mini, var, ast);
 	if (execve(var->path_exe, &var->command_m[0], __environ) < 0)
 		perror(var->path_exe);
-	free_memory(mini, var, ast, 1);
+	free_memory(mini, var, 1);
 }
 
 static void	ft_valid_command(t_ast_n *cmd,
@@ -45,10 +45,10 @@ static void	ft_valid_command(t_ast_n *cmd,
 		&& cmd->m_lst->matrix->head->lst->size == 0)
 	{
 		ft_msg_error("''", " command not found");
-		free_memory(mini, var, ast, 126);
+		free_memory(mini, var, 126);
 	}
 	if (cmd->m_lst->matrix->size == 0)
-		free_memory(mini, var, ast, 0);
+		free_memory(mini, var, 0);
 }
 
 static void	ft_manager_fd(t_ast_n *cmd,
@@ -63,5 +63,5 @@ static void	ft_manager_fd(t_ast_n *cmd,
 		close(var->tube[1]);
 	}
 	if (ft_redirect_manager(cmd->m_lst->matrix) < 0)
-		free_memory(mini, var, ast, 1);
+		free_memory(mini, var, 1);
 }

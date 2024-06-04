@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 11:16:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:11:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	my_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	if (cmd->m_lst->matrix->size == 1)
 	{
 		ft_putlst_fd(cmd->m_lst->matrix->head->lst, 1, 2);
-		free_memory(mini, var, ast, status_child);
+		free_memory(mini, var, status_child);
 	}
 	exe_exit(cmd, mini, ast, var);
 }
@@ -56,7 +56,7 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	}
 	nbr = ft_atoi(nbr_exit);
 	free(nbr_exit);
-	free_memory(mini, var, ast, nbr);
+	free_memory(mini, var, nbr);
 }
 
 static int	valid_number(t_lst *lst)

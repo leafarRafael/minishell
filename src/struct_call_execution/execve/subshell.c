@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:38:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 10:20:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:13:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	{
 		init_fork(cmd, mini, ast, var);
 		rl_clear_history();
-		free_memory(mini, var, ast, status_child);
+		free_memory(mini, var, status_child);
 	}
 	else
 	{

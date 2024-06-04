@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 09:00:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:10:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ char			**path_system_bin(t_mlst *m_lst);
 
 void	builds_execution_call(t_lst *input, t_mini *mini);
 
-void 	free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit);
+void 	free_memory(t_mini *mini, t_var_exe *var, int status_exit);
 void	ft_msg_error(char *invalid_input, char *msg_error);
 /*
 		FUNCTION IN SRC/EXECUTE_COMMAND

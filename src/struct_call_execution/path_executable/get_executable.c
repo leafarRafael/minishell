@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 09:21:26 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 11:49:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:13:30 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_get_executable(t_mini *mini, t_var_exe *var, t_ast *ast)
 		i++;
 	}
 	ft_msg_error(var->command_m[0], "command not found");
-	free_memory(mini, var, ast, 127);
+	free_memory(mini, var, 127);
 	return (NULL);
 }
 
@@ -53,7 +53,7 @@ static char *binary_with_path(char *path_bin, t_mini *mini, t_var_exe *var, t_as
 		{
 			close(fd);
 			ft_msg_error(path_bin, " Is a directory");
-			free_memory(mini, var, ast, 126);
+			free_memory(mini, var, 126);
 		}
 		if ((access(path_bin, X_OK) == 0))
 			return (ft_strdup(path_bin));
@@ -62,10 +62,10 @@ static char *binary_with_path(char *path_bin, t_mini *mini, t_var_exe *var, t_as
 			if (errno == EACCES)
 			{
 				ft_msg_error(path_bin, strerror(errno));
-				free_memory(mini, var, ast, 126);
+				free_memory(mini, var, 126);
 			}
 			ft_msg_error(path_bin, strerror(errno));
-			free_memory(mini, var, ast, 127);
+			free_memory(mini, var, 127);
 		}
 	}
 	return (NULL);
