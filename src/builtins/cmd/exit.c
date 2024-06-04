@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 10:48:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 11:09:56 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,15 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 		return ;
 	}
 	ft_remove_lst_front(cmd->m_lst->matrix);
-	if (valid_number(cmd->m_lst->matrix->head->lst))
+	nbr_exit = ft_cpy_lst_to_array(cmd->m_lst->matrix->head->lst);
+	if (valid_number(cmd->m_lst->matrix->head->lst)
+			|| cmd->m_lst->matrix->head->lst->size > 19)
 	{
 		ft_msg_error(nbr_exit, "numeric argument required");
 		status_child = 2;
+		free(nbr_exit);
 		return ;
 	}
-	nbr_exit = ft_cpy_lst_to_array(cmd->m_lst->matrix->head->lst);
 	nbr = ft_atoi(nbr_exit);
 	free(nbr_exit);
 	free_memory(mini, var, ast, nbr);
