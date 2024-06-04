@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   expand_parentheses.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 17:46:22 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:39:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void remove_parent(t_lst *new_lst);
-static void command_in_subshell(t_mmlst *mmlst);
-static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini);
+static void	remove_parent(t_lst *new_lst);
+static void	command_in_subshell(t_mmlst *mmlst);
+static void	add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini);
 
-void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
+void	ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 {
-	t_lst		*new_lst;
-	t_lst		*temp;
+	t_lst	*new_lst;
+	t_lst	*temp;
 
 	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
 		return ;
@@ -32,7 +32,7 @@ void ft_expand_subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	builds_execution_call(new_lst, mini);
 }
 
-static void remove_parent(t_lst *new_lst)
+static void	remove_parent(t_lst *new_lst)
 {
 	int		i;
 	t_node	*node;
@@ -57,7 +57,7 @@ static void remove_parent(t_lst *new_lst)
 	}
 }
 
-static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
+static void	add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
 {
 	t_mmlst		*new_mmlst;
 	t_mnode		*temp;
@@ -77,13 +77,13 @@ static void add_new_token(t_lst *new_lst, t_ast_n *cmd, t_mini *mini)
 	new_mmlst = NULL;
 }
 
-static void command_in_subshell(t_mmlst *mmlst)
+static void	command_in_subshell(t_mmlst *mmlst)
 {
 	t_mnode	*node;
 
 	node = mmlst->head;
 	node->in_parent = 1;
-	while(node->next != mmlst->head)
+	while (node->next != mmlst->head)
 	{
 		node->in_parent = 1;
 		node = node->next;
