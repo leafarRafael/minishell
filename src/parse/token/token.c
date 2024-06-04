@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 09:31:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 12:56:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:55:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 
-static void delete_white_space(t_lst *lst);
+static void	delete_white_space(t_lst *lst);
 
 t_mlst	*ft_token_cmd(t_lst	*lst)
 {
@@ -40,7 +40,7 @@ t_mlst	*ft_token_cmd(t_lst	*lst)
 	return (new_matrix);
 }
 
-static void delete_white_space(t_lst *lst)
+static void	delete_white_space(t_lst *lst)
 {
 	while (lst->last->type == WH_SPACE)
 		lst_rmv_back(lst);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strlstcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 08:39:56 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/02 16:10:57 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:54:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 int	ft_strlstcmp(t_lst *lst, char *str, int size)
 {

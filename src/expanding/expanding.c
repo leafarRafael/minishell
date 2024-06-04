@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 09:13:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ static int	ft_status(t_lst *lst)
 	ft_remove_node_front(lst);
 	ft_remove_node_front(lst);
 	temp = ft_init_lst();
-	status = ft_itoa(status_child);
+	status = ft_itoa(g_status_child);
 	ft_add_string_in_list(temp, status);
 	ft_scanner_after_expand(temp);
 	while (temp->size)

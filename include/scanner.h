@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:35:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 10:27:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:33:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ typedef struct s_scanner
 
 }			t_scan;
 
-void	ft_scanner_parenthes(t_lst *lst);
-void	ft_scanner_quotes(t_lst *lst);
-void	ft_scanner_simple_operator(t_lst *lst);
-void	ft_scanner_composite(t_lst *lst);
-void	ft_scanner_input(t_lst *lst);
-void	ft_scanner_priority_type(t_lst *lst);
-int		ft_scanner_add_literal(t_lst *lst);
-void	ft_scanner_after_expand(t_lst *lst);
-void	ft_scanner_wildcard(t_lst *lst);
-void	ft_scanner_equal(t_lst *lst);
+void		ft_scanner_parenthes(t_lst *lst);
+void		ft_scanner_quotes(t_lst *lst);
+void		ft_scanner_simple_operator(t_lst *lst);
+void		ft_scanner_composite(t_lst *lst);
+void		ft_scanner_input(t_lst *lst);
+void		ft_scanner_priority_type(t_lst *lst);
+int			ft_scanner_add_literal(t_lst *lst);
+void		ft_scanner_after_expand(t_lst *lst);
+void		ft_scanner_wildcard(t_lst *lst);
+void		ft_scanner_equal(t_lst *lst);
 
 #endif

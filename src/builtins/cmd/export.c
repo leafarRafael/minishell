@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:11:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	int		i;
 	int		i_color;
 
-	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return ;
-	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	status_child = 0;
+	g_status_child = 0;
 	ft_manager_fd(cmd, mini, ast, var);
 	if (cmd->m_lst->matrix->size == 1)
 	{

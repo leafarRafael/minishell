@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:38:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:13:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	{
 		init_fork(cmd, mini, ast, var);
 		rl_clear_history();
-		free_memory(mini, var, status_child);
+		free_memory(mini, var, g_status_child);
 	}
 	else
 	{
@@ -36,6 +36,6 @@ void	subshell(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			close(var->tube[1]);
 		}
 		free_cmd_operator_executed(cmd, mini);
-		status_child = WEXITSTATUS(mini->status);
+		g_status_child = WEXITSTATUS(mini->status);
 	}
 }

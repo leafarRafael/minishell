@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:36:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static int	operator_manager(t_ast_n *cmd,
 {
 	if (cmd == NULL)
 		return (1);
-	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return (1);
-	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return (1);
 	if (cmd->m_lst->next->type == PIPE)
 	{
 		if (pipe(var->tube) < 0)
 		{
 			ft_msg_error("pipe error", strerror(errno));
-			free_memory(mini, var, status_child + 1);
+			free_memory(mini, var, g_status_child + 1);
 		}
 		return (0);
 	}

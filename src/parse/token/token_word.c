@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 07:59:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 14:28:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:56:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "token.h"
 
-static void create_token(t_lst *lst, t_token *v);
+static void	create_token(t_lst *lst, t_token *v);
 
 void	token_command(t_lst *lst, t_mlst *matrix)
 {
@@ -30,7 +30,7 @@ void	token_command(t_lst *lst, t_mlst *matrix)
 	token_command(lst, matrix);
 }
 
-static void create_token(t_lst *lst, t_token *v)
+static void	create_token(t_lst *lst, t_token *v)
 {
 	while (!is_operator(lst->head->type) && lst->head->type != WH_SPACE)
 	{

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 11:29:56 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	setpwd(t_mlst *envlst);
 
 void	cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return ;
-	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
 	ft_manager_fd_builtin(cmd, mini, ast, var);
 	ft_valid_command_builtin(cmd, mini, ast, var);
@@ -33,24 +33,24 @@ void	cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 
 static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	status_child = 0;
+	g_status_child = 0;
 	if (cmd->m_lst->matrix->size == 1)
 	{
 		chdir(getenv("HOME"));
 		setpwd(mini->m_lst_env);
-		return (status_child);
+		return (g_status_child);
 	}
 	var->command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);
 	if (chdir(var->command_m[1]) < 0)
 	{
 		ft_msg_error(var->command_m[1], strerror(errno));
 		ft_delcmtrx(var->command_m);
-		status_child = 1;
-		return (status_child);
+		g_status_child = 1;
+		return (g_status_child);
 	}
 	setpwd(mini->m_lst_env);
 	ft_delcmtrx(var->command_m);
-	return (status_child);
+	return (g_status_child);
 }
 
 static void	setpwd(t_mlst *envlst)

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:54:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 14:53:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:38:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	status_process_manager(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		waitpid(var->pid, &mini->status, 0);
 	else
 		waitpid(-1, &mini->status, 0);
-	status_child = WEXITSTATUS(mini->status);
+	g_status_child = WEXITSTATUS(mini->status);
 }
 
 static void	file_descriptor_manager(t_ast_n *cmd, t_var_exe *var)

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:05:04 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:32:53 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 
 typedef struct s_execute
 {
-	char		**path;
-	char		**matrix_cmd;
-	char		*path_exe;
-	char		*comand;
-	pid_t		*pid;
-	int			pipe[2];
+	char	**path;
+	char	**matrix_cmd;
+	char	*path_exe;
+	char	*comand;
+	pid_t	*pid;
+	int		pipe[2];
 	t_llst	*temp;
 
-}				t_execute;
+}			t_execute;
 
 #endif

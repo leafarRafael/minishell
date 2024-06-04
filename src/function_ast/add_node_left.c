@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:17:28 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 15:40:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:51:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_add_left(t_ast_n	*node, t_ast_n *new_node)
 
 static int	if_have_node(t_ast *tree, t_mnode *mtrx)
 {
-	t_ast_n *temp;
+	t_ast_n	*temp;
 
 	if (!tree)
 		return (-1);

@@ -6,16 +6,16 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:26:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/23 16:50:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:35:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	show_str_type(int type);
-void	print_all_type();
-static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa);
-
+void		show_str_type(int type);
+void		print_all_type(void);
+static int	ft_chage_pointer(t_node **current_node, t_node *ref_node,
+				int *is_aspa);
 
 void	ft_printf_matrix(char **matrix)
 {
@@ -33,8 +33,8 @@ void	ft_printf_matrix(char **matrix)
 
 void	ft_print_array_lst(t_lst *lst, int front_back)
 {
-	int i;
-	t_node *temp;
+	int		i;
+	t_node	*temp;
 
 	if (!lst)
 		return ;
@@ -59,8 +59,8 @@ void	ft_print_array_lst(t_lst *lst, int front_back)
 
 void	ft_print_array_lst_content_type(t_lst *lst)
 {
-	int i;
-	t_node *temp;
+	int		i;
+	t_node	*temp;
 
 	if (!lst)
 		return ;
@@ -71,13 +71,14 @@ void	ft_print_array_lst_content_type(t_lst *lst)
 	while (i != lst->size)
 	{
 		show_str_type(temp->type);
-		printf(" [%c] [%d] [%d] [priority = %d] \n", temp->c, temp->type, temp->paren, temp->priority);
+		printf(" [%c] [%d] [%d] [priority = %d] \n", temp->c, temp->type,
+			temp->paren, temp->priority);
 		temp = temp->next;
 		i++;
 	}
 }
 
-void	print_all_type()
+void	print_all_type(void)
 {
 	printf("\n%d NO_OP_TYPE \n", NO_OP_TYPE);
 	printf("%d S_QUOTES\n", S_QUOTES);
@@ -133,11 +134,12 @@ void	show_str_type(int type)
 
 void	ft_print_matrix_line(t_mlst *m_line)
 {
-	t_llst *temp;
-	int i;
+	t_llst	*temp;
+	int		i;
 
 	if (!m_line)
-		ft_putstr_fd("\nNULL\n", 2);;
+		ft_putstr_fd("\nNULL\n", 2);
+	;
 	if (!m_line->head)
 		return ;
 	i = 1;
@@ -163,7 +165,8 @@ void	print_operator(t_lst *lst)
 		if (is_operator(var.current_node->type))
 		{
 			printf("\n");
-			if (var.current_node->type == var.current_node->next->type && var.current_node->next != lst->head)
+			if (var.current_node->type == var.current_node->next->type
+				&& var.current_node->next != lst->head)
 			{
 				printf("%c", var.current_node->c);
 				if (ft_chage_pointer(&var.current_node, lst->head, &is_aspa))
@@ -178,7 +181,8 @@ void	print_operator(t_lst *lst)
 	}
 }
 
-static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_aspa)
+static int	ft_chage_pointer(t_node **current_node, t_node *ref_node,
+		int *is_aspa)
 {
 	*current_node = (*current_node)->next;
 	if ((*current_node)->type & (D_QUOTES | S_QUOTES))
@@ -189,14 +193,14 @@ static int	ft_chage_pointer(t_node **current_node, t_node *ref_node, int *is_asp
 			(*is_aspa)--;
 	}
 	if ((*current_node) == ref_node)
-		return (-1) ;
+		return (-1);
 	return (0);
 }
 
-void ft_print_lst_matrix(t_mmlst *m_l)
+void	ft_print_lst_matrix(t_mmlst *m_l)
 {
 	t_mnode	*temp;
-	int 	i;
+	int		i;
 
 	if (m_l == NULL)
 		return ;
@@ -215,9 +219,9 @@ void ft_print_lst_matrix(t_mmlst *m_l)
 
 void	ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx)
 {
-	t_mnode		*temp;
-	char		**matrix;
-	int			i;
+	t_mnode	*temp;
+	char	**matrix;
+	int		i;
 
 	i = 1;
 	temp = mtrx_mtrx->head;
@@ -238,7 +242,7 @@ void	ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx)
 	}
 }
 
-void ft_printtree(t_ast_n *root)
+void	ft_printtree(t_ast_n *root)
 {
 	if (root != NULL)
 	{

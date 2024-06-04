@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:58:15 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 14:43:06 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:33:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef struct s_token
 	int		type;
 }			t_token;
 
-t_mlst	*ft_token_cmd(t_lst *lst);
-void	token_command(t_lst *lst, t_mlst *matrix);
-void	token_operator(t_lst *lst, t_mlst *matrix);
-void	token_parent(t_lst *lst, t_mlst *matrix);
-void	token_after_expand(t_mlst *mlst, t_llst *llst);
+t_mlst		*ft_token_cmd(t_lst *lst);
+void		token_command(t_lst *lst, t_mlst *matrix);
+void		token_operator(t_lst *lst, t_mlst *matrix);
+void		token_parent(t_lst *lst, t_mlst *matrix);
+void		token_after_expand(t_mlst *mlst, t_llst *llst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:16:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 13:50:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "th_syntax.h"
 
 static void	ft_execute_minishell(t_mini *mini);
-void	ft_scanner_env(t_mlst *mlst);
-int status_child;
+void		ft_scanner_env(t_mlst *mlst);
+int	g_status_child;
 
 // ARRUMAR PASTA /TEMP
 
@@ -25,13 +25,13 @@ int	main(void)
 	char	*name;
 	int		i;
 	t_stx	stx;
+	int		index;
 
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini.color = ft_init_color();
 	i = 1;
 	mini.status = 0;
-
-	int	index = 0;
+	index = 0;
 	while (index < 40)
 	{
 		mini.ast[index] = NULL;
@@ -42,7 +42,7 @@ int	main(void)
 	{
 		ft_scanner_env(mini.m_lst_env);
 		name = ft_get_program_name();
-		//ft_putstr_fd(name, 2);
+		// ft_putstr_fd(name, 2);
 		free(name);
 		mini.input = readline(GRN " \033[1mminishel \u279C : \033[0m" RST);
 		stx.error = th_parse_param(mini.input, &stx);
@@ -58,7 +58,7 @@ int	main(void)
 				i = 1;
 			ft_putstr_fd(RESET, 2);
 		}
-		int	index = 0;
+		index = 0;
 		while (mini.ast[index] && index < 40)
 		{
 			ft_delete_tree(mini.ast[index]);
@@ -70,7 +70,7 @@ int	main(void)
 	rl_clear_history();
 	close_allfd(&mini);
 	ft_delete_matrix(mini.m_lst_env);
-	return (status_child);
+	return (g_status_child);
 }
 
 static void	ft_execute_minishell(t_mini *mini)

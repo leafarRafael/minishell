@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:02:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 08:42:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 12:54:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void swap_tty(int copy_restore, t_mini *mini)
+void	swap_tty(int copy_restore, t_mini *mini)
 {
 	if (copy_restore == COPY)
 	{
