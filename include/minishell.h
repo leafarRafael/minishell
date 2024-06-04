@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:52:09 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:59:37 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void		ft_msg_error(char *invalid_input, char *msg_error);
 /*
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
-void		ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast);
+void		ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini);
 void		ft_expand_subshell(t_ast_n *cmd, t_mini *mini);
 char		*ft_get_executable(t_mini *mini, t_var_exe *var);
 

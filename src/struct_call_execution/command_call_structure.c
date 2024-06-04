@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_call_structure.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:48:39 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 10:36:09 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 18:08:28 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
