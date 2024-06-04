@@ -6,13 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:19:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 07:51:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:58:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	remove_variable(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	remove_variable(t_ast_n *cmd,
+				t_mini *mini, t_ast *ast, t_var_exe *var);
 static char	*get_prefix(t_node *ptr, t_lst *lst);
 
 void	unset(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
@@ -28,7 +29,8 @@ void	unset(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	finished_builtin(cmd, mini, ast, var);
 }
 
-static void	remove_variable(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	remove_variable(t_ast_n *cmd,
+			t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	t_llst	*current;
 	t_lst	*lst;

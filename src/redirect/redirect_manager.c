@@ -6,14 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 16:23:10 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/21 10:05:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:23:21 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
 
-static int valid(t_mlst *mtrix, t_llst *line);
-static int valid_here_doc(t_mlst *mtrix, t_llst *line);
+static int	valid(t_mlst *mtrix, t_llst *line);
 
 int	ft_redirect_manager(t_mlst *mtrix)
 {
@@ -33,7 +32,7 @@ int	ft_redirect_manager(t_mlst *mtrix)
 		v.c = v.next;
 		if (v.next == v.next->next)
 		{
-			valid(mtrix,v.next);
+			valid(mtrix, v.next);
 			break ;
 		}
 		v.next = v.next->next;
@@ -41,7 +40,7 @@ int	ft_redirect_manager(t_mlst *mtrix)
 	return (0);
 }
 
-static int valid(t_mlst *mtrix, t_llst *line)
+static int	valid(t_mlst *mtrix, t_llst *line)
 {
 	if (line->rdrct == APPEND)
 	{

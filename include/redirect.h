@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:52:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/25 11:59:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:37:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ typedef struct s_hdoc
 	int		is_head;
 	int		is_last;
 }		t_hdoc;
+
+typedef struct s_add_token
+{
+	int		count_x;
+	int		count_i;
+	int		size;
+	t_mnode	*mnoode_temp;
+	t_llst	*lst_temp;
+	t_llst	*lst_next;
+}		t_add_token;
 
 int	ft_redirect_manager(t_mlst *mtrix);
 int	ft_myopen(char *file, int oflag, int prmssn, int stdfd);

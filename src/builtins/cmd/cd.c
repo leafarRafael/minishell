@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 07:44:08 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:54:02 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 static void	setpwd(t_mlst *envlst);
 
 void	cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
@@ -28,7 +28,7 @@ void	cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	finished_builtin(cmd, mini, ast, var);
 }
 
-static int exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	if (cmd->m_lst->matrix->size == 1)
 	{
@@ -57,7 +57,7 @@ static void	setpwd(t_mlst *envlst)
 
 	current_dir = getcwd(buf, 300);
 	node = envlst->head;
-	while(node->next != envlst->head)
+	while (node->next != envlst->head)
 	{
 		if (!ft_strlstcmp(node->lst, "PWD=", 4))
 		{

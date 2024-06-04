@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 08:43:09 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:00:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int	main(void)
 		{
 			ft_putstr_fd(mini.color[i], 2);
 			if (!mini.input)
-				break ;
-			if (!ft_exit(mini.input))
 				break ;
 			if (!ft_input_is_valid(mini.input))
 				ft_execute_minishell(&mini);

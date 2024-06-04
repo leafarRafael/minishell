@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 17:16:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 14:32:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:59:47 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static int	ft_size_one(t_mmlst *mmlst, t_mnode *mnode, t_mmlst *new_mmlst)
 	mnode->prev = new_mmlst->last;
 	new_mmlst->last->next = mnode;
 	mmlst->last = new_mmlst->last;
-	mmlst->size += new_mmlst->size;	
-	return (0);	
+	mmlst->size += new_mmlst->size;
+	return (0);
 }
 
 static int	ft_case_head(t_mmlst *mmlst, t_mnode *mnode, t_mmlst *new_mmlst)

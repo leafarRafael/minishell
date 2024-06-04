@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:20:40 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/14 10:21:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:29:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_change_name_file(int *hdoc_ctrlname, t_lst *here_doc);
 
-t_lst *ft_initialize_hdoc_lst(int *hdoc_ctrlname)
+t_lst	*ft_initialize_hdoc_lst(int *hdoc_ctrlname)
 {
 	t_lst	*here_doc;
 

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 08:20:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:00:14 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ void			ft_printtree(t_ast_n *root);
 char			**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix);
 
 int				ft_input_is_valid(char *array);
-int				ft_exit(char *input);
 void			ft_free_memory_revert_environ(t_mini *v);
 char			**path_system_bin(t_mlst *m_lst);
 

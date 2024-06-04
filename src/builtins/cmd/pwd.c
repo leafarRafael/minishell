@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:21:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 07:44:42 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:57:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void putpwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	putpwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 
 void	pwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
@@ -26,13 +26,14 @@ void	pwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	finished_builtin(cmd, mini, ast, var);
 }
 
-static void putpwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	putpwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	t_llst	*node;
+	int		i;
 
 	node = mini->m_lst_env->head;
-	// START AT NEXT??
-	while(node->next != mini->m_lst_env->head)
+	i = 0;
+	while (i < mini->m_lst_env->size)
 	{
 		if (!ft_strlstcmp(node->lst, "PWD=", 4))
 		{
@@ -42,5 +43,6 @@ static void putpwd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			break ;
 		}
 		node = node->next;
+		i++;
 	}
 }

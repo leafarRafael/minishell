@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_wildcard_mlst.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 08:46:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/29 17:21:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:20:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "minishell.h"
 
 static int	find_asterisk(t_mlst *mlst);
-static void search_replace_token(t_mlst *mlst);
-static void replace(t_mlst *mlst, t_llst *line, int *i);
+static void	search_replace_token(t_mlst *mlst);
+static void	replace(t_mlst *mlst, t_llst *line, int *i);
 
 void	expand_wildcard_mlst(t_mlst *mlst)
 {
@@ -44,10 +44,10 @@ static int	find_asterisk(t_mlst *mlst)
 		line = line->next;
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
-static void search_replace_token(t_mlst *mlst)
+static void	search_replace_token(t_mlst *mlst)
 {
 	t_llst	*nlst;
 	t_llst	*next;
@@ -56,7 +56,7 @@ static void search_replace_token(t_mlst *mlst)
 	i = 0;
 	nlst = mlst->head;
 	next = nlst->next;
-	while(i < mlst->size)
+	while (i < mlst->size)
 	{
 		if (find_type_return_ptr(nlst->lst, WILDCARD))
 			replace(mlst, nlst, &i);
@@ -66,7 +66,7 @@ static void search_replace_token(t_mlst *mlst)
 	}
 }
 
-static void replace(t_mlst *mlst, t_llst *line, int *i)
+static void	replace(t_mlst *mlst, t_llst *line, int *i)
 {
 	t_mlst	*directory;
 
@@ -82,5 +82,5 @@ static void replace(t_mlst *mlst, t_llst *line, int *i)
 		(*i)--;
 	}
 	else
-		free(directory);;
+		free(directory);
 }

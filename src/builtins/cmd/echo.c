@@ -6,13 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 07:46:29 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:02:51 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void exe_echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	exe_echo(t_ast_n *cmd,
+				t_mini *mini, t_ast *ast, t_var_exe *var);
 
 void	echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
@@ -27,9 +28,9 @@ void	echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	finished_builtin(cmd, mini, ast, var);
 }
 
-static void exe_echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	exe_echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	ft_remove_lst_front(cmd->m_lst->matrix);

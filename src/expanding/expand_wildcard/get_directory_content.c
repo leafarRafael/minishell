@@ -6,12 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 11:57:34 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 13:08:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:57:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expanding.h"
 #include "minishell.h"
+
+static DIR	*getdir(char *path);
 
 t_mlst	*expand_current_directory(void)
 {
@@ -35,12 +37,9 @@ t_mlst	*read_directory(char *path)
 	t_mlst			*mlst;
 	t_lst			*lst;
 
-	dir = opendir(path);
-	if (dir == NULL)
-	{
-		ft_msg_error(path, strerror(errno));
+	dir = getdir(path);
+	if (!dir)
 		return (NULL);
-	}
 	mlst = init_mlst();
 	while (1)
 	{
@@ -58,4 +57,19 @@ t_mlst	*read_directory(char *path)
 	}
 	closedir(dir);
 	return (mlst);
+}
+
+static DIR	*getdir(char *path)
+{
+	DIR	*dir;
+
+	if (!path)
+		return (NULL);
+	dir = opendir(path);
+	if (dir == NULL)
+	{
+		ft_msg_error(path, strerror(errno));
+		return (NULL);
+	}
+	return (dir);
 }

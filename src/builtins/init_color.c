@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init_color.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:05:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/30 08:44:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:52:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 #include "minishell.h"
 
-char	**ft_init_color()
+char	**ft_init_color(void)
 {
 	char	**mtrix_color;
 

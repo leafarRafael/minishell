@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/27 12:56:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:28:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "expanding.h"
 
 static t_mlst	*ft_read_std(char *eof);
-static int ft_open_create_here_doc(char *file);
-static void	ft_open(char *c_file, char *eof, int expand);
-static void valid_expand(t_lst *l_eof, int *expand);
+static int		ft_open_create_here_doc(char *file);
+static void		ft_open(char *c_file, char *eof, int expand);
+static void		valid_expand(t_lst *l_eof, int *expand);
 
 void	ft_write_here_doc(t_lst *l_file, t_lst *l_eof)
 {
@@ -25,7 +25,7 @@ void	ft_write_here_doc(t_lst *l_file, t_lst *l_eof)
 	t_lst	*new_lst;
 	int		expand;
 
-	expand = 0;	
+	expand = 0;
 	valid_expand(l_eof, &expand);
 	new_lst = ft_duplst(l_file, ft_cpynode, ft_add_node_back);
 	while (new_lst->head->c == '<' || new_lst->head->c == ' ')
@@ -41,9 +41,9 @@ void	ft_write_here_doc(t_lst *l_file, t_lst *l_eof)
 
 static void	ft_open(char *c_file, char *eof, int expand)
 {
-	int			i;
-	int			fd;
-	t_mlst		*mlst;
+	int		i;
+	int		fd;
+	t_mlst	*mlst;
 	t_llst	*line;
 
 	fd = ft_open_create_here_doc(c_file);
@@ -54,7 +54,7 @@ static void	ft_open(char *c_file, char *eof, int expand)
 	line = mlst->head;
 	while (i <= mlst->size)
 	{
-		ft_putlst_fd(line->lst, 0 ,fd);
+		ft_putlst_fd(line->lst, 0, fd);
 		write(fd, "\n", 1);
 		line = line->next;
 		i++;
@@ -74,7 +74,7 @@ static t_mlst	*ft_read_std(char *eof)
 		write(2, ">> ", 3);
 		h_doc.read_line = get_next_line(STDIN_FILENO);
 		if (!h_doc.read_line)
-			return NULL;
+			return (NULL);
 		if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)
 		{
 			free(h_doc.read_line);
@@ -92,7 +92,7 @@ static t_mlst	*ft_read_std(char *eof)
 	return (h_doc.new_mtrx);
 }
 
-static int ft_open_create_here_doc(char *file)
+static int	ft_open_create_here_doc(char *file)
 {
 	int	fd;
 
@@ -105,7 +105,7 @@ static int ft_open_create_here_doc(char *file)
 	return (fd);
 }
 
-static void valid_expand(t_lst *l_eof, int *expand)
+static void	valid_expand(t_lst *l_eof, int *expand)
 {
 	t_node	*current;
 	t_node	*next;

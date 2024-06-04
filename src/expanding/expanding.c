@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 11:59:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:13:16 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ int	ft_expander_lst_token(t_lst *lst)
 	t_expand	v;
 
 	v.lst_temp.size = 0;
-	if (!lst || lst->size == 0)
-		return (-1);
-	if (lst->size == 1 && lst->head->type == DOLLAR)
-	{
-		lst->head->type = META_LITERAL;
-		return (-1);
-	}
 	if (ft_status(lst))
 		return (-1);
 	if (find_variable(lst, &v.lst_temp))
@@ -111,6 +104,13 @@ static int	ft_status(t_lst *lst)
 	char	*status;
 	t_lst	*temp;
 
+	if (!lst || lst->size == 0)
+		return (-1);
+	if (lst->size == 1 && lst->head->type == DOLLAR)
+	{
+		lst->head->type = META_LITERAL;
+		return (-1);
+	}
 	if (lst->head->next->c != '?')
 		return (0);
 	ft_remove_node_front(lst);

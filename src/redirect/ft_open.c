@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:29:16 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 14:31:26 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:24:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
 
-int ft_myopen(char *file, int oflag, int prmssn, int stdfd)
+int	ft_myopen(char *file, int oflag, int prmssn, int stdfd)
 {
 	int	fd;
 
@@ -25,7 +25,7 @@ int ft_myopen(char *file, int oflag, int prmssn, int stdfd)
 	if (dup2(fd, stdfd) < 0)
 	{
 		perror("dup2");
-		return (-1);	
+		return (-1);
 	}
 	close(fd);
 	return (0);

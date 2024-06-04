@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:30:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	ft_define_cmd_opertor(t_mmlst *m_m_lst)
 
 static void	ft_define_infile(t_mmlst *m_m_lst)
 {
-	int			count[2];
-	t_mnode		*mnoode_temp;
+	int		count[2];
+	t_mnode	*mnoode_temp;
 	t_llst	*lst_temp;
 
 	mnoode_temp = m_m_lst->head;
@@ -73,8 +73,8 @@ static void	ft_define_infile(t_mmlst *m_m_lst)
 
 static void	ft_define_outfile(t_mmlst *m_m_lst)
 {
-	int			count[2];
-	t_mnode		*mnoode_temp;
+	int		count[2];
+	t_mnode	*mnoode_temp;
 	t_llst	*lst_temp;
 
 	mnoode_temp = m_m_lst->head;

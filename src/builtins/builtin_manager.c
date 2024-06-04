@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:01:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/31 09:22:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:52:57 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
 
-static int valid_builtin(t_lst *lst);
+static int	valid_builtin(t_lst *lst);
 
 int	is_builtin(t_ast_n *cmd, t_mini *mini)
 {
@@ -37,7 +37,7 @@ int	is_builtin(t_ast_n *cmd, t_mini *mini)
 	return (0);
 }
 
-static int valid_builtin(t_lst *lst)
+static int	valid_builtin(t_lst *lst)
 {
 	if (!ft_strlstcmp(lst, CD, lst->size))
 		return (1);

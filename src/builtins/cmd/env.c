@@ -6,13 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 07:43:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:00:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_execute_env(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
+static void	ft_execute_env(t_ast_n *cmd,
+				t_mini *mini, t_ast *ast, t_var_exe *var);
 
 void	env(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
@@ -26,7 +27,8 @@ void	env(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	finished_builtin(cmd, mini, ast, var);
 }
 
-static void	ft_execute_env(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
+static void	ft_execute_env(t_ast_n *cmd,
+			t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	t_llst	*line;
 	int		i_color;

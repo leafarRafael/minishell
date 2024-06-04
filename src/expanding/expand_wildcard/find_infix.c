@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 15:48:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:15:16 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	find_infix(t_lst *inlst, t_lst *this_lst)
 	if (this_lst->size == 0)
 		return (ft_delete_list(inlst) + ft_delete_list(this_lst));
 	if (inlst->size == 0 && this_lst->size != 0)
-		return (ft_delete_list(inlst) + ft_delete_list(this_lst) +1);
+		return (ft_delete_list(inlst) + ft_delete_list(this_lst) + 1);
 	if (ft_remove_wild_dup(inlst, this_lst))
 		return (ft_delete_list(inlst) + ft_delete_list(this_lst));
 	while (inlst->size > 0)
@@ -32,12 +32,12 @@ int	find_infix(t_lst *inlst, t_lst *this_lst)
 		{
 			lst_rmv_back(inlst);
 			if (inlst->size == 0)
-				return (ft_delete_list(inlst) + ft_delete_list(this_lst) +1);
+				return (ft_delete_list(inlst) + ft_delete_list(this_lst) + 1);
 		}
 		else
 			return (ft_delete_list(inlst) + ft_delete_list(this_lst));
 	}
-	return (ft_delete_list(inlst) + ft_delete_list(this_lst) +1);
+	return (ft_delete_list(inlst) + ft_delete_list(this_lst) + 1);
 }
 
 static int	ft_find_infix_healper(t_lst *in, t_lst *this)
@@ -58,9 +58,9 @@ static int	ft_find_infix_healper(t_lst *in, t_lst *this)
 		if (node->prev == this->last && cpyin->last->c == node->c)
 			return (is_last_content(this, in, cpyin));
 		if (node->c != cpyin->last->c)
-			return (ft_delete_list(cpyin) +30);
+			return (ft_delete_list(cpyin) + 30);
 		if (cpyin->size == 0)
-			return (ft_delete_list(cpyin) +30);
+			return (ft_delete_list(cpyin) + 30);
 	}
 	return (ft_delete_list(cpyin) + 11);
 }
@@ -76,7 +76,7 @@ static int	is_wildcard_content(t_lst *this, t_lst *in, t_lst *cpyin)
 	return (lst_rmv_back(in) + find_infix(in, this) + ft_delete_list(cpyin));
 }
 
-static int is_last_content(t_lst *this, t_lst *in, t_lst *cpyin)
+static int	is_last_content(t_lst *this, t_lst *in, t_lst *cpyin)
 {
 	while (this->size)
 		lst_rmv_back(this);
@@ -85,7 +85,7 @@ static int is_last_content(t_lst *this, t_lst *in, t_lst *cpyin)
 	return (0);
 }
 
-static int ft_remove_wild_dup(t_lst *inlst, t_lst *this_lst)
+static int	ft_remove_wild_dup(t_lst *inlst, t_lst *this_lst)
 {
 	while (this_lst->size > 0)
 	{
@@ -104,6 +104,6 @@ static int ft_remove_wild_dup(t_lst *inlst, t_lst *this_lst)
 			break ;
 	}
 	if (this_lst->size == 0)
-		return (1) ;
+		return (1);
 	return (0);
 }

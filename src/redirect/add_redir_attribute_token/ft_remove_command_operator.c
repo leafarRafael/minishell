@@ -6,11 +6,12 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/20 17:49:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:40:14 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "redirect.h"
 
 static void	ft_remove_cmd_opertor(t_mmlst *m_m_lst);
 static void	ft_remove_rdrct(t_mmlst *m_m_lst);
@@ -25,7 +26,6 @@ int	ft_remove_cmd_status(t_mmlst *m_m_lst)
 	return (0);
 }
 
-// TODO
 static void	ft_remove_cmd_opertor(t_mmlst *m_m_lst)
 {
 	int		i;
@@ -43,29 +43,26 @@ static void	ft_remove_cmd_opertor(t_mmlst *m_m_lst)
 
 static void	ft_remove_rdrct(t_mmlst *m_m_lst)
 {
-	int			count[2];
-	int			size;
-	t_mnode		*mnoode_temp;
-	t_llst	*lst_temp;
-	t_llst	*lst_next;
+	t_add_token	v;
 
-	mnoode_temp = m_m_lst->head;
-	count[0] = 1;
-	while (count[0] <= m_m_lst->size)
+	v.mnoode_temp = m_m_lst->head;
+	v.count_i = 1;
+	while (v.count_i <= m_m_lst->size)
 	{
-		lst_temp = mnoode_temp->matrix->head;
-		lst_next = lst_temp->next;
-		count[1] = 1;
-		size = mnoode_temp->matrix->size;
-		while (count[1] <= size)
+		v.lst_temp = v.mnoode_temp->matrix->head;
+		v.lst_next = v.lst_temp->next;
+		v.count_x = 1;
+		v.size = v.mnoode_temp->matrix->size;
+		while (v.count_x <= v.size)
 		{
-			if (lst_temp->lst->head->type & (REDI_IN | HERE_DOC | REDI_OUT | APPEND))
-				ft_rmv_spcfc_lst_mtrx(mnoode_temp->matrix, lst_temp);
-			lst_temp = lst_next;
-			lst_next = lst_next->next;
-			count[1]++;
+			if (v.lst_temp->lst->head->type
+				& (REDI_IN | HERE_DOC | REDI_OUT | APPEND))
+				ft_rmv_spcfc_lst_mtrx(v.mnoode_temp->matrix, v.lst_temp);
+			v.lst_temp = v.lst_next;
+			v.lst_next = v.lst_next->next;
+			v.count_x++;
 		}
-		mnoode_temp = mnoode_temp->next;
-		count[0]++;
+		v.mnoode_temp = v.mnoode_temp->next;
+		v.count_i++;
 	}
 }

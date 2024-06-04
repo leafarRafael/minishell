@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 11:54:26 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 09:03:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void ft_close();
 
 // void free_BUILTIN_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 
-void free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
+void	free_memory(t_mini *mini, t_var_exe *var, t_ast *ast, int status_exit)
 {
 	if (mini)
 	{

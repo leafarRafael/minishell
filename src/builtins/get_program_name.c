@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:55:33 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/28 07:54:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:51:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 char	*ft_mtrx_to_str(char **mtrx);
 int		addcolor_matrix(char **mtrix);
-int		add_prefix_or_sufix_to_matrix(char **matrix, char *prefix_suffix, int pre_su_fix);
-char	**cpy_mtrx_add_prefix_sufix(char **matrix, char *prefix_suffix, int pre_su_fix);
+int		add_prefix_or_sufix_to_matrix(char **matrix,
+			char *prefix_suffix, int pre_su_fix);
+char	**cpy_mtrx_add_prefix_sufix(char **matrix,
+			char *prefix_suffix, int pre_su_fix);
 
-char	*ft_get_program_name()
+char	*ft_get_program_name(void)
 {
 	char	**path_name;
 	char	*directory;
@@ -43,7 +45,8 @@ char	*ft_get_program_name()
 	return (program_name);
 }
 
-char	**cpy_mtrx_add_prefix_sufix(char **matrix, char *prefix_suffix, int pre_su_fix)
+char	**cpy_mtrx_add_prefix_sufix(char **matrix,
+				char *prefix_suffix, int pre_su_fix)
 {
 	int		i;
 	int		size;
@@ -67,7 +70,8 @@ char	**cpy_mtrx_add_prefix_sufix(char **matrix, char *prefix_suffix, int pre_su_
 	return (new_matrix);
 }
 
-int	add_prefix_or_sufix_to_matrix(char **matrix, char *prefix_suffix, int pre_su_fix)
+int	add_prefix_or_sufix_to_matrix(char **matrix,
+			char *prefix_suffix, int pre_su_fix)
 {
 	int		i;
 	char	*new_str;
