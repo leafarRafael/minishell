@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:11:50 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 12:34:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 10:12:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	builds_execution_call(t_lst *input, t_mini *mini)
 {
-	t_ast		*ast;
+	t_ast	*ast;
+	int		index;
 
 	ast = NULL;
 	ast = ft_init_ast();
-
-	int index = 0;
+	index = 0;
 	while (mini->ast[index] != NULL && index < 40)
 		index++;
 	mini->ast[index] = ast;
