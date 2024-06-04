@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 14:34:24 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 14:56:25 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	{
 		ft_msg_error(var->command_m[1], strerror(errno));
 		ft_delcmtrx(var->command_m);
+		var->command_m = NULL;
 		g_status_child = 1;
 		return (g_status_child);
 	}
 	setpwd(mini->m_lst_env);
 	ft_delcmtrx(var->command_m);
+	var->command_m = NULL;
 	return (g_status_child);
 }
 
