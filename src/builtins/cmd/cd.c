@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 13:17:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 07:44:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ static void	setpwd(t_mlst *envlst);
 
 void	cd(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
+	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+		return ;
+	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+		return ;
 	ft_manager_fd_builtin(cmd, mini, ast, var);
 	ft_valid_command_builtin(cmd, mini, ast, var);
 	if (exe_cd(cmd, mini, ast, var))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 17:38:46 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 08:43:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(void)
 		mini.ast[index] = NULL;
 		index++;
 	}
+	swap_tty(COPY, &mini);
 	while (1)
 	{
 
@@ -88,7 +89,7 @@ static void	ft_execute_minishell(t_mini *mini)
 	while (mini->input_lst->size > 0)
 		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(mini->input_lst));
 	ft_delete_list(mini->input_lst);
-	swap_tty(COPY, mini);
+	/* swap_tty(COPY, mini); */
 	builds_execution_call(mini->input_lst, mini);
 	swap_tty(RESTORE, mini);
 	ft_swap_environ(mini, RESTORE);

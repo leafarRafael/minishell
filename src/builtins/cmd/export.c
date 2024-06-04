@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 15:03:22 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/04 07:52:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,11 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 	int		i;
 	int		i_color;
 
+	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+		return ;
+	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+		return ;
+	status_child = 0;
 	ft_manager_fd(cmd, mini, ast, var);
 	if (cmd->m_lst->matrix->size == 1)
 	{
@@ -148,7 +153,6 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 
 		llst = cmd->m_lst->matrix->head->next;
 		llst_size = cmd->m_lst->matrix->size - 1;
-
 		t_llst	*env;
 		char	*prefix;
 		char	*var;
@@ -162,7 +166,6 @@ void export(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 			// ft_print_array_lst(llst->lst, 0);
 			var = get_prefix(find_equal_return_ptr(llst->lst, '='), llst->lst);
 			// printf("===>>> VAR [ %s ]\n", var);
-
 			while(ft_strlen(var) && index < mini->m_lst_env->size)
 			{
 				prefix = NULL;

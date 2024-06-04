@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:52:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 14:52:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 07:58:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_exec_manager(t_ast_n *cmd, t_mini *mini, t_ast *ast)
 	t_var_exe	var;
 
 	init_variables(&var);
-	if (operator_manager(cmd, mini, ast, &var) == -1)
+	if (operator_manager(cmd, mini, ast, &var))
 		return ;
 	if (cmd->m_lst->in_parent)
 		subshell(cmd, mini, ast, &var);
@@ -33,17 +33,17 @@ static int	operator_manager(t_ast_n *cmd,
 				t_mini *mini, t_ast *ast, t_var_exe *var)
 {
 	if (cmd == NULL)
-		return (-1);
+		return (1);
 	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
-		return (-1);
+		return (1);
 	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
-		return (-1);
+		return (1);
 	if (cmd->m_lst->next->type == PIPE)
 	{
 		if (pipe(var->tube) < 0)
 		{
 			ft_msg_error("pipe error", strerror(errno));
-			free_memory(mini, var, ast, 1);
+			free_memory(mini, var, ast, status_child+1);
 		}
 		return (0);
 	}

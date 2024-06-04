@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 11:14:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 07:46:29 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ static void exe_echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var);
 
 void	echo(t_ast_n *cmd, t_mini *mini, t_ast *ast, t_var_exe *var)
 {
+	if (cmd->m_lst->prev->type == AND_OP && status_child != 0)
+		return ;
+	if (cmd->m_lst->prev->type == OR_OP && status_child == 0)
+		return ;
 	ft_manager_fd_builtin(cmd, mini, ast, var);
 	ft_valid_command_builtin(cmd, mini, ast, var);
 	exe_echo(cmd, mini, ast, var);
+	status_child = 0;
 	finished_builtin(cmd, mini, ast, var);
 }
 

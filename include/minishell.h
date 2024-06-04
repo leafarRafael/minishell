@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 12:27:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/04 08:20:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ extern int	status_child;
 # define PROGRAM_NAME "\033[34m minishell$ \033[0m"
 # define PATH "PATH=/"
 # define SIZE_PATH 6
-# define PATH_HERE_DOC "<< tmp/0000"
+# define PATH_HERE_DOC "<< /tmp/0000"
 
 typedef struct s_variables_minishell
 {
