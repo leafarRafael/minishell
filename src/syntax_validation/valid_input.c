@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:27:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/03 12:10:01 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/05 16:10:53 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ int	ft_input_is_valid(char *array)
 		free(array);
 		return (-1);
 	}
-	if (size == 1)
-	{
-		if (ft_words_delemiter(array[0]))
+	// if (size == 1)
+	// {
+		if (array[0] == '\n')
 		{
 			free(array);
 			return (-1);
 		}
-		write(2, array, size);
-		write(2, ": command not found\n", 21);
-		free(array);
-		return (-1);
-	}
+	// 	write(2, array, size);
+	// 	write(2, ": command not found\n", 21);
+	// 	free(array);
+	// 	return (-1);
+	// }
 	while (array[i])
 	{
 		if (!ft_words_delemiter(array[i]))

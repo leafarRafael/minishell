@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 12:10:06 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/05 16:13:59 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ int	main(void)
 		mini.input = readline(GRN " \033[1m\nminishel \u279C : \033[0m" RST);
 		if (!mini.input)
 			break ;
+		add_history(mini.input);
 		stx.error = th_parse_param(mini.input);
 		if (!stx.error)
 		{
 			ft_putstr_fd(mini.color[i], 2);
-			if (!ft_input_is_valid(mini.input))
+			// if (!ft_input_is_valid(mini.input))
 				ft_execute_minishell(&mini);
 			i++;
 			if (i == 6)
@@ -76,7 +77,6 @@ int	main(void)
 static void	ft_execute_minishell(t_mini *mini)
 {
 	ft_swap_environ(mini, SWAP);
-	add_history(mini->input);
 	mini->input_lst = ft_init_lst();
 	mini->mmlst = init_mmlst();
 	ft_add_string_in_list(mini->input_lst, mini->input);
