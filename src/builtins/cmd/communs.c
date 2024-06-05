@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   communs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 09:00:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:29:24 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:17:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins.h"
 
 void	ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {

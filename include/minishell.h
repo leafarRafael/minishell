@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:59:37 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:17:14 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "abstract_syntax_tree.h"
 # include "array_lst.h"
-# include "builtins.h"
+/* # include "builtins.h" */
 # include "color.h"
 # include "expanding.h"
 # include "ft_printf.h"
@@ -164,7 +164,7 @@ void		*getdir_list_string(int str_lst);
 char		*ft_get_program_name(void);
 
 /*    BUILTINS		*/
-int			is_builtin(t_ast_n *cmd);
+/* int			is_builtin(t_ast_n *cmd);
 void		cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		env(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
@@ -177,6 +177,6 @@ void		ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		ft_valid_command_builtin(t_ast_n *cmd);
 void		finished_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 char	*get_prfx(t_node *ptr, t_lst *lst);
-int			ft_strlstcmp(t_lst *lst, char *str);
+int			ft_strlstcmp(t_lst *lst, char *str); */
 
 #endif

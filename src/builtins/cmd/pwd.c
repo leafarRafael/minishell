@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:21:05 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:35:00 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:18:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins.h"
 
 static void	putpwd(t_mini *mini);
 
@@ -42,8 +43,10 @@ static void	putpwd(t_mini *mini)
 			ft_putstr_fd(mini->color[0], STDOUT_FILENO);
 			ft_putlst_fd(env->lst, 1, STDOUT_FILENO);
 			ft_putstr_fd(RESET, STDOUT_FILENO);
+			free(prefix);
 			break ;
 		}
+		free(prefix);
 		env = env->next;
 		i++;
 	}

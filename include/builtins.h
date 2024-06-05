@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:32:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/05 12:16:53 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,19 @@ typedef enum s_builtin_size
 	_UNSET,
 	_EXPORT
 }	t_builtin_size;
+
+int		is_builtin(t_ast_n *cmd);
+void	cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	env(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	export(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	pwd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void	ft_valid_command_builtin(t_ast_n *cmd);
+void	finished_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+char	*get_prfx(t_node *ptr, t_lst *lst);
+int		ft_strlstcmp(t_lst *lst, char *str);
 
 #endif

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:30:39 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:17:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins.h"
 
 static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 static void	setpwd(t_mlst *envlst);
@@ -74,6 +75,7 @@ static void	setpwd(t_mlst *envlst)
 			while (*current_dir)
 				ft_create_node_add_back(env->lst, *(current_dir++));
 		}
+		free(prefix);
 		env = env->next;
 	}
 }

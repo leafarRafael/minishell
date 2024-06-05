@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_program_name.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:55:33 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 08:51:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/05 12:10:53 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_get_program_name(void)
 	char	**path_name;
 	char	*directory;
 	char	*path;
-	char	*program_name;
+/* 	char	*program_name; */
 
 	directory = (char *) getdir_list_string(STRING);
 	if (!directory)
@@ -38,11 +38,11 @@ char	*ft_get_program_name(void)
 	if (addcolor_matrix(path_name))
 		return (NULL);
 	path = ft_mtrx_to_str(path_name);
-	program_name = ft_strjoin(path, PROGRAM_NAME);
+/* 	program_name = ft_strjoin(path, PROGRAM_NAME); */
 	ft_delcmtrx(path_name);
 	free(directory);
-	free(path);
-	return (program_name);
+/* 	free(path); */
+	return (path);
 }
 
 char	**cpy_mtrx_add_prefix_sufix(char **matrix,

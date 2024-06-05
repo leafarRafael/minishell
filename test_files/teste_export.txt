@@ -1,0 +1,7 @@
+echo TESTE 01
+
+export var=1 && env
+
+echo TESTE2
+
+export var2=2 | export var3=3 && env

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:39:23 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:10:06 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ int	main(void)
 	{
 		ft_scanner_env(mini.m_lst_env);
 		name = ft_get_program_name();
-		// ft_putstr_fd(name, 2);
+		ft_putstr_fd(name, 2);
 		free(name);
-		mini.input = readline(GRN " \033[1mminishel \u279C : \033[0m" RST);
+		mini.input = readline(GRN " \033[1m\nminishel \u279C : \033[0m" RST);
+		if (!mini.input)
+			break ;
 		stx.error = th_parse_param(mini.input);
 		if (!stx.error)
 		{
 			ft_putstr_fd(mini.color[i], 2);
-			if (!mini.input)
-				break ;
 			if (!ft_input_is_valid(mini.input))
 				ft_execute_minishell(&mini);
 			i++;

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:20:41 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:17:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins.h"
 
-static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+/* static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var); */
 
 int	ft_cmpvar(t_lst *lst, char *str, int size)
 {
@@ -62,8 +63,9 @@ void export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
+	ft_manager_fd_builtin(cmd, mini, var);
+	ft_valid_command_builtin(cmd);
 	g_status_child = 0;
-	ft_manager_fd(cmd, mini, var);
 	if (cmd->m_lst->matrix->size == 1)
 	{
 		line = mini->m_lst_env->head;
@@ -96,25 +98,26 @@ void export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		llst_size = cmd->m_lst->matrix->size - 1;
 		t_llst	*env;
 		char	*prefix;
-		char	*var;
+		char	*varrrr;
 		int		index;
 		while (llst_size)
 		{
 			env = mini->m_lst_env->head;
 			index = 0;
-			var = get_prfx(find_equal_return_ptr(llst->lst, '='), llst->lst);
-			while(ft_strlen(var) && index < mini->m_lst_env->size)
+			varrrr = get_prfx(find_equal_return_ptr(llst->lst, '='), llst->lst);
+			while(ft_strlen(varrrr) && index < mini->m_lst_env->size)
 			{
 				prefix = NULL;
 				prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL_SING), env->lst);
 				if (prefix)
 				{
-					if (!ft_strncmp(var, prefix, ft_strlen(prefix) + 1))
+					if (!ft_strncmp(varrrr, prefix, ft_strlen(prefix) + 1))
 					{
 						ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
 						ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, env);
 						free(prefix);
-						free(var);
+						free(varrrr);
+						finished_builtin(cmd, mini, var);
 						return ;
 					}
 				}
@@ -122,19 +125,20 @@ void export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 				index++;
 				env = env->next;
 			}
-			if (ft_strlen(var))
+			if (ft_strlen(varrrr))
 			{
 				ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
-				free(var);
+				free(varrrr);
 			}
 
 			llst = llst->next;
 			llst_size--;
 		}
 	}
+	finished_builtin(cmd, mini, var);
 }
 
-static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
+/* static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->next->type == PIPE)
 	{
@@ -145,3 +149,4 @@ static void ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	if (ft_redirect_manager(cmd->m_lst->matrix) < 0)
 		free_memory(mini, var, 1);
 }
+ */

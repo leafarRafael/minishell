@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/04 16:14:53 by tforster         ###   ########.fr        #
+#    Updated: 2024/06/05 11:16:38 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,9 @@ REDIRECT		:= ./src/redirect/add_redir_attribute_token/ft_define_command_operator
 SIMPLE			:=./src/struct_call_execution/call_and_exec_manager.c\
 				./src/struct_call_execution/path_executable/get_executable.c\
 				./src/struct_call_execution/expanding_parentheses/expand_parentheses.c\
-				./src/struct_call_execution/execve/exec_manager.c\
 				./src/struct_call_execution/execve/children.c\
 				./src/struct_call_execution/execve/parent.c\
 				./src/struct_call_execution/execve/init_fork.c\
-				./src/struct_call_execution/execve/subshell.c\
 				./src/struct_call_execution/command_call_structure.c\
 				./src/struct_call_execution/builds_execution_call.c
 

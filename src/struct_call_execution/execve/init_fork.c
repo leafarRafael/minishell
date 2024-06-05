@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:49:41 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:19:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "builtins.h"
 
 static void	*select_function(int i);
 static void	valid_fork(pid_t *pid, t_ast_n *cmd, int ctrl_func);
@@ -73,7 +74,6 @@ static int	ft_valid_command(t_ast_n *cmd)
 
 static void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
-	// void	(*function)(t_ast_n *, t_mini *, t_ast *, t_var_exe *);
 	void	(*function)(t_ast_n *, t_mini *, t_var_exe *);
 	int		ctrl_func;
 
@@ -96,4 +96,16 @@ static void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	}
 	else
 		function(cmd, mini, var);
+}
+
+void	free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini)
+{
+	if (cmd->m_lst->next->type == PIPE)
+	{
+		cmd->m_lst->next->next->prev_pipe = 1;
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->next);
+	}
+	if (cmd->m_lst->prev->type & (OR_OP | AND_OP))
+		ft_remove_specific_matrix(mini->mmlst, cmd->m_lst->prev);
+	ft_remove_specific_matrix(mini->mmlst, cmd->m_lst);
 }
