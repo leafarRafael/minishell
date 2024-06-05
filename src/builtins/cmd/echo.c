@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 12:17:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/05 17:38:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,18 @@ void	echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 
 static void	exe_echo(t_ast_n *cmd)
 {
-	int	i;
+	int		i;
+	int		index;
+	t_llst	*lnode;
 
 	i = 1;
 	ft_remove_lst_front(cmd->m_lst->matrix);
 	if (cmd->m_lst->matrix->size == 0)
+	{
+		ft_putstr_fd("\n", STDOUT_FILENO);
+		return ;
+	}
+	if (cmd->m_lst->matrix->size == 1 && cmd->m_lst->matrix->head->lst->size == 0)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return ;
@@ -46,9 +53,12 @@ static void	exe_echo(t_ast_n *cmd)
 	}
 	if (cmd->m_lst->matrix->size == 0)
 		return ;
-	while (cmd->m_lst->matrix->size)
+	index = 0;
+	lnode = cmd->m_lst->matrix->head;
+	while (index < cmd->m_lst->matrix->size)
 	{
-		ft_putlst_fd(cmd->m_lst->matrix->head->lst, i, STDOUT_FILENO);
-		ft_remove_lst_front(cmd->m_lst->matrix);
+		ft_putlst_fd(lnode->lst, i, STDOUT_FILENO);
+		index++;
+		lnode = lnode->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 15:20:31 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:19:26 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,26 +92,18 @@ void export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	else
 	{
 		t_llst	*llst;
-/* 		int		llst_size; */
-
-		ft_remove_lst_front(cmd->m_lst->matrix);
-		llst = cmd->m_lst->matrix->head;
-		// ft_scanner_equal(llst->lst);
-
-
-		// llst_size = cmd->m_lst->matrix->size - 1;
 		t_llst	*env;
-
 		char	*prefix;
 		char	*new_var;
 		int		index;
+	
+		ft_remove_lst_front(cmd->m_lst->matrix);
+		llst = cmd->m_lst->matrix->head;
 		while (cmd->m_lst->matrix->size)
 		{
-			ft_putlst_fd(llst->lst, 1, 2);
 			env = mini->m_lst_env->head;
 			index = 0;
 			new_var = get_prfx(find_equal_return_ptr(llst->lst, '='), llst->lst);
-			printf("STR [%s]\n", new_var);
 			if (!new_var)
 			{
 				ft_remove_lst_front(cmd->m_lst->matrix);
@@ -122,21 +114,17 @@ void export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 			while(index < mini->m_lst_env->size)
 			{
 				prefix = NULL;
-				// prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL_SING), env->lst);
 				prefix = get_prfx(find_equal_return_ptr(env->lst, '='), env->lst);
 				if (prefix)
 				{
-					// printf("+++ IF PREFIZ +++\n");
+
 					if (!ft_strncmp(new_var, prefix, ft_strlen(prefix) + 1))
 					{
-						printf("==== STRCMP ====\n");
-						ft_putlst_fd(env->lst, 1, 2);
-						ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, env);
 						ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
+						ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, env);
 						free(prefix);
 						free(new_var);
 						new_var = NULL;
-						// finished_builtin(cmd, mini, var);
 						break; ;
 					}
 				}
@@ -146,13 +134,10 @@ void export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 			}
 			if (new_var && ft_strlen(new_var))
 			{
-				printf("ADD NEW!\n");
-				ft_putlst_fd(llst->lst, 1, 2);
 				ft_add_mlstnode_back(mini->m_lst_env, mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
 				free(new_var);
 			}
 			llst = cmd->m_lst->matrix->head;
-					/* llst_size--; */
 		}
 	}
 	finished_builtin(cmd, mini, var);

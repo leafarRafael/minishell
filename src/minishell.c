@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 16:13:59 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:45:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_scanner_env(t_mlst *mlst)
 	i = 0;
 	while (i < mlst->size)
 	{
-		ft_scanner_equal(node->lst);
+		ft_scanner_input(node->lst);
 		node = node->next;
 		i++;
 	}

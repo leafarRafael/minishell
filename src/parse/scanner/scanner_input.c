@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:20:14 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 15:58:56 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 16:44:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_scanner_input(t_lst *lst)
 	if (!lst || lst->size == 0)
 		return ;
 	ft_scanner_simple_operator(lst);
+	ft_scanner_equal(lst);
 	ft_scanner_wildcard(lst);
 	ft_scanner_composite(lst);
 	ft_scanner_quotes(lst);

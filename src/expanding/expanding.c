@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:59:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 15:46:36 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:34:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_expander_lst_token(t_lst *lst)
 		return (-1);
 	v.array_var = ft_cpy_lst_to_array(&v.lst_temp);
 	v.env = getenv(&v.array_var[1]);
-	ft_putstr_fd(v.env, 2);
 	free(v.array_var);
 	if (v.env)
 	{

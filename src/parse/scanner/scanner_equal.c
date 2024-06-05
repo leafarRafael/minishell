@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_equal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:25:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:57:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/05 16:44:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	ft_scanner_equal(t_lst *lst)
 	{
 		if (node->c == '=')
 			node->type = EQUAL_SING;
-		else
-			node->type = NO_OP_TYPE;
 		node = node->next;
 		i++;
 	}
