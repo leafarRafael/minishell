@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/05 17:26:59 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:12:09 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ int	th_parse_param(char *str)
 	index = 0;
 	status = parse_out_prnht(str, &parse, &index);
 	status = last_tkn(str, parse, status);
-	if (!parse)
-		return (1);
-	// printf("\n");
-	// printf("PARSER RESULT:\n");
-	// th_print_parenth(str, parse, 0, 0);
 	if (parse)
 		parse_free(parse);
-	return (status);
+	else
+		return (1);
+	if (status)
+		return (1);
+	return (0);
 }
 
 /*

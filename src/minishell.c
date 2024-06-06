@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 17:38:48 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:12:22 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,10 @@ int	main(void)
 			ft_putstr_fd(name, 2);
 			free(name);
 		}
-		mini.input = readline(GRN " \033[1m\nminishel \u279C : \033[0m" RST);
+		mini.input = readline("\n minishell$ : ");
 		if (!mini.input)
 			break ;
 		mini.status = ft_input_is_valid(mini.input);
-		if (mini.status)
-			g_status_child = mini.status;
 		if (!mini.status)
 		{
 			ft_putstr_fd(mini.color[i], 2);
