@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 10:13:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 17:38:48 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(void)
 	t_mini	mini;
 	char	*name;
 	int		i;
-	t_stx	stx;
 	int		index;
 
 	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
@@ -48,13 +47,13 @@ int	main(void)
 		mini.input = readline(GRN " \033[1m\nminishel \u279C : \033[0m" RST);
 		if (!mini.input)
 			break ;
-		add_history(mini.input);
-		stx.error = th_parse_param(mini.input);
-		if (!stx.error)
+		mini.status = ft_input_is_valid(mini.input);
+		if (mini.status)
+			g_status_child = mini.status;
+		if (!mini.status)
 		{
 			ft_putstr_fd(mini.color[i], 2);
-			// if (!ft_input_is_valid(mini.input))
-				ft_execute_minishell(&mini);
+			ft_execute_minishell(&mini);
 			i++;
 			if (i == 6)
 				i = 1;
