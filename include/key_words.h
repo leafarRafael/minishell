@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_words.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:46:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:35:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 09:44:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef enum s_type_character
 	COMMAND = 1 << 14,
 	END_OF = 1 << 15,
 	WILDCARD = 1 << 16,
-	EQUAL_SING = 1 << 17
+	EQUAL = 1 << 17
 }	t_type_character;
 
 int	ft_or_op(char current, char next);

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 12:17:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 08:52:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static int	valid_number(t_lst *lst);
 
 void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
-	if (!cmd)
-		return ;
 	if (cmd->m_lst->prev->type == AND_OP && g_status_child != 0)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
@@ -36,8 +34,7 @@ void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 
 static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
-	char	*nbr_exit;
-	int		nbr;
+	t_builtin	v;
 
 	if (cmd->m_lst->matrix->size > 2)
 	{
@@ -46,33 +43,32 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		return ;
 	}
 	ft_remove_lst_front(cmd->m_lst->matrix);
-	nbr_exit = ft_cpy_lst_to_array(cmd->m_lst->matrix->head->lst);
+	v.nbr_exit = ft_cpy_lst_to_array(cmd->m_lst->matrix->head->lst);
 	if (valid_number(cmd->m_lst->matrix->head->lst)
 		|| cmd->m_lst->matrix->head->lst->size > 19)
 	{
-		ft_msg_error(nbr_exit, "numeric argument required");
+		ft_msg_error(v.nbr_exit, "numeric argument required");
 		g_status_child = 2;
-		free(nbr_exit);
+		free(v.nbr_exit);
 		return ;
 	}
-	nbr = ft_atoi(nbr_exit);
-	free(nbr_exit);
-	free_memory(mini, var, nbr);
+	v.nbr = ft_atoi(v.nbr_exit);
+	free(v.nbr_exit);
+	free_memory(mini, var, v.nbr);
 }
 
 static int	valid_number(t_lst *lst)
 {
-	t_node	*node;
-	int		i;
+	t_builtin	v;
 
-	node = lst->head;
-	i = 0;
-	while (i < lst->size)
+	v.node = lst->head;
+	v.index = 0;
+	while (v.index < lst->size)
 	{
-		if (!ft_isdigit(node->c))
+		if (!ft_isdigit(v.node->c))
 			return (1);
-		i++;
-		node = node->next;
+		v.index++;
+		v.node = v.node->next;
 	}
 	return (0);
 }

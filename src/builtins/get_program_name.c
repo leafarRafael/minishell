@@ -6,28 +6,27 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:55:33 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 12:10:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 08:22:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "color.h"
+#include "minishell.h"
 
 char	*ft_mtrx_to_str(char **mtrx);
 int		addcolor_matrix(char **mtrix);
-int		add_prefix_or_sufix_to_matrix(char **matrix,
-			char *prefix_suffix, int pre_su_fix);
-char	**cpy_mtrx_add_prefix_sufix(char **matrix,
-			char *prefix_suffix, int pre_su_fix);
+int		add_prefix_or_sufix_to_matrix(char **matrix, char *prefix_suffix,
+			int pre_su_fix);
+char	**cpy_mtrx_add_prefix_sufix(char **matrix, char *prefix_suffix,
+			int pre_su_fix);
 
 char	*ft_get_program_name(void)
 {
 	char	**path_name;
 	char	*directory;
 	char	*path;
-/* 	char	*program_name; */
 
-	directory = (char *) getdir_list_string(STRING);
+	directory = (char *)getdir_list_string(STRING);
 	if (!directory)
 		return (NULL);
 	path_name = ft_split(directory, '/');
@@ -38,22 +37,20 @@ char	*ft_get_program_name(void)
 	if (addcolor_matrix(path_name))
 		return (NULL);
 	path = ft_mtrx_to_str(path_name);
-/* 	program_name = ft_strjoin(path, PROGRAM_NAME); */
 	ft_delcmtrx(path_name);
 	free(directory);
-/* 	free(path); */
 	return (path);
 }
 
-char	**cpy_mtrx_add_prefix_sufix(char **matrix,
-				char *prefix_suffix, int pre_su_fix)
+char	**cpy_mtrx_add_prefix_sufix(char **matrix, char *prefix_suffix,
+		int pre_su_fix)
 {
 	int		i;
 	int		size;
 	char	**new_matrix;
 
 	i = 0;
-	size = ft_mtrxlen(matrix)+1;
+	size = ft_mtrxlen(matrix) + 1;
 	new_matrix = ft_calloc(sizeof(char *), size);
 	if (!new_matrix)
 		return (NULL);
@@ -70,8 +67,8 @@ char	**cpy_mtrx_add_prefix_sufix(char **matrix,
 	return (new_matrix);
 }
 
-int	add_prefix_or_sufix_to_matrix(char **matrix,
-			char *prefix_suffix, int pre_su_fix)
+int	add_prefix_or_sufix_to_matrix(char **matrix, char *prefix_suffix,
+		int pre_su_fix)
 {
 	int		i;
 	char	*new_str;

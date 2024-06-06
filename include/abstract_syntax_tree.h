@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   abstract_syntax_tree.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 08:23:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:32:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 10:47:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_ast_node
 {
 	t_mnode				*m_lst;
+	t_llst				*line;
 	int					type;
 	int					how_to_exe;
 	struct s_ast_node	*left;
@@ -43,5 +44,6 @@ void					ft_tree_add_left(t_ast *tree, t_mnode *matrix);
 void					ft_delete_tree(t_ast *tree);
 t_ast_n					*ft_init_new_ast_node(void);
 t_ast					*ft_init_ast(void);
+void					ft_build_tree_lnode(t_ast *tree, t_llst *line, int value);
 
 #endif

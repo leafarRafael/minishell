@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 12:16:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 10:47:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ typedef enum s_builtin_size
 	_UNSET,
 	_EXPORT
 }	t_builtin_size;
+
+typedef struct s_variables_builtins
+{
+	t_llst	*line;
+	t_llst	*env;
+	t_lst	*list;
+	t_lst	*lst;
+	t_node	*node;
+	char	*prefix;
+	char	*new_var;
+	char	*nbr_exit;
+	int		nbr;
+	int		index;
+	int		flag;
+	int		i_color;
+	t_ast	*expor_sort;
+
+}			t_builtin;
 
 int		is_builtin(t_ast_n *cmd);
 void	cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);

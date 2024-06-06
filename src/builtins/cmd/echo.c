@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 17:38:05 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 09:56:30 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "builtins.h"
 
 static void	exe_echo(t_ast_n *cmd);
+static void	put_echo(int flag, t_mlst *mlst);
 
 void	echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
@@ -30,18 +31,17 @@ void	echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 
 static void	exe_echo(t_ast_n *cmd)
 {
-	int		i;
-	int		index;
-	t_llst	*lnode;
+	t_builtin	v;
 
-	i = 1;
+	v.flag = 1;
 	ft_remove_lst_front(cmd->m_lst->matrix);
 	if (cmd->m_lst->matrix->size == 0)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return ;
 	}
-	if (cmd->m_lst->matrix->size == 1 && cmd->m_lst->matrix->head->lst->size == 0)
+	if (cmd->m_lst->matrix->size == 1
+		&& cmd->m_lst->matrix->head->lst->size == 0)
 	{
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		return ;
@@ -49,16 +49,22 @@ static void	exe_echo(t_ast_n *cmd)
 	if (!ft_strlstcmp(cmd->m_lst->matrix->head->lst, "-n"))
 	{
 		ft_remove_lst_front(cmd->m_lst->matrix);
-		i = 0;
+		v.flag = 0;
 	}
-	if (cmd->m_lst->matrix->size == 0)
+	put_echo(v.flag, cmd->m_lst->matrix);
+}
+
+static void	put_echo(int flag, t_mlst *mlst)
+{
+	if (mlst->size == 0)
 		return ;
-	index = 0;
-	lnode = cmd->m_lst->matrix->head;
-	while (index < cmd->m_lst->matrix->size)
+	while (mlst->size)
 	{
-		ft_putlst_fd(lnode->lst, i, STDOUT_FILENO);
-		index++;
-		lnode = lnode->next;
+		ft_putlst_fd(mlst->head->lst, 0, STDOUT_FILENO);
+		ft_remove_lst_front(mlst);
+		if (mlst->size)
+			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
+	if (flag)
+		ft_putchar_fd('\n', STDOUT_FILENO);
 }

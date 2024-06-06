@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_node_ast.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:35:25 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/05/07 08:29:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 10:43:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_ast_n	*ft_init_new_ast_node(void)
 	new_node->left = NULL;
 	new_node->right = NULL;
 	new_node->m_lst = NULL;
+	new_node->line = NULL;
 	new_node->type = -42;
 	new_node->how_to_exe = -42;
 	return (new_node);

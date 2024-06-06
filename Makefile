@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/05 11:16:38 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/06/06 10:44:52 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ SIMPLE			:=./src/struct_call_execution/call_and_exec_manager.c\
 				./src/struct_call_execution/command_call_structure.c\
 				./src/struct_call_execution/builds_execution_call.c
 
-AS_TREE			:=./src/function_ast/build_tree.c\
+AS_TREE			:=./src/function_ast/build_tree_tmnode.c\
+				./src/function_ast/build_tree_tline.c\
 				./src/function_ast/init_ast.c\
 				./src/function_ast/init_node_ast.c\
 				./src/function_ast/delete_tree.c\

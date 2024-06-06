@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 12:17:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 09:44:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	setpwd(t_mlst *envlst)
 	env = envlst->head;
 	while (env->next != envlst->head)
 	{
-		prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL_SING), env->lst);
+		prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL), env->lst);
 		if (!ft_strncmp("PWD", prefix, ft_strlen(prefix) + 1))
 		{
 			while (env->lst->last->c != '=')

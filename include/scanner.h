@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:35:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:33:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 08:28:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_scanner
 	int		type;
 	int		s_quotes;
 	int		d_quotes;
-
 }			t_scan;
 
 void		ft_scanner_parenthes(t_lst *lst);

@@ -3,101 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 19:13:13 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:58:01 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-void	exe_export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
-{
-	t_llst	*line;
-	int		i;
-	int		i_color;
-
-	line = mini->m_lst_env->head;
-	i = 1;
-	i_color = 0;
-	while (i <= mini->m_lst_env->size)
-	{
-		if (i_color > 3)
-			i_color = 0;
-		ft_putstr_fd(mini->color[i_color], STDOUT_FILENO);
-		ft_putlst_fd(line->lst, 1, STDOUT_FILENO);
-		ft_putstr_fd(RESET, STDOUT_FILENO);
-		i_color++;
-		line = line->next;
-		i++;
-	}
-	if (cmd->m_lst->next->type == PIPE)
-	{
-		close (mini->fd_std[0]);
-		close (mini->fd_std[1]);
-		free_memory(mini, var, 1);
-	}
-}
-
-char	*is_var_in_env(t_ast_n *cmd, t_mini *mini, t_llst *llst, char *new_var)
-{
-	t_llst	*env;
-	char	*prefix;
-	int		index;
-
-	env = mini->m_lst_env->head;
-	index = 0;
-	while (new_var && index < mini->m_lst_env->size)
-	{
-		prefix = NULL;
-		prefix = get_prfx(find_type_rtrn_ptr(env->lst, EQUAL_SING), env->lst);
-		if (prefix && !ft_strncmp(new_var, prefix, ft_strlen(prefix) + 1))
-		{
-			ft_add_mlstnode_back(mini->m_lst_env,
-				mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
-			ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, env);
-			free(prefix);
-			free(new_var);
-			new_var = NULL;
-			break ;
-		}
-		free(prefix);
-		index++;
-		env = env->next;
-	}
-	return (new_var);
-}
-
-void	exe_export_var(t_ast_n *cmd, t_mini *mini)
-{
-	t_llst	*llst;
-	char	*new_var;
-
-	ft_remove_lst_front(cmd->m_lst->matrix);
-	llst = cmd->m_lst->matrix->head;
-	while (cmd->m_lst->matrix->size)
-	{
-		new_var = get_prfx(find_type_rtrn_ptr(llst->lst, EQUAL_SING),
-				llst->lst);
-		if (!new_var)
-		{
-			ft_remove_lst_front(cmd->m_lst->matrix);
-			if (cmd->m_lst->matrix->size == 0)
-				break ;
-			llst = cmd->m_lst->matrix->head;
-		}
-		new_var = is_var_in_env(cmd, mini, llst, new_var);
-		if (new_var && ft_strlen(new_var))
-		{
-			ft_add_mlstnode_back(mini->m_lst_env,
-				mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
-			free(new_var);
-		}
-		llst = cmd->m_lst->matrix->head;
-	}
-}
+static void	exe_export_var(t_ast_n *cmd, t_mini *mini);
+static char	*is_var_in_env(t_ast_n *cmd,
+				t_mini *mini, t_llst *llst, char *new_var);
+static void	exe_export(t_mini *mini);
+void	ft_put_export(t_ast_n *root);
 
 void	export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
@@ -109,8 +29,97 @@ void	export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	ft_valid_command_builtin(cmd);
 	g_status_child = 0;
 	if (cmd->m_lst->matrix->size == 1)
-		exe_export(cmd, mini, var);
+		exe_export(mini);
 	else
 		exe_export_var(cmd, mini);
+	g_status_child = 0;
 	finished_builtin(cmd, mini, var);
+}
+
+static void	exe_export(t_mini *mini)
+{
+	t_builtin	v;
+
+	v.line = mini->m_lst_env->head;
+	v.index = 1;
+	v.expor_sort = ft_init_ast();
+	add_lexicographic_value(mini->m_lst_env, '=');
+	while (v.index <= mini->m_lst_env->size)
+	{
+		ft_build_tree_lnode(v.expor_sort, v.line, v.line->lex_val);
+		v.line = v.line->next;
+		v.i_color++;
+		v.index++;
+	}
+	ft_putstr_fd(mini->color[2], STDOUT_FILENO);
+	ft_put_export(v.expor_sort->root);
+	ft_putstr_fd(RESET, STDOUT_FILENO);
+	ft_delete_tree(v.expor_sort);
+}
+
+static void	exe_export_var(t_ast_n *cmd, t_mini *mini)
+{
+	t_builtin	v;
+
+	ft_remove_lst_front(cmd->m_lst->matrix);
+	v.line = cmd->m_lst->matrix->head;
+	while (cmd->m_lst->matrix->size)
+	{
+		v.new_var = get_prfx(find_type_rtrn_ptr(v.line->lst, EQUAL),
+				v.line->lst);
+		if (!v.new_var)
+		{
+			ft_remove_lst_front(cmd->m_lst->matrix);
+			if (cmd->m_lst->matrix->size == 0)
+				break ;
+			v.line = cmd->m_lst->matrix->head;
+		}
+		v.new_var = is_var_in_env(cmd, mini, v.line, v.new_var);
+		if (v.new_var && ft_strlen(v.new_var))
+		{
+			ft_add_mlstnode_back(mini->m_lst_env,
+				mlst_rmv_return_lnode(cmd->m_lst->matrix, v.line));
+			free(v.new_var);
+		}
+		v.line = cmd->m_lst->matrix->head;
+	}
+}
+
+static char	*is_var_in_env(t_ast_n *cmd,
+			t_mini *mini, t_llst *llst, char *new_var)
+{
+	t_builtin	v;
+
+	v.env = mini->m_lst_env->head;
+	v.index = 0;
+	while (new_var && v.index < mini->m_lst_env->size)
+	{
+		v.prefix = NULL;
+		v.prefix = get_prfx(find_type_rtrn_ptr(v.env->lst, EQUAL), v.env->lst);
+		if (v.prefix && !ft_strncmp(new_var, v.prefix, ft_strlen(v.prefix) + 1))
+		{
+			ft_add_mlstnode_back(mini->m_lst_env,
+				mlst_rmv_return_lnode(cmd->m_lst->matrix, llst));
+			ft_rmv_spcfc_lst_mtrx(mini->m_lst_env, v.env);
+			free(v.prefix);
+			free(new_var);
+			new_var = NULL;
+			break ;
+		}
+		free(v.prefix);
+		v.index++;
+		v.env = v.env->next;
+	}
+	return (new_var);
+}
+
+void	ft_put_export(t_ast_n *root)
+{
+	if (root != NULL)
+	{
+		ft_put_export(root->left);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putlst_fd(root->line->lst, 1, STDOUT_FILENO);
+		ft_put_export(root->right);
+	}
 }

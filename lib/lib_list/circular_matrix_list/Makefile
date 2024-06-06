@@ -15,6 +15,7 @@ SRC				:= ./src/init_matrix.c\
 				./src/remove_and_return_lline.c\
 				./src/add_nodeline_back.c\
 				./src/add_nodeline_front.c\
+				./src/mlst_add_lexicographic_value.c\
 				./src/bubble_mlst.c
 
 NUM_FILES		:= $(words $(SRC))

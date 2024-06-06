@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:25:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 16:44:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/06 09:44:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_scanner_equal(t_lst *lst)
 	while (i <= lst->size)
 	{
 		if (node->c == '=')
-			node->type = EQUAL_SING;
+			node->type = EQUAL;
 		node = node->next;
 		i++;
 	}
