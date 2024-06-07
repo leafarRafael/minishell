@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:57:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 14:29:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/07 18:57:53 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	export(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	else
 	{
 		export_addvar(cmd, mini);
-		if (mini->status == 1)
-			g_status_child = mini->status;
-		else
-			g_status_child = 0;
+		g_status_child = mini->status;
 	}
 	finished_builtin(cmd, mini, var);
 }

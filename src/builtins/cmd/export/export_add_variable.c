@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:35:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 14:31:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/07 19:00:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	export_addvar(t_ast_n *cmd, t_mini *mini)
 		if (valid_var_declar(v.line->lst))
 		{
 			ft_putstr_fd("export: ", 2);
-			ft_putlst_fd(v.line->lst, 1, 2);
+			ft_putlst_fd(v.line->lst, 0, 2);
+			ft_putstr_fd(": not a valid identifier\n", 2);
 			ft_remove_lst_front(cmd->m_lst->matrix);
 			mini->status = 1;
 			if (cmd->m_lst->matrix->size == 0)

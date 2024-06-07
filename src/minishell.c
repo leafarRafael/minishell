@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 18:02:32 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:58:31 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,16 +121,17 @@ static void	ft_execute_minishell(t_mini *mini)
 	mini->pid = -42;
 	builds_execution_call(mini);
 	waitpid(mini->pid, &mini->status, 0);
-
-	if (WIFSIGNALED(mini->status))
+	if (mini->pid != -42)
 	{
-		if (WTERMSIG(mini->status) == SIGQUIT)
-			ft_putstr_fd("Quit (core dumped)\n", 2);
-		g_status_child = 128 + WTERMSIG(mini->status);
+		if (WIFSIGNALED(mini->status))
+		{
+			if (WTERMSIG(mini->status) == SIGQUIT)
+				ft_putstr_fd("Quit (core dumped)\n", 2);
+			g_status_child = 128 + WTERMSIG(mini->status);
+		}
+		else
+			g_status_child = WEXITSTATUS(mini->status);
 	}
-	else
-		g_status_child = WEXITSTATUS(mini->status);
-
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);
 }
