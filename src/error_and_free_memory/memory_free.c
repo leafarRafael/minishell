@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:20:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/07 19:32:51 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_close(int fd_std[2]);
 static void	free_mini(t_mini *mini);
 static void	free_var(t_var_exe *var);
 
-void	free_memory(t_mini *mini, t_var_exe *var, int status_exit)
+void	free_memory(t_mini *mini, t_var_exe *var, int pwd )
 {
 	free_mini(mini);
 	free_var(var);
