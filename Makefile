@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/06 10:44:52 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/06/07 10:37:50 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,7 +124,9 @@ BUILTINS		:= ./src/builtins/getdir_list_or_string.c\
 				./src/builtins/cmd/echo.c\
 				./src/builtins/cmd/env.c\
 				./src/builtins/cmd/exit.c\
-				./src/builtins/cmd/export.c\
+				./src/builtins/cmd/export/export.c\
+				./src/builtins/cmd/export/export_add_variable.c\
+				./src/builtins/cmd/export/export_putenv.c\
 				./src/builtins/cmd/pwd.c\
 				./src/builtins/cmd/unset.c\
 				./src/builtins/cmd/communs.c

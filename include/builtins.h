@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 10:47:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/07 10:40:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum s_builtin_size
 	_EXIT,
 	_UNSET,
 	_EXPORT
-}	t_builtin_size;
+}			t_builtin_size;
 
 typedef struct s_variables_builtins
 {
@@ -54,18 +54,20 @@ typedef struct s_variables_builtins
 
 }			t_builtin;
 
-int		is_builtin(t_ast_n *cmd);
-void	cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	env(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	export(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	pwd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void	ft_valid_command_builtin(t_ast_n *cmd);
-void	finished_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-char	*get_prfx(t_node *ptr, t_lst *lst);
-int		ft_strlstcmp(t_lst *lst, char *str);
+int			is_builtin(t_ast_n *cmd);
+void		cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		env(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		pwd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		ft_valid_command_builtin(t_ast_n *cmd);
+void		finished_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+char		*get_prfx(t_node *ptr, t_lst *lst);
+int			ft_strlstcmp(t_lst *lst, char *str);
+void		export(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		export_putenv(t_mini *mini);
+void		export_addvar(t_ast_n *cmd, t_mini *mini);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 18:12:22 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/07 09:05:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(void)
 	swap_tty(COPY, &mini);
 	while (1)
 	{
+		swap_tty(RESTORE, &mini);
 		ft_scanner_env(mini.m_lst_env);
 		name = ft_get_program_name();
 		if (name)
@@ -84,8 +85,10 @@ static void	ft_execute_minishell(t_mini *mini)
 	while (mini->input_lst->size > 0)
 		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(mini->input_lst));
 	ft_delete_list(mini->input_lst);
+	mini->pid = -42;
 	builds_execution_call(mini);
-	swap_tty(RESTORE, mini);
+	waitpid(mini->pid, &mini->status, 0);
+	g_status_child = WEXITSTATUS(mini->status);
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);
 }
