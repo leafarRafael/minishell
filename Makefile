@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/07 10:37:50 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/06/07 15:51:10 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

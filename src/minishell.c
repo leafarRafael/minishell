@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 09:05:12 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/07 18:02:32 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,87 @@ static void	ft_execute_minishell(t_mini *mini);
 void		ft_scanner_env(t_mlst *mlst);
 int			g_status_child;
 
-int	main(void)
+static void	init_minishell(t_mini *mini)
 {
-	t_mini	mini;
-	char	*name;
-	int		i;
 	int		index;
 
-	mini.m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
-	mini.color = ft_init_color();
-	i = 1;
-	mini.status = 0;
+	index = 0;
+	mini->m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
+	mini->color = ft_init_color();
+	mini->status = 0;
 	index = 0;
 	while (index < 40)
 	{
-		mini.ast[index] = NULL;
+		mini->ast[index] = NULL;
 		index++;
 	}
-	swap_tty(COPY, &mini);
+	swap_tty(COPY, mini);
+}
+
+static void print_pwd()
+{
+	char	*name;
+
+	name = NULL;
+	name = ft_get_program_name();
+	if (name)
+	{
+		ft_putstr_fd(name, 2);
+		free(name);
+	}
+}
+
+static void clear_garbage(t_mini *mini)
+{
+	int		index;
+
+	index = 0;
+	while (mini->ast[index] && index < 40)
+	{
+		ft_delete_tree(mini->ast[index]);
+		mini->ast[index] = NULL;
+		index++;
+	}
+}
+
+int	main(void)
+{
+	t_mini				mini;
+	int					index;
+	struct sigaction	sa;
+
+	sa.sa_handler  = SIG_IGN;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+	{
+		perror("sigaction");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("SIGQUIT is now ignored. Press Ctrl+\\ (backslash) to test it.\n");
+
+	init_minishell(&mini);
+	index = 1;
 	while (1)
 	{
 		swap_tty(RESTORE, &mini);
 		ft_scanner_env(mini.m_lst_env);
-		name = ft_get_program_name();
-		if (name)
-		{
-			ft_putstr_fd(name, 2);
-			free(name);
-		}
+		print_pwd();
 		mini.input = readline("\n minishell$ : ");
 		if (!mini.input)
 			break ;
 		mini.status = ft_input_is_valid(mini.input);
 		if (!mini.status)
 		{
-			ft_putstr_fd(mini.color[i], 2);
+			ft_putstr_fd(mini.color[index], 2);
 			ft_execute_minishell(&mini);
-			i++;
-			if (i == 6)
-				i = 1;
+			index++;
+			if (index == 6)
+				index = 1;
 			ft_putstr_fd(RESET, 2);
 		}
-		index = 0;
-		while (mini.ast[index] && index < 40)
-		{
-			ft_delete_tree(mini.ast[index]);
-			mini.ast[index] = NULL;
-			index++;
-		}
+		clear_garbage(&mini);
 	}
 	ft_delcmtrx(mini.color);
 	rl_clear_history();
@@ -88,7 +121,16 @@ static void	ft_execute_minishell(t_mini *mini)
 	mini->pid = -42;
 	builds_execution_call(mini);
 	waitpid(mini->pid, &mini->status, 0);
-	g_status_child = WEXITSTATUS(mini->status);
+
+	if (WIFSIGNALED(mini->status))
+	{
+		if (WTERMSIG(mini->status) == SIGQUIT)
+			ft_putstr_fd("Quit (core dumped)\n", 2);
+		g_status_child = 128 + WTERMSIG(mini->status);
+	}
+	else
+		g_status_child = WEXITSTATUS(mini->status);
+
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);
 }

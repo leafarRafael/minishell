@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 08:55:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/07 16:17:20 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <wait.h>
+# include <signal.h>
 # define PROGRAM_NAME "\033[34m minishell$ \033[0m"
 # define PATH "PATH=/"
 # define SIZE_PATH 6
