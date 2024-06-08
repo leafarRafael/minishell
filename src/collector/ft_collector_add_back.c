@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:17:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 14:09:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 16:24:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	collector_add_back(t_collector *collec, pid_t pid)
 		return (1);
 	if (pid == -42)
 		return (1);
-	node = ft_init_ncollec();
-	node->pid = pid;
+	node = ft_init_ncollec(pid);
 	if (collec->size == 0)
 		return (case_zero(collec, node));
 	if (collec->size == 1)

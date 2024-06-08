@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 09:28:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 16:24:28 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,26 @@ static t_mlst	*ft_read_std(char *eof)
 	{
 		write(2, ">> ", 3);
 		h_doc.read_line = get_next_line(STDIN_FILENO);
-		if (!h_doc.read_line)
-			return (NULL);
-		if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)
+		if (h_doc.read_line[0] != '\n')
 		{
+			if (!h_doc.read_line)
+				return (NULL);
+			if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)
+			{
+				free(h_doc.read_line);
+				h_doc.read_line = NULL;
+				break ;
+			}
+			h_doc.new_lst = ft_create_lst_add_str(h_doc.read_line);
+			if (h_doc.new_lst->last->c == '\n')
+				lst_rmv_back(h_doc.new_lst);
+			ft_scanner_simple_operator(h_doc.new_lst);
+			ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
 			free(h_doc.read_line);
 			h_doc.read_line = NULL;
-			break ;
 		}
-		h_doc.new_lst = ft_create_lst_add_str(h_doc.read_line);
-		if (h_doc.new_lst->last->c == '\n')
-			lst_rmv_back(h_doc.new_lst);
-		ft_scanner_simple_operator(h_doc.new_lst);
-		ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
-		free(h_doc.read_line);
-		h_doc.read_line = NULL;
+		else
+			free(h_doc.read_line);
 	}
 	return (h_doc.new_mtrx);
 }

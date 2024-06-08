@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:07:42 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 14:45:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 16:25:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,4 @@ t_collector *ft_init_collector(void)
 	collector->last = NULL;
 	collector->size = 0;
 	return (collector);
-}
-
-t_void *ft_initt_void(void)
-{
-	t_void	*col;
-
-	col = malloc(sizeof(t_void));
-	if (!col)
-		return (NULL);
-	col->head = NULL;
-	col->last = NULL;
-	col->size = 0;
-	return (col);
 }

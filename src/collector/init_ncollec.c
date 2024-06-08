@@ -6,13 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:13:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 11:20:25 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 15:55:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collector.h"
 
-t_ncollec	*ft_init_ncollec(void)
+t_ncollec	*ft_init_ncollec(pid_t pid)
 {
 	t_ncollec *node;
 
@@ -21,6 +21,6 @@ t_ncollec	*ft_init_ncollec(void)
 		return (NULL);
 	node->next = NULL;
 	node->prev = NULL;
-	node->pid = -42;
+	node->pid = pid;
 	return (node);
 }
