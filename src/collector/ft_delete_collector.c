@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_tty.c                                         :+:      :+:    :+:   */
+/*   ft_delete_collector.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 11:02:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 09:25:50 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/06/08 11:39:38 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/06/08 13:55:42 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "collector.h"
 
-void	swap_tty(int copy_restore, t_mini *mini)
+int	ft_delete_collector(t_collector *collec)
 {
-	if (copy_restore == COPY)
+	if (!collec)
+		return (0);
+	if (collec->size == 0)
 	{
-		mini->fd_std[0] = dup(STDIN_FILENO);
-		mini->fd_std[1] = dup(STDOUT_FILENO);
+		free(collec);
+		return (0);
 	}
-	if (copy_restore == RESTORE)
-	{
-		dup2(mini->fd_std[0], STDIN_FILENO);
-		dup2(mini->fd_std[1], STDOUT_FILENO);
-	}
+	while (collec->size)
+		collector_rmv_front(collec);
+	free(collec);
+	collec = NULL;
+	return (0);
 }

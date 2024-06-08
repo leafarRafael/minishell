@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 19:23:34 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:29:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "th_syntax.h"
+
+static void	ft_wait_children(t_mini *mini);
 
 static void	ft_execute_minishell(t_mini *mini);
 void		ft_scanner_env(t_mlst *mlst);
@@ -24,6 +26,7 @@ static void	init_minishell(t_mini *mini)
 	index = 0;
 	mini->m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini->color = ft_init_color();
+	mini->collect = ft_init_collector();
 	mini->status = 0;
 	index = 0;
 	while (index < 40)
@@ -65,7 +68,7 @@ int	main(void)
 	t_mini				mini;
 	int					index;
 	struct sigaction	sa;
-
+	
 	sa.sa_handler  = SIG_IGN;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
@@ -74,9 +77,6 @@ int	main(void)
 		perror("sigaction");
 		exit(EXIT_FAILURE);
 	}
-
-	printf("SIGQUIT is now ignored. Press Ctrl+\\ (backslash) to test it.\n");
-
 	init_minishell(&mini);
 	index = 1;
 	while (1)
@@ -118,20 +118,10 @@ static void	ft_execute_minishell(t_mini *mini)
 	while (mini->input_lst->size > 0)
 		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(mini->input_lst));
 	ft_delete_list(mini->input_lst);
-	mini->pid = -42;
 	builds_execution_call(mini);
-	waitpid(mini->pid, &mini->status, 0);
-	if (mini->pid != -42)
-	{
-		if (WIFSIGNALED(mini->status))
-		{
-			if (WTERMSIG(mini->status) == SIGQUIT)
-				ft_putstr_fd("Quit (core dumped)\n", 2);
-			g_status_child = 128 + WTERMSIG(mini->status);
-		}
-		else
-			g_status_child = WEXITSTATUS(mini->status);
-	}
+	swap_tty(RESTORE, mini);
+	ft_wait_children(mini);
+	swap_tty(RESTORE, mini);
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);
 }
@@ -147,6 +137,29 @@ void	ft_scanner_env(t_mlst *mlst)
 	{
 		ft_scanner_input(node->lst);
 		node = node->next;
+		i++;
+	}
+}
+
+static void	ft_wait_children(t_mini *mini)
+{
+	int			i;
+	t_ncollec	*no;
+
+	no = mini->collect->head;
+	i = 0;
+	while (i < mini->collect->size)
+	{
+		waitpid(no->pid, &mini->status, WUNTRACED);
+		if (WIFSIGNALED(mini->status))
+		{
+			if (WTERMSIG(mini->status) == SIGQUIT)
+				ft_putstr_fd("Quit (core dumped)\n", 2);
+			g_status_child = 128 + WTERMSIG(mini->status);
+		}
+		else
+			g_status_child = WEXITSTATUS(mini->status);
+		no = no->next;
 		i++;
 	}
 }

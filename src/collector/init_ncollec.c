@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_tty.c                                         :+:      :+:    :+:   */
+/*   init_ncollec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 11:02:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 09:25:50 by rbutzke          ###   ########.fr       */
+/*   Created: 2024/06/08 11:13:31 by rbutzke           #+#    #+#             */
+/*   Updated: 2024/06/08 11:20:25 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "collector.h"
 
-void	swap_tty(int copy_restore, t_mini *mini)
+t_ncollec	*ft_init_ncollec(void)
 {
-	if (copy_restore == COPY)
-	{
-		mini->fd_std[0] = dup(STDIN_FILENO);
-		mini->fd_std[1] = dup(STDOUT_FILENO);
-	}
-	if (copy_restore == RESTORE)
-	{
-		dup2(mini->fd_std[0], STDIN_FILENO);
-		dup2(mini->fd_std[1], STDOUT_FILENO);
-	}
+	t_ncollec *node;
+
+	node = malloc(sizeof(t_ncollec));
+	if (!node)
+		return (NULL);
+	node->next = NULL;
+	node->prev = NULL;
+	node->pid = -42;
+	return (node);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/07 15:51:10 by tforster         ###   ########.fr        #
+#    Updated: 2024/06/08 13:56:34 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,12 @@ MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
 FILES			:= ./REMOVER_FUNCOES_DEBUG/FUNCOES_TEMPORARIAS.c\
 				./REMOVER_FUNCOES_DEBUG/expand_m_lst_to_cmtrx.c
+
+COLLECTOR		:= ./src/collector/init_collector.c\
+				./src/collector/init_ncollec.c\
+				./src/collector/ft_collector_add_back.c\
+				./src/collector/ft_delete_collector.c\
+				./src/collector/ft_remove_node_front.c
 
 MAIN			:= ./src/minishell.c
 
@@ -148,7 +154,7 @@ SRC				:= $(MAIN) $(FILES) $(AS_TREE) $(PARSE)\
 				$(EXPANDER) $(PATH_SYSTEM_BIN)\
 				$(BUILTINS) $(SYNTAX_VALID)\
 				$(STDFD) $(ENVIRON) $(UTILS)\
-				$(TH_FUNC)
+				$(TH_FUNC) $(COLLECTOR)
 
 
 INCLUDE			:= -I ./include\

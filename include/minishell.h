@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 16:17:20 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/08 13:53:51 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include "scanner.h"
 # include "string.h"
 # include "token.h"
+# include "collector.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -51,17 +52,19 @@ extern int	g_status_child;
 
 typedef struct s_variables_minishell
 {
-	t_mmlst	*mmlst;
-	t_mlst	*m_lst_env;
-	t_lst	*input_lst;
-	char	*input;
-	char	**env;
-	char	**temp_environ;
-	char	**color;
-	int		fd_std[2];
-	int		status;
-	t_ast	*ast[40];
-	pid_t	pid;
+	t_mmlst		*mmlst;
+	t_mlst		*m_lst_env;
+	t_lst		*input_lst;
+	t_collector	*collect;
+	char		*input;
+	char		**env;
+	char		**temp_environ;
+	char		**color;
+	int			fd_std[2];
+	int			status;
+	t_ast		*ast[40];
+	pid_t		pid[30875];
+	int			ctrl_pid;
 }			t_mini;
 
 typedef struct s_var_executable

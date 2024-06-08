@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 19:32:51 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/08 13:41:03 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_close(int fd_std[2]);
 static void	free_mini(t_mini *mini);
 static void	free_var(t_var_exe *var);
 
-void	free_memory(t_mini *mini, t_var_exe *var, int pwd )
+void	free_memory(t_mini *mini, t_var_exe *var, int status_exit)
 {
 	free_mini(mini);
 	free_var(var);
@@ -47,6 +47,8 @@ static void	free_mini(t_mini *mini)
 			ft_delcmtrx(mini->env);
 		if (mini->color)
 			ft_delcmtrx(mini->color);
+		if (mini->collect)
+			ft_delete_collector(mini->collect);
 		index = 0;
 		while (mini->ast[index] && index < 40)
 		{

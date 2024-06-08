@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_add_variable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:35:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 19:25:26 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/08 09:12:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	export_addvar(t_ast_n *cmd, t_mini *mini)
 			v.line = cmd->m_lst->matrix->head;
 		}
 	}
-	mini->pid = -42;
+	mini->pid[mini->ctrl_pid] = -42;
+	mini->ctrl_pid++;
 }
 
 static char	*var_in_env(t_ast_n *cmd, t_mini *mini, t_llst *llst, char *new_var)
