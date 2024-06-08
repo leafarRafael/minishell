@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:39:49 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 13:47:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 18:36:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	function = select_function(ctrl_func);
 	valid_fork(&var->pid, cmd, ctrl_func);
 	if (var->pid != -42)
-		collector_add_back(mini->collect, var->pid);
+		collector_add_back(mini->collect, &var->pid, node_collect_pid);
 	if (var->pid != -42)
 	{
 		if (var->pid == 0)

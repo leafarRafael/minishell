@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 15:29:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 19:57:35 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_minishell(t_mini *mini)
 	mini->m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini->color = ft_init_color();
 	mini->collect = ft_init_collector();
+	mini->collect_ast = ft_init_collector();
 	mini->status = 0;
 	index = 0;
 	while (index < 40)
@@ -47,19 +48,6 @@ static void print_pwd()
 	{
 		ft_putstr_fd(name, 2);
 		free(name);
-	}
-}
-
-static void clear_garbage(t_mini *mini)
-{
-	int		index;
-
-	index = 0;
-	while (mini->ast[index] && index < 40)
-	{
-		ft_delete_tree(mini->ast[index]);
-		mini->ast[index] = NULL;
-		index++;
 	}
 }
 
@@ -97,7 +85,6 @@ int	main(void)
 				index = 1;
 			ft_putstr_fd(RESET, 2);
 		}
-		clear_garbage(&mini);
 	}
 	ft_delcmtrx(mini.color);
 	rl_clear_history();
@@ -121,7 +108,6 @@ static void	ft_execute_minishell(t_mini *mini)
 	builds_execution_call(mini);
 	swap_tty(RESTORE, mini);
 	ft_wait_children(mini);
-	swap_tty(RESTORE, mini);
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);
 }
@@ -150,7 +136,7 @@ static void	ft_wait_children(t_mini *mini)
 	i = 0;
 	while (i < mini->collect->size)
 	{
-		waitpid(no->pid, &mini->status, WUNTRACED);
+		waitpid(no->type.pid, &mini->status, WUNTRACED);
 		if (WIFSIGNALED(mini->status))
 		{
 			if (WTERMSIG(mini->status) == SIGQUIT)

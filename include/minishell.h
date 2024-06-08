@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 13:53:51 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 19:53:27 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ typedef struct s_variables_minishell
 	t_mlst		*m_lst_env;
 	t_lst		*input_lst;
 	t_collector	*collect;
+	t_collector	*collect_ast;
 	char		*input;
 	char		**env;
 	char		**temp_environ;
 	char		**color;
 	int			fd_std[2];
 	int			status;
+	
 	t_ast		*ast[40];
 	pid_t		pid[30875];
 	int			ctrl_pid;

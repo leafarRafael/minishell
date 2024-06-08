@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:17:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 16:24:49 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 18:46:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@ static int	case_zero(t_collector *collec, t_ncollec *node);
 static int	case_one(t_collector *collec,  t_ncollec *node);
 static int	case_others(t_collector *collec, t_ncollec *node);
 
-int	collector_add_back(t_collector *collec, pid_t pid)
+int	collector_add_back(t_collector *collec, void *cont, void *(*ft_func)(void *))
 {
-	t_ncollec	*node;
+	void	*node;
 
 	if (!collec)
 		return (1);
-	if (pid == -42)
-		return (1);
-	node = ft_init_ncollec(pid);
+	node = ft_func(cont);
 	if (collec->size == 0)
 		return (case_zero(collec, node));
 	if (collec->size == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parent.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:54:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 19:22:44 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:47:42 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ static void	status_process_manager(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->next->type & (AND_OP | OR_OP))
 		waitpid(var->pid, &mini->status, 0);
-/* 	else
-		waitpid(-2, &mini->status, 0);
-	g_status_child = WEXITSTATUS(mini->status); */
 	if (cmd->m_lst->next->type & (AND_OP | OR_OP))
 		swap_tty(RESTORE, mini);
 }

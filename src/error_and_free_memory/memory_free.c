@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 13:41:03 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/08 19:36:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_close(int fd_std[2])
 
 static void	free_mini(t_mini *mini)
 {
-	int	index;
+	//int	index;
 
 	if (mini)
 	{
@@ -48,14 +48,9 @@ static void	free_mini(t_mini *mini)
 		if (mini->color)
 			ft_delcmtrx(mini->color);
 		if (mini->collect)
-			ft_delete_collector(mini->collect);
-		index = 0;
-		while (mini->ast[index] && index < 40)
-		{
-			ft_delete_tree(mini->ast[index]);
-			mini->ast[index] = NULL;
-			index++;
-		}
+			ft_delete_collector(mini->collect, NULL);
+		if (mini->collect_ast)
+			ft_delete_collector(mini->collect_ast, ft_delete_tree);
 	}
 }
 
