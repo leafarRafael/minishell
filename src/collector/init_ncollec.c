@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:13:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 10:34:21 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 18:12:26 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*node_collect_pid(void *content)
 {
-	t_ncollec *node;
+	t_ncollec	*node;
 
 	node = malloc(sizeof(t_ncollec));
 	if (!node)
@@ -28,7 +28,7 @@ void	*node_collect_pid(void *content)
 
 void	*node_collect_ast(void *content)
 {
-	t_ncollec *node;
+	t_ncollec	*node;
 
 	node = malloc(sizeof(t_ncollec));
 	if (!node)

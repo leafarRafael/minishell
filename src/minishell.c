@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 09:48:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 14:24:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,11 @@ int			g_status_child;
 
 static void	init_minishell(t_mini *mini)
 {
-	int		index;
-
-	index = 0;
 	mini->m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini->color = ft_init_color();
 	mini->collect = ft_init_collector();
 	mini->collect_ast = ft_init_collector();
 	mini->status = 0;
-	index = 0;
-	while (index < 40)
-	{
-		mini->ast[index] = NULL;
-		index++;
-	}
 	swap_tty(COPY, mini);
 }
 

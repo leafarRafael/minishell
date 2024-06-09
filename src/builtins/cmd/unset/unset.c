@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:19:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 11:36:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 14:04:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ static void	remove_variable(t_ast_n *cmd, t_mini *mini)
 	v.index = 0;
 	if (valid_var_declar(v.list))
 	{
-		ft_putstr_fd("unset: ", 2);
-		ft_putlst_fd(v.list, 0, 2);
-		ft_putstr_fd(": not a valid identifier\n", 2);
+		ft_msg_error_lst(UNSET, v.list, NV_INDT);
 		ft_status_builtin(mini, 1, __ERROR);
 		remove_variable(cmd, mini);
 		return ;

@@ -6,17 +6,18 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:17:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 18:46:10 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 18:13:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collector.h"
 
 static int	case_zero(t_collector *collec, t_ncollec *node);
-static int	case_one(t_collector *collec,  t_ncollec *node);
+static int	case_one(t_collector *collec, t_ncollec *node);
 static int	case_others(t_collector *collec, t_ncollec *node);
 
-int	collector_add_back(t_collector *collec, void *cont, void *(*ft_func)(void *))
+int	collector_add_back(t_collector *collec,	
+			void *cont, void *(*ft_func)(void *))
 {
 	void	*node;
 

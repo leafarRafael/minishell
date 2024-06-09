@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/09 11:34:14 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/06/09 17:29:32 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,15 +48,18 @@ REDIRECT		:= ./src/redirect/add_redir_attribute_token/ft_define_command_operator
 				./src/redirect/here_doc/write_here_doc.c\
 				./src/redirect/ft_open.c
 
+BINARY			:= ./src/binary/binary.c\
+				./src/binary/parent.c\
+
 SIMPLE			:=./src/struct_call_execution/call_and_exec_manager.c\
 				./src/struct_call_execution/path_executable/get_executable.c\
 				./src/struct_call_execution/expanding_parentheses/expand_parentheses.c\
-				./src/struct_call_execution/execve/children.c\
-				./src/struct_call_execution/execve/parent.c\
-				./src/struct_call_execution/execve/init_fork.c\
+				./src/struct_call_execution/execve/remove_executed.c\
+				./src/struct_call_execution/execve/setup_command.c\
 				./src/struct_call_execution/command_call_structure.c\
 				./src/struct_call_execution/builds_execution_call.c\
-				./src/struct_call_execution/wait_execution.c
+				./src/struct_call_execution/wait_execution.c\
+				./src/struct_call_execution/execve/execution.c
 
 AS_TREE			:=./src/function_ast/build_tree_tmnode.c\
 				./src/function_ast/build_tree_tline.c\
@@ -158,7 +161,8 @@ SRC				:= $(MAIN) $(FILES) $(AS_TREE) $(PARSE)\
 				$(EXPANDER) $(PATH_SYSTEM_BIN)\
 				$(BUILTINS) $(SYNTAX_VALID)\
 				$(STDFD) $(ENVIRON) $(UTILS)\
-				$(TH_FUNC) $(COLLECTOR)
+				$(TH_FUNC) $(COLLECTOR)\
+				$(BINARY)
 
 
 INCLUDE			:= -I ./include\

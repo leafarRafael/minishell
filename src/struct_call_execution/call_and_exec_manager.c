@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:17:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 10:54:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 18:13:56 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini)
 		init_variables(&var);
 		if (operator_manager(cmd, mini, &var))
 			return ;
-		init_fork(cmd, mini, &var);
+		setup_command(cmd, mini, &var);
 	}
 }
 

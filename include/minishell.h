@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 09:50:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 17:29:05 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,6 @@ typedef struct s_variables_minishell
 	char		**color;
 	int			fd_std[2];
 	int			status;
-	
-	t_ast		*ast[40];
-	pid_t		pid[30875];
-	int			ctrl_pid;
 }			t_mini;
 
 typedef struct s_var_executable
@@ -143,6 +139,7 @@ void		builds_execution_call(t_mini *mini);
 
 void		free_memory(t_mini *mini, t_var_exe *var, int status_exit);
 void		ft_msg_error(char *invalid_input, char *msg_error);
+void		ft_msg_error_lst(char *function, t_lst *input_lst, char *msg_error);
 /*
 		FUNCTION IN SRC/EXECUTE_COMMAND
 */
@@ -151,10 +148,10 @@ void		ft_expand_subshell(t_ast_n *cmd, t_mini *mini);
 char		*ft_get_executable(t_mini *mini, t_var_exe *var);
 
 void		ft_exec_manager(t_ast_n *cmd, t_mini *mini);
-void		children(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		binary(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		subshell(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		init_fork(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+void		setup_command(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		free_cmd_operator_executed(t_ast_n *cmd, t_mini *mini);
 
 void		ft_remove_quote_mlst(t_mlst *mlst);
@@ -171,6 +168,6 @@ void		*getdir_list_string(int str_lst);
 char		*ft_get_program_name(void);
 void		ft_wait_execution(t_mini *mini);
 
-
+void		execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
 #endif

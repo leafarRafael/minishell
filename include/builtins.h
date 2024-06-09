@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 11:35:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 14:01:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define UNSET "unset"
 # define ENV "env"
 # define EXIT "exit"
+
+#define NV_INDT ": not a valid identifier\n"
 
 typedef enum s_builtin_size
 {

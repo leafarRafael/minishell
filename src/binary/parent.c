@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:54:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 10:18:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 18:14:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,4 @@ static void	file_descriptor_manager(t_ast_n *cmd, t_var_exe *var)
 		close(var->tube[0]);
 		close(var->tube[1]);
 	}
-
 }

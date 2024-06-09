@@ -6,10 +6,9 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:45:02 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 11:52:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 13:42:45 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "abstract_syntax_tree.h"
 #include "matrix_lst.h"

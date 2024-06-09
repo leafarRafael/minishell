@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 19:36:23 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 14:18:04 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_memory(t_mini *mini, t_var_exe *var, int status_exit)
 	free_mini(mini);
 	free_var(var);
 	ft_close(mini->fd_std);
+	ft_putstr_fd(RESET, 2);
 	exit(status_exit);
 }
 
@@ -35,8 +36,6 @@ static void	ft_close(int fd_std[2])
 
 static void	free_mini(t_mini *mini)
 {
-	//int	index;
-
 	if (mini)
 	{
 		if (mini->mmlst)
