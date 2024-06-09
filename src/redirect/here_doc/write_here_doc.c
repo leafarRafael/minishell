@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   write_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 16:24:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 19:09:14 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
 #include "expanding.h"
+#include "sigaction.h"
 
 static t_mlst	*ft_read_std(char *eof);
 static int		ft_open_create_here_doc(char *file);
@@ -67,33 +68,61 @@ static t_mlst	*ft_read_std(char *eof)
 {
 	t_redirect	h_doc;
 
+	struct sigaction sa;
+	sa.sa_handler = handle_sigint;
+	sa.sa_flags = 0; // or SA_RESTART
+	sigemptyset(&sa.sa_mask);
+
+	if (sigaction(SIGINT, &sa, NULL) == -1) {
+		perror("sigaction");
+		exit(EXIT_FAILURE);
+	}
+	int eof_flag = 0; // Local flag to track EOF
+
 	h_doc.size = ft_strlen(eof);
 	h_doc.new_mtrx = init_mlst();
-	while (1)
+	while (!eof_flag)
 	{
 		write(2, ">> ", 3);
 		h_doc.read_line = get_next_line(STDIN_FILENO);
-		if (h_doc.read_line[0] != '\n')
+		if (h_doc.read_line)
 		{
-			if (!h_doc.read_line)
-				return (NULL);
-			if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)
+			if (h_doc.read_line[0] != '\n')
 			{
+				if (!h_doc.read_line)
+				{
+					ft_putstr_fd("h_doc.read_line is NULL\n", 2);
+					return (NULL);
+				}
+				if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)
+				{
+					ft_putstr_fd("FOUND EOF\n", 2);
+					free(h_doc.read_line);
+					h_doc.read_line = NULL;
+					break ;
+				}
+				h_doc.new_lst = ft_create_lst_add_str(h_doc.read_line);
+				if (h_doc.new_lst->last->c == '\n')
+					lst_rmv_back(h_doc.new_lst);
+				ft_scanner_simple_operator(h_doc.new_lst);
+				ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
 				free(h_doc.read_line);
 				h_doc.read_line = NULL;
-				break ;
 			}
-			h_doc.new_lst = ft_create_lst_add_str(h_doc.read_line);
-			if (h_doc.new_lst->last->c == '\n')
-				lst_rmv_back(h_doc.new_lst);
-			ft_scanner_simple_operator(h_doc.new_lst);
-			ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
+			else
+				ft_putstr_fd("END of line input\n", 2);
 			free(h_doc.read_line);
-			h_doc.read_line = NULL;
 		}
 		else
-			free(h_doc.read_line);
+		{
+			ft_putstr_fd("NULL input [", 2);
+			ft_putnbr_fd(g_status_child, 2);
+			ft_putstr_fd("]\n", 2);
+			// g_status_child = 9764;
+			break ;
+		}
 	}
+	ft_putstr_fd("OUT OF WHILE\n", 2);
 	return (h_doc.new_mtrx);
 }
 

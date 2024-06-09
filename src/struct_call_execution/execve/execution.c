@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:02:06 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 17:24:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 18:49:34 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <signal.h>
 #include "minishell.h"
 #include "builtins.h"
 
@@ -31,6 +32,7 @@ void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		if (var->pid == 0)
 		{
 			signal(SIGQUIT, SIG_DFL);
+			signal(SIGINT, SIG_DFL);
 			rl_clear_history();
 			function(cmd, mini, var);
 		}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/09 17:29:32 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/06/09 18:38:48 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,10 @@ TH_FUNC			:= ./src/th_syntax/th_syntax.c\
 				./src/th_syntax/th_parser_error_utils.c\
 				./src/th_syntax/th_print.c
 
+SIGACTION		:= ./src/sigaction/sigaction.c\
+
+MINIUTILS		:=  ./src/mini_utils.c
+
 EXPANDER		:= ./src/expanding/expanding.c\
 				./src/expanding/expand_mtrx_lst.c\
 				./src/expanding/expand_wildcard/expand_wildcard_mlst.c\
@@ -144,7 +148,6 @@ BUILTINS		:= ./src/builtins/getdir_list_or_string.c\
 				./src/builtins/cmd/valid_var_declaration.c\
 				./src/builtins/cmd/status_builtin.c
 
-
 SYNTAX_VALID	:= ./src/syntax_validation/valid_input.c\
 				./src/syntax_validation/syntax_and_here_doc.c
 
@@ -161,9 +164,8 @@ SRC				:= $(MAIN) $(FILES) $(AS_TREE) $(PARSE)\
 				$(EXPANDER) $(PATH_SYSTEM_BIN)\
 				$(BUILTINS) $(SYNTAX_VALID)\
 				$(STDFD) $(ENVIRON) $(UTILS)\
-				$(TH_FUNC) $(COLLECTOR)\
-				$(BINARY)
-
+				$(COLLECTOR) $(BINARY)\
+				$(TH_FUNC) $(SIGACTION) $(MINIUTILS)
 
 INCLUDE			:= -I ./include\
 				-I lib/lib_get_print/includes\
