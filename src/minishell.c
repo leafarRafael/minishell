@@ -6,17 +6,14 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 19:57:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 09:48:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "th_syntax.h"
 
-static void	ft_wait_children(t_mini *mini);
-
 static void	ft_execute_minishell(t_mini *mini);
-void		ft_scanner_env(t_mlst *mlst);
 int			g_status_child;
 
 static void	init_minishell(t_mini *mini)
@@ -107,45 +104,9 @@ static void	ft_execute_minishell(t_mini *mini)
 	ft_delete_list(mini->input_lst);
 	builds_execution_call(mini);
 	swap_tty(RESTORE, mini);
-	ft_wait_children(mini);
+	ft_wait_execution(mini);
 	ft_swap_environ(mini, RESTORE);
 	ft_delete_mmlst(mini->mmlst);
 }
 
-void	ft_scanner_env(t_mlst *mlst)
-{
-	t_llst	*node;
-	int		i;
 
-	node = mlst->head;
-	i = 0;
-	while (i < mlst->size)
-	{
-		ft_scanner_input(node->lst);
-		node = node->next;
-		i++;
-	}
-}
-
-static void	ft_wait_children(t_mini *mini)
-{
-	int			i;
-	t_ncollec	*no;
-
-	no = mini->collect->head;
-	i = 0;
-	while (i < mini->collect->size)
-	{
-		waitpid(no->type.pid, &mini->status, WUNTRACED);
-		if (WIFSIGNALED(mini->status))
-		{
-			if (WTERMSIG(mini->status) == SIGQUIT)
-				ft_putstr_fd("Quit (core dumped)\n", 2);
-			g_status_child = 128 + WTERMSIG(mini->status);
-		}
-		else
-			g_status_child = WEXITSTATUS(mini->status);
-		no = no->next;
-		i++;
-	}
-}

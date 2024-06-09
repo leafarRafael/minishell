@@ -6,7 +6,7 @@
 #    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/08 13:56:34 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/06/09 11:34:14 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SIMPLE			:=./src/struct_call_execution/call_and_exec_manager.c\
 				./src/struct_call_execution/execve/parent.c\
 				./src/struct_call_execution/execve/init_fork.c\
 				./src/struct_call_execution/command_call_structure.c\
-				./src/struct_call_execution/builds_execution_call.c
+				./src/struct_call_execution/builds_execution_call.c\
+				./src/struct_call_execution/wait_execution.c
 
 AS_TREE			:=./src/function_ast/build_tree_tmnode.c\
 				./src/function_ast/build_tree_tline.c\
@@ -83,7 +84,8 @@ PARSE			:= ./src/parse/scanner/scanner_add_literal_in_all.c\
 				./src/parse/scanner/scanner_for_priotity.c\
 				./src/parse/scanner/scanner_after_expanding.c\
 				./src/parse/scanner/scanner_wildcard.c\
-				./src/parse/scanner/scanner_equal.c
+				./src/parse/scanner/scanner_equal.c\
+				./src/parse/scanner/scanner_env.c
 
 TH_FUNC			:= ./src/th_syntax/th_syntax.c\
 				./src/th_syntax/th_parser.c\
@@ -134,8 +136,10 @@ BUILTINS		:= ./src/builtins/getdir_list_or_string.c\
 				./src/builtins/cmd/export/export_add_variable.c\
 				./src/builtins/cmd/export/export_putenv.c\
 				./src/builtins/cmd/pwd.c\
-				./src/builtins/cmd/unset.c\
-				./src/builtins/cmd/communs.c
+				./src/builtins/cmd/unset/unset.c\
+				./src/builtins/cmd/communs.c\
+				./src/builtins/cmd/valid_var_declaration.c\
+				./src/builtins/cmd/status_builtin.c
 
 
 SYNTAX_VALID	:= ./src/syntax_validation/valid_input.c\

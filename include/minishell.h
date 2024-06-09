@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 19:53:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 09:50:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,21 +169,8 @@ void		ft_swap_environ(t_mini *mini, int swap_restore);
 t_mlst		*expand_asterisk(t_ast_n *cmd);
 void		*getdir_list_string(int str_lst);
 char		*ft_get_program_name(void);
+void		ft_wait_execution(t_mini *mini);
 
-/*    BUILTINS		*/
-/* int			is_builtin(t_ast_n *cmd);
-void		cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		env(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		export(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		pwd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
-void		ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		ft_valid_command_builtin(t_ast_n *cmd);
-void		finished_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-char	*get_prfx(t_node *ptr, t_lst *lst);
-int			ft_strlstcmp(t_lst *lst, char *str); */
 
 #endif

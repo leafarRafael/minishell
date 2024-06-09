@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:35:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 08:28:31 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 09:52:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SCANNER_H
 
 # include "array_lst.h"
+# include "matrix_lst.h"
 # include "key_words.h"
 
 typedef enum s_priority
@@ -45,5 +46,6 @@ int			ft_scanner_add_literal(t_lst *lst);
 void		ft_scanner_after_expand(t_lst *lst);
 void		ft_scanner_wildcard(t_lst *lst);
 void		ft_scanner_equal(t_lst *lst);
+void		ft_scanner_env(t_mlst *mlst);
 
 #endif

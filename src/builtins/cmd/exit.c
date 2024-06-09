@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 08:52:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 11:41:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		return ;
 	ft_manager_fd_builtin(cmd, mini, var);
 	ft_valid_command_builtin(cmd);
+	ft_status_builtin(mini, 0, INIT_SUCCESS);
 	if (cmd->m_lst->matrix->size == 1)
 	{
 		ft_putlst_fd(cmd->m_lst->matrix->head->lst, 1, 2);
@@ -39,7 +40,7 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	if (cmd->m_lst->matrix->size > 2)
 	{
 		ft_msg_error("exit", "too many arguments");
-		g_status_child = 1;
+		ft_status_builtin(mini, 1, __ERROR);
 		return ;
 	}
 	ft_remove_lst_front(cmd->m_lst->matrix);
@@ -48,7 +49,7 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		|| cmd->m_lst->matrix->head->lst->size > 19)
 	{
 		ft_msg_error(v.nbr_exit, "numeric argument required");
-		g_status_child = 2;
+		ft_status_builtin(mini, 2, __ERROR);
 		free(v.nbr_exit);
 		return ;
 	}

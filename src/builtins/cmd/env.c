@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 08:51:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 11:39:52 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	env(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		return ;
 	ft_manager_fd_builtin(cmd, mini, var);
 	ft_valid_command_builtin(cmd);
+	ft_status_builtin(mini, 0, INIT_SUCCESS);
 	ft_execute_env(mini);
 	finished_builtin(cmd, mini, var);
 }
@@ -45,5 +46,4 @@ static void	ft_execute_env(t_mini *mini)
 		v.i_color++;
 		v.index++;
 	}
-	g_status_child = 0;
 }

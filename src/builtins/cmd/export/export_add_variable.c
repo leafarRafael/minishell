@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:35:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 19:56:57 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 11:35:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include "builtins.h"
 
 static char	*var_in_env(t_ast_n *cmd, t_mini *mini, t_llst *llst, char *new_var);
-static int	valid_var_declar(t_lst *lst);
-static int	valid_prefix(char c);
-static int	valid_infix(char c);
 
 void	export_addvar(t_ast_n *cmd, t_mini *mini)
 {
@@ -24,7 +21,6 @@ void	export_addvar(t_ast_n *cmd, t_mini *mini)
 
 	ft_remove_lst_front(cmd->m_lst->matrix);
 	v.line = cmd->m_lst->matrix->head;
-	mini->status = 0;
 	while (cmd->m_lst->matrix->size)
 	{
 		if (valid_var_declar(v.line->lst))
@@ -33,7 +29,7 @@ void	export_addvar(t_ast_n *cmd, t_mini *mini)
 			ft_putlst_fd(v.line->lst, 0, 2);
 			ft_putstr_fd(": not a valid identifier\n", 2);
 			ft_remove_lst_front(cmd->m_lst->matrix);
-			mini->status = 1;
+			ft_status_builtin(mini, 1, __ERROR);
 			if (cmd->m_lst->matrix->size == 0)
 				break ;
 			v.line = cmd->m_lst->matrix->head;
@@ -86,44 +82,4 @@ static char	*var_in_env(t_ast_n *cmd, t_mini *mini, t_llst *llst, char *new_var)
 		v.env = v.env->next;
 	}
 	return (new_var);
-}
-
-static int	valid_var_declar(t_lst *lst)
-{
-	t_node	*node;
-	int		i;
-
-	if (!lst)
-		return (1);
-	if (lst->size == 0)
-		return (1);
-	if (!valid_prefix(lst->head->c))
-		return (1);
-	if (lst->size == 2 && lst->head->next->c == '=')
-		return (0);
-	i = 1;
-	node = lst->head->next;
-	while (i < lst->size && node->c != '=')
-	{
-		if (!valid_infix(node->c))
-			return (1);
-		node = node->next;
-		i++;
-	}
-	return (0);
-}
-
-static int	valid_prefix(char c)
-{
-	return ((c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z')
-		|| (c == '_'));
-}
-
-static int	valid_infix(char c)
-{
-	return ((c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z')
-		|| (c >= '0' && c <= '9')
-		|| (c == '_'));
 }

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/06 09:44:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 11:37:53 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		return ;
 	ft_manager_fd_builtin(cmd, mini, var);
 	ft_valid_command_builtin(cmd);
+	ft_status_builtin(mini, 0, INIT_SUCCESS);
 	if (exe_cd(cmd, mini, var))
 	{
 		finished_builtin(cmd, mini, var);
@@ -34,7 +35,6 @@ void	cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 
 static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
-	g_status_child = 0;
 	if (cmd->m_lst->matrix->size == 1)
 	{
 		chdir(getenv("HOME"));
@@ -47,7 +47,7 @@ static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		ft_msg_error(var->command_m[1], strerror(errno));
 		ft_delcmtrx(var->command_m);
 		var->command_m = NULL;
-		g_status_child = 1;
+		ft_status_builtin(mini, 1, __ERROR);
 		return (g_status_child);
 	}
 	setpwd(mini->m_lst_env);

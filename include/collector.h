@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 10:59:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 19:01:58 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 10:24:13 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ union mytype
 typedef struct s_n_collector_pid
 {
 	union mytype				type;
+	int							status;
 	struct s_n_collector_pid	*next;
 	struct s_n_collector_pid	*prev;
 }		t_ncollec;

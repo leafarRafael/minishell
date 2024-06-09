@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:13:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 18:53:35 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 10:34:21 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*node_collect_pid(void *content)
 		return (NULL);
 	node->next = NULL;
 	node->prev = NULL;
+	node->status = 0;
 	node->type.pid = *((pid_t *)content);
 	return (node);
 }
@@ -34,6 +35,7 @@ void	*node_collect_ast(void *content)
 		return (NULL);
 	node->next = NULL;
 	node->prev = NULL;
+	node->status = 0;
 	node->type.ast = (t_ast *)content;
 	return (node);
 }

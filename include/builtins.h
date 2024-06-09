@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 10:40:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/09 11:35:07 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ typedef enum s_builtin_size
 	_UNSET,
 	_EXPORT
 }			t_builtin_size;
+
+typedef enum s_error_or_success
+{
+	__ERROR = 1,
+	INIT_SUCCESS,
+}		t_error_success;
 
 typedef struct s_variables_builtins
 {
@@ -69,5 +75,7 @@ int			ft_strlstcmp(t_lst *lst, char *str);
 void		export(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		export_putenv(t_mini *mini);
 void		export_addvar(t_ast_n *cmd, t_mini *mini);
+int			valid_var_declar(t_lst *lst);
+void		ft_status_builtin(t_mini *mini, int value, int error_or_success);
 
 #endif
