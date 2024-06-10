@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 14:25:07 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 20:00:52 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ int	main(void)
 		init_signal();
 		swap_tty(RESTORE, &mini);
 		ft_scanner_env(mini.m_lst_env);
-		print_pwd();
-		mini.input = readline("\nminishell$: ");
+		//print_pwd();
+		mini.input = readline("minishell$: ");
 		if (!mini.input)
 			mini.input = sig_eof(mini.input);
 		mini.status = ft_input_is_valid(mini.input);
+		ft_putstr_fd(mini.color[mini.i_color++], 2);
 		if (!mini.status)
 			ft_execute_minishell(&mini);
+		if (mini.i_color == 6)
+			mini.i_color = 0;
+		ft_putstr_fd(RESET, 2);
 		tcsetattr(STDIN_FILENO, TCSANOW, &fd);
 	}
 	return (g_status_child);
@@ -58,14 +62,18 @@ static void	ft_execute_minishell(t_mini *mini)
 	ft_delete_list(mini->input_lst);
 	if (g_status_child != 99)
 	{
-		ft_putstr_fd(mini->color[mini->i_color++], 2);
 		builds_execution_call(mini);
-		if (mini->i_color == 6)
-			mini->i_color = 0;
-		ft_putstr_fd(RESET, 2);
 	}
 	else
+	{
+		swap_tty(RESTORE, mini);
+		ft_wait_execution(mini);
+		ft_swap_environ(mini, RESTORE);
+		if (mini->mmlst)
+			ft_delete_mmlst(mini->mmlst);
 		g_status_child = 130;
+		return ;
+	}
 	swap_tty(RESTORE, mini);
 	ft_wait_execution(mini);
 	ft_swap_environ(mini, RESTORE);

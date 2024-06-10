@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:07:15 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/09 19:03:09 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 17:31:49 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <signal.h>
 
 void	init_signal(void);
-void	sigint_action(int sig);
+void	sigint_action(int sig, siginfo_t *siginfo, void *context);
 void	handle_sigint(int sig);
 
 #endif

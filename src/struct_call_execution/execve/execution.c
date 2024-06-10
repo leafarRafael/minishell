@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:02:06 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 14:36:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:46:16 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	{
 		if (var->pid == 0)
 		{
-			signal(SIGQUIT, SIG_DFL);
 			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
 			rl_clear_history();
 			function(cmd, mini, var);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parent.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:54:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 18:14:45 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:56:00 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,17 @@ void	parent(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 static void	status_process_manager(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->next->type & (AND_OP | OR_OP))
+	{
 		waitpid(var->pid, &mini->status, 0);
-	waitpid(-2, &mini->status, 0);
-	g_status_child = WEXITSTATUS(mini->status);
+		if (WIFSIGNALED(mini->status))
+		{
+			if (WTERMSIG(mini->status) == SIGQUIT)
+				ft_putstr_fd("Quit (core dumped)\n", 2);
+			g_status_child = 128 + WTERMSIG(mini->status);
+		}
+		else
+			g_status_child = WEXITSTATUS(mini->status);
+	}
 	if (cmd->m_lst->next->type & (AND_OP | OR_OP))
 		swap_tty(RESTORE, mini);
 }

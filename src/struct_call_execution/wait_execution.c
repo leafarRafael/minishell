@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 09:44:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 14:46:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:47:35 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,13 @@ static void	add_status(t_ncllc *no, t_mini *mini)
 	if (WIFSIGNALED(mini->status))
 	{
 		if (WTERMSIG(mini->status) == SIGQUIT)
+		{
 			ft_putstr_fd("Quit (core dumped)\n", 2);
-		no->status = 128 + WTERMSIG(mini->status);
+			no->status = 128 + WTERMSIG(mini->status);
+		}
 	}
 	else
 		no->status = WEXITSTATUS(mini->status);
+	if (WTERMSIG(mini->status) == SIGINT)
+		no->status = 128 + WTERMSIG(mini->status);
 }

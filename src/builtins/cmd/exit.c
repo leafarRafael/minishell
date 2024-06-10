@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 15:32:43 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 20:04:54 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	ft_putstr_fd(RESET, 2);
 	if (cmd->m_lst->matrix->size == 1)
 	{
-		ft_putlst_fd(cmd->m_lst->matrix->head->lst, 1, 2);
+		ft_putlst_fd(cmd->m_lst->matrix->head->lst, 1, STDOUT_FILENO);
 		free_memory(mini, var, g_status_child);
 	}
 	exe_exit(cmd, mini, var);
@@ -45,7 +45,7 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	if (cmd->m_lst->matrix->size > 2)
 	{
 		ft_msg_error("exit", "too many arguments");
-		ft_status_builtin(mini, 2, __ERROR);
+		ft_status_builtin(mini, 1, __ERROR);
 		free_memory(mini, var, g_status_child);
 		return ;
 	}
