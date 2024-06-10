@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:21:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 11:37:53 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 10:13:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ static int	exe_cd(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	{
 		chdir(getenv("HOME"));
 		setpwd(mini->m_lst_env);
+		return (g_status_child);
+	}
+	if (cmd->m_lst->matrix->size > 2)
+	{
+		ft_msg_error_lst(CD, NULL, " too many arguments\n");
+		ft_status_builtin(mini, 1, __ERROR);
 		return (g_status_child);
 	}
 	var->command_m = ft_cpy_mtrllst_to_cmtrx(cmd->m_lst->matrix);

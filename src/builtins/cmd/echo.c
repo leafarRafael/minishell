@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:41 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 11:39:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 10:47:53 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	echo(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	ft_manager_fd_builtin(cmd, mini, var);
+	if (ft_manager_fd_builtin(cmd, mini, var))
+	{
+		ft_status_builtin(mini, 1, __ERROR);
+		return ;
+	}
 	ft_valid_command_builtin(cmd);
 	ft_status_builtin(mini, 0, INIT_SUCCESS);
 	exe_echo(cmd);

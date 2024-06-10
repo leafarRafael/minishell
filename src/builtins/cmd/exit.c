@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 11:41:55 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 10:31:34 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "builtins.h"
 
 static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-static int	valid_number(t_lst *lst);
+static int	valid_number(char *nbr);
 
 void	my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
@@ -45,7 +45,7 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	}
 	ft_remove_lst_front(cmd->m_lst->matrix);
 	v.nbr_exit = ft_cpy_lst_to_array(cmd->m_lst->matrix->head->lst);
-	if (valid_number(cmd->m_lst->matrix->head->lst)
+	if (valid_number(v.nbr_exit)
 		|| cmd->m_lst->matrix->head->lst->size > 19)
 	{
 		ft_msg_error(v.nbr_exit, "numeric argument required");
@@ -58,18 +58,20 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	free_memory(mini, var, v.nbr);
 }
 
-static int	valid_number(t_lst *lst)
+static int	valid_number(char *nbr)
 {
-	t_builtin	v;
+	int i;
 
-	v.node = lst->head;
-	v.index = 0;
-	while (v.index < lst->size)
+	i = 0;
+	while (nbr[i] == '-' || nbr[i] == '+')
+		i++;
+	if (nbr[i] == '\0')
+		return (1);
+	while (nbr[i])
 	{
-		if (!ft_isdigit(v.node->c))
+		if (!ft_isdigit(nbr[i]))
 			return (1);
-		v.index++;
-		v.node = v.node->next;
+		i++;
 	}
 	return (0);
 }

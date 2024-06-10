@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_m_lst_to_cmtrx.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:18:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 16:20:38 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 07:19:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix)
 {
 	t_var_matrix	v;
 
+	v.matrix = NULL;
 	if (!lst_matrix)
 		return (v.matrix);
 	v.matrix = ft_calloc(sizeof(char *), lst_matrix->size + 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 19:15:55 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:11:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static void	ft_execute_minishell(t_mini *mini);
 int			g_status_child;
 
-int	main(void)
+int	main()
 {
 	t_mini				mini;
 	int					index;
@@ -36,8 +36,8 @@ int	main(void)
 		init_signal();
 		swap_tty(RESTORE, &mini);
 		ft_scanner_env(mini.m_lst_env);
-		print_pwd();
-		mini.input = readline("\n minishell$ : ");
+		//print_pwd();
+		mini.input = readline("minishell$: ");
 		if (!mini.input)
 			mini.input = sig_eof(mini.input);
 		mini.status = ft_input_is_valid(mini.input);

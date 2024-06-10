@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 14:01:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 10:45:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		env(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		my_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		pwd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
-void		ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
+int			ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 void		ft_valid_command_builtin(t_ast_n *cmd);
 void		finished_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 char		*get_prfx(t_node *ptr, t_lst *lst);

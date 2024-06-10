@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 09:44:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 11:19:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 11:00:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	ft_wait_execution(t_mini *mini)
 	int			i;
 	t_ncollec	*no;
 
+	g_status_child = 0;
+	if (!mini->collect)
+		return ;
+	if (!mini->collect->head)
+		return ;
 	no = mini->collect->head;
 	i = 0;
 	while (i < mini->collect->size)

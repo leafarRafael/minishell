@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 10:56:17 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 12:59:54 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 07:18:09 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int	ft_valid_syntax_open_here_doc(t_lst *lst)
 {
 	t_node	*nd;
 	int		*hdoc_ctrlname;
-	int		i;
 
 	hdoc_ctrlname = ft_init_ctrl_name();
-	i = 1;
 	nd = lst->head;
 	while (nd->next != lst->head)
 	{

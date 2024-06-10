@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   communs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 09:00:31 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/05 12:17:38 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 10:49:10 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-void	ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
+int	ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
 	if (cmd->m_lst->next->type == PIPE)
 	{
@@ -22,7 +22,16 @@ void	ft_manager_fd_builtin(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		close(var->tube[1]);
 	}
 	if (ft_redirect_manager(cmd->m_lst->matrix) < 0)
-		free_memory(mini, var, g_status_child);
+	{
+		if (cmd->m_lst->next->type == PIPE || cmd->m_lst->prev_pipe)
+		{
+			ft_status_builtin(mini, 1, __ERROR);
+			free_memory(mini, var, g_status_child);
+		}
+		else
+			return (1);
+	}
+	return (0);
 }
 
 void	ft_valid_command_builtin(t_ast_n *cmd)

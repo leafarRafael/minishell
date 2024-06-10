@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_parentheses.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 08:25:07 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:03:56 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 08:15:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

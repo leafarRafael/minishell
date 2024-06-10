@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 19:09:14 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 07:17:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,12 @@ static void	valid_expand(t_lst *l_eof, int *expand)
 {
 	t_node	*current;
 	t_node	*next;
-	int		size;
 	int		i;
+
 
 	i = 1;
 	current = l_eof->head;
 	next = current->next;
-	size = l_eof->size;
 	while (i <= l_eof->size)
 	{
 		if (ft_d_quotes(current->c) || ft_s_quotes(current->c))
