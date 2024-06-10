@@ -6,46 +6,43 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 10:59:22 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 10:24:13 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:39:27 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLLECTOR_H
 # define COLLECTOR_H
-# include <sys/types.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include "abstract_syntax_tree.h"
-union mytype
+# include <stdlib.h>
+# include <sys/types.h>
+# include <unistd.h>
+
+union	u_mytype
 {
 	pid_t	pid;
 	t_ast	*ast;
 };
 
-typedef struct s_n_collector_pid
+typedef struct s_n_collec
 {
-	union mytype				type;
-	int							status;
-	struct s_n_collector_pid	*next;
-	struct s_n_collector_pid	*prev;
-}		t_ncollec;
-
+	union u_mytype		type;
+	int					status;
+	struct s_n_collec	*next;
+	struct s_n_collec	*prev;
+}						t_ncllc;
 
 typedef struct s_collector
 {
-	t_ncollec	*head;
-	t_ncollec	*last;
-	int			size;
-}			t_collector;
+	t_ncllc	*head;
+	t_ncllc	*last;
+	int		size;
+}			t_clct;
 
-t_collector *ft_init_collector(void);
-void		*node_collect_pid(void *content);
-void		*node_collect_ast(void *content);
-int			collector_add_back(t_collector *collec, void *cont, void* (ft_func)(void *));
-
-int			collector_rmv_front(t_collector *collec);
-//int			ft_delete_collector(t_collector *collec);
-
-int	ft_delete_collector(t_collector *collec, void (del_content)(t_ast *));
+t_clct	*ft_init_collector(void);
+void	*node_collect_pid(void *content);
+void	*node_collect_ast(void *content);
+int		cllctr_rmv_front(t_clct *collec);
+int		cllctr_add_back( t_clct *collec, void *cont, void *(ft_func)(void *));
+int		del_cllctr(t_clct *collec, void (del_content)(t_ast *));
 
 #endif

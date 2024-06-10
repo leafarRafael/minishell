@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 10:45:39 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 13:39:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ENV "env"
 # define EXIT "exit"
 
-#define NV_INDT ": not a valid identifier\n"
+# define NV_INDT ": not a valid identifier\n"
 
 typedef enum s_builtin_size
 {
@@ -42,7 +42,7 @@ typedef enum s_error_or_success
 {
 	__ERROR = 1,
 	INIT_SUCCESS,
-}		t_error_success;
+}			t_error_success;
 
 typedef struct s_variables_builtins
 {

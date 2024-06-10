@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 11:39:52 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:36:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ void	env(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		return ;
 	if (cmd->m_lst->prev->type == OR_OP && g_status_child == 0)
 		return ;
-	ft_manager_fd_builtin(cmd, mini, var);
+	if (ft_manager_fd_builtin(cmd, mini, var))
+	{
+		ft_status_builtin(mini, 1, __ERROR);
+		return ;
+	}
 	ft_valid_command_builtin(cmd);
 	ft_status_builtin(mini, 0, INIT_SUCCESS);
 	ft_execute_env(mini);
@@ -39,9 +43,7 @@ static void	ft_execute_env(t_mini *mini)
 	{
 		if (v.i_color > 3)
 			v.i_color = 1;
-		ft_putstr_fd(mini->color[v.i_color], STDOUT_FILENO);
 		ft_putlst_fd(v.line->lst, 1, STDOUT_FILENO);
-		ft_putstr_fd(RESET, STDOUT_FILENO);
 		v.line = v.line->next;
 		v.i_color++;
 		v.index++;

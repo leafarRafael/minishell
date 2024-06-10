@@ -6,17 +6,17 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:17:45 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 18:13:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:36:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collector.h"
 
-static int	case_zero(t_collector *collec, t_ncollec *node);
-static int	case_one(t_collector *collec, t_ncollec *node);
-static int	case_others(t_collector *collec, t_ncollec *node);
+static int	case_zero(t_clct *collec, t_ncllc *node);
+static int	case_one(t_clct *collec, t_ncllc *node);
+static int	case_others(t_clct *collec, t_ncllc *node);
 
-int	collector_add_back(t_collector *collec,	
+int	cllctr_add_back(t_clct *collec,	
 			void *cont, void *(*ft_func)(void *))
 {
 	void	*node;
@@ -31,7 +31,7 @@ int	collector_add_back(t_collector *collec,
 	return (case_others(collec, node));
 }
 
-static int	case_zero(t_collector *collec, t_ncollec *node)
+static int	case_zero(t_clct *collec, t_ncllc *node)
 {
 	node->next = node;
 	node->prev = node;
@@ -41,7 +41,7 @@ static int	case_zero(t_collector *collec, t_ncollec *node)
 	return (0);
 }
 
-static int	case_one(t_collector *collec, t_ncollec *node)
+static int	case_one(t_clct *collec, t_ncllc *node)
 {
 	node->prev = collec->head;
 	node->next = collec->head;
@@ -52,7 +52,7 @@ static int	case_one(t_collector *collec, t_ncollec *node)
 	return (0);
 }
 
-static int	case_others(t_collector *collec, t_ncollec *node)
+static int	case_others(t_clct *collec, t_ncllc *node)
 {
 	node->prev = collec->last;
 	node->next = collec->head;

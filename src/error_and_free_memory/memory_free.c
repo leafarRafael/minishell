@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 14:18:04 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:38:59 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ static void	free_mini(t_mini *mini)
 		if (mini->color)
 			ft_delcmtrx(mini->color);
 		if (mini->collect)
-			ft_delete_collector(mini->collect, NULL);
+			del_cllctr(mini->collect, NULL);
 		if (mini->collect_ast)
-			ft_delete_collector(mini->collect_ast, ft_delete_tree);
+			del_cllctr(mini->collect_ast, ft_delete_tree);
 	}
 }
 

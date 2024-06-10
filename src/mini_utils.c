@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:44:47 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/10 11:12:50 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:21:36 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,17 @@
 
 void	init_minishell(t_mini *mini)
 {
-	extern char **environ;
-
 	mini->mmlst = NULL;
 	mini->input_lst = NULL;
 	mini->input = NULL;
 	mini->env = NULL;
 	mini->temp_environ = NULL;
-	mini->m_lst_env = ft_cmtrix_to_mtrx_lst(environ);
+	mini->m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini->color = ft_init_color();
-	// WHY TWO FUNCTIONS?
 	mini->collect = ft_init_collector();
 	mini->collect_ast = ft_init_collector();
 	mini->status = 0;
-	// index = 0;
-	// while (index < 40)
-	// {
-	// 	mini->ast[index] = NULL;
-	// 	index++;
-	// }
+	mini->i_color = 1;
 	swap_tty(COPY, mini);
 }
 

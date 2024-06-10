@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:48:48 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 18:39:43 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 15:19:39 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,18 @@ extern int	g_status_child;
 
 typedef struct s_variables_minishell
 {
-	t_mmlst		*mmlst;
-	t_mlst		*m_lst_env;
-	t_lst		*input_lst;
-	t_collector	*collect;
-	t_collector	*collect_ast;
-	char		*input;
-	char		**env;
-	char		**temp_environ;
-	char		**color;
-	int			fd_std[2];
-	int			status;
+	t_mmlst	*mmlst;
+	t_mlst	*m_lst_env;
+	t_lst	*input_lst;
+	t_clct	*collect;
+	t_clct	*collect_ast;
+	char	*input;
+	char	**env;
+	char	**temp_environ;
+	char	**color;
+	int		i_color;
+	int		fd_std[2];
+	int		status;
 }			t_mini;
 
 typedef struct s_var_executable
@@ -116,19 +117,6 @@ int			ft_remove_cmd_status(t_mmlst *m_m_lst);
 void		command_call_structure(t_ast *tree, t_mmlst *mmlst);
 void		ft_populetree_right(t_ast *tree, t_mmlst *mmlst);
 
-void		ft_printf_matrix(char **matrix);
-void		ft_print_array_lst(t_lst *lst, int front_back);
-void		ft_print_array_lst_content_type(t_lst *lst);
-void		show_str_type(int type);
-void		print_all_type(void);
-void		print_operator(t_lst *lst);
-void		ft_print_matrix_line(t_mlst *m_line);
-
-void		ft_print_lst_matrix(t_mmlst *m_l);
-void		ft_print_todos_os_tokens_expandidos(t_mmlst *mtrx_mtrx);
-void		ft_printtree(t_ast_n *root);
-char		**ft_expand_m_lst_to_cmtrx(t_mlst *lst_matrix);
-
 int			ft_input_is_valid(char *array);
 void		ft_free_memory_revert_environ(t_mini *v);
 char		**path_system_bin(t_mlst *m_lst);
@@ -138,9 +126,7 @@ void		builds_execution_call(t_mini *mini);
 void		free_memory(t_mini *mini, t_var_exe *var, int status_exit);
 void		ft_msg_error(char *invalid_input, char *msg_error);
 void		ft_msg_error_lst(char *function, t_lst *input_lst, char *msg_error);
-/*
-		FUNCTION IN SRC/EXECUTE_COMMAND
-*/
+
 void		ft_call_and_exec_manager(t_ast_n *cmd, t_mini *mini);
 void		ft_expand_subshell(t_ast_n *cmd, t_mini *mini);
 char		*ft_get_executable(t_mini *mini, t_var_exe *var);
@@ -165,7 +151,6 @@ t_mlst		*expand_asterisk(t_ast_n *cmd);
 void		*getdir_list_string(int str_lst);
 char		*ft_get_program_name(void);
 void		ft_wait_execution(t_mini *mini);
-
 void		execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
 #endif

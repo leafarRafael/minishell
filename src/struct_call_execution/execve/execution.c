@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:02:06 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 18:49:34 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:36:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	execute(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 	ctrl_func = is_builtin(cmd);
 	function = select_function(ctrl_func);
 	valid_fork(&var->pid, cmd, ctrl_func);
-	collector_add_back(mini->collect, &var->pid, node_collect_pid);
+	cllctr_add_back(mini->collect, &var->pid, node_collect_pid);
 	if (var->pid != -42)
 	{
 		if (var->pid == 0)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/09 18:38:48 by tforster         ###   ########.fr        #
+#    Updated: 2024/06/10 15:20:47 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,10 @@ MAKE_MATRIX_L	:= ./lib/lib_list/circular_matrix_list
 MTRX_MTRX_L		:= ./lib/lib_list/lib_list.a
 MAKE_MTRX_MTRX	:= ./lib/lib_list/circular_matrix_matrix_list
 
-FILES			:= ./REMOVER_FUNCOES_DEBUG/FUNCOES_TEMPORARIAS.c\
-				./REMOVER_FUNCOES_DEBUG/expand_m_lst_to_cmtrx.c
-
 COLLECTOR		:= ./src/collector/init_collector.c\
 				./src/collector/init_ncollec.c\
 				./src/collector/ft_collector_add_back.c\
-				./src/collector/ft_delete_collector.c\
+				./src/collector/del_cllctr.c\
 				./src/collector/ft_remove_node_front.c
 
 MAIN			:= ./src/minishell.c
@@ -158,7 +155,7 @@ ENVIRON			:=./src/environ_variable_ctrl/swap_environ.c
 
 UTILS			:= ./src/utils/strlstcmp.c
 
-SRC				:= $(MAIN) $(FILES) $(AS_TREE) $(PARSE)\
+SRC				:= $(MAIN) $(AS_TREE) $(PARSE)\
 				$(KEY_WORDS) $(SIMPLE) $(REDIRECT)\
 				$(ERROR) $(TOKEN) $(DEL_QUOTES)\
 				$(EXPANDER) $(PATH_SYSTEM_BIN)\
@@ -177,6 +174,8 @@ CMD_CLEAN		:= rm -Rf
 CMD_FCLEAN		:= rm -rf
 
 all: $(NAME)
+
+bonus: re
 
 $(NAME): $(SRC) $(LIBFT) $(LINKED_LIST) $(MATRIX_LIST) $(MTRX_MTRX_L)
 

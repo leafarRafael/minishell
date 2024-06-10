@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   th_parser_open_prnth.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:58:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/03 20:27:00 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:49:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,3 @@ int	token_aft_opn_prnth(t_parse *parse)
 		return (1);
 	return (0);
 }
-
-// test
-

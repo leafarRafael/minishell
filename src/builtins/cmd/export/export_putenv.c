@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:16:40 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/07 10:38:46 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 15:37:08 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ void	export_putenv(t_mini *mini)
 		v.i_color++;
 		v.index++;
 	}
-	ft_putstr_fd(mini->color[2], STDOUT_FILENO);
 	ft_put_export(v.expor_sort->root);
-	ft_putstr_fd(RESET, STDOUT_FILENO);
 	ft_delete_tree(v.expor_sort);
 }
 

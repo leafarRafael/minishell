@@ -6,17 +6,17 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 11:44:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/08 13:55:47 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 14:35:54 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "collector.h"
 
-static int	ft_one_node(t_collector *collec);
-static int	ft_two_node(t_collector *collec);
-static int	ft_three_more(t_collector *collec);
+static int	ft_one_node(t_clct *collec);
+static int	ft_two_node(t_clct *collec);
+static int	ft_three_more(t_clct *collec);
 
-int	collector_rmv_front(t_collector *collec)
+int	cllctr_rmv_front(t_clct *collec)
 {
 	if (!collec)
 		return (1);
@@ -29,7 +29,7 @@ int	collector_rmv_front(t_collector *collec)
 	return (ft_three_more(collec));
 }
 
-static int	ft_one_node(t_collector *collec)
+static int	ft_one_node(t_clct *collec)
 {
 	free(collec->head);
 	collec->size = 0;
@@ -38,7 +38,7 @@ static int	ft_one_node(t_collector *collec)
 	return (0);
 }
 
-static int	ft_two_node(t_collector *collec)
+static int	ft_two_node(t_clct *collec)
 {
 	free(collec->head);
 	collec->last->prev = collec->last;
@@ -48,7 +48,7 @@ static int	ft_two_node(t_collector *collec)
 	return (0);
 }
 
-static int	ft_three_more(t_collector *collec)
+static int	ft_three_more(t_clct *collec)
 {
 	collec->head->next->prev = collec->last;
 	collec->last->next = collec->head->next;
