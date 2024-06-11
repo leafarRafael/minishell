@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 21:22:13 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/11 08:48:44 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,14 @@ static t_mlst	*ft_read_std(char *eof)
 				free(h_doc.read_line);
 				h_doc.read_line = NULL;
 			}
-			free(h_doc.read_line);
+			else
+			{
+				h_doc.new_lst = ft_create_lst_add_str("\r");
+				ft_scanner_simple_operator(h_doc.new_lst);
+				ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
+				free(h_doc.read_line);
+				h_doc.read_line = NULL;
+			}
 		}
 		else
 		{
