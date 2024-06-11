@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
+#    By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/10 20:27:48 by tforster         ###   ########.fr        #
+#    Updated: 2024/06/11 11:01:05 by rbutzke          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ REDIRECT		:= ./src/redirect/add_redir_attribute_token/ft_define_command_operator
 				./src/redirect/here_doc/here_doc_create_file.c\
 				./src/redirect/here_doc/new_lst_heredoc.c\
 				./src/redirect/here_doc/write_here_doc.c\
+				./src/redirect/here_doc/read_std_here_doc.c\
 				./src/redirect/ft_open.c
 
 BINARY			:= ./src/binary/binary.c\

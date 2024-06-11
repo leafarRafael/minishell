@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:52:52 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 13:33:14 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:01:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int			open_trnc(t_mlst *mtrix, t_llst *lst);
 int			open_here_doc(t_mlst *mtrix, t_llst *lst);
 void		ft_finished_hdoc(t_lst *lst, t_node *nd, int *hdoc_ctrlname);
 t_lst		*ft_initialize_hdoc_lst(int *hdoc_ctrlname);
+t_mlst		*ft_read_std(char *eof);
 void		ft_write_here_doc(t_lst *l_file, t_lst *l_eof);
 t_mlst		*read_directory(char *path);
 t_mlst		*expand_current_directory(void);

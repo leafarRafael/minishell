@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/11 08:48:44 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:06:23 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "expanding.h"
 #include "sigaction.h"
 
-static t_mlst	*ft_read_std(char *eof);
 static int		ft_open_create_here_doc(char *file);
 static void		ft_open(char *c_file, char *eof, int expand);
 static void		valid_expand(t_lst *l_eof, int *expand);
@@ -62,54 +61,6 @@ static void	ft_open(char *c_file, char *eof, int expand)
 	}
 	ft_delete_matrix(mlst);
 	close(fd);
-}
-
-static t_mlst	*ft_read_std(char *eof)
-{
-	t_redirect	h_doc;
-
-	here_signal();
-	h_doc.size = ft_strlen(eof);
-	h_doc.new_mtrx = init_mlst();
-	while (1)
-	{
-		write(2, ">> ", 3);
-		h_doc.read_line = get_next_line(STDIN_FILENO);
-		if (h_doc.read_line)
-		{
-			if (h_doc.read_line[0] != '\n')
-			{
-				if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)
-				{
-					free(h_doc.read_line);
-					h_doc.read_line = NULL;
-					break ;
-				}
-				h_doc.new_lst = ft_create_lst_add_str(h_doc.read_line);
-				if (h_doc.new_lst->last->c == '\n')
-					lst_rmv_back(h_doc.new_lst);
-				ft_scanner_simple_operator(h_doc.new_lst);
-				ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
-				free(h_doc.read_line);
-				h_doc.read_line = NULL;
-			}
-			else
-			{
-				h_doc.new_lst = ft_create_lst_add_str("\r");
-				ft_scanner_simple_operator(h_doc.new_lst);
-				ft_add_list_back(h_doc.new_mtrx, h_doc.new_lst);
-				free(h_doc.read_line);
-				h_doc.read_line = NULL;
-			}
-		}
-		else
-		{
-			if (g_status_child != 99)
-				ft_putstr_fd("\nwarning: here-document delimited by end-of-file (wanted `eof')\n", 2);
-			break ;
-		}
-	}
-	return (h_doc.new_mtrx);
 }
 
 static int	ft_open_create_here_doc(char *file)

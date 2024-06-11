@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/11 08:54:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/11 10:45:56 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "sigaction.h"
 
 static void	ft_execute_minishell(t_mini *mini);
+static void	ft_call_wait(t_mini *mini);
 int			g_status_child;
 
 int	main(void)
@@ -60,6 +61,11 @@ static void	ft_execute_minishell(t_mini *mini)
 	while (mini->input_lst->size > 0)
 		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(mini->input_lst));
 	ft_delete_list(mini->input_lst);
+	ft_call_wait(mini);
+}
+
+static void	ft_call_wait(t_mini *mini)
+{
 	if (g_status_child != 99)
 		builds_execution_call(mini);
 	else
