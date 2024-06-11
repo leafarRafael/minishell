@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/11 10:45:56 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:56:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	main(void)
 		init_signal();
 		swap_tty(RESTORE, &mini);
 		ft_scanner_env(mini.m_lst_env);
-		//print_pwd();
-		mini.input = readline("minishell$: ");
+		print_pwd();
+		mini.input = readline("\nminishell$: ");
 		if (!mini.input)
 			mini.input = sig_eof(mini.input);
 		mini.status = ft_input_is_valid(mini.input);
