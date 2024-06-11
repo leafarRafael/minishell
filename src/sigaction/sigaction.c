@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:03:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/10 19:55:15 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 21:23:01 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,17 @@
 void	init_signal(void)
 {
 	struct sigaction	sa;
-	struct sigaction	old;
 
 	sa = (struct sigaction){0};
-	old = (struct sigaction){0};
 	sa.sa_flags = SA_SIGINFO | SA_RESTART;
 	sa.sa_sigaction = sigint_action;
-	sigaction(SIGINT, &sa, &old);
+	sigaction(SIGINT, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
-
 }
 
 void	sigint_action(int sig, siginfo_t *siginfo, void *context)
 {
 	context = NULL;
-
 	g_status_child = 128 + sig;
 	ft_putstr("\n");
 	rl_on_new_line();
@@ -44,8 +40,19 @@ void	sigint_action(int sig, siginfo_t *siginfo, void *context)
 	}
 }
 
-void handle_sigint(int sig)
+void	here_signal(void)
 {
+	struct sigaction	sa;
+
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = handle_sigint;
+	sigaction(SIGINT, &sa, NULL);
+}
+
+void	handle_sigint(int sig)
+{
+	ft_putstr_fd("\n", 2);
 	sig = 0;
 	g_status_child = 99;
 }

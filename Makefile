@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+         #
+#    By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/22 08:41:47 by rbutzke           #+#    #+#              #
-#    Updated: 2024/06/10 15:20:47 by rbutzke          ###   ########.fr        #
+#    Updated: 2024/06/10 20:27:48 by tforster         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,6 @@ TH_FUNC			:= ./src/th_syntax/th_syntax.c\
 				./src/th_syntax/th_parser_oprtr_rdrct.c\
 				./src/th_syntax/th_parser_error.c\
 				./src/th_syntax/th_parser_error_utils.c\
-				./src/th_syntax/th_print.c
 
 SIGACTION		:= ./src/sigaction/sigaction.c\
 

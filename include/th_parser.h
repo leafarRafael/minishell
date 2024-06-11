@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   th_parser.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:32:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/04 13:33:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 20:27:38 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,5 @@ int						syntax_error(t_parse *parse, char *str,
 char					*error_opn_prnth(t_sytx_er error);
 char					*error_name(t_parse *parse, char *str, t_sytx_er error,
 							int *flag);
-
-void					th_print_parenth(char *str, t_parse *parse, int len,
-							int more);
 
 #endif

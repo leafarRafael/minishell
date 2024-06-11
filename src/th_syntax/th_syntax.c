@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:47:17 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/06 18:12:09 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:27:05 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,3 @@ int	th_parse_param(char *str)
 		return (1);
 	return (0);
 }
-
-/*
-()'1'"12"
-((cmd1"lixo" arg1" arg2)&&(cmdA&&cmdB)||(cmd2|cmd3 arg3))
-012345678901234567
-(cmd1&|||&&&cmd2)
-cmd&&&cmd&&|(cmd&||(cmd|||(cmd||&(cmd|&&(cmd&|&(cmd|&|cmd))))))
-<<eof cmd "arg" arg"1" "arg"2 || (cmd && (cmd | cmd > file ))
-cmd1 -l -f || cmd2 't' 'y' | (cmd3 -l && cmd4 arg1 arg2 "lixo ()")
-"cmd1"cmd2"cmd3" cmd1"cmd2"cmd3
-(cmd&& (cmd |c,d)  && cd) || cmd >> file || (cmd || cmd || (cmd))
-"cmd"cmd"cmd"
-"cmd""cmd
-&& ( | ( && ( || && ))) NEW TEST
-THIS WORKS
-( ls || )
-NOT
-( || ls )
-( cmd || << || )
-(>> file (cdm ) || cmd >> file )
-111(222(333))
-11>>(22>>(33>>(cmd)))
- */
-
-/*
-|| (ls) && (ls) >>
- */

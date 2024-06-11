@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 20:00:52 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:48:49 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	main(void)
 		init_signal();
 		swap_tty(RESTORE, &mini);
 		ft_scanner_env(mini.m_lst_env);
-		//print_pwd();
-		mini.input = readline("minishell$: ");
+		print_pwd();
+		mini.input = readline("\nminishell$: ");
 		if (!mini.input)
 			mini.input = sig_eof(mini.input);
 		mini.status = ft_input_is_valid(mini.input);
@@ -61,9 +61,7 @@ static void	ft_execute_minishell(t_mini *mini)
 		ft_mmlst_add_back(mini->mmlst, ft_token_cmd(mini->input_lst));
 	ft_delete_list(mini->input_lst);
 	if (g_status_child != 99)
-	{
 		builds_execution_call(mini);
-	}
 	else
 	{
 		swap_tty(RESTORE, mini);

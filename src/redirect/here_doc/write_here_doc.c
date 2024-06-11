@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_here_doc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 10:57:59 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 07:17:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 21:22:13 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,10 @@ static t_mlst	*ft_read_std(char *eof)
 {
 	t_redirect	h_doc;
 
-	struct sigaction sa;
-	sa.sa_handler = handle_sigint;
-	sa.sa_flags = 0; // or SA_RESTART
-	sigemptyset(&sa.sa_mask);
-
-	if (sigaction(SIGINT, &sa, NULL) == -1) {
-		perror("sigaction");
-		exit(EXIT_FAILURE);
-	}
-	int eof_flag = 0; // Local flag to track EOF
-
+	here_signal();
 	h_doc.size = ft_strlen(eof);
 	h_doc.new_mtrx = init_mlst();
-	while (!eof_flag)
+	while (1)
 	{
 		write(2, ">> ", 3);
 		h_doc.read_line = get_next_line(STDIN_FILENO);
@@ -89,14 +79,8 @@ static t_mlst	*ft_read_std(char *eof)
 		{
 			if (h_doc.read_line[0] != '\n')
 			{
-				if (!h_doc.read_line)
-				{
-					ft_putstr_fd("h_doc.read_line is NULL\n", 2);
-					return (NULL);
-				}
 				if (ft_strncmp(h_doc.read_line, eof, h_doc.size -1) == 0)
 				{
-					ft_putstr_fd("FOUND EOF\n", 2);
 					free(h_doc.read_line);
 					h_doc.read_line = NULL;
 					break ;
@@ -109,20 +93,15 @@ static t_mlst	*ft_read_std(char *eof)
 				free(h_doc.read_line);
 				h_doc.read_line = NULL;
 			}
-			else
-				ft_putstr_fd("END of line input\n", 2);
 			free(h_doc.read_line);
 		}
 		else
 		{
-			ft_putstr_fd("NULL input [", 2);
-			ft_putnbr_fd(g_status_child, 2);
-			ft_putstr_fd("]\n", 2);
-			// g_status_child = 9764;
+			if (g_status_child != 99)
+				ft_putstr_fd("\nwarning: here-document delimited by end-of-file (wanted `eof')\n", 2);
 			break ;
 		}
 	}
-	ft_putstr_fd("OUT OF WHILE\n", 2);
 	return (h_doc.new_mtrx);
 }
 
@@ -144,7 +123,6 @@ static void	valid_expand(t_lst *l_eof, int *expand)
 	t_node	*current;
 	t_node	*next;
 	int		i;
-
 
 	i = 1;
 	current = l_eof->head;

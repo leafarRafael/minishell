@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 20:04:54 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:48:15 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 
 static int	valid_number(char *nbr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (nbr[i] == '-' || nbr[i] == '+')
