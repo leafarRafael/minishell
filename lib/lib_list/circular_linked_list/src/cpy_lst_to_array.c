@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 11:19:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/04/29 11:02:15 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:18:22 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_cpy_lst_to_array(t_lst *lst)
 
 	if (!lst || lst->size == 0)
 		return (NULL);
-	str = malloc(sizeof(char) * (lst->size +1));
+	str = malloc(sizeof(char) * (lst->size +2));
 	if (!str)
 		return (NULL);
 	var.current_node = lst->head;
@@ -34,5 +34,6 @@ char	*ft_cpy_lst_to_array(t_lst *lst)
 		i++;
 	}
 	str[i] = '\0';
+	str[i++] = '\0';
 	return (str);
 }

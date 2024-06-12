@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_std_here_doc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:48:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/11 11:33:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:33:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ t_mlst	*ft_read_std(char *eof)
 	h_doc.new_mtrx = init_mlst();
 	while (1)
 	{
-		write(2, ">> ", 3);
-		h_doc.read_line = get_next_line(STDIN_FILENO);
+		h_doc.read_line = readline(">> ");
+		if (!h_doc.read_line)
+			printf("ola\n");
 		if (valid(h_doc.read_line, eof, h_doc.size, h_doc.new_mtrx))
 			break ;
 	}
@@ -63,19 +64,24 @@ static int	new_str(char *read, char *eof, int size, t_mlst *mlst)
 {
 	t_lst	*new_lst;
 
-	if (ft_strncmp(read, eof, size -1) == 0)
+	if (ft_strncmp(read, eof, size +1) == 0)
 	{
 		free(read);
 		read = NULL;
 		return (1);
 	}
-	new_lst = ft_create_lst_add_str(read);
-	if (new_lst->last->c == '\n')
-		lst_rmv_back(new_lst);
-	ft_scanner_simple_operator(new_lst);
-	ft_add_list_back(mlst, new_lst);
-	free(read);
-	read = NULL;
+	if (ft_strlen(read))
+	{
+		new_lst = ft_create_lst_add_str(read);
+		if (new_lst->last->c == '\n')
+			lst_rmv_back(new_lst);
+		ft_scanner_simple_operator(new_lst);
+		ft_add_list_back(mlst, new_lst);
+		free(read);
+		read = NULL;
+		return (0);
+	}
+	new_line(read, mlst);
 	return (0);
 }
 
