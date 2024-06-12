@@ -3,40 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   wait_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 09:44:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/12 20:28:41 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:47:35 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//static void	add_status(t_ncllc *no, t_mini *mini);
+static void	add_status(t_ncllc *no, t_mini *mini);
 
 void	ft_wait_execution(t_mini *mini)
 {
-/* 	int		i;
-	t_ncllc	*no; */
+	int		i;
+	t_ncllc	*no;
 
-	pid_t pid;
-	pid = 0;
-	while (pid == waitpid(-1, &mini->status, 0))
-	{
-		if (WIFSIGNALED(mini->status))
-		{
-			if (WTERMSIG(mini->status) == SIGQUIT)
-			{
-				ft_putstr_fd("Quit (core dumped)\n", 2);
-				g_status_child = 128 + WTERMSIG(mini->status);
-			}
-		}
-		else
-			g_status_child = WEXITSTATUS(mini->status);
-		if (WTERMSIG(mini->status) == SIGINT)
-			g_status_child = 128 + WTERMSIG(mini->status);
-	}
-/* 
 	g_status_child = 0;
 	if (!mini->collect || !mini->collect->head)
 		return ;
@@ -49,9 +31,9 @@ void	ft_wait_execution(t_mini *mini)
 		no = no->next;
 		i++;
 	}
-	g_status_child = mini->collect->last->status; */
+	g_status_child = mini->collect->last->status;
 }
-/* 
+
 static void	add_status(t_ncllc *no, t_mini *mini)
 {
 	waitpid(no->type.pid, &mini->status, WUNTRACED);
@@ -68,4 +50,3 @@ static void	add_status(t_ncllc *no, t_mini *mini)
 	if (WTERMSIG(mini->status) == SIGINT)
 		no->status = 128 + WTERMSIG(mini->status);
 }
- */
