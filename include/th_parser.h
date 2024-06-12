@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   th_parser.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:32:34 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/04 13:33:27 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 15:40:01 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,52 +48,49 @@ typedef int				(*t_tkn_fc)(t_parse *);
 
 /* PARSE Functions */
 /* Utils*/
-t_parse					*parse_init(t_type_character type, int start);
-t_parse					*parse_last(t_parse *parse);
-t_parse					*parse_add_back(t_parse **parse, t_parse *new_node);
-int						parse_len(t_parse *parse);
-void					parse_free(t_parse *parse);
+t_parse		*parse_init(t_type_character type, int start);
+t_parse		*parse_last(t_parse *parse);
+t_parse		*parse_add_back(t_parse **parse, t_parse *new_node);
+int			parse_len(t_parse *parse);
+void		parse_free(t_parse *parse);
+t_parse		*parse_pop(t_parse *pop_node);
+t_parse		*parse_sub_last(t_parse *parse);
+
 
 /* Parse Types */
-int						parse_out_prnht(char *str, t_parse **parse, int *index);
-int						parse_prnth(char *str, t_parse **parse, int *index);
-int						parse_quote(char *str, t_parse **parse, int *index);
-int						parse_oprtr(char *str, t_parse **parse, int *index);
-int						parse_rdrct(char *str, t_parse **parse, int *index);
-int						parse_text(char *str, t_parse **parse, int *index);
+int			parse_out_prnht(char *str, t_parse **parse, int *index);
+int			parse_prnth(char *str, t_parse **parse, int *index);
+int			parse_quote(char *str, t_parse **parse, int *index);
+int			parse_oprtr(char *str, t_parse **parse, int *index);
+int			parse_rdrct(char *str, t_parse **parse, int *index);
+int			parse_text(char *str, t_parse **parse, int *index);
 
 /* Tokens */
-int						tkn_is_oprtr(t_parse *parse);
-int						tkn_is_rdrct(t_parse *parse);
+int			tkn_is_oprtr(t_parse *parse);
+int			tkn_is_rdrct(t_parse *parse);
 
 /* Utils */
-int						th_is_tab(int ch);
-int						th_is_in_set(char ch, char *set);
-int						th_is_quote(char *str, int index);
-int						th_is_logical_oprtr(char *str, int index);
-int						th_is_io_rdrct(char *str, int index);
-int						append_sub(char *str, t_parse *parse, int *index,
-							t_parse_func func);
+int			th_is_tab(int ch);
+int			th_is_in_set(char ch, char *set);
+int			th_is_quote(char *str, int index);
+int			th_is_logical_oprtr(char *str, int index);
+int			th_is_io_rdrct(char *str, int index);
+int			append_sub(char *str, t_parse *parse, int *index, t_parse_func func);
 
 /* Parse and Syntax Checks */
 /* OPEN PARENTHESIS */
-int						parse_bfr_fst_prnth(t_parse **parse, char *str,
-							int *index);
-int						parse_bfr_sub_prnth(t_parse *parse, char *str,
-							int *index);
-int						token_aft_opn_prnth(t_parse *parse);
+int			parse_bfr_fst_prnth(t_parse **parse, char *str, int *index);
+int			parse_bfr_sub_prnth(t_parse *parse, char *str, int *index);
+int			token_aft_opn_prnth(t_parse *parse);
 /* CLOSE PARENTHESIS */
-int						parse_bfr_cls_prnth(t_parse *parse, char *str,
-							int *index);
+int			parse_bfr_cls_prnth(t_parse *parse, char *str, int *index);
 
 /* ERROR message */
-int						syntax_error(t_parse *parse, char *str,
-							t_sytx_er error);
-char					*error_opn_prnth(t_sytx_er error);
-char					*error_name(t_parse *parse, char *str, t_sytx_er error,
-							int *flag);
+int			syntax_error(t_parse *parse, char *str, t_sytx_er error);
+char		*error_opn_prnth(t_sytx_er error);
+char		*error_name(t_parse *parse, char *str, t_sytx_er error, int *flag);
 
-void					th_print_parenth(char *str, t_parse *parse, int len,
-							int more);
+void		th_print_parenth(char *str, t_parse *parse, int len, int more);
+void		select_type(int type);
 
 #endif

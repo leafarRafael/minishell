@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:26:51 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/04 17:41:38 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:39:41 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,52 @@ static int	token_afr_cls_prnth(t_parse *parse, char *str, int status)
 		status = syntax_error(parse, str, TKN_AFT_CLS_PRNTH);
 	return (status);
 }
+
+// int token_aftr_text(t_parse **parse, t_parse *ptr)
+// {
+// 	int		type;
+// 	int		next;
+// 	t_parse	*last;
+
+// 	last = parse_sub_last(*parse);
+// 	if (ptr->prev)
+// 	{
+// 		printf("TEXT!\n");
+// 		prev = last->type;
+// 		type = ptr->type;
+// 		select_type(prev);
+// 		select_type(type);
+// 		if ((prev & type) & COMMAND)
+// 			return (0);
+// 		if (((prev & COMMAND) && (type & (D_QUOTES | S_QUOTES)))
+// 			|| ((prev & (D_QUOTES | S_QUOTES)) && (type & COMMAND)))
+// 		{
+// 			int		end;
+// 			int		begin;
+
+// 			end = ptr->prev->start + ptr->prev->size;
+// 			begin = ptr->start;
+// 			parse_pop(ptr);
+// 			// (*parse)->sub = ptr;
+// 			// last = parse_sub_last(*parse);
+// 			last->sub = ptr;
+// 			if (begin - end == 1)
+// 				printf("==>> IS TEXT [%d] [%d] [%d]\n", end, begin, begin - end);
+// 		}
+// 		if ((prev & (D_QUOTES | S_QUOTES)) && (type & (D_QUOTES | S_QUOTES)))
+// 		{
+// 			int	end;
+// 			int	begin;
+
+// 			end = ptr->prev->start + ptr->prev->size;
+// 			begin = ptr->start;
+// 			parse_pop(ptr);
+// 			// (*parse)->sub = ptr;
+// 			// last = parse_sub_last(*parse);
+// 			last->sub = ptr;
+// 			if (begin - end == 2)
+// 				printf("==>> IS TEXT [%d] [%d] [%d]\n", end, begin, begin - end);
+// 		}
+// 	}
+// 	return (0);
+// }

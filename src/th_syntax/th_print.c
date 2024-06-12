@@ -6,7 +6,7 @@
 /*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:42:48 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/04 17:44:47 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/12 13:27:12 by tforster         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	select_type(int type)
 	if (type == CLOSE_PAREN)
 		print_type("CLOSE_PAREN", 13);
 }
-
-
 
 void	th_print_parenth(char *str, t_parse *parse, int len, int more)
 {
