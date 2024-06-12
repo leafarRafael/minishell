@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 09:26:58 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 13:39:11 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:43:38 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ typedef enum s_error_or_success
 
 typedef struct s_variables_builtins
 {
-	t_llst	*line;
-	t_llst	*env;
-	t_lst	*list;
-	t_lst	*lst;
-	t_node	*node;
-	char	*prefix;
-	char	*new_var;
-	char	*nbr_exit;
-	int		nbr;
-	int		index;
-	int		flag;
-	int		i_color;
-	t_ast	*expor_sort;
+	t_llst		*line;
+	t_llst		*env;
+	t_lst		*list;
+	t_lst		*lst;
+	t_node		*node;
+	char		*prefix;
+	char		*new_var;
+	char		*nbr_exit;
+	long long	nbr;
+	int			index;
+	int			flag;
+	int			i_color;
+	t_ast		*expor_sort;
 
 }			t_builtin;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:37 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 20:48:15 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:46:56 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	exe_exit(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		free_memory(mini, var, g_status_child);
 		return ;
 	}
-	v.nbr = ft_atoi(v.nbr_exit);
+	v.nbr = ft_atoll(v.nbr_exit);
 	free(v.nbr_exit);
 	free_memory(mini, var, v.nbr);
 }
@@ -70,7 +70,7 @@ static int	valid_number(char *nbr)
 	int	i;
 
 	i = 0;
-	while (nbr[i] == '-' || nbr[i] == '+')
+	if (nbr[i] == '-' || nbr[i] == '+')
 		i++;
 	if (nbr[i] == '\0')
 		return (1);

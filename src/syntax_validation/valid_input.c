@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:27:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 15:50:23 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 17:36:50 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	ft_input_is_valid(char *array)
 	}
 	v.status = th_parse_param(array);
 	if (v.status)
-		g_status_child = 1;
+		g_status_child = 2;
 	return (v.status);
 }

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:35:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 15:41:19 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:33:40 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,4 @@ static int	add(t_ast_n *cmd, t_mini *mini, t_llst *llst)
 	}
 	return (0);
 }
+
