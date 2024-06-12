@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 08:43:23 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/11 11:56:18 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 14:55:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,18 @@ int	main(void)
 		if (!mini.input)
 			mini.input = sig_eof(mini.input);
 		mini.status = ft_input_is_valid(mini.input);
+		mini.collect = ft_init_collector();
+		mini.collect_ast = ft_init_collector();
 		ft_putstr_fd(mini.color[mini.i_color++], 2);
 		if (!mini.status)
 			ft_execute_minishell(&mini);
 		if (mini.i_color == 6)
 			mini.i_color = 0;
 		ft_putstr_fd(RESET, 2);
+		if (mini.collect)
+			del_cllctr(mini.collect, NULL);
+		if (mini.collect_ast)
+			del_cllctr(mini.collect_ast, ft_delete_tree);
 		tcsetattr(STDIN_FILENO, TCSANOW, &fd);
 	}
 	return (g_status_child);

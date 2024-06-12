@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 13:44:47 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/10 14:21:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:10:32 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	init_minishell(t_mini *mini)
 	mini->temp_environ = NULL;
 	mini->m_lst_env = ft_cmtrix_to_mtrx_lst(__environ);
 	mini->color = ft_init_color();
-	mini->collect = ft_init_collector();
-	mini->collect_ast = ft_init_collector();
 	mini->status = 0;
 	mini->i_color = 1;
 	swap_tty(COPY, mini);

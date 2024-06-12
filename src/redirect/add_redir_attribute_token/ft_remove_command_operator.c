@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 17:05:23 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:13:18 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "redirect.h"
 
-// static void	ft_remove_cmd_opertor(t_mmlst *m_m_lst);
 static void	ft_remove_rdrct(t_mmlst *m_m_lst);
 
 int	ft_remove_cmd_status(t_mmlst *m_m_lst)
@@ -25,21 +24,6 @@ int	ft_remove_cmd_status(t_mmlst *m_m_lst)
 	ft_remove_rdrct(m_m_lst);
 	return (0);
 }
-
-// static void	ft_remove_cmd_opertor(t_mmlst *m_m_lst)
-// {
-// 	int		i;
-// 	t_mnode	*temp;
-
-// 	temp = m_m_lst->head;
-// 	i = 1;
-// 	while (i <= m_m_lst->size)
-// 	{
-// 		temp->type = temp->matrix->head->lst->head->type;
-// 		temp = temp->next;
-// 		i++;
-// 	}
-// }
 
 static void	ft_remove_rdrct(t_mmlst *m_m_lst)
 {

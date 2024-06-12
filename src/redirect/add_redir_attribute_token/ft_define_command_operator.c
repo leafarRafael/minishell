@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_define_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/04 09:30:12 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:21:20 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	ft_define_cmd_opertor(t_mmlst *m_m_lst);
 static void	ft_define_infile(t_mmlst *m_m_lst);
 static void	ft_define_outfile(t_mmlst *m_m_lst);
+static void	add_atribute(t_llst *llst);
 
 int	ft_define_cmd_status(t_mmlst *m_m_lst)
 {
@@ -60,7 +61,7 @@ static void	ft_define_infile(t_mmlst *m_m_lst)
 		while (count[1] <= mnoode_temp->matrix->size)
 		{
 			if (lst_temp->prev->lst->head->type == REDI_IN)
-				lst_temp->rdrct = REDI_IN;
+				add_atribute(lst_temp);
 			else if (lst_temp->prev->lst->head->type == HERE_DOC)
 				lst_temp->rdrct = HERE_DOC;
 			lst_temp = lst_temp->next;
@@ -95,4 +96,24 @@ static void	ft_define_outfile(t_mmlst *m_m_lst)
 		mnoode_temp = mnoode_temp->next;
 		count[0]++;
 	}
+}
+
+static void	add_atribute(t_llst *llst)
+{
+	t_lst	*cpy;
+
+	if (llst->lst->head->type == DOLLAR)
+	{
+		cpy = ft_duplst(llst->lst, ft_cpynode, ft_add_node_back);
+		ft_expander_lst_token(llst->lst);
+		if (llst->lst->size == 0)
+		{
+			cpy->head->type = META_LITERAL;
+			ft_delete_list(llst->lst);
+			llst->lst = cpy;
+		}
+		else
+			ft_delete_list(cpy);
+	}
+	llst->rdrct = REDI_IN;
 }
