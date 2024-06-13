@@ -18,7 +18,6 @@ static void	ft_manager_fd(t_ast_n *cmd, t_mini *mini, t_var_exe *var);
 
 void	binary(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
-	rl_clear_history();
 	ft_manager_fd(cmd, mini, var);
 	ft_valid_command(cmd, mini, var);
 	bld_var_and_run_execve(cmd, mini, var);

@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:08:21 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 14:38:59 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:36:43 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	free_var(t_var_exe *var);
 
 void	free_memory(t_mini *mini, t_var_exe *var, int status_exit)
 {
+	rl_clear_history();
 	free_mini(mini);
 	free_var(var);
 	ft_close(mini->fd_std);

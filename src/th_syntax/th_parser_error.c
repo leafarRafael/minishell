@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   th_parser_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 16:46:00 by tforster          #+#    #+#             */
-/*   Updated: 2024/06/06 18:07:31 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:49:14 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ int	syntax_error(t_parse *parse, char *str, t_sytx_er error)
 
 static int	err_msg(char *msg1, char *msg2, t_sytx_er error)
 {
-	printf("%s Syntax ERROR, %s%s %s\n", RED, RST, msg1, msg2);
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd("Syntax ERROR, ", STDERR_FILENO);
+	ft_putstr_fd(RST, STDERR_FILENO);
+	ft_putstr_fd(msg1, STDERR_FILENO);
+	ft_putstr_fd(", ", STDERR_FILENO);
+	ft_putendl_fd(msg2, STDERR_FILENO);
 	return (error);
 }
 
@@ -57,7 +62,11 @@ static int	parse_err(t_parse *parse, char *str, t_sytx_er error)
 	tkn = slct_type(parse, error, tkn);
 	if (parse->type & (COMMAND | D_QUOTES | S_QUOTES))
 		tkn = error_name(parse, str, error, &flag);
-	printf("%s Syntax ERROR: %snear unexpected token, '%s'\n", RED, RST, tkn);
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd("Syntax ERROR, ", STDERR_FILENO);
+	ft_putstr_fd(RST, STDERR_FILENO);
+	ft_putstr_fd("near unexpected token, ", STDERR_FILENO);
+	ft_putendl_fd(tkn, STDERR_FILENO);
 	if (flag)
 		free(tkn);
 	return (error);

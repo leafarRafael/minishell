@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:54:54 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/12 20:32:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:35:14 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ static void	status_process_manager(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 		if (WIFSIGNALED(mini->status))
 		{
 			if (WTERMSIG(mini->status) == SIGQUIT)
+			{
 				ft_putstr_fd("Quit (core dumped)\n", 2);
-			g_status_child = 128 + WTERMSIG(mini->status);
+				g_status_child = 128 + WTERMSIG(mini->status);
+			}
+			else if (WTERMSIG(mini->status) == SIGINT)
+				g_status_child = 0;
 		}
 		else
 			g_status_child = WEXITSTATUS(mini->status);

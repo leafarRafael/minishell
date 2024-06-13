@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_add_variable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:35:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/13 09:19:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:58:41 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ static char	*var_in_env(t_ast_n *cmd, t_mini *mini, t_llst *llst, char *new_var)
 	while (new_var && v.index < mini->m_lst_env->size)
 	{
 		v.prefix = NULL;
-		v.prefix = ft_cpy_lst_to_array(v.env->lst);
-		//v.prefix = get_prfx(find_type_rtrn_ptr(v.env->lst, EQUAL), v.env->lst);
+		v.prefix = get_prfx(find_type_rtrn_ptr(v.env->lst, EQUAL), v.env->lst);
+		if (!v.prefix)
+			v.prefix = ft_cpy_lst_to_array(v.env->lst);
 		if (v.prefix && !ft_strncmp(new_var, v.prefix, ft_strlen(v.prefix) + 1))
 		{
 			ft_add_mlstnode_back(mini->m_lst_env,
@@ -82,8 +83,9 @@ static int	add(t_ast_n *cmd, t_mini *mini, t_llst *llst)
 {
 	char	*str;
 
-	//str = get_prfx(find_type_rtrn_ptr(llst->lst, EQUAL), llst->lst);
-	str = ft_cpy_lst_to_array(llst->lst);
+	str = get_prfx(find_type_rtrn_ptr(llst->lst, EQUAL), llst->lst);
+	if (!str)
+		str = ft_cpy_lst_to_array(llst->lst);
 	if (!str)
 	{
 		ft_remove_lst_front(cmd->m_lst->matrix);

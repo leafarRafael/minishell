@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:19:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/13 13:38:56 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:22:55 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static void	remove_variable(t_ast_n *cmd, t_mini *mini);
 static int	find_var_and_remove(t_lst *lst, t_llst *line, t_mlst *env);
+static int	valid_unset(t_lst *lst, t_ast_n *cmd, t_mini *mini);
 
 void	unset(t_ast_n *cmd, t_mini *mini, t_var_exe *var)
 {
@@ -44,6 +45,8 @@ static void	remove_variable(t_ast_n *cmd, t_mini *mini)
 	v.line = mini->m_lst_env->head;
 	v.list = cmd->m_lst->matrix->head->lst;
 	v.index = 0;
+	if (valid_unset(v.list, cmd, mini))
+		return ;
 	if (valid_var_declar(v.list))
 	{
 		ft_msg_error_lst(UNSET, v.list, NV_INDT);
@@ -65,7 +68,9 @@ static int	find_var_and_remove(t_lst *lst, t_llst *line, t_mlst *env)
 {
 	char	*prefix;
 
-	prefix = ft_cpy_lst_to_array(line->lst);
+	prefix = get_prfx(find_type_rtrn_ptr(line->lst, EQUAL), line->lst);
+	if (!prefix)
+		prefix = ft_cpy_lst_to_array(line->lst);
 	if (prefix)
 	{
 		if (!ft_strlstcmp(lst, prefix))
@@ -76,5 +81,17 @@ static int	find_var_and_remove(t_lst *lst, t_llst *line, t_mlst *env)
 		}
 	}
 	free(prefix);
+	return (0);
+}
+
+static int	valid_unset(t_lst *lst, t_ast_n *cmd, t_mini *mini)
+{
+	if (lst->last->c == '=')
+	{
+		ft_msg_error_lst(UNSET, lst, NV_INDT);
+		ft_status_builtin(mini, 1, __ERROR);
+		remove_variable(cmd, mini);
+		return (1);
+	}
 	return (0);
 }
