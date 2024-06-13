@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:20:08 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 15:36:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 09:07:16 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,12 @@ static void	ft_execute_env(t_mini *mini)
 	t_builtin	v;
 
 	v.line = mini->m_lst_env->head;
-	v.i_color = 1;
 	v.index = 1;
 	while (v.index <= mini->m_lst_env->size)
 	{
-		if (v.i_color > 3)
-			v.i_color = 1;
-		ft_putlst_fd(v.line->lst, 1, STDOUT_FILENO);
+		if (find_type_rtrn_ptr(v.line->lst, EQUAL))
+			ft_putlst_fd(v.line->lst, 1, STDOUT_FILENO);
 		v.line = v.line->next;
-		v.i_color++;
 		v.index++;
 	}
 }
