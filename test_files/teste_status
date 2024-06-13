@@ -1,0 +1,36 @@
+
+asdasd
+echo $?
+
+asdasd || ls
+echo $?
+
+asdasd && ls
+echo $?
+
+asdasd | sadasd && ls
+echo $?
+
+asdasd || echo oi
+echo $?
+
+asdasd && echo oi
+echo $?
+
+asdasd | asdasd || echo oi
+echo $?
+
+asdasd | asdasdasd && echo oi
+echo $?
+
+echo oi && echo ola
+echo $?
+
+echo oi || echo ola
+echo $?
+
+echo oi || ls
+echo $?
+
+echo oi && ls
+echo $?
