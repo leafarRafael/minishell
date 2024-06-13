@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 09:44:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/13 07:23:17 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 08:04:37 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_wait_execution(t_mini *mini)
 	int		i;
 	t_ncllc	*no;
 
-
-	add_status(mini->collect->last, mini, WUNTRACED);
+	if (mini->collect->last->type.pid != -42)
+		add_status(mini->collect->last, mini, WUNTRACED);
 	g_status_child = 0;
 	if (!mini->collect || !mini->collect->head)
 		return ;

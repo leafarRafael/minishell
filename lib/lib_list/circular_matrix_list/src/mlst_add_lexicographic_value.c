@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlst_add_lexicographic_value.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:30:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/09 13:41:28 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 07:50:26 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
