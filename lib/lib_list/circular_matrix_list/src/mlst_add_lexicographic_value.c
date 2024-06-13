@@ -6,11 +6,12 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 10:30:18 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/13 07:50:26 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 08:51:58 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_lst.h"
+#include <stdio.h>
 
 static int	ft_find_the_smallest_size(t_mlst *mlst, char limiter);
 
@@ -26,12 +27,12 @@ int	add_lexicographic_value(t_mlst *mlst, char limiter)
 		v.i_l = 0;
 		v.node = v.current_lst->lst->head;
 		v.current_lst->lex_val = 0;
-		while (v.i_l < v.size || v.i_l < v.current_lst->lst->size)
+		while (v.i_l < v.size && v.i_l < v.current_lst->lst->size)
 		{
 			v.current_lst->lex_val += v.node->lex_val;
 			v.node = v.node->next;
 			v.i_l++;
-			if (v.node->c == limiter)
+			if (v.i_l == v.size)
 				break ;
 		}
 		v.i_m ++;
@@ -54,15 +55,11 @@ static int	ft_find_the_smallest_size(t_mlst *mlst, char limiter)
 		while (v.i_l < v.current_lst->lst->size)
 		{
 			if (v.node->c == limiter)
-			{
-				v.i_l--;
 				break ;
-			}
 			v.node = v.node->next;
 			v.i_l++;
 		}
-		if (v.i_l < v.size)
-			v.size = v.i_l;
+		v.size = v.i_l;
 		v.current_lst = v.current_lst->next;
 		v.i_m++;
 	}

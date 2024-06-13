@@ -6,14 +6,13 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 10:48:51 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/12 22:21:36 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 08:53:49 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirect.h"
 #include "expanding.h"
 #include "sigaction.h"
-
 
 static int	new_str(char *read, char *eof, int size, t_mlst *mlst);
 static int	valid(char *read, char *eof, int size, t_mlst *mlst);

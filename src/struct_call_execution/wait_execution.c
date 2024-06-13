@@ -6,7 +6,7 @@
 /*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 09:44:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/13 08:04:37 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 08:53:19 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	ft_wait_execution(t_mini *mini)
 		if (no->type.pid != -42)
 			add_status(no, mini, WNOHANG);
 		no = no->next;
-		if(no == mini->collect->last)
-			break;
+		if (no == mini->collect->last)
+			break ;
 		i++;
 	}
 	g_status_child = mini->collect->last->status;
