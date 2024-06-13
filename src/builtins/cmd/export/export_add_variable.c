@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_add_variable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:35:32 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/12 16:33:40 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 07:30:00 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int	add(t_ast_n *cmd, t_mini *mini, t_llst *llst)
 {
 	char	*str;
 
-	str = get_prfx(find_type_rtrn_ptr(llst->lst, EQUAL), llst->lst);
+	//str = get_prfx(find_type_rtrn_ptr(llst->lst, EQUAL), llst->lst);
+	str = ft_cpy_lst_to_array(llst->lst);
 	if (!str)
 	{
 		ft_remove_lst_front(cmd->m_lst->matrix);

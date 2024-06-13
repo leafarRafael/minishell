@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   wait_execution.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tforster <tfforster@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 09:44:09 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 19:47:35 by tforster         ###   ########.fr       */
+/*   Updated: 2024/06/13 07:23:17 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_status(t_ncllc *no, t_mini *mini);
+static void	add_status(t_ncllc *no, t_mini *mini, int flag);
 
 void	ft_wait_execution(t_mini *mini)
 {
 	int		i;
 	t_ncllc	*no;
 
+
+	add_status(mini->collect->last, mini, WUNTRACED);
 	g_status_child = 0;
 	if (!mini->collect || !mini->collect->head)
 		return ;
@@ -27,16 +29,18 @@ void	ft_wait_execution(t_mini *mini)
 	while (i < mini->collect->size)
 	{
 		if (no->type.pid != -42)
-			add_status(no, mini);
+			add_status(no, mini, WNOHANG);
 		no = no->next;
+		if(no == mini->collect->last)
+			break;
 		i++;
 	}
 	g_status_child = mini->collect->last->status;
 }
 
-static void	add_status(t_ncllc *no, t_mini *mini)
+static void	add_status(t_ncllc *no, t_mini *mini, int flag)
 {
-	waitpid(no->type.pid, &mini->status, WUNTRACED);
+	waitpid(no->type.pid, &mini->status, flag);
 	if (WIFSIGNALED(mini->status))
 	{
 		if (WTERMSIG(mini->status) == SIGQUIT)

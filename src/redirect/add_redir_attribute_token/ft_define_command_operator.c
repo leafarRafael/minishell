@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_define_command_operator.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:06:30 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/12 16:21:20 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 07:05:11 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	ft_define_cmd_opertor(t_mmlst *m_m_lst);
 static void	ft_define_infile(t_mmlst *m_m_lst);
 static void	ft_define_outfile(t_mmlst *m_m_lst);
-static void	add_atribute(t_llst *llst);
+static void	add_atribute(t_llst *llst, int type);
 
 int	ft_define_cmd_status(t_mmlst *m_m_lst)
 {
@@ -61,7 +61,7 @@ static void	ft_define_infile(t_mmlst *m_m_lst)
 		while (count[1] <= mnoode_temp->matrix->size)
 		{
 			if (lst_temp->prev->lst->head->type == REDI_IN)
-				add_atribute(lst_temp);
+				add_atribute(lst_temp, REDI_IN);
 			else if (lst_temp->prev->lst->head->type == HERE_DOC)
 				lst_temp->rdrct = HERE_DOC;
 			lst_temp = lst_temp->next;
@@ -87,9 +87,9 @@ static void	ft_define_outfile(t_mmlst *m_m_lst)
 		while (count[1] <= mnoode_temp->matrix->size)
 		{
 			if (lst_temp->prev->lst->head->type == REDI_OUT)
-				lst_temp->rdrct = REDI_OUT;
+				add_atribute(lst_temp, REDI_OUT);
 			else if (lst_temp->prev->lst->head->type == APPEND)
-				lst_temp->rdrct = APPEND;
+				add_atribute(lst_temp, APPEND);
 			lst_temp = lst_temp->next;
 			count[1]++;
 		}
@@ -98,7 +98,7 @@ static void	ft_define_outfile(t_mmlst *m_m_lst)
 	}
 }
 
-static void	add_atribute(t_llst *llst)
+static void	add_atribute(t_llst *llst, int type)
 {
 	t_lst	*cpy;
 
@@ -115,5 +115,5 @@ static void	add_atribute(t_llst *llst)
 		else
 			ft_delete_list(cpy);
 	}
-	llst->rdrct = REDI_IN;
+	llst->rdrct = type;
 }

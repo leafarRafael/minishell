@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbutzke <rbutzke@student.42so.org.br>      +#+  +:+       +#+        */
+/*   By: rbutzke <rbutzke@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 11:19:43 by rbutzke           #+#    #+#             */
-/*   Updated: 2024/06/10 15:32:16 by rbutzke          ###   ########.fr       */
+/*   Updated: 2024/06/13 07:32:12 by rbutzke          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ static int	find_var_and_remove(t_lst *lst, t_llst *line, t_mlst *env)
 {
 	char	*prefix;
 
-	prefix = NULL;
-	prefix = get_prfx(find_type_rtrn_ptr(line->lst, EQUAL), line->lst);
+/* 	prefix = NULL;
+	prefix = get_prfx(find_type_rtrn_ptr(line->lst, EQUAL), line->lst); */
+	prefix = ft_cpy_lst_to_array(line->lst);
 	if (prefix)
 	{
 		if (!ft_strlstcmp(lst, prefix))
